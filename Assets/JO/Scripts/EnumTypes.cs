@@ -4,16 +4,46 @@ using UnityEngine;
 
 namespace EnumTypes
 {
-    public enum ManagerTypes
+    public enum eManagerTypes
     {
         InputManager,
+        MoveManager,
+        AnimationManager,
+
 
     }
 
-    public enum InputEvents
+    public enum eComponentTypes
+    {
+        InputCom,
+        MoveCom,
+        AnimatorCom,
+
+        comMax
+    }
+    public enum eInputEvents
     {
 
     }
 
+    public enum eAnimationClips
+    {
+        Idle01,
+        Idle02,
+        Idle03,
+        Dash,
+        Die,
+        Attack01,
+        Attack010,
+        Attack02,
+        Damage,
+        Run,
+        Skill01,
+        Skill02,
+        Skill03,
+        Skill04,
+        Stun,
+        AnimationMax
+    }
 
 }

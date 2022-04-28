@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character3DMove: MonoBehaviour
 {
     //[Header("============components============")]
-
+    
     [System.Serializable]
     public class Com
     {
@@ -21,6 +21,8 @@ public class Character3DMove: MonoBehaviour
         public Rigidbody CharacterRig = null;
 
         public CapsuleCollider CapsuleCol = null;
+
+        public CAnimationComponent animator = null;
     }
 
 
@@ -39,6 +41,8 @@ public class Character3DMove: MonoBehaviour
     public bool IsFPP = true;
 
     public bool IsMoving = false;
+
+    public bool IsRunning = false;
 
     public bool IsGrounded = false;
 
@@ -99,6 +103,13 @@ public class Character3DMove: MonoBehaviour
 
     public Vector3 rightleft;
     public float ynext;
+
+    public Vector3 testtart;
+    public Vector3 testend;
+
+
+    public Transform testcube;
+
     void KeyInput()
     {
         float v = 0;
@@ -119,6 +130,17 @@ public class Character3DMove: MonoBehaviour
             Jump();
         }
 
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (!IsRunning)
+                IsRunning = true;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (IsRunning)
+                IsRunning = false;
+        }
+
         if (Input.GetKey(KeyCode.W)) v += 1.0f;
         if (Input.GetKey(KeyCode.S)) v -= 1.0f;
         if (Input.GetKey(KeyCode.A)) h -= 1.0f;
@@ -130,9 +152,27 @@ public class Character3DMove: MonoBehaviour
         MoveDir = new Vector3(h, 0, v);
         IsMoving = (MoveDir.sqrMagnitude > 0.01f);
         if (IsMoving)
+        {
             MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
+            if (com.animator == null)
+            {
+                com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
+            }
+            com.animator.SetBool("Idle",false);
+            com.animator.SetBool("Move", true);
+
+        }
         else
+        {
+            if (com.animator == null)
+            {
+                com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
+            }
             MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
+            com.animator.SetBool("Idle", true);
+            com.animator.SetBool("Move", false);
+
+        }
     }
 
     public void Move()
@@ -200,6 +240,9 @@ public class Character3DMove: MonoBehaviour
         Gizmos.DrawWireSphere(Capsuletopcenter, com.CapsuleCol.radius);
         Gizmos.DrawWireSphere(Capsulebottomcenter, com.CapsuleCol.radius);
 
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(testtart, testend);
+
         if (CurFowardSlopAngle != 0)
         {
 
@@ -213,10 +256,18 @@ public class Character3DMove: MonoBehaviour
         CurGroundSlopAngle = 0;
         if (Time.time >= LastJump + 0.2f)//점프하고 0.2초 동안은 지면검사를 하지 않는다.
         {
+            //Debug.Log("바닥");
             RaycastHit hit;
-            bool cast = Physics.SphereCast(com.CapsuleCol.transform.position, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, 0.2f, GroundMask);
+            testtart = com.CapsuleCol.transform.position;
+            testend = testtart + Vector3.down * 0.2f;
+            //Debug.DrawRay(testtart, Vector3.down, Color.yellow);
+            bool cast = Physics.SphereCast(Capsulebottomcenter, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, com.CapsuleCol.radius + 0.1f);
+
+            //testcube.transform.position = com.CapsuleCol.transform.position;
+            //bool cast = Physics.SphereCast(com.CapsuleCol.transform.position, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, 0.2f, GroundMask);
             if (cast)
             {
+                //Debug.Log("뭔가 들어옴");
                 IsGrounded = true;
                 CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
                 CurGroundNomal = hit.normal;
@@ -228,6 +279,13 @@ public class Character3DMove: MonoBehaviour
                 {
                     IsSlip = false;
                 }
+                Debug.Log("바닥");
+                //if (hit.transform.tag == "Ground")
+                //{
+                //    //Debug.Log("바닥");
+                    
+                //}
+                
             }
         }
         CurGroundCross = Vector3.Cross(CurGroundNomal, Vector3.up);
@@ -252,12 +310,15 @@ public class Character3DMove: MonoBehaviour
     public void Falling()
     {
         float deltacof = Time.deltaTime * 10f;
+        
         if (IsGrounded)
         {
             CurGravity = 0;
+            Gravity = 1;
         }
         else
         {
+            Gravity += 0.098f;
             CurGravity -= deltacof * Gravity;
         }
     }
@@ -364,6 +425,7 @@ public class Character3DMove: MonoBehaviour
 
     private void Awake()
     {
+        
         ChaingePerspective();
         ShowCursor(false);
 
@@ -373,7 +435,7 @@ public class Character3DMove: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        com.animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
     }
 
     // Update is called once per frame
@@ -384,8 +446,6 @@ public class Character3DMove: MonoBehaviour
 
         CheckGround();
         CheckFront();
-
-
 
         Rotation();
         HorVelocity();
