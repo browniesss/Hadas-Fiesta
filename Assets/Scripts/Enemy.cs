@@ -2,29 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
+    [Header("Enemy Info")]
     [SerializeField]
-    private float moveSpeed;
+    protected float moveSpeed;
+    [Header("Enemy Now State")]
     [SerializeField]
-    private bool is_Target_Set; // 타겟이 범위내로 들어와서 정해져있다면
+    protected bool is_Target_Set; // 타겟이 범위내로 들어와서 정해져있다면
     [SerializeField]
-    private Vector3 return_Pos; // 복귀할 위치
+    protected Vector3 return_Pos; // 복귀할 위치
     [SerializeField]
-    private int cur_State; // 현재 상태 1 : 순찰 2 : 추적 3 : 공격 4 : 복귀
+    protected int cur_State; // 현재 상태 1 : 순찰 2 : 추적 3 : 공격 4 : 복귀
     [SerializeField]
-    private GameObject cur_Target;
+    protected GameObject cur_Target;
 
-    void Start()
+    protected Animator anim;
+
+    protected void parent_Init()
     {
-        return_Pos = new Vector3(transform.position.x, 0, transform.position.z);
+        return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
+        anim = GetComponent<Animator>();
+        cur_State = 1;
     }
 
+
     [SerializeField]
-    private Vector3 destination_Pos;
-    bool patrol_Start = false; // 탐색 시작
-    void Enemy_Patrol()
+    protected Vector3 destination_Pos;
+    protected bool patrol_Start = false; // 탐색 시작
+    protected void Enemy_Patrol()
     {
         if (Vector3.Distance(transform.position, destination_Pos) == 0f)
         {
@@ -36,10 +43,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                                                     destination_Pos,
-                                                     Time.deltaTime * moveSpeed);
+            Destination_Move(destination_Pos);
         }
+
         Collider[] cols = Physics.OverlapSphere(transform.position, 10f);  //, 1 << 8); // 비트 연산자로 8번째 레이어
 
         if (cols.Length > 0)
@@ -67,7 +73,24 @@ public class Enemy : MonoBehaviour
         patrol_Start = false;
     }
 
-    void Enemy_Trace() // 추적 함수
+    void Destination_Move(Vector3 in_destination_Pos)
+    {
+        transform.position = Vector3.MoveTowards(transform.position,
+                                                                 in_destination_Pos,
+                                                                 Time.deltaTime * moveSpeed);
+       
+        if (Vector3.Distance(transform.position, in_destination_Pos) <= 0.5f)
+        {
+            anim.SetBool("isWalk", false);
+        }
+        else
+        {
+            anim.SetBool("isWalk", true); 
+            transform.LookAt(in_destination_Pos);
+        }
+    }
+
+    protected void Enemy_Trace() // 추적 함수
     {
         if (Vector3.Distance(transform.position, cur_Target.transform.position) == 0) // 타겟에 닿았다면
         {
@@ -75,9 +98,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                                                                 cur_Target.transform.position,
-                                                                 Time.deltaTime * moveSpeed);
+            Destination_Move(cur_Target.transform.position);
         }
     }
 
@@ -86,7 +107,7 @@ public class Enemy : MonoBehaviour
         cur_State = 4;
     }
 
-    void Enemy_Return()
+    protected void Enemy_Return()
     {
         if (Vector3.Distance(transform.position, return_Pos) == 0)
         {
@@ -96,30 +117,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                                                                return_Pos,
-                                                                 Time.deltaTime * moveSpeed);
+            Destination_Move(return_Pos);
         }
     }
 
-    void Enemy_FSM()
-    {
-        switch (cur_State)
-        {
-            case 1:
-                Enemy_Patrol();
-                break;
-            case 2:
-                Enemy_Trace();
-                break;
-            case 3:
-                break;
-            case 4:
-                Enemy_Return();
-                break;
-        }
-
-    }
+    abstract protected void Enemy_FSM();
 
     private void OnDrawGizmos()
     {
@@ -129,6 +131,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Enemy_FSM();
+
     }
 }
