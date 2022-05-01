@@ -1,132 +1,374 @@
 fileFormatVersion: 2
 guid: 892a7448b3417804aa051e6b708db80e
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Bip001
-    100002: Bip001 Footsteps
-    100004: Bip001 Head
-    100006: Bip001 HeadNub
-    100008: Bip001 L Calf
-    100010: Bip001 L Clavicle
-    100012: Bip001 L Finger0
-    100014: Bip001 L Finger01
-    100016: Bip001 L Finger0Nub
-    100018: Bip001 L Finger1
-    100020: Bip001 L Finger11
-    100022: Bip001 L Finger1Nub
-    100024: Bip001 L Foot
-    100026: Bip001 L Forearm
-    100028: Bip001 L Hand
-    100030: Bip001 L Thigh
-    100032: Bip001 L Toe0
-    100034: Bip001 L Toe0Nub
-    100036: Bip001 L UpperArm
-    100038: Bip001 Neck
-    100040: Bip001 Pelvis
-    100042: Bip001 R Calf
-    100044: Bip001 R Clavicle
-    100046: Bip001 R Finger0
-    100048: Bip001 R Finger01
-    100050: Bip001 R Finger0Nub
-    100052: Bip001 R Finger1
-    100054: Bip001 R Finger11
-    100056: Bip001 R Finger1Nub
-    100058: Bip001 R Foot
-    100060: Bip001 R Forearm
-    100062: Bip001 R Hand
-    100064: Bip001 R Thigh
-    100066: Bip001 R Toe0
-    100068: Bip001 R Toe0Nub
-    100070: Bip001 R UpperArm
-    100072: Bip001 Spine
-    100074: Bip001 Spine1
-    100076: Ctrl_Eye
-    100078: defender01
-    100080: defender02
-    100082: //RootNode
-    100084: Point001
-    100086: Point002
-    100088: shield01
-    100090: shield02
-    100092: weapon01
-    100094: weapon02
-    400000: Bip001
-    400002: Bip001 Footsteps
-    400004: Bip001 Head
-    400006: Bip001 HeadNub
-    400008: Bip001 L Calf
-    400010: Bip001 L Clavicle
-    400012: Bip001 L Finger0
-    400014: Bip001 L Finger01
-    400016: Bip001 L Finger0Nub
-    400018: Bip001 L Finger1
-    400020: Bip001 L Finger11
-    400022: Bip001 L Finger1Nub
-    400024: Bip001 L Foot
-    400026: Bip001 L Forearm
-    400028: Bip001 L Hand
-    400030: Bip001 L Thigh
-    400032: Bip001 L Toe0
-    400034: Bip001 L Toe0Nub
-    400036: Bip001 L UpperArm
-    400038: Bip001 Neck
-    400040: Bip001 Pelvis
-    400042: Bip001 R Calf
-    400044: Bip001 R Clavicle
-    400046: Bip001 R Finger0
-    400048: Bip001 R Finger01
-    400050: Bip001 R Finger0Nub
-    400052: Bip001 R Finger1
-    400054: Bip001 R Finger11
-    400056: Bip001 R Finger1Nub
-    400058: Bip001 R Foot
-    400060: Bip001 R Forearm
-    400062: Bip001 R Hand
-    400064: Bip001 R Thigh
-    400066: Bip001 R Toe0
-    400068: Bip001 R Toe0Nub
-    400070: Bip001 R UpperArm
-    400072: Bip001 Spine
-    400074: Bip001 Spine1
-    400076: Ctrl_Eye
-    400078: defender01
-    400080: defender02
-    400082: //RootNode
-    400084: Point001
-    400086: Point002
-    400088: shield01
-    400090: shield02
-    400092: weapon01
-    400094: weapon02
-    2100000: 'Material #591'
-    2100002: 'Material #595'
-    2100004: 'Material #596'
-    2100006: 'Material #597'
-    2100008: 'Material #592'
-    2100010: 'Material #593'
-    2300000: defender02
-    2300002: shield01
-    2300004: shield02
-    2300006: weapon01
-    2300008: weapon02
-    3300000: defender02
-    3300002: shield01
-    3300004: shield02
-    3300006: weapon01
-    3300008: weapon02
-    4300000: defender01
-    4300002: defender02
-    4300004: shield02
-    4300006: weapon02
-    4300008: shield01
-    4300010: weapon01
-    7400000: Attack02
-    9500000: //RootNode
-    13700000: defender01
+  serializedVersion: 21100
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Bip001
+  - first:
+      1: 100002
+    second: Bip001 Footsteps
+  - first:
+      1: 100004
+    second: Bip001 Head
+  - first:
+      1: 100006
+    second: Bip001 HeadNub
+  - first:
+      1: 100008
+    second: Bip001 L Calf
+  - first:
+      1: 100010
+    second: Bip001 L Clavicle
+  - first:
+      1: 100012
+    second: Bip001 L Finger0
+  - first:
+      1: 100014
+    second: Bip001 L Finger01
+  - first:
+      1: 100016
+    second: Bip001 L Finger0Nub
+  - first:
+      1: 100018
+    second: Bip001 L Finger1
+  - first:
+      1: 100020
+    second: Bip001 L Finger11
+  - first:
+      1: 100022
+    second: Bip001 L Finger1Nub
+  - first:
+      1: 100024
+    second: Bip001 L Foot
+  - first:
+      1: 100026
+    second: Bip001 L Forearm
+  - first:
+      1: 100028
+    second: Bip001 L Hand
+  - first:
+      1: 100030
+    second: Bip001 L Thigh
+  - first:
+      1: 100032
+    second: Bip001 L Toe0
+  - first:
+      1: 100034
+    second: Bip001 L Toe0Nub
+  - first:
+      1: 100036
+    second: Bip001 L UpperArm
+  - first:
+      1: 100038
+    second: Bip001 Neck
+  - first:
+      1: 100040
+    second: Bip001 Pelvis
+  - first:
+      1: 100042
+    second: Bip001 R Calf
+  - first:
+      1: 100044
+    second: Bip001 R Clavicle
+  - first:
+      1: 100046
+    second: Bip001 R Finger0
+  - first:
+      1: 100048
+    second: Bip001 R Finger01
+  - first:
+      1: 100050
+    second: Bip001 R Finger0Nub
+  - first:
+      1: 100052
+    second: Bip001 R Finger1
+  - first:
+      1: 100054
+    second: Bip001 R Finger11
+  - first:
+      1: 100056
+    second: Bip001 R Finger1Nub
+  - first:
+      1: 100058
+    second: Bip001 R Foot
+  - first:
+      1: 100060
+    second: Bip001 R Forearm
+  - first:
+      1: 100062
+    second: Bip001 R Hand
+  - first:
+      1: 100064
+    second: Bip001 R Thigh
+  - first:
+      1: 100066
+    second: Bip001 R Toe0
+  - first:
+      1: 100068
+    second: Bip001 R Toe0Nub
+  - first:
+      1: 100070
+    second: Bip001 R UpperArm
+  - first:
+      1: 100072
+    second: Bip001 Spine
+  - first:
+      1: 100074
+    second: Bip001 Spine1
+  - first:
+      1: 100076
+    second: Ctrl_Eye
+  - first:
+      1: 100078
+    second: defender01
+  - first:
+      1: 100080
+    second: defender02
+  - first:
+      1: 100082
+    second: //RootNode
+  - first:
+      1: 100084
+    second: Point001
+  - first:
+      1: 100086
+    second: Point002
+  - first:
+      1: 100088
+    second: shield01
+  - first:
+      1: 100090
+    second: shield02
+  - first:
+      1: 100092
+    second: weapon01
+  - first:
+      1: 100094
+    second: weapon02
+  - first:
+      4: 400000
+    second: Bip001
+  - first:
+      4: 400002
+    second: Bip001 Footsteps
+  - first:
+      4: 400004
+    second: Bip001 Head
+  - first:
+      4: 400006
+    second: Bip001 HeadNub
+  - first:
+      4: 400008
+    second: Bip001 L Calf
+  - first:
+      4: 400010
+    second: Bip001 L Clavicle
+  - first:
+      4: 400012
+    second: Bip001 L Finger0
+  - first:
+      4: 400014
+    second: Bip001 L Finger01
+  - first:
+      4: 400016
+    second: Bip001 L Finger0Nub
+  - first:
+      4: 400018
+    second: Bip001 L Finger1
+  - first:
+      4: 400020
+    second: Bip001 L Finger11
+  - first:
+      4: 400022
+    second: Bip001 L Finger1Nub
+  - first:
+      4: 400024
+    second: Bip001 L Foot
+  - first:
+      4: 400026
+    second: Bip001 L Forearm
+  - first:
+      4: 400028
+    second: Bip001 L Hand
+  - first:
+      4: 400030
+    second: Bip001 L Thigh
+  - first:
+      4: 400032
+    second: Bip001 L Toe0
+  - first:
+      4: 400034
+    second: Bip001 L Toe0Nub
+  - first:
+      4: 400036
+    second: Bip001 L UpperArm
+  - first:
+      4: 400038
+    second: Bip001 Neck
+  - first:
+      4: 400040
+    second: Bip001 Pelvis
+  - first:
+      4: 400042
+    second: Bip001 R Calf
+  - first:
+      4: 400044
+    second: Bip001 R Clavicle
+  - first:
+      4: 400046
+    second: Bip001 R Finger0
+  - first:
+      4: 400048
+    second: Bip001 R Finger01
+  - first:
+      4: 400050
+    second: Bip001 R Finger0Nub
+  - first:
+      4: 400052
+    second: Bip001 R Finger1
+  - first:
+      4: 400054
+    second: Bip001 R Finger11
+  - first:
+      4: 400056
+    second: Bip001 R Finger1Nub
+  - first:
+      4: 400058
+    second: Bip001 R Foot
+  - first:
+      4: 400060
+    second: Bip001 R Forearm
+  - first:
+      4: 400062
+    second: Bip001 R Hand
+  - first:
+      4: 400064
+    second: Bip001 R Thigh
+  - first:
+      4: 400066
+    second: Bip001 R Toe0
+  - first:
+      4: 400068
+    second: Bip001 R Toe0Nub
+  - first:
+      4: 400070
+    second: Bip001 R UpperArm
+  - first:
+      4: 400072
+    second: Bip001 Spine
+  - first:
+      4: 400074
+    second: Bip001 Spine1
+  - first:
+      4: 400076
+    second: Ctrl_Eye
+  - first:
+      4: 400078
+    second: defender01
+  - first:
+      4: 400080
+    second: defender02
+  - first:
+      4: 400082
+    second: //RootNode
+  - first:
+      4: 400084
+    second: Point001
+  - first:
+      4: 400086
+    second: Point002
+  - first:
+      4: 400088
+    second: shield01
+  - first:
+      4: 400090
+    second: shield02
+  - first:
+      4: 400092
+    second: weapon01
+  - first:
+      4: 400094
+    second: weapon02
+  - first:
+      21: 2100000
+    second: Material #591
+  - first:
+      21: 2100002
+    second: Material #595
+  - first:
+      21: 2100004
+    second: Material #596
+  - first:
+      21: 2100006
+    second: Material #597
+  - first:
+      21: 2100008
+    second: Material #592
+  - first:
+      21: 2100010
+    second: Material #593
+  - first:
+      23: 2300000
+    second: defender02
+  - first:
+      23: 2300002
+    second: shield01
+  - first:
+      23: 2300004
+    second: shield02
+  - first:
+      23: 2300006
+    second: weapon01
+  - first:
+      23: 2300008
+    second: weapon02
+  - first:
+      33: 3300000
+    second: defender02
+  - first:
+      33: 3300002
+    second: shield01
+  - first:
+      33: 3300004
+    second: shield02
+  - first:
+      33: 3300006
+    second: weapon01
+  - first:
+      33: 3300008
+    second: weapon02
+  - first:
+      43: 4300000
+    second: defender01
+  - first:
+      43: 4300002
+    second: defender02
+  - first:
+      43: 4300004
+    second: shield02
+  - first:
+      43: 4300006
+    second: weapon02
+  - first:
+      43: 4300008
+    second: shield01
+  - first:
+      43: 4300010
+    second: weapon01
+  - first:
+      74: 7400000
+    second: Attack02
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: defender01
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -155,6 +397,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack02
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 30
       wrapMode: 0
@@ -163,7 +406,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -175,7 +418,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.67115384
+        functionName: AttackEnd
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 071bddc9f34591443975b72312a660a1, type: 3}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -186,34 +436,45 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -223,14 +484,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

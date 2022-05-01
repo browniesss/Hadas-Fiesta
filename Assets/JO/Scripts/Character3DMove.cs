@@ -81,6 +81,8 @@ public class Character3DMove: MonoBehaviour
 
     public float MoveSpeed;
 
+    public float RunSpeed;
+
     public float MinAngle;
 
     public float MaxAngle;
@@ -115,6 +117,8 @@ public class Character3DMove: MonoBehaviour
         float v = 0;
         float h = 0;
 
+
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ChaingePerspective();
@@ -140,38 +144,50 @@ public class Character3DMove: MonoBehaviour
             if (IsRunning)
                 IsRunning = false;
         }
-
-        if (Input.GetKey(KeyCode.W)) v += 1.0f;
-        if (Input.GetKey(KeyCode.S)) v -= 1.0f;
-        if (Input.GetKey(KeyCode.A)) h -= 1.0f;
-        if (Input.GetKey(KeyCode.D)) h += 1.0f;
-
-
-
-        MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-        MoveDir = new Vector3(h, 0, v);
-        IsMoving = (MoveDir.sqrMagnitude > 0.01f);
-        if (IsMoving)
+        if (com.animator == null)
         {
-            MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
-            if (com.animator == null)
-            {
-                com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-            }
-            com.animator.SetBool("Idle",false);
-            com.animator.SetBool("Move", true);
-
+            com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
         }
-        else
-        {
-            if (com.animator == null)
-            {
-                com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-            }
-            MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
-            com.animator.SetBool("Idle", true);
-            com.animator.SetBool("Move", false);
 
+        //MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        MoveDir = new Vector3(h, 0, v);
+        IsMoving = false;
+
+        if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
+        {
+            if (Input.GetKey(KeyCode.W)) v += 1.0f;
+            if (Input.GetKey(KeyCode.S)) v -= 1.0f;
+            if (Input.GetKey(KeyCode.A)) h -= 1.0f;
+            if (Input.GetKey(KeyCode.D)) h += 1.0f;
+
+
+
+            MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+            MoveDir = new Vector3(h, 0, v);
+            IsMoving = (MoveDir.sqrMagnitude > 0.01f);
+
+
+            if (IsMoving)
+            {
+                MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
+                com.animator.SetBool("Idle", false);
+
+
+                com.animator.SetBool("Move", true);
+                if (IsRunning)
+                    com.animator.SetInt("MoveNum", 1);
+                else
+                    com.animator.SetInt("MoveNum", 0);
+
+            }
+            else
+            {
+                MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
+                com.animator.SetBool("Idle", true);
+                com.animator.SetBool("Move", false);
+
+
+            }
         }
     }
 
@@ -186,7 +202,9 @@ public class Character3DMove: MonoBehaviour
             WorldMove = com.TpCamRig.TransformDirection(MoveDir);
 
 
-        WorldMove *= MoveSpeed;
+        WorldMove *= (IsRunning) ? RunSpeed : MoveSpeed;
+
+
 
         if (IsSlip)
         {
@@ -267,7 +285,6 @@ public class Character3DMove: MonoBehaviour
             //bool cast = Physics.SphereCast(com.CapsuleCol.transform.position, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, 0.2f, GroundMask);
             if (cast)
             {
-                //Debug.Log("뭔가 들어옴");
                 IsGrounded = true;
                 CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
                 CurGroundNomal = hit.normal;
@@ -279,12 +296,6 @@ public class Character3DMove: MonoBehaviour
                 {
                     IsSlip = false;
                 }
-                Debug.Log("바닥");
-                //if (hit.transform.tag == "Ground")
-                //{
-                //    //Debug.Log("바닥");
-                    
-                //}
                 
             }
         }
@@ -313,6 +324,8 @@ public class Character3DMove: MonoBehaviour
         
         if (IsGrounded)
         {
+            if (IsJumping)
+                IsJumping = false;
             CurGravity = 0;
             Gravity = 1;
         }
@@ -399,10 +412,11 @@ public class Character3DMove: MonoBehaviour
     //이떄는 마우스로움직이는게아니고 키보드 입력에 따라서  회전 해야 하기때문에 따로 만듦
     public void RotateTPFP()
     {
-
+        float nextRotY = 0;
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
         float curRotY = com.FpRoot.localEulerAngles.y;
-        float nextRotY = Quaternion.LookRotation(WorldMove, Vector3.up).eulerAngles.y;
+        if(WorldMove.sqrMagnitude!=0)
+            nextRotY = Quaternion.LookRotation(WorldMove, Vector3.up).eulerAngles.y;
 
         if (!IsMoving) nextRotY = curRotY;
 
