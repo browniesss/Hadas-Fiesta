@@ -7,6 +7,8 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Info")]
     [SerializeField]
     protected float moveSpeed;
+    [SerializeField]
+    protected float Attack_Range; // 기본 공격 사거리
     [Header("Enemy Now State")]
     [SerializeField]
     protected bool is_Target_Set; // 타겟이 범위내로 들어와서 정해져있다면
@@ -16,6 +18,8 @@ public abstract class Enemy : MonoBehaviour
     protected int cur_State; // 현재 상태 1 : 순찰 2 : 추적 3 : 공격 4 : 복귀
     [SerializeField]
     protected GameObject cur_Target;
+    [SerializeField]
+    protected int next_Skill;
 
     protected Animator anim;
 
@@ -92,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected void Enemy_Trace() // 추적 함수
     {
-        if (Vector3.Distance(transform.position, cur_Target.transform.position) == 0) // 타겟에 닿았다면
+        if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // 타겟에 닿았다면
         {
             cur_State = 3; // 공격 상태로 변경
         }
@@ -122,6 +126,8 @@ public abstract class Enemy : MonoBehaviour
     }
 
     abstract protected void Enemy_FSM();
+
+    abstract protected void Enemy_Attack(); // 안에서 마나가 다찼으면 저장된 스킬을 발동.
 
     private void OnDrawGizmos()
     {
