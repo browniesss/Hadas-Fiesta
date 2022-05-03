@@ -149,7 +149,7 @@ public class Character3DMove: MonoBehaviour
             com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
         }
 
-        //MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        MouseMove = new Vector2(0,0);
         MoveDir = new Vector3(h, 0, v);
         IsMoving = false;
 

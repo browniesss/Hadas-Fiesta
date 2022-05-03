@@ -1,6 +1,7 @@
 using EnumTypes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CAnimationComponent : BaseComponent
@@ -8,18 +9,24 @@ public class CAnimationComponent : BaseComponent
     [SerializeField]
     Animator animator;
 
-   
-    public AnimationClip[][] clips;
+    //list는 각각의 ani열거형을 이용해서 접근
+    public Dictionary<EnumTypes.eAnimationState, List<AnimationClip>> clips = new Dictionary<eAnimationState, List<AnimationClip>>();
+
     public Animation tempani;
+    //테스트용
     public AnimationClip[] Attackclips;
 
     private void Awake()
     {
-        clips = new AnimationClip[(int)EnumTypes.eAnimationState.AniStateMax][];
-
-        for(int i=0;i<clips.GetLength(0);i++)
+        for(EnumTypes.eAnimationState i = 0;i<EnumTypes.eAnimationState.AniStateMax;i++)
         {
+            AnimationClip[] tempclips = Resources.LoadAll<AnimationClip>($"Clips.{i}");
 
+            if(i==EnumTypes.eAnimationState.Attack)
+            {
+                Attackclips = tempclips;
+            }
+            clips.Add(i, tempclips.ToList());
         }
 
 
