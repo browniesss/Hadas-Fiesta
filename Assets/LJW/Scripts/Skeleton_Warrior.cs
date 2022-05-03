@@ -31,4 +31,9 @@ public class Skeleton_Warrior : Enemy
     {
         Enemy_FSM();
     }
+
+    protected override void Enemy_Attack()
+    {
+        throw new System.NotImplementedException();
+    }
 }
