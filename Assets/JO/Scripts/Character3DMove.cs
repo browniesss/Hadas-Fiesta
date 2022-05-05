@@ -52,6 +52,14 @@ public class Character3DMove: MonoBehaviour
 
     public bool IsSlip = false;
 
+    public bool IsFowordBlock = false;
+
+    public bool IsOnTheSlop = false;
+
+    public bool IsAttacked = false;
+
+    public bool IsOutofControl = false;
+
     public float CurGravity;//현재 벨로시티의 y값
 
     private float LastJump;
@@ -65,6 +73,8 @@ public class Character3DMove: MonoBehaviour
     public Vector3 CurGroundCross;
 
     public Vector3 CurHorVelocity;
+
+    public Vector3 CurVirVelocity;
 
     public float MoveAccel;
 
@@ -97,6 +107,7 @@ public class Character3DMove: MonoBehaviour
 
     public float MaxSlop = 70;
 
+    public float SlopAccel;//(중력값과 같이 미끌어질때 점점증가될 값)
 
     [Header("============TestVals============")]
 
@@ -153,6 +164,9 @@ public class Character3DMove: MonoBehaviour
         MoveDir = new Vector3(h, 0, v);
         IsMoving = false;
 
+        Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
+
+        //공격 중일 때는 움직일 수 없다.
         if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
         {
             if (Input.GetKey(KeyCode.W)) v += 1.0f;
@@ -205,18 +219,40 @@ public class Character3DMove: MonoBehaviour
         WorldMove *= (IsRunning) ? RunSpeed : MoveSpeed;
 
 
-
-        if (IsSlip)
+        if (IsFowordBlock && !IsGrounded||IsJumping&&IsGrounded||IsJumping&&IsFowordBlock)
         {
-            Vector3 temp = -CurGroundCross;
-            com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
-        }
-        else
-        {
-            com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//이전에 사용했던 무브
-            //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//이건 슬립상태일때만 이용하도록
+            WorldMove.x = 0;
+            WorldMove.z = 0;
         }
 
+        
+
+        if(IsOnTheSlop)
+        {
+            CurVirVelocity = new Vector3(0, CurGravity + SlopAccel, 0);//중력값과 경사로에서의 미끄러질때의 가속도값
+            CurVirVelocity = new Vector3(0, 0, 0);
+            if (IsSlip)
+            {
+                Vector3 temp = -CurGroundCross;
+                //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
+                temp = com.FpRoot.forward;
+                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurVirVelocity;//경사로에 의한 y축 이동방향
+                CurHorVelocity *= MoveSpeed;
+                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
+                //com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
+            }
+            else
+            {
+                CurHorVelocity = Quaternion.AngleAxis(CurGroundSlopAngle, CurGroundCross) * CurVirVelocity;//경사로에 의한 y축 이동방향
+                //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//이전에 사용했던 무브
+                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//이건 슬립상태일때만 이용하도록
+            }
+            com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
+        }
+
+        //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
+        
+        com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
     }
 
     private void ShowCursorToggle()
@@ -237,11 +273,17 @@ public class Character3DMove: MonoBehaviour
     {
         RaycastHit hit;
         CurFowardSlopAngle = 0;
-        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, com.CapsuleCol.radius, WorldMove + Vector3.down, out hit, 5.0f, GroundMask);
+        IsFowordBlock = false;
+        Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
+        temp = com.FpRoot.forward /*+ Vector3.down*/;
+        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, com.CapsuleCol.radius-0.2f, temp.normalized, out hit, 0.3f);
         if (cast)
         {
             CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
-
+            if(CurFowardSlopAngle>=70.0f)
+            {
+                IsFowordBlock = true;
+            }
 
 
         }
@@ -271,6 +313,7 @@ public class Character3DMove: MonoBehaviour
     {
         IsGrounded = false;
         IsSlip = false;
+        IsOnTheSlop = false;
         CurGroundSlopAngle = 0;
         if (Time.time >= LastJump + 0.2f)//점프하고 0.2초 동안은 지면검사를 하지 않는다.
         {
@@ -278,25 +321,29 @@ public class Character3DMove: MonoBehaviour
             RaycastHit hit;
             testtart = com.CapsuleCol.transform.position;
             testend = testtart + Vector3.down * 0.2f;
+            testend = testtart;
             //Debug.DrawRay(testtart, Vector3.down, Color.yellow);
-            bool cast = Physics.SphereCast(Capsulebottomcenter, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, com.CapsuleCol.radius + 0.1f);
+            bool cast = Physics.SphereCast(Capsulebottomcenter, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, com.CapsuleCol.radius -0.1f);
 
-            //testcube.transform.position = com.CapsuleCol.transform.position;
-            //bool cast = Physics.SphereCast(com.CapsuleCol.transform.position, com.CapsuleCol.radius - 0.2f, Vector3.down, out hit, 0.2f, GroundMask);
             if (cast)
             {
+                testend = hit.point;
                 IsGrounded = true;
-                CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
                 CurGroundNomal = hit.normal;
-                if (CurGroundSlopAngle >= MaxSlop)
+                CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+                CurFowardSlopAngle = Vector3.Angle(hit.normal, MoveDir) - 90f;
+
+                if (CurGroundSlopAngle > 0)
                 {
-                    IsSlip = true;
+                    IsOnTheSlop = true;
+                    if (CurGroundSlopAngle >= MaxSlop)
+                    {
+                        IsSlip = true;
+                    }
                 }
-                else
-                {
-                    IsSlip = false;
-                }
-                
+
+
             }
         }
         CurGroundCross = Vector3.Cross(CurGroundNomal, Vector3.up);
@@ -307,7 +354,7 @@ public class Character3DMove: MonoBehaviour
     //x,z축의 움직임을 담당 y축의 움직임은 따로 관리
     public void HorVelocity()
     {
-        CurHorVelocity = com.FpCamRig.forward;
+        //CurHorVelocity = com.FpCamRig.forward;
 
 
         if (IsSlip)
