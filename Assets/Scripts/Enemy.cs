@@ -9,6 +9,10 @@ public abstract class Enemy : MonoBehaviour
     protected float moveSpeed;
     [SerializeField]
     protected float Attack_Range; // 기본 공격 사거리
+    [SerializeField]
+    protected int Mana; // 현재 마나
+    [SerializeField]
+    protected int need_Mana; // 스킬 사용시 필요한 마나
     [Header("Enemy Now State")]
     [SerializeField]
     protected bool is_Target_Set; // 타겟이 범위내로 들어와서 정해져있다면
