@@ -39,6 +39,10 @@ public class Skeleton_Warrior : Enemy
         {
             switch (next_Skill)
             {
+                case 1: // 1번 스킬
+                    break;
+                case 2: // 2번 스킬
+                    break;
                 // 스킬에 따라 진행
             }
         }
