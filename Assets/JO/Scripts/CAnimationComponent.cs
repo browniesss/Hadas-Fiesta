@@ -17,6 +17,7 @@ public class CAnimationComponent : BaseComponent
     //테스트용
     public AnimationClip[] Attackclips;
 
+    
     private void Awake()
     {
         for(EnumTypes.eAnimationState i = 0;i<EnumTypes.eAnimationState.AniStateMax;i++)
