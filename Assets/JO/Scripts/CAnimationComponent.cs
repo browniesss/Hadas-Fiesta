@@ -9,6 +9,7 @@ public class CAnimationComponent : BaseComponent
     [SerializeField]
     Animator animator;
 
+
     //list는 각각의 ani열거형을 이용해서 접근
     public Dictionary<EnumTypes.eAnimationState, List<AnimationClip>> clips = new Dictionary<eAnimationState, List<AnimationClip>>();
 
