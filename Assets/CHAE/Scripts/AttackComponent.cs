@@ -14,14 +14,15 @@ public class AttackComponent : MonoBehaviour
 
     public bool B_AttackOn;
 
-    
+
+    public Animator ani;
 
     public CAnimationComponent animator;
 
     void Start()
     {
         animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-
+        
         colliders = GetComponentsInChildren<Collider>();
 
         foreach (Collider coll in colliders)
@@ -31,10 +32,14 @@ public class AttackComponent : MonoBehaviour
             Debug.Log(coll.gameObject.name);
         }
 
-        foreach (var item in animator.Attackclips)
-        {
-            Debug.Log(item.name);
-        }
+        //foreach (var item in animator.Attackclips)
+        //{
+        //    Debug.Log(item.name);
+        //}
+
+        //ani.GetCurrentAnimatorStateInfo(0)
+
+        
     }
 
     // Update is called once per frame
@@ -83,5 +88,12 @@ public class AttackComponent : MonoBehaviour
         B_AttackOn = false;
     }
 
+    IEnumerator Anitime()
+    {
+        
+        yield return null;
+
+
+    }
    
 }
