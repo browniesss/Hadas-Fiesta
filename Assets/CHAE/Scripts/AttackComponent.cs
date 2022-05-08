@@ -19,6 +19,7 @@ public class AttackComponent : MonoBehaviour
 
     public CAnimationComponent animator;
 
+    public AnimationClip aaa;
     void Start()
     {
         animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
@@ -39,6 +40,9 @@ public class AttackComponent : MonoBehaviour
 
         //ani.GetCurrentAnimatorStateInfo(0)
 
+
+        aaa = animator.clips[EnumTypes.eAnimationState.Attack][(int)EnumTypes.eAniAttack.Attack02];
+        
         
     }
 
