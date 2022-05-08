@@ -18,6 +18,7 @@ namespace EnumTypes
         InputCom,
         MoveCom,
         AnimatorCom,
+        GuardCom,
 
         comMax
     }
