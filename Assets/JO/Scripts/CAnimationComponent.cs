@@ -50,6 +50,10 @@ public class CAnimationComponent : BaseComponent
         animator.SetInteger(valname, value);
     }
 
+    public void GetCurrentAnimatorStateInfo(int index)
+    {
+        animator.GetCurrentAnimatorStateInfo(index);
+    }
 
     public void SetBool(EnumTypes.eAnimationState state, bool value)
     {
