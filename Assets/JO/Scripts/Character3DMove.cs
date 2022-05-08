@@ -230,29 +230,38 @@ public class Character3DMove: MonoBehaviour
         if(IsOnTheSlop)
         {
             CurVirVelocity = new Vector3(0, CurGravity + SlopAccel, 0);//중력값과 경사로에서의 미끄러질때의 가속도값
-            CurVirVelocity = new Vector3(0, 0, 0);
+            
+            //CurVirVelocity = new Vector3(0, 0, 0);
             if (IsSlip)
             {
+                CurHorVelocity = new Vector3(WorldMove.x, 0.0f, WorldMove.z);
                 Vector3 temp = -CurGroundCross;
                 //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
                 temp = com.FpRoot.forward;
-                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurVirVelocity;//경사로에 의한 y축 이동방향
+                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//경사로에 의한 y축 이동방향
                 CurHorVelocity *= MoveSpeed;
+                CurHorVelocity *= -1.0f;
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
                 //com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
             }
             else
             {
-                CurHorVelocity = Quaternion.AngleAxis(CurGroundSlopAngle, CurGroundCross) * CurVirVelocity;//경사로에 의한 y축 이동방향
+                CurHorVelocity = new Vector3(WorldMove.x, 0.0f, WorldMove.z);
+                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//경사로에 의한 y축 이동방향
                 //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//이전에 사용했던 무브
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//이건 슬립상태일때만 이용하도록
             }
+            Debug.DrawLine(this.transform.position, this.transform.position + (CurHorVelocity + CurVirVelocity));
             com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
         }
-
+        else
+        {
+            com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
+        }
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
-        
-        com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
+        //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
+
+
     }
 
     private void ShowCursorToggle()
@@ -300,9 +309,16 @@ public class Character3DMove: MonoBehaviour
         Gizmos.DrawWireSphere(Capsuletopcenter, com.CapsuleCol.radius);
         Gizmos.DrawWireSphere(Capsulebottomcenter, com.CapsuleCol.radius);
 
+        //
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(testtart, testend);
 
+        //수직벡터
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(this.transform.position, this.transform.position + CurGroundCross);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(this.transform.position, this.transform.position + (CurHorVelocity + CurVirVelocity));
         if (CurFowardSlopAngle != 0)
         {
 
@@ -334,7 +350,7 @@ public class Character3DMove: MonoBehaviour
 
                 CurFowardSlopAngle = Vector3.Angle(hit.normal, MoveDir) - 90f;
 
-                if (CurGroundSlopAngle > 0)
+                if (CurGroundSlopAngle > 1.0f)
                 {
                     IsOnTheSlop = true;
                     if (CurGroundSlopAngle >= MaxSlop)
@@ -342,11 +358,11 @@ public class Character3DMove: MonoBehaviour
                         IsSlip = true;
                     }
                 }
-
+                CurGroundCross = Vector3.Cross(CurGroundNomal, Vector3.up);
 
             }
         }
-        CurGroundCross = Vector3.Cross(CurGroundNomal, Vector3.up);
+        
     }
 
 
