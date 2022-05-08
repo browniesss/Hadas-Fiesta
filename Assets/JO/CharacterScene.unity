@@ -372,12 +372,15 @@ MonoBehaviour:
   IsSlip: 0
   IsFowordBlock: 0
   IsOnTheSlop: 0
+  IsAttacked: 0
+  IsOutofControl: 0
   CurGravity: 0
   CurGroundSlopAngle: 0
   CurFowardSlopAngle: 0
   CurGroundNomal: {x: 0, y: 0, z: 0}
   CurGroundCross: {x: 0, y: 0, z: 0}
   CurHorVelocity: {x: 0, y: 0, z: 0}
+  CurVirVelocity: {x: 0, y: 0, z: 0}
   MoveAccel: 0
   RotMouseSpeed: 10
   MoveSpeed: 10
@@ -390,7 +393,8 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
-  MaxSlop: 10
+  MaxSlop: 70
+  SlopAccel: 0
   updown: {x: 0, y: 0, z: 0}
   xnext: 0
   rightleft: {x: 0, y: 0, z: 0}
@@ -1314,7 +1318,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90.5
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
