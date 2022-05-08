@@ -292,10 +292,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   Attack_Range: 1.5
+  Mana: 0
+  need_Mana: 50
   is_Target_Set: 0
   return_Pos: {x: 0, y: 0, z: 0}
   cur_State: 0
   cur_Target: {fileID: 0}
+  next_Skill: 0
   destination_Pos: {x: 0, y: 0, z: 0}
 --- !u!136 &685162738
 CapsuleCollider:
