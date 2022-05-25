@@ -35,7 +35,6 @@ public abstract class Enemy : MonoBehaviour
         cur_State = 1;
     }
 
-
     [SerializeField]
     protected Vector3 destination_Pos;
     protected bool patrol_Start = false; // Å½»ö ½ÃÀÛ
