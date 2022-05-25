@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Summoner : Enemy
 {
-   
+
+    public GameObject SusuPrefabs;
+    public GameObject ShootingStarPrefabs;
+
+
     void Start()
     {
         parent_Init();
+    }
+
+    void Attack_Mana()
+    {
+        Mana += 5;
     }
 
     protected override void Enemy_FSM()
@@ -26,6 +35,7 @@ public class Summoner : Enemy
             case 4:
                 Enemy_Return();
                 break;
+
         }
     }
 
@@ -33,14 +43,19 @@ public class Summoner : Enemy
     {
         if (Mana >= need_Mana)
         {
+            next_Skill = Random.Range(1, 3);
             switch (next_Skill)
             {
                 case 1: // 1번 스킬
+                    susu_Summons();
                     break;
                 case 2: // 2번 스킬
+                    ShootingStar();
                     break;
                     // 스킬에 따라 진행
             }
+            Mana = 0;
+
         }
         else // 기본 공격
         {
@@ -48,6 +63,7 @@ public class Summoner : Enemy
             {
                 anim.SetBool("isWalk", false);
                 anim.SetTrigger("isAttack");
+                //Attack_Mana();
             }
             else // 사정 거리 외에 있다면
             {
@@ -60,4 +76,20 @@ public class Summoner : Enemy
     {
         Enemy_FSM();
     }
+
+
+    void susu_Summons()
+    {
+        Instantiate(SusuPrefabs, new Vector3(transform.position.x, transform.position.y, transform.position.z+20f),Quaternion.identity);
+    }
+
+    void ShootingStar()
+    {
+        for (int i = 1; i < 6; i++)
+        {
+            Instantiate(ShootingStarPrefabs, new Vector3(transform.position.x+i*5, transform.position.y+20, transform.position.z + 20f), Quaternion.identity);
+        }
+
+    }
+
 }

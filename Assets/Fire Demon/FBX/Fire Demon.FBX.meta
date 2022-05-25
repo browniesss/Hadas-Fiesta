@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 787bf97a858eb704585a3362afbc56e5
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 21100
   internalIDToNameTable:
   - first:
       1: 100000
@@ -546,6 +546,7 @@ ModelImporter:
   - f4c85d1395040de419f9d3a5a264612f
   - e607578d96803504aab29de9dbe01fb1
   - c3fc1e39c652bb843b56b7f4e0a7f24a
+  - 770f2dcd8e07f0c4ba37dc6b6595f756
   - 278a6941d2a83054aa1a477eb0033941
   - b0c779606a2504f4d86503959f3fe891
   - 1fd2ab8835854c44dbfeed3fe8df9b6e
