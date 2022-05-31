@@ -205,6 +205,32 @@ public class Character3DMove: MonoBehaviour
         }
     }
 
+    //구르기
+    public void Rolling()
+    {
+        //땅에 있어야 구르기 가능
+        if (!IsGrounded)
+            return;
+
+
+
+
+        
+    }
+
+    IEnumerator Rolling_Coroutine()
+    {
+
+
+
+
+
+        yield break;
+    }
+
+
+
+
     public void Move()
     {
 
@@ -225,7 +251,6 @@ public class Character3DMove: MonoBehaviour
             WorldMove.z = 0;
         }
 
-        
 
         if(IsOnTheSlop)
         {
@@ -299,10 +324,6 @@ public class Character3DMove: MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
-    {
-
-    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

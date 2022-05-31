@@ -20,30 +20,23 @@ public class AttackComponent : MonoBehaviour
     public CAnimationComponent animator;
 
     public AnimationClip aaa;
-    void Start()
+    private void Awake()
     {
         animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-        
+
         colliders = GetComponentsInChildren<Collider>();
-
-        foreach (Collider coll in colliders)
-        {
-            coll.enabled = false;
-            Debug.Log(coll.name);
-            Debug.Log(coll.gameObject.name);
-        }
-
-        //foreach (var item in animator.Attackclips)
+        B_AttackOn = false;
+        //foreach (Collider coll in colliders)
         //{
-        //    Debug.Log(item.name);
+        //    coll.enabled = false;
+        //    Debug.Log(coll.name);
+        //    Debug.Log(coll.gameObject.name);
         //}
-
-        //ani.GetCurrentAnimatorStateInfo(0)
-
-
-        aaa = animator.clips[EnumTypes.eAnimationState.Attack][(int)EnumTypes.eAniAttack.Attack02];
+    }
+    void Start()
+    {
         
-        
+
     }
 
     // Update is called once per frame
@@ -59,6 +52,7 @@ public class AttackComponent : MonoBehaviour
 
                 foreach (Collider coll in colliders)
                 {
+                    Debug.Log(coll.name);
                     coll.enabled = true;
                 }
             }
