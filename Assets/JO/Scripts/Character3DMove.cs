@@ -82,8 +82,8 @@ public class Character3DMove: MonoBehaviour
 
     //public Vector3 Capsulebottomcenter = Vector3.zero;
 
-    public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
-    public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
+    public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius , transform.position.z);
+    public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius , transform.position.z);
 
     [Header("============Options============")]
 
@@ -132,7 +132,7 @@ public class Character3DMove: MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ChaingePerspective();
+            ChangePerspective();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -155,10 +155,10 @@ public class Character3DMove: MonoBehaviour
             if (IsRunning)
                 IsRunning = false;
         }
-        if (com.animator == null)
-        {
-            com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-        }
+        //if (com.animator == null)
+        //{
+        //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
+        //}
 
         MouseMove = new Vector2(0,0);
         MoveDir = new Vector3(h, 0, v);
@@ -166,43 +166,45 @@ public class Character3DMove: MonoBehaviour
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
-        //공격 중일 때는 움직일 수 없다.
-        if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
+        if (Input.GetKey(KeyCode.W)) v += 1.0f;
+        if (Input.GetKey(KeyCode.S)) v -= 1.0f;
+        if (Input.GetKey(KeyCode.A)) h -= 1.0f;
+        if (Input.GetKey(KeyCode.D)) h += 1.0f;
+
+
+
+        MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        MoveDir = new Vector3(h, 0, v);
+        IsMoving = (MoveDir.sqrMagnitude > 0.01f);
+
+
+        if (IsMoving)
         {
-            if (Input.GetKey(KeyCode.W)) v += 1.0f;
-            if (Input.GetKey(KeyCode.S)) v -= 1.0f;
-            if (Input.GetKey(KeyCode.A)) h -= 1.0f;
-            if (Input.GetKey(KeyCode.D)) h += 1.0f;
+            MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
+            com.animator.SetBool("Idle", false);
 
 
-
-            MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-            MoveDir = new Vector3(h, 0, v);
-            IsMoving = (MoveDir.sqrMagnitude > 0.01f);
-
-
-            if (IsMoving)
-            {
-                MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
-                com.animator.SetBool("Idle", false);
-
-
-                com.animator.SetBool("Move", true);
-                if (IsRunning)
-                    com.animator.SetInt("MoveNum", 1);
-                else
-                    com.animator.SetInt("MoveNum", 0);
-
-            }
+            com.animator.SetBool("Move", true);
+            if (IsRunning)
+                com.animator.SetInt("MoveNum", 1);
             else
-            {
-                MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
-                com.animator.SetBool("Idle", true);
-                com.animator.SetBool("Move", false);
+                com.animator.SetInt("MoveNum", 0);
 
-
-            }
         }
+        else
+        {
+            MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
+            //com.animator.SetBool("Idle", true);
+            //com.animator.SetBool("Move", false);
+
+
+        }
+
+        ////공격 중일 때는 움직일 수 없다.
+        //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
+        //{
+            
+        //}
     }
 
     //구르기
@@ -514,7 +516,7 @@ public class Character3DMove: MonoBehaviour
 
 
 
-    void ChaingePerspective()
+    void ChangePerspective()
     {
         IsFPP = !IsFPP;
         com.FpCam.gameObject.SetActive(IsFPP);
@@ -523,8 +525,8 @@ public class Character3DMove: MonoBehaviour
 
     private void Awake()
     {
-        
-        ChaingePerspective();
+
+        ChangePerspective();
         ShowCursor(false);
 
 
