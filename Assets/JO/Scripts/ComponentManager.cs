@@ -17,8 +17,6 @@ public class ComponentManager : MonoBehaviour
 
 
 
-
-
     [SerializeField]
     BaseComponent[] comlist = new BaseComponent[(int)EnumTypes.eComponentTypes.comMax];
 

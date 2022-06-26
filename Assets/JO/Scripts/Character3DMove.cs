@@ -181,14 +181,14 @@ public class Character3DMove: MonoBehaviour
         if (IsMoving)
         {
             MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
-            com.animator.SetBool("Idle", false);
+            //com.animator.SetBool("Idle", false);
 
 
-            com.animator.SetBool("Move", true);
-            if (IsRunning)
-                com.animator.SetInt("MoveNum", 1);
-            else
-                com.animator.SetInt("MoveNum", 0);
+            //com.animator.SetBool("Move", true);
+            //if (IsRunning)
+            //    com.animator.SetInt("MoveNum", 1);
+            //else
+            //    com.animator.SetInt("MoveNum", 0);
 
         }
         else

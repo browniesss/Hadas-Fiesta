@@ -4,22 +4,13 @@ using UnityEngine;
 
 namespace EnumTypes
 {
-    public enum eManagerTypes
-    {
-        InputManager,
-        MoveManager,
-        AnimationManager,
-
-
-    }
-
     public enum eComponentTypes
     {
         InputCom,
         MoveCom,
         AnimatorCom,
         GuardCom,
-
+        AttackCom,
         comMax
     }
     public enum eInputEvents

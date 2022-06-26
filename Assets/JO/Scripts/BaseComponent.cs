@@ -20,7 +20,7 @@ public abstract class BaseComponent : MonoBehaviour
     }
     public abstract void InitComtype();
 
-    public abstract BaseComponent GetComponent();
+    //public abstract BaseComponent GetComponent();
     //public abstract void SetComponent();
 
     //public abstract void InitComponent();

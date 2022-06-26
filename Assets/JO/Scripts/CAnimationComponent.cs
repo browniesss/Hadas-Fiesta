@@ -36,10 +36,6 @@ public class CAnimationComponent : BaseComponent
         animator = GetComponentInChildren<Animator>();
     }
 
-    public override BaseComponent GetComponent()
-    {
-        return this;
-    }
 
     public override void InitComtype()
     {

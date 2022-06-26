@@ -36,11 +36,6 @@ public class CGuardComponent : BaseComponent
 
 
 
-    public override BaseComponent GetComponent()
-    {
-        return this;
-    }
-
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.GuardCom;
