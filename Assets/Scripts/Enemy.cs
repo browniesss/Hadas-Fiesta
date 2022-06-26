@@ -26,6 +26,8 @@ public abstract class Enemy : MonoBehaviour
     protected int next_Skill;
     [SerializeField]
     protected bool enemy_isDie = false;  // 몬스터가 죽어있는지 
+    [SerializeField]
+    protected float defense; // 방어력
 
     protected Animator anim;
 
@@ -124,6 +126,11 @@ public abstract class Enemy : MonoBehaviour
     public void Enemy_Return_Set()
     {
         cur_State = 4;
+    }
+
+    public virtual void Enemy_Attacked(float damage) // 플레이어가 몬스터를 공격 시 호출할 함수
+    {
+        // 방어력 계산 후 체력깎기
     }
 
     protected void Enemy_Return()

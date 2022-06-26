@@ -1424,7 +1424,7 @@ Animator:
   m_GameObject: {fileID: 4936146840888596241}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e310e1fea9e2e6c41968548c0b563d84, type: 2}
+  m_Controller: {fileID: 9100000, guid: cd75c990099f9cf44aa630711afe6541, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1445,6 +1445,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed40f8d09de5954d9aee69a733fa726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
+  Attack_Range: 2
+  Mana: 0
+  need_Mana: 50
+  is_Target_Set: 0
+  return_Pos: {x: 0, y: 0, z: 0}
+  cur_State: 0
+  cur_Target: {fileID: 0}
+  next_Skill: 0
+  enemy_isDie: 0
+  destination_Pos: {x: 0, y: 0, z: 0}
+  spawn_Skeleton_Prefab: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
 --- !u!1 &5204953240468884467
 GameObject:
   m_ObjectHideFlags: 0
