@@ -85,14 +85,21 @@ public abstract class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position,
                                                                  in_destination_Pos,
                                                                  Time.deltaTime * moveSpeed);
-       
+
         if (Vector3.Distance(transform.position, in_destination_Pos) <= 0.5f)
         {
-            anim.SetBool("isWalk", false);
+            if (cur_State == 4)
+                anim.SetBool("isReturn", false);
+            else
+                anim.SetBool("isWalk", false);
         }
         else
         {
-            anim.SetBool("isWalk", true); 
+            if (cur_State == 4)
+                anim.SetBool("isReturn", true);
+            else
+                anim.SetBool("isWalk", true);
+
             transform.LookAt(in_destination_Pos);
         }
     }
