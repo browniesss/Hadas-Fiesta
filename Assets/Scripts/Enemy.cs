@@ -24,6 +24,8 @@ public abstract class Enemy : MonoBehaviour
     protected GameObject cur_Target;
     [SerializeField]
     protected int next_Skill;
+    [SerializeField]
+    protected bool enemy_isDie = false;  // 몬스터가 죽어있는지 
 
     protected Animator anim;
 
@@ -82,6 +84,9 @@ public abstract class Enemy : MonoBehaviour
 
     void Destination_Move(Vector3 in_destination_Pos)
     {
+        if (enemy_isDie)
+            return;
+
         transform.position = Vector3.MoveTowards(transform.position,
                                                                  in_destination_Pos,
                                                                  Time.deltaTime * moveSpeed);
@@ -133,6 +138,25 @@ public abstract class Enemy : MonoBehaviour
         {
             Destination_Move(return_Pos);
         }
+    }
+
+    protected virtual void Enemy_Die()
+    {
+        // 사망 함수 구현 하기
+    }
+
+    protected virtual void Enemy_Skill_Rand()
+    {
+        // 다음 스킬 랜덤으로 정해주기
+    }
+
+    protected virtual IEnumerator Mana_Regen() // 마나 재생 함수. virtual 이므로 몬스터에 따라 마나 획득량 다르게 할 수도 있음. 아직은 몬스터별 마나 획득량 모르니까 통일
+    {
+        yield return new WaitForSeconds(1f);
+
+        Mana += 5;
+
+        StartCoroutine(Mana_Regen());
     }
 
     abstract protected void Enemy_FSM();
