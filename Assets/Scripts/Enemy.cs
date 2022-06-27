@@ -24,6 +24,10 @@ public abstract class Enemy : MonoBehaviour
     protected GameObject cur_Target;
     [SerializeField]
     protected int next_Skill;
+    [SerializeField]
+    protected bool enemy_isDie = false;  // 몬스터가 죽어있는지 
+    [SerializeField]
+    protected float defense; // 방어력
 
     protected Animator anim;
 
@@ -82,17 +86,27 @@ public abstract class Enemy : MonoBehaviour
 
     void Destination_Move(Vector3 in_destination_Pos)
     {
+        if (enemy_isDie)
+            return;
+
         transform.position = Vector3.MoveTowards(transform.position,
                                                                  in_destination_Pos,
                                                                  Time.deltaTime * moveSpeed);
-       
+
         if (Vector3.Distance(transform.position, in_destination_Pos) <= 0.5f)
         {
-            anim.SetBool("isWalk", false);
+            if (cur_State == 4)
+                anim.SetBool("isReturn", false);
+            else
+                anim.SetBool("isWalk", false);
         }
         else
         {
-            anim.SetBool("isWalk", true); 
+            if (cur_State == 4)
+                anim.SetBool("isReturn", true);
+            else
+                anim.SetBool("isWalk", true);
+
             transform.LookAt(in_destination_Pos);
         }
     }
@@ -114,6 +128,11 @@ public abstract class Enemy : MonoBehaviour
         cur_State = 4;
     }
 
+    public virtual void Enemy_Attacked(float damage) // 플레이어가 몬스터를 공격 시 호출할 함수
+    {
+        // 방어력 계산 후 체력깎기
+    }
+
     protected void Enemy_Return()
     {
         if (Vector3.Distance(transform.position, return_Pos) == 0)
@@ -126,6 +145,25 @@ public abstract class Enemy : MonoBehaviour
         {
             Destination_Move(return_Pos);
         }
+    }
+
+    protected virtual void Enemy_Die()
+    {
+        // 사망 함수 구현 하기
+    }
+
+    protected virtual void Enemy_Skill_Rand()
+    {
+        // 다음 스킬 랜덤으로 정해주기
+    }
+
+    protected virtual IEnumerator Mana_Regen() // 마나 재생 함수. virtual 이므로 몬스터에 따라 마나 획득량 다르게 할 수도 있음. 아직은 몬스터별 마나 획득량 모르니까 통일
+    {
+        yield return new WaitForSeconds(1f);
+
+        Mana += 5;
+
+        StartCoroutine(Mana_Regen());
     }
 
     abstract protected void Enemy_FSM();
