@@ -555,5 +555,10 @@ public class Character3DMove: MonoBehaviour
         Rotation();
         HorVelocity();
         Move();
+
+        if(Input.GetMouseButton(0))
+        {
+            AnimationManager.Instance.SetBool(GetComponent<Animator>(), "Move", true);
+        }
     }
 }
