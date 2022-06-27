@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8852424274791322926}
   - component: {fileID: 4034973441209835901}
   - component: {fileID: 380500563679194444}
+  - component: {fileID: -5687214293705890864}
+  - component: {fileID: -2748682260526339930}
   m_Layer: 0
   m_Name: susu
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8443192087402398456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.052389827, y: 0.8784587, z: 0.09908192, w: 0.4644874}
   m_LocalPosition: {x: -23.433771, y: -20.6, z: 106.510994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -113,3 +115,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5687214293705890864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443192087402398456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98484c834c3697f46a846e032bd7c3ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  Attack_Range: 5
+  Mana: 0
+  need_Mana: 10
+  is_Target_Set: 0
+  return_Pos: {x: 0, y: 0, z: 0}
+  cur_State: 0
+  cur_Target: {fileID: 0}
+  next_Skill: 0
+  destination_Pos: {x: 0, y: 0, z: 0}
+--- !u!95 &-2748682260526339930
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443192087402398456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
