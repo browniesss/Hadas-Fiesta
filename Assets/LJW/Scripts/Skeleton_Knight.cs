@@ -104,7 +104,7 @@ public class Skeleton_Knight : Enemy
             GameObject spawned_enemy = GameObject.Instantiate(spawn_Skeleton_Prefab);
             spawned_enemy.gameObject.name = i.ToString() + "¹øÂ°";
 
-            Vector3 v = new Vector3(Mathf.Sin(30.0f * i) * 5.0f, 0.0f, Mathf.Cos(30.0f * i) * 5.0f);
+            Vector3 v = new Vector3(Mathf.Sin(30.0f * i) * 5.0f, 0, Mathf.Cos(30.0f * i) * 5.0f);
 
             spawned_enemy.transform.position = transform.position + v;
         }
