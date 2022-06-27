@@ -556,9 +556,18 @@ public class Character3DMove: MonoBehaviour
         HorVelocity();
         Move();
 
+        
+
         if(Input.GetMouseButton(0))
         {
-            AnimationManager.Instance.SetBool(GetComponent<Animator>(), "Move", true);
+            
+            AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
+            Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            AnimationManager.Instance.SetPlaySpeed(GetComponentInChildren<Animator>().GetInstanceID(), 0.5f);
         }
     }
 }

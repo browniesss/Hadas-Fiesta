@@ -17,6 +17,7 @@ public class AnimationManager : Singleton<AnimationManager>
 
     public AnimatorControllerParameter[] _params;
 
+
     private void Awake()
     {
         animatorlist = GameObject.FindObjectsOfType<Animator>().ToList();
@@ -24,9 +25,14 @@ public class AnimationManager : Singleton<AnimationManager>
         foreach (var a in animatorlist)
         {
             
-            animatordic.Add(i++, new AnimationInfos(a));
+            animatordic.Add(a.GetInstanceID(), new AnimationInfos(a));
+            Debug.Log($"애니메이터 하나 받아옴 ID = {a.GetInstanceID()}");
+            AnimatorControllerParameter anii;
+            AnimationClip clip;
+            //animator.
             
         }
+
 
         //for (int i = 0; i < _params.Length; i++)
         //{
@@ -39,29 +45,30 @@ public class AnimationManager : Singleton<AnimationManager>
     }
 
 
-    public void SetInt(Animator animator, string pname, int value)
+    public void SetInt(int id, string pname, int value)
     {
-        animatordic[0].SetInt(pname, value);
+        animatordic[id].SetInt(pname, value);
     }
 
-    public void SetBool(Animator animator, string pname, bool value)
+    public void SetBool(int id, string pname, bool value)
     {
-        animatordic[0].SetBool(pname, value);
+        animatordic[id].SetBool(pname, value);
     }
 
-    public void SetFloat(Animator animator, string pname, float value)
+    public void SetFloat(int id, string pname, float value)
     {
-        animatordic[0].SetFloat(pname, value);
+        animatordic[id].SetFloat(pname, value);
     }
 
-    public void SetTrigger(Animator animator, string pname)
+    public void SetTrigger(int id, string pname)
     {
-        animatordic[0].SetTrigger(pname);
+        animatordic[id].SetTrigger(pname);
     }
 
-    public void SetPlaySpeed(Animator animator, float rate)
+    public void SetPlaySpeed(int id, float rate)
     {
-
+        Debug.Log($"속도 수정 {rate}");
+        animatordic[id].SetPlaySpeed(rate);
     }
 
     private void Update()

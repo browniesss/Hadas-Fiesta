@@ -43,7 +43,7 @@ public class AnimationInfos
             {
                 m_TriggerParamDic.Add(param[i].name, param[i]);
             }
-            Debug.Log($"{i}¹ø, {param[i].name}, {param[i].type}");
+            //Debug.Log($"{i}¹ø, {param[i].name}, {param[i].type}");
         }
 
     }
@@ -72,5 +72,8 @@ public class AnimationInfos
     {
         animator.SetTrigger(pname);
     }
-
+    public void SetPlaySpeed(float rate)
+    {
+        animator.speed = rate;
+    }
 }
