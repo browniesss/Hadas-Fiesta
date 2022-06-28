@@ -9,7 +9,7 @@ using System.Linq;
 
 public class AnimationManager : Singleton<AnimationManager>
 {
-    public Dictionary<int, AnimationInfos> animatordic = new Dictionary<int, AnimationInfos>();
+    public Dictionary<Animator, AnimationInfos> animatordic = new Dictionary<Animator, AnimationInfos>();
 
     public List<Animator> animatorlist;
 
@@ -25,7 +25,7 @@ public class AnimationManager : Singleton<AnimationManager>
         foreach (var a in animatorlist)
         {
             
-            animatordic.Add(a.GetInstanceID(), new AnimationInfos(a));
+            animatordic.Add(a, new AnimationInfos(a));
             Debug.Log($"애니메이터 하나 받아옴 ID = {a.GetInstanceID()}");
             AnimatorControllerParameter anii;
             AnimationClip clip;
@@ -45,31 +45,42 @@ public class AnimationManager : Singleton<AnimationManager>
     }
 
 
-    public void SetInt(int id, string pname, int value)
+    public void SetInt(Animator id, string pname, int value)
     {
         animatordic[id].SetInt(pname, value);
     }
 
-    public void SetBool(int id, string pname, bool value)
+    public void SetBool(Animator id, string pname, bool value)
     {
         animatordic[id].SetBool(pname, value);
     }
 
-    public void SetFloat(int id, string pname, float value)
+    public void SetFloat(Animator id, string pname, float value)
     {
         animatordic[id].SetFloat(pname, value);
     }
 
-    public void SetTrigger(int id, string pname)
+    public void SetTrigger(Animator id, string pname)
     {
         animatordic[id].SetTrigger(pname);
     }
 
-    public void SetPlaySpeed(int id, float rate)
+    public void SetPlaySpeed(Animator id, float rate)
     {
         Debug.Log($"속도 수정 {rate}");
         animatordic[id].SetPlaySpeed(rate);
     }
+
+    public void Play(Animator id, string pname)
+    {
+        animatordic[id].Play(pname);
+    }
+
+    public void Play(Animator id, string pname,int layer, float normalizedTime)
+    {
+        animatordic[id].Play(pname, layer, normalizedTime);
+    }
+
 
     private void Update()
     {

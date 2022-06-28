@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class AnimationInfos
@@ -12,14 +13,6 @@ public class AnimationInfos
     Dictionary<string, AnimatorControllerParameter> m_BoolParamDic = new Dictionary<string, AnimatorControllerParameter>();
     Dictionary<string, AnimatorControllerParameter> m_TriggerParamDic = new Dictionary<string, AnimatorControllerParameter>();
 
-    List<AnimatorControllerParameter> m_floatParamList;
-    List<AnimatorControllerParameter> m_IntParamList;
-    List<AnimatorControllerParameter> m_BoolParamList;
-    List<AnimatorControllerParameter> m_TriggerParamList;
-    AnimatorControllerParameter[] m_FloatParams;
-    AnimatorControllerParameter[] m_IntParams;
-    AnimatorControllerParameter[] m_BoolParams;
-    AnimatorControllerParameter[] m_TriggerParams;
 
     public AnimationInfos(Animator animator)
     {
@@ -45,12 +38,58 @@ public class AnimationInfos
             }
             //Debug.Log($"{i}¹ø, {param[i].name}, {param[i].type}");
         }
-
+        AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
+        m_clips = anicontrol.animationClips;
     }
 
-    public void Init(Animator animator)
-    {
 
+    public AnimatorControllerParameter[] GetFloatParams()
+    {
+        AnimatorControllerParameter[] temp = new AnimatorControllerParameter[m_floatParamDic.Count];
+        int i = 0;
+        foreach(KeyValuePair<string, AnimatorControllerParameter> item in m_floatParamDic)
+        {
+            temp[i++] = item.Value;
+        }
+        return temp;
+    }
+
+    public AnimatorControllerParameter[] GetIntParams()
+    {
+        AnimatorControllerParameter[] temp = new AnimatorControllerParameter[m_IntParamDic.Count];
+        int i = 0;
+        foreach (KeyValuePair<string, AnimatorControllerParameter> item in m_IntParamDic)
+        {
+            temp[i++] = item.Value;
+        }
+        return temp;
+    }
+
+    public AnimatorControllerParameter[] GetBoolParams()
+    {
+        AnimatorControllerParameter[] temp = new AnimatorControllerParameter[m_BoolParamDic.Count];
+        int i = 0;
+        foreach (KeyValuePair<string, AnimatorControllerParameter> item in m_BoolParamDic)
+        {
+            temp[i++] = item.Value;
+        }
+        return temp;
+    }
+
+    public AnimatorControllerParameter[] GetTriggerParams()
+    {
+        AnimatorControllerParameter[] temp = new AnimatorControllerParameter[m_TriggerParamDic.Count];
+        int i = 0;
+        foreach (KeyValuePair<string, AnimatorControllerParameter> item in m_TriggerParamDic)
+        {
+            temp[i++] = item.Value;
+        }
+        return temp;
+    }
+
+    public AnimationClip[] GetAnimationClips()
+    {
+        return m_clips;
     }
 
     public void SetFloat(string pname, float value)
@@ -75,5 +114,15 @@ public class AnimationInfos
     public void SetPlaySpeed(float rate)
     {
         animator.speed = rate;
+    }
+
+    public void Play(string pname)
+    {
+        animator.Play(pname);
+    }
+
+    public void Play(string pname, int layer, float normalizedTime)
+    {
+        animator.Play(pname, layer, normalizedTime);
     }
 }
