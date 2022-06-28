@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -494,10 +494,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackAnimationNum: 0
   colliders: []
+  NextAttack: 0
   B_AttackOn: 0
-  ani: {fileID: 0}
   animator: {fileID: 0}
-  aaa: {fileID: 0}
+  AttackCount: 0
 --- !u!1 &574279981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1201275748583684, guid: 371694600d6b08f4fa8a81386b687f30, type: 3}
   m_PrefabInstance: {fileID: 2043327222}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1100561090
+--- !u!114 &1100561089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1120,11 +1120,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1100561088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c9dd1871d1f3740b68de6beafd5115, type: 3}
+  m_Script: {fileID: 11500000, guid: e0869079b5837d74aba77dcc123e3606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextAttack: 0
-  NextAttack_Possible: 0
+  attackcom: {fileID: 0}
 --- !u!1 &1108315201
 GameObject:
   m_ObjectHideFlags: 0
