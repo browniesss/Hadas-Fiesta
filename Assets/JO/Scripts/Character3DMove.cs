@@ -558,16 +558,16 @@ public class Character3DMove: MonoBehaviour
 
         
 
-        if(Input.GetMouseButton(0))
-        {
+        //if(Input.GetMouseButton(0))
+        //{
             
-            AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
-            Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
-        }
+        //    AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
+        //    Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
+        //}
 
-        if (Input.GetMouseButton(1))
-        {
-            AnimationManager.Instance.SetPlaySpeed(GetComponentInChildren<Animator>().GetInstanceID(), 0.5f);
-        }
+        //if (Input.GetMouseButton(1))
+        //{
+        //    AnimationManager.Instance.SetPlaySpeed(GetComponentInChildren<Animator>().GetInstanceID(), 0.5f);
+        //}
     }
 }
