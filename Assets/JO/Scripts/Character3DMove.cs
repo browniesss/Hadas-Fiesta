@@ -128,89 +128,89 @@ public class Character3DMove: MonoBehaviour
 
     }
 
-    //void KeyInput()
-    //{
-    //    float v = 0;
-    //    float h = 0;
+    void KeyInput()
+    {
+        float v = 0;
+        float h = 0;
 
 
 
-    //    if (Input.GetKeyDown(KeyCode.Tab))
-    //    {
-    //        ChangePerspective();
-    //    }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ChangePerspective();
+        }
 
-    //    if (Input.GetKeyDown(KeyCode.LeftControl))
-    //    {
-    //        ShowCursorToggle();
-    //    }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            ShowCursorToggle();
+        }
 
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Jump();
-    //    }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
 
-    //    if(Input.GetKeyDown(KeyCode.LeftShift))
-    //    {
-    //        if (!IsRunning)
-    //            IsRunning = true;
-    //    }
-    //    if(Input.GetKeyUp(KeyCode.LeftShift))
-    //    {
-    //        if (IsRunning)
-    //            IsRunning = false;
-    //    }
-    //    //if (com.animator == null)
-    //    //{
-    //    //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-    //    //}
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (!IsRunning)
+                IsRunning = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (IsRunning)
+                IsRunning = false;
+        }
+        //if (com.animator == null)
+        //{
+        //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
+        //}
 
-    //    MouseMove = new Vector2(0,0);
-    //    MoveDir = new Vector3(h, 0, v);
-    //    IsMoving = false;
+        MouseMove = new Vector2(0, 0);
+        MoveDir = new Vector3(h, 0, v);
+        IsMoving = false;
 
-    //    Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
+        Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
-    //    if (Input.GetKey(KeyCode.W)) v += 1.0f;
-    //    if (Input.GetKey(KeyCode.S)) v -= 1.0f;
-    //    if (Input.GetKey(KeyCode.A)) h -= 1.0f;
-    //    if (Input.GetKey(KeyCode.D)) h += 1.0f;
-
-
-
-    //    MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-    //    MoveDir = new Vector3(h, 0, v);
-    //    IsMoving = (MoveDir.sqrMagnitude > 0.01f);
+        if (Input.GetKey(KeyCode.W)) v += 1.0f;
+        if (Input.GetKey(KeyCode.S)) v -= 1.0f;
+        if (Input.GetKey(KeyCode.A)) h -= 1.0f;
+        if (Input.GetKey(KeyCode.D)) h += 1.0f;
 
 
-    //    if (IsMoving)
-    //    {
-    //        MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
-    //        //com.animator.SetBool("Idle", false);
+
+        MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        MoveDir = new Vector3(h, 0, v);
+        IsMoving = (MoveDir.sqrMagnitude > 0.01f);
 
 
-    //        //com.animator.SetBool("Move", true);
-    //        //if (IsRunning)
-    //        //    com.animator.SetInt("MoveNum", 1);
-    //        //else
-    //        //    com.animator.SetInt("MoveNum", 0);
-
-    //    }
-    //    else
-    //    {
-    //        MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
-    //        //com.animator.SetBool("Idle", true);
-    //        //com.animator.SetBool("Move", false);
+        if (IsMoving)
+        {
+            MoveAccel = Mathf.Lerp(MoveAccel, 1.0f, 0.1f);
+            //com.animator.SetBool("Idle", false);
 
 
-    //    }
+            //com.animator.SetBool("Move", true);
+            //if (IsRunning)
+            //    com.animator.SetInt("MoveNum", 1);
+            //else
+            //    com.animator.SetInt("MoveNum", 0);
 
-    //    ////공격 중일 때는 움직일 수 없다.
-    //    //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
-    //    //{
-            
-    //    //}
-    //}
+        }
+        else
+        {
+            MoveAccel = Mathf.Lerp(MoveAccel, 0.0f, 0.1f);
+            //com.animator.SetBool("Idle", true);
+            //com.animator.SetBool("Move", false);
+
+
+        }
+
+        ////공격 중일 때는 움직일 수 없다.
+        //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
+        //{
+
+        //}
+    }
 
     //구르기
     public void Rolling()
@@ -325,10 +325,7 @@ public class Character3DMove: MonoBehaviour
             {
                 IsFowordBlock = true;
             }
-
-
         }
-
     }
 
     private void OnDrawGizmos()
@@ -562,7 +559,12 @@ public class Character3DMove: MonoBehaviour
         {
 
             //AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
-            AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), "Run");
+            AnimationClip[] clips = AnimationManager.Instance.GetAnimationClips(GetComponentInChildren<Animator>());
+            foreach(var a in clips)
+            {
+                Debug.Log($"애니메이션 클립들 받아옴 개수 => {clips.Length} {a.name}");
+            }
+            AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), clips[Random.Range(0,clips.Length)].name);
 
             Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
         }

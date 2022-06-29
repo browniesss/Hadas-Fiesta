@@ -12,62 +12,82 @@ public class CInputComponent : BaseComponent
     [System.Serializable]
     public class KeySetting
     {
-        [SerializeField]
-        KeyCode right;
-        [SerializeField]
-        KeyCode foward;
-        [SerializeField]
-        KeyCode left;
-        [SerializeField]
-        KeyCode back;
-        [SerializeField]
-        KeyCode Rolling;
+        public KeyCode right = KeyCode.D;
+
+        public KeyCode foward = KeyCode.W;
+
+        public KeyCode left = KeyCode.A;
+
+        public KeyCode back = KeyCode.S;
+
+        public KeyCode Rolling = KeyCode.Space;
+
+        public KeyCode Run = KeyCode.LeftShift;
     }
 
-    public KeySetting _keysetting = new KeySetting();
+    public KeySetting _key = new KeySetting();
 
-    public Vector2 MouseMove = Vector2.zero;
+    //input에서 필요한 컴포넌트들
 
-    public Vector3 MoveDir = Vector3.zero;
+    //move 컴포넌트
+    public CMoveComponent movecom;
+    //Attack 컴포넌트
 
-    //public CMoveComponent
+    //Defence 컴포넌트
+    public CDefenceComponent defencecom;
+    
+   
 
     void KeyInput()
     {
+        if (movecom == null)
+            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
+
         float v = 0;
         float h = 0;
 
-        MouseMove = new Vector2(0, 0);
-        MoveDir = new Vector3(0, 0, 0);
+        movecom.MouseMove = new Vector2(0, 0);
+        movecom.MoveDir = new Vector3(0, 0, 0);
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
-        if (Input.GetKey(KeyCode.W)) v += 1.0f;
-        if (Input.GetKey(KeyCode.S)) v -= 1.0f;
-        if (Input.GetKey(KeyCode.A)) h -= 1.0f;
-        if (Input.GetKey(KeyCode.D)) h += 1.0f;
+        if (Input.GetKey(_key.foward)) v += 1.0f;
+        if (Input.GetKey(_key.back)) v -= 1.0f;
+        if (Input.GetKey(_key.left)) h -= 1.0f;
+        if (Input.GetKey(_key.right)) h += 1.0f;
 
-        MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
+        else movecom.curval.IsRunning = false;
 
-        
-        MoveDir = new Vector3(h, 0, v);
+        movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
-        if (MouseMove.magnitude > 0)
-            ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom);
+        movecom.MoveDir = new Vector3(h, 0, v);
 
+        if (Input.GetKey(_key.Rolling))
+            movecom.Rolling();
+
+
+        if (movecom.MoveDir.magnitude > 0)
+        {
+            movecom.curval.IsMoving = true;
+        }
+        else
+        {
+            movecom.curval.IsMoving = false;
+        }
     }
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
+        //왼쪽 마우스 클릭
         Input.GetMouseButtonDown(0);
 
+        //오른쪽 마우스 클릭
         Input.GetMouseButtonDown(1);
 
+        //키 입력
         KeyInput();
     }
 }

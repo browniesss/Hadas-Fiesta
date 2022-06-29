@@ -7,8 +7,9 @@ using System.Linq;
 //기능
 //1. animator 파라미터 값 변경 해당animator컴포넌트 이름과 변경할 파라미터의 이름을 이용해서 
 
-public class AnimationManager : Singleton<AnimationManager>
+public class AnimationManager : MySingleton<AnimationManager>
 {
+    [SerializeField]
     public Dictionary<Animator, AnimationInfos> animatordic = new Dictionary<Animator, AnimationInfos>();
 
     public List<Animator> animatorlist;
@@ -24,24 +25,9 @@ public class AnimationManager : Singleton<AnimationManager>
         int i = 0;
         foreach (var a in animatorlist)
         {
-            
             animatordic.Add(a, new AnimationInfos(a));
-            Debug.Log($"애니메이터 하나 받아옴 ID = {a.GetInstanceID()}");
-            AnimatorControllerParameter anii;
-            AnimationClip clip;
-            //animator.
-            
+            //Debug.Log($"애니메이터 하나 받아옴 ID = {a.GetInstanceID()}");
         }
-
-
-        //for (int i = 0; i < _params.Length; i++)
-        //{
-        //    Debug.Log($"{i}번, {_params[i].name}, {_params[i].type}");
-        //    //Debug.Log($"{_params[i].defaultBool}");
-        //    //Debug.Log($"{_params[i].defaultFloat}");
-        //    //Debug.Log($"{_params[i].defaultInt}");
-        //}
-
     }
 
 
@@ -80,6 +66,32 @@ public class AnimationManager : Singleton<AnimationManager>
     {
         animatordic[id].Play(pname, layer, normalizedTime);
     }
+
+    public AnimatorControllerParameter[] GetFloatParams(Animator id)
+    {
+        return animatordic[id].GetFloatParams();
+    }
+
+    public AnimatorControllerParameter[] GetIntParams(Animator id)
+    {
+        return animatordic[id].GetIntParams();
+    }
+
+    public AnimatorControllerParameter[] GetBoolParams(Animator id)
+    {
+        return animatordic[id].GetBoolParams();
+    }
+
+    public AnimatorControllerParameter[] GetTriggerParams(Animator id)
+    {
+        return animatordic[id].GetTriggerParams();
+    }
+
+    public AnimationClip[] GetAnimationClips(Animator id)
+    {
+        return animatordic[id].GetAnimationClips();
+    }
+
 
 
     private void Update()

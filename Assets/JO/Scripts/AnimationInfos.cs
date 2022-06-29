@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
+[System.Serializable]
 public class AnimationInfos
 {
     Animator animator;
@@ -38,8 +39,11 @@ public class AnimationInfos
             }
             //Debug.Log($"{i}번, {param[i].name}, {param[i].type}");
         }
+
         AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
-        m_clips = anicontrol.animationClips;
+        if (anicontrol == null)
+            Debug.Log("Is Null!");
+        m_clips = animator.runtimeAnimatorController.animationClips;
     }
 
 
@@ -118,11 +122,22 @@ public class AnimationInfos
 
     public void Play(string pname)
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(pname))
+        {
+            //Debug.Log("재생중인거 재생");
+            return;
+        }
+            
         animator.Play(pname);
     }
 
     public void Play(string pname, int layer, float normalizedTime)
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(pname))
+        {
+            //Debug.Log("재생중인거 재생");
+            return;
+        }
         animator.Play(pname, layer, normalizedTime);
     }
 }
