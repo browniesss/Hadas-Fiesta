@@ -30,6 +30,12 @@ public class AnimationManager : MySingleton<AnimationManager>
         }
     }
 
+    public float GetClipLength(Animator id,string pname)
+    {
+        return animatordic[id].GetClipLength(pname);
+    }
+
+
 
     public void SetInt(Animator id, string pname, int value)
     {

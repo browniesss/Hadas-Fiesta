@@ -46,7 +46,19 @@ public class AnimationInfos
         m_clips = animator.runtimeAnimatorController.animationClips;
     }
 
-
+    public float GetClipLength(string pname)
+    {
+        float time = 0;
+        RuntimeAnimatorController ac = animator.runtimeAnimatorController;
+        foreach(var a in ac.animationClips)
+        {
+            if(a.name == pname)
+            {
+                time = a.length;
+            }
+        }
+        return time;
+    }
     public AnimatorControllerParameter[] GetFloatParams()
     {
         AnimatorControllerParameter[] temp = new AnimatorControllerParameter[m_floatParamDic.Count];
