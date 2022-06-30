@@ -30,12 +30,15 @@ public class AnimationManager : MySingleton<AnimationManager>
         }
     }
 
+    public float GetPlaySpeed(Animator id)
+    {
+        return animatordic[id].GetPlaySpeed();
+    }
+
     public float GetClipLength(Animator id,string pname)
     {
         return animatordic[id].GetClipLength(pname);
     }
-
-
 
     public void SetInt(Animator id, string pname, int value)
     {
@@ -59,7 +62,6 @@ public class AnimationManager : MySingleton<AnimationManager>
 
     public void SetPlaySpeed(Animator id, float rate)
     {
-        Debug.Log($"속도 수정 {rate}");
         animatordic[id].SetPlaySpeed(rate);
     }
 

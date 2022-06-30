@@ -127,9 +127,16 @@ public class AnimationInfos
     {
         animator.SetTrigger(pname);
     }
+
     public void SetPlaySpeed(float rate)
     {
-        animator.speed = rate;
+        if(animator.speed!=rate)
+            animator.speed = rate;
+    }
+
+    public float GetPlaySpeed()
+    {
+        return animator.speed;
     }
 
     public void Play(string pname)

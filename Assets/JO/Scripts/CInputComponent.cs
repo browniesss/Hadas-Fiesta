@@ -43,12 +43,20 @@ public class CInputComponent : BaseComponent
         if (movecom == null)
             movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
+        movecom.curval.IsMoving = false;
 
         float v = 0;
         float h = 0;
 
         movecom.MouseMove = new Vector2(0, 0);
         movecom.MoveDir = new Vector3(0, 0, 0);
+
+        movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+
+        if (movecom.curval.IsRolling|| movecom.curval.IsSlip)
+        {
+            return;
+        }
 
         Input.GetAxisRaw("Mouse ScrollWheel");//ÁÜÀÎ ÁÜ¾Æ¿ô¿¡ »ç¿ë
 
@@ -60,7 +68,7 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
         else movecom.curval.IsRunning = false;
 
-        movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        
 
         movecom.MoveDir = new Vector3(h, 0, v);
 
@@ -68,13 +76,9 @@ public class CInputComponent : BaseComponent
             movecom.Rolling();
 
 
-        if (movecom.MoveDir.magnitude > 0)
+        if (movecom.MoveDir.magnitude > 0 )
         {
             movecom.curval.IsMoving = true;
-        }
-        else
-        {
-            movecom.curval.IsMoving = false;
         }
     }
 

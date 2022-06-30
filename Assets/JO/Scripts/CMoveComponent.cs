@@ -186,10 +186,12 @@ public class CMoveComponent : BaseComponent
         {
             if(curval.IsRunning)
             {
+                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
                 AnimationManager.Instance.Play(com.animator, "_Dash");
             }
             else
             {
+                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
                 AnimationManager.Instance.Play(com.animator, "_Walk");
             }
         }
@@ -197,10 +199,12 @@ public class CMoveComponent : BaseComponent
         {
             if(curval.IsRolling)
             {
+                AnimationManager.Instance.SetPlaySpeed(com.animator,1.8f);
                 AnimationManager.Instance.Play(com.animator, "_Rolling");
             }
             else
             {
+                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
                 AnimationManager.Instance.Play(com.animator, "_Idle");
             }
             
@@ -290,13 +294,22 @@ public class CMoveComponent : BaseComponent
 
     IEnumerator Rolling_Coroutine(float time)
     {
-        int tempval = (int)(time / 0.016f);
-        Debug.Log($"{time}/{0.016} -> {tempval}회 반복");
+        float temptime = time;
+        //float speed = AnimationManager.Instance.GetPlaySpeed(com.animator);
+        //speed -= 1.0f;
+        //speed = Mathf.Abs(speed);
+       // Debug.Log($"{temptime}*={speed}");
+        temptime /= 1.8f;
+        
+        int tempval = (int)(temptime / 0.016f);
+        Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
         int i = 0;
         Vector3 tempmove = Vector3.zero;
         tempmove = com.FpRoot.forward; 
-        tempmove *= 10;
-        
+        tempmove *= 100;
+
+        Vector3 dest = this.transform.position + tempmove; 
+
         while (true)
         {
             if(i>=tempval)
@@ -305,7 +318,9 @@ public class CMoveComponent : BaseComponent
                 yield break;
             }
 
-            com.CharacterRig.velocity = new Vector3(tempmove.x, tempmove.y, tempmove.z);
+            this.transform.position = Vector3.Lerp(this.transform.position, dest, Time.deltaTime);
+
+            //com.CharacterRig.velocity = new Vector3(tempmove.x, tempmove.y, tempmove.z);
 
             i++;
             yield return new WaitForSeconds(0.016f);

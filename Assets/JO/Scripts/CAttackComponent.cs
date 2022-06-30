@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CAttackComponent : MonoBehaviour
+public class CAttackComponent : BaseComponent
 {
     //public AnimationClip[] Attack
     [SerializeField]
@@ -21,20 +21,10 @@ public class CAttackComponent : MonoBehaviour
 
     public CAnimationComponent animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log($"공격시작");
-            Attack();
-        }
-    }
-
     void Start()
     {
         animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
-        
+
     }
 
     IEnumerator Cor_AttackTimeCounter()
@@ -81,8 +71,9 @@ public class CAttackComponent : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    
+    public override void InitComtype()
+    {
+        p_comtype = EnumTypes.eComponentTypes.AttackCom;
+    }
 
-    
 }
