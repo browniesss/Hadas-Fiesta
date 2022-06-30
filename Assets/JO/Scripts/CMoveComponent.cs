@@ -195,8 +195,16 @@ public class CMoveComponent : BaseComponent
         }
         else
         {
+            if(curval.IsRolling)
+            {
+                AnimationManager.Instance.Play(com.animator, "_Rolling");
+            }
+            else
+            {
+                AnimationManager.Instance.Play(com.animator, "_Idle");
+            }
             
-            //AnimationManager.Instance.Play(com.animator, "_Idle");
+            
         }
             
 
@@ -275,7 +283,7 @@ public class CMoveComponent : BaseComponent
 
         curval.IsRolling = true;
 
-        AnimationManager.Instance.Play(com.animator, "_Rolling");
+        //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
         StartCoroutine(Rolling_Coroutine(AnimationManager.Instance.GetClipLength(com.animator, "_Rolling")));
     }
@@ -293,6 +301,7 @@ public class CMoveComponent : BaseComponent
         {
             if(i>=tempval)
             {
+                curval.IsRolling = false;
                 yield break;
             }
 

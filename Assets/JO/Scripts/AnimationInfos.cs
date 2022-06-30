@@ -152,4 +152,9 @@ public class AnimationInfos
         }
         animator.Play(pname, layer, normalizedTime);
     }
+
+    public bool IsNowPlaying(string pname)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(pname);
+    }
 }

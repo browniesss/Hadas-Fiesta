@@ -98,7 +98,10 @@ public class AnimationManager : MySingleton<AnimationManager>
         return animatordic[id].GetAnimationClips();
     }
 
-
+    public bool IsNowPlaying(Animator id,string pname)
+    {
+        return animatordic[id].IsNowPlaying(pname);
+    }
 
     private void Update()
     {
