@@ -25,12 +25,20 @@ public class CurState
     private bool isFowordBlock = false;
     [SerializeField]
     private bool isOnTheSlop = false;
+
     [SerializeField]
-    private bool isAttacked = false;
+    private bool isAttacking = false;
+    //[SerializeField]
+    //private bool isAttacked = false;
+
+
     [SerializeField]
     private bool isOutofControl = false;
+
+
     [SerializeField]
     private bool isRolling = false;
+
     [SerializeField]
     private float lastJump;
     [SerializeField]
@@ -61,10 +69,11 @@ public class CurState
     public bool IsSlip { get => isSlip; set => isSlip = value; }
     public bool IsFowordBlock { get => isFowordBlock; set => isFowordBlock = value; }
     public bool IsOnTheSlop { get => isOnTheSlop; set => isOnTheSlop = value; }
-    public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
+    //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
     public bool IsOutofControl { get => isOutofControl; set => isOutofControl = value; }
     public bool IsRolling { get => isRolling; set => isRolling = value; }
-    //public float CurGravity { get => curGravity; set => curGravity = value; }
+
+
     public float LastJump { get => lastJump; set => lastJump = value; }
     public float CurGroundSlopAngle { get => curGroundSlopAngle; set => curGroundSlopAngle = value; }
     public float CurFowardSlopAngle { get => curFowardSlopAngle; set => curFowardSlopAngle = value; }
@@ -73,4 +82,5 @@ public class CurState
     public Vector3 CurHorVelocity { get => curHorVelocity; set => curHorVelocity = value; }
     public Vector3 CurVirVelocity { get => curVirVelocity; set => curVirVelocity = value; }
     public float MoveAccel { get => moveAccel; set => moveAccel = value; }
+    public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
 }
