@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class AnimationEventDelegate : MonoBehaviour
 {
-    public delegate void AnimationEvent(string name);
+	System.Action _beginCallback = null;
+	System.Action _midCallback = null;
+	System.Action _endCallback = null;
 
-    public AnimationEvent animationevent;
+	public void Play(string trigger,
+		System.Action beginCallback = null,
+		System.Action midCallback = null,
+		System.Action endCallback = null
+		)
+	{
+		GetComponent<Animator>().SetTrigger(trigger);
+		_beginCallback = beginCallback;
+		_midCallback = midCallback;
+		_endCallback = endCallback;
+	}
 
-    public Dictionary<string, AnimationEvent> eventdic = new Dictionary<string, AnimationEvent>();
+	//Animation Event
+	public void OnBeginEvent()
+	{
+		//if (null != _beginCallback)
+		//	_beginCallback();
 
-    public void AddEvent(AnimationEvent _event)
-    {
-        animationevent += _event;
-    }
+		_beginCallback?.Invoke();   //위 주석부분처럼 작성해도 무관합니다.
+	}
 
-    public void ExecuteEvent(string name)
-    {
-        animationevent(name);
-    }
+	public void OnMidEvent()
+	{
+		_midCallback?.Invoke();
+	}
 
+	public void OnEndEvent()
+	{
+		Debug.Log("Animaton End Event");
+		_endCallback?.Invoke();
+	}
 }

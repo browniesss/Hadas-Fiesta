@@ -58468,8 +58468,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: ExecuteEvent
-    data: _Attack02
+    functionName: OnEndEvent
+    data: 
     objectReferenceParameter: {fileID: 11500000, guid: 071bddc9f34591443975b72312a660a1, type: 3}
     floatParameter: 0
     intParameter: 0
