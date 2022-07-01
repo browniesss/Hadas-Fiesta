@@ -14,7 +14,7 @@ public class SlimeMonster : Enemy
     {
         throw new System.NotImplementedException();
     }
-
+    
     protected override void Enemy_FSM()
     {
         switch (cur_State)
@@ -34,6 +34,7 @@ public class SlimeMonster : Enemy
     }
     void SkillFsm()
     {
+      
         if(Now_HP<=0) // 현재 체력이 0보다 작다면. 
         {
             if(Mob_Skill_divide) //스킬을 사용했다면 그대로 종료한다. 
@@ -82,6 +83,7 @@ public class SlimeMonster : Enemy
     }
     private void Awake()
     {
+       
         Mob_Skill_divide = false;
     }
     // Update is called once per frame

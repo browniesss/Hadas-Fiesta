@@ -62710,21 +62710,21 @@ AnimationClip:
   - time: 0.5
     functionName: On_DoubleAttack_State
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: e0869079b5837d74aba77dcc123e3606, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1
     functionName: AttackEnd
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: e0869079b5837d74aba77dcc123e3606, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1
     functionName: Off_DoubleAttack_State
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: e0869079b5837d74aba77dcc123e3606, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

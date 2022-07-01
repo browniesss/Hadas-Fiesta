@@ -7,35 +7,36 @@ public class AttackComponent : MonoBehaviour
 
     [SerializeField]
     private int AttackAnimationNum;
-
-
     [SerializeField]
-    public Collider[] colliders;    
+    public Collider[] colliders;
+    [SerializeField]
+    private bool NextAttack;
 
     public bool B_AttackOn;
 
 
-    public Animator ani;
+    
 
     public CAnimationComponent animator;
 
-    public AnimationClip aaa;
+
+    public int AttackCount;
+
+
     private void Awake()
     {
-        animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
 
+        
         colliders = GetComponentsInChildren<Collider>();
         B_AttackOn = false;
-        //foreach (Collider coll in colliders)
-        //{
-        //    coll.enabled = false;
-        //    Debug.Log(coll.name);
-        //    Debug.Log(coll.gameObject.name);
-        //}
+        NextAttack = false;
+
+        AttackCount = 0;
+
     }
     void Start()
     {
-        
+        animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
 
     }
 
@@ -44,48 +45,60 @@ public class AttackComponent : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!B_AttackOn)
-            {
-                B_AttackOn = true;
-                Debug.Log("공격");
-                AttackOn();
-
-                foreach (Collider coll in colliders)
-                {
-                    Debug.Log(coll.name);
-                    coll.enabled = true;
-                }
-            }
+            AttackOn();
+            
         }
     }
     public void AttackOn()
     {
-        
-        if (animator == null)
+        if (!B_AttackOn)
         {
-            Debug.Log("이거 실행");
-            animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
-        }
-       
+            B_AttackOn = true;
+            Debug.Log("공격");
 
-        animator.SetBool(EnumTypes.eAnimationState.Attack, true);
+            foreach (Collider coll in colliders)
+            {
+                Debug.Log(coll.name);
+                coll.enabled = true;
+            }
+            animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", 0);
+            animator.SetBool(EnumTypes.eAnimationState.Attack, true);
+            
+            //AttackCount++;
+        }
+        
     }    
         
     public void AttackEnd(int num)
     {
+        if (animator == null)
+        {
+            Debug.Log("이거 실행");
+            animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        }
 
         Debug.Log("공격 끝");
         animator.SetBool(EnumTypes.eAnimationState.Idle, true);
-
+        animator.SetBool(EnumTypes.eAnimationState.Attack, false);
 
         foreach (Collider coll in colliders)
         {
+            if (coll.name == "weapon03")
             coll.enabled = false;
         }
-
+       
         B_AttackOn = false;
+        
     }
-
+    public void On_NextAttack()
+    {
+        NextAttack = true;
+        
+    }
+    public void Off_NextAttack()
+    {
+        NextAttack = false;
+    }
     IEnumerator Anitime()
     {
         

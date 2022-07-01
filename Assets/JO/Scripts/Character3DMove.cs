@@ -123,6 +123,11 @@ public class Character3DMove: MonoBehaviour
 
     public Transform testcube;
 
+    void CharacterDirectionMove(Vector3 direction)
+    {
+
+    }
+
     void KeyInput()
     {
         float v = 0;
@@ -145,12 +150,12 @@ public class Character3DMove: MonoBehaviour
             Jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!IsRunning)
                 IsRunning = true;
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             if (IsRunning)
                 IsRunning = false;
@@ -160,7 +165,7 @@ public class Character3DMove: MonoBehaviour
         //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
         //}
 
-        MouseMove = new Vector2(0,0);
+        MouseMove = new Vector2(0, 0);
         MoveDir = new Vector3(h, 0, v);
         IsMoving = false;
 
@@ -203,7 +208,7 @@ public class Character3DMove: MonoBehaviour
         ////공격 중일 때는 움직일 수 없다.
         //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
         //{
-            
+
         //}
     }
 
@@ -320,10 +325,7 @@ public class Character3DMove: MonoBehaviour
             {
                 IsFowordBlock = true;
             }
-
-
         }
-
     }
 
     private void OnDrawGizmos()
@@ -542,7 +544,7 @@ public class Character3DMove: MonoBehaviour
     void Update()
     {
         Falling();
-        KeyInput();
+        //KeyInput();
 
         CheckGround();
         CheckFront();
@@ -550,5 +552,26 @@ public class Character3DMove: MonoBehaviour
         Rotation();
         HorVelocity();
         Move();
+
+
+
+        if (Input.GetMouseButton(1))
+        {
+
+            //AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
+            AnimationClip[] clips = AnimationManager.Instance.GetAnimationClips(GetComponentInChildren<Animator>());
+            foreach(var a in clips)
+            {
+                Debug.Log($"애니메이션 클립들 받아옴 개수 => {clips.Length} {a.name}");
+            }
+            AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), clips[Random.Range(0,clips.Length)].name);
+
+            Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
+        }
+
+        //if (Input.GetMouseButton(1))
+        //{
+        //    AnimationManager.Instance.SetPlaySpeed(GetComponentInChildren<Animator>().GetInstanceID(), 0.5f);
+        //}
     }
 }
