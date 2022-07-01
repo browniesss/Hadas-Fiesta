@@ -18,17 +18,47 @@ public class CAttackComponent : BaseComponent
 
     //public bool NowAttack;
 
+    //
     public bool Linkable;
 
     public int AttackNum = 0;
+    public CMoveComponent movecom;
+    //public CAnimationComponent animator;
 
-    public CAnimationComponent animator;
+    [System.Serializable]
+    public class AttackMovementInfo
+    {
+        public int AttackNum;
+
+        //애니메이션 배속
+        public float animationPlaySpeed;
+        
+        //해당 매니메이션 클립
+        public AnimationClip aniclip;
+
+        //후딜레이
+        public float MovementDelay;
+
+        //다음동작으로 넘어가기 위한 시간
+        //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
+        public float NextMovementTimeVal;
+
+        public float damage;
+    }
+
+    
+
+
+    public AttackMovementInfo[] attckinfos;
 
     void Start()
     {
-        animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
-        CMoveComponent movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        curval = movecom.curval;
+        //animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //curval = movecom.curval;
+
+
+
     }
 
 
@@ -64,12 +94,12 @@ public class CAttackComponent : BaseComponent
             AttackCount = 0;
         }
 
-        if (animator == null)
-            animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        //if (animator == null)
+        //    animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
 
-        animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", AttackCount);
+        //animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", AttackCount);
 
-        animator.SetBool(EnumTypes.eAnimationState.Attack, true);
+        //animator.SetBool(EnumTypes.eAnimationState.Attack, true);
         curval.IsAttacking = true;
     }
 
@@ -78,14 +108,14 @@ public class CAttackComponent : BaseComponent
     {
         Debug.Log($"공격 끝 들어옴{num}");
         //animator.SetBool(EnumTypes.eAnimationState.Attack, false);
-        animator.SetBool(EnumTypes.eAnimationState.Idle, true);
-        LastAttackTime = Time.time;
-        //NowAttack = false;
-        StartCoroutine(Cor_AttackTimeCounter());
+        //animator.SetBool(EnumTypes.eAnimationState.Idle, true);
+        //LastAttackTime = Time.time;
+        ////NowAttack = false;
+        //StartCoroutine(Cor_AttackTimeCounter());
         
     }
 
-
+    //공격이 중간에 끊겨야 할때
     public void AttackCutOff()
     {
 

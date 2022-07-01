@@ -202,6 +202,11 @@ public class CMoveComponent : BaseComponent
                 AnimationManager.Instance.SetPlaySpeed(com.animator,1.8f);
                 AnimationManager.Instance.Play(com.animator, "_Rolling");
             }
+            else if(curval.IsAttacking)
+            {
+                AnimationManager.Instance.SetPlaySpeed(com.animator, 1.0f);
+                AnimationManager.Instance.Play(com.animator, "_Attack02");
+            }
             else
             {
                 AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
