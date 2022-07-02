@@ -10,14 +10,9 @@ public class Test_enemy : Battle_Character
         ai.AI_Initialize(this);
     }
 
-    protected override void Patrol_Enter_Process()
+    void Update()
     {
-        Debug.Log("패트롤 엔터");
-    }
-
-    new void Update()
-    {
-        base.state = ai.AI_Update();
-        base.Update();
+        state_handler.state = ai.AI_Update();
+        state_handler.State_Handler_Update();
     }
 }
