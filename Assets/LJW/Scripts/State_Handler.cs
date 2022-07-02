@@ -22,6 +22,12 @@ public class State_Handler : MonoBehaviour
             case State.Patrol:
                 Patrol_Process();
                 break;
+            case State.Trace:
+                Trace_Process();
+                break;
+            case State.Attack:
+
+                break;
         }
     }
 
@@ -36,6 +42,16 @@ public class State_Handler : MonoBehaviour
     }
 
     protected virtual void Patrol_Exit_Process()
+    {
+
+    }
+
+    protected virtual void Trace_Process()
+    {
+
+    }
+
+    protected virtual void Attack_Process()
     {
 
     }

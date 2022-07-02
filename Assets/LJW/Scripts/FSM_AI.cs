@@ -11,6 +11,9 @@ public enum State
     Trace_Enter,
     Trace,
     Trace_Exit,
+    Attack_Enter,
+    Attack,
+    Attack_Exit,
 }
 
 [System.Serializable]
@@ -36,7 +39,7 @@ public class FSM_AI
                 now_State = State.Patrol;
                 break;
             case State.Patrol:
-                Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, 10f);  
+                Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, 10f);
                 //, 1 << 8); // 비트 연산자로 8번째 레이어
 
                 if (cols.Length > 0)
@@ -49,6 +52,12 @@ public class FSM_AI
                             now_State = State.Trace_Enter;
                         }
                     }
+                }
+                break;
+            case State.Trace:
+                if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range) // 타겟에 닿았다면
+                {
+                    now_State = State.Attack; // 공격 상태로 변경
                 }
                 break;
         }
