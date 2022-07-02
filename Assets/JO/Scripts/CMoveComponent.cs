@@ -27,7 +27,7 @@ public class CMoveComponent : BaseComponent
 
         public CapsuleCollider CapsuleCol = null;
 
-        public Animator animator = null;
+        public AnimationController animator = null;
     }
 
     [System.Serializable]
@@ -116,7 +116,7 @@ public class CMoveComponent : BaseComponent
         com.FpCam = GameObject.Find("FPCam").transform;
         com.CapsuleCol = GetComponent<CapsuleCollider>();
 
-        com.animator = GetComponentInChildren<Animator>();
+        com.animator = GetComponentInChildren<AnimationController>();
         //if (com.animator == null)
         //    Debug.Log("MoveCom ¿À·ù com.animator = null");
 
@@ -186,31 +186,31 @@ public class CMoveComponent : BaseComponent
         {
             if(curval.IsRunning)
             {
-                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
-                AnimationManager.Instance.Play(com.animator, "_Dash");
+                com.animator.SetPlaySpeed(1f);
+                com.animator.Play("_Dash");
             }
             else
             {
-                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
-                AnimationManager.Instance.Play(com.animator, "_Walk");
+                com.animator.SetPlaySpeed( 1f);
+                com.animator.Play("_Walk");
             }
         }
         else
         {
             if(curval.IsRolling)
             {
-                AnimationManager.Instance.SetPlaySpeed(com.animator,1.8f);
-                AnimationManager.Instance.Play(com.animator, "_Rolling");
+                com.animator.SetPlaySpeed(1.8f);
+                com.animator.Play("_Rolling");
             }
             else if(curval.IsAttacking)
             {
-                AnimationManager.Instance.SetPlaySpeed(com.animator, 1.0f);
-                AnimationManager.Instance.Play(com.animator, "_Attack02");
+                com.animator.SetPlaySpeed(1.0f);
+                com.animator.Play("_Attack02");
             }
             else
             {
-                AnimationManager.Instance.SetPlaySpeed(com.animator, 1f);
-                AnimationManager.Instance.Play(com.animator, "_Idle");
+                com.animator.SetPlaySpeed(1f);
+                com.animator.Play("_Idle");
             }
             
             
@@ -294,7 +294,7 @@ public class CMoveComponent : BaseComponent
 
         //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
-        StartCoroutine(Rolling_Coroutine(AnimationManager.Instance.GetClipLength(com.animator, "_Rolling")));
+        StartCoroutine(Rolling_Coroutine(com.animator.GetClipLength("_Rolling")));
     }
 
     IEnumerator Rolling_Coroutine(float time)

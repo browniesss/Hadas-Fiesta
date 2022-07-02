@@ -158,9 +158,36 @@ public class AnimationInfos
             //Debug.Log("재생중인거 재생");
             return;
         }
-            
-        animator.Play(pname);
+        //animator.Play(pname);
+        animator.CrossFade(pname, 0.1f);
+        //animator.CrossFade
+
+        
+        //CountTime(0.1f, pname);
+
+        
     }
+
+    
+
+    public IEnumerator CountTime(float desttime, string playname)
+    {
+        float starttime = Time.time;
+        Debug.Log($"코루틴 들어옴");
+        while (true)
+        {
+            if (Time.time - starttime >= desttime)
+            {
+                Debug.Log($"{playname} 애니메이션 실행함");
+                animator.Play(playname);
+                yield break;
+            }
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+    }
+
 
     public void Play(string pname, int layer, float normalizedTime)
     {
