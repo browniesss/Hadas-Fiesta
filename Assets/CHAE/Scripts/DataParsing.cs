@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataParsing : MonoBehaviour
 {
+    
     [SerializeField]
     Dictionary<string, List<Information>> Dic_Data_Test = new Dictionary<string, List<Information>>();
 

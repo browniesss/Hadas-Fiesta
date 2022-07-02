@@ -26,7 +26,7 @@ public class State_Handler : MonoBehaviour
                 Trace_Process();
                 break;
             case State.Attack:
-
+                Attack_Process();
                 break;
         }
     }
