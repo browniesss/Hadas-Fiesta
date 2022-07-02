@@ -44,6 +44,18 @@ public class AnimationInfos
         if (anicontrol == null)
             Debug.Log("Is Null!");
         m_clips = animator.runtimeAnimatorController.animationClips;
+
+        //AnimationEvent e_event;
+        //e_event.
+        //m_clips[0].AddEvent()
+        //foreach(var a in m_clips)
+        //{
+        //    if(a.events.Length>0)
+        //    {
+        //        Debug.Log($"클립이름 {a.name} 이벤트 이름{a.events[0].functionName}");
+        //    }
+        //}
+
     }
 
     public float GetClipLength(string pname)
