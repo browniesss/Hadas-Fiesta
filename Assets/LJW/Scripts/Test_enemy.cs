@@ -15,4 +15,9 @@ public class Test_enemy : Battle_Character
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
     }
+
+    public override void Skill_1()
+    {
+        // ½ºÅ³ 1¹ø
+    }
 }

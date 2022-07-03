@@ -60,6 +60,12 @@ public class FSM_AI
                     now_State = State.Attack; // 공격 상태로 변경
                 }
                 break;
+            case State.Attack:
+                if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range)) // 사정 거리 내에 있다면 
+                {
+                    now_State = State.Trace_Enter;
+                }
+                break;
         }
 
         return now_State;

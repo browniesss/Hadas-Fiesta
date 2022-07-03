@@ -14,6 +14,8 @@ public abstract class State_Handler : MonoBehaviour
     public void State_Handler_Initialize(Battle_Character b_c)
     {
         battle_Character = b_c;
+
+        StartCoroutine(Mana_Regen());
     }
 
     protected abstract void Patrol_Enter_Process();
@@ -60,5 +62,20 @@ public abstract class State_Handler : MonoBehaviour
 
             battle_Character.transform.LookAt(in_destination_Pos);
         }
+    }
+
+    protected virtual IEnumerator Mana_Regen() // 마나 재생 함수. virtual 이므로 몬스터에 따라 마나 획득량 다르게 할 수도 있음. 아직은 몬스터별 마나 획득량 모르니까 통일
+    {
+        yield return new WaitForSeconds(1f);
+
+        battle_Character.Mana += 5; // 몬스터 마나 재생량을 더해주면 될듯.
+
+        StartCoroutine(Mana_Regen());
+    }
+
+    protected void Enemy_Skill_Rand()
+    {
+        battle_Character.next_Skill = Random.Range(1, 3); // 스킬 범위를 데이터를 받아와서 가진 스킬 수 만큼 중에 랜덤으로 나오게
+        battle_Character.Mana = 0;
     }
 }

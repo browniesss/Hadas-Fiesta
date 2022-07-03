@@ -5,7 +5,9 @@ using UnityEngine;
 /*
 ex ) 원거리, 근거리 처럼 다른 스테이트 프로세스를 수행해야 한다면 
 스테이트 처리기를 상속받은 클래스를 구현해서, 예를들어서 patrol 이 필요없는 ai 종류의 스테이트 처리기, 필요한 종료의 스테이트 처리기 등을
-구현해야함 . 그리고 state_handler 를 상속이 아니라 ai 처럼 가지고 있을 수 있게 해야함.
+구현해야함 . 그리고 state_handler 를 상속이 아니라 ai 처럼 가지고 있을 수 있게 해야함. 
+
+시간 값 저장해주는 것도 처리.
  */
 
 public class Battle_Character : MonoBehaviour
@@ -23,6 +25,9 @@ public class Battle_Character : MonoBehaviour
     public Vector3 destination_Pos; // Patrol 목적지
     public float Attack_Range; // 사거리
     public bool patrol_Start = false; // 탐색 시작
+    public int Mana; // 몬스터 마나
+    public int need_Mana; // 스킬 사용시 필요한 마나
+    public int next_Skill;
     protected Animator anim;
 
     protected void Initalize()
@@ -35,5 +40,20 @@ public class Battle_Character : MonoBehaviour
 
         state_handler.State_Handler_Initialize(this);
         //anim = GetComponent<Animator>();
+    }
+
+    public virtual void Skill_1()
+    {
+
+    }
+
+    public virtual void Skill_2()
+    {
+
+    }
+    
+    public virtual void Skill_3()
+    {
+
     }
 }
