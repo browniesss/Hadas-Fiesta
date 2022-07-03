@@ -186,12 +186,13 @@ public class CMoveComponent : BaseComponent
         {
             if(curval.IsRunning)
             {
-                com.animator.SetPlaySpeed(1f);
+                //com.animator.SetPlaySpeed(1f);
                 com.animator.Play("_Dash");
+
             }
             else
             {
-                com.animator.SetPlaySpeed( 1f);
+                //com.animator.SetPlaySpeed( 1f);
                 com.animator.Play("_Walk");
             }
         }
@@ -199,17 +200,18 @@ public class CMoveComponent : BaseComponent
         {
             if(curval.IsRolling)
             {
-                com.animator.SetPlaySpeed(1.8f);
-                com.animator.Play("_Rolling");
+                //com.animator.SetPlaySpeed(1.8f);
+                com.animator.Play("_Rolling",1.8f);
             }
             else if(curval.IsAttacking)
             {
-                com.animator.SetPlaySpeed(1.0f);
-                com.animator.Play("_Attack02");
+                //int num  = GetComponent<CAttackComponent>().AttackNum;
+                ////com.animator.SetPlaySpeed(1.0f);
+                //com.animator.Play(string.Format("_Attack0{0}", num));
             }
             else
             {
-                com.animator.SetPlaySpeed(1f);
+                //com.animator.SetPlaySpeed(1f);
                 com.animator.Play("_Idle");
             }
             

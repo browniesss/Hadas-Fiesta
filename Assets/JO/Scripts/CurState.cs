@@ -30,15 +30,10 @@ public class CurState
     private bool isAttacking = false;
     //[SerializeField]
     //private bool isAttacked = false;
-
-
     [SerializeField]
     private bool isOutofControl = false;
-
-
     [SerializeField]
     private bool isRolling = false;
-
     [SerializeField]
     private float lastJump;
     [SerializeField]
@@ -72,8 +67,6 @@ public class CurState
     //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
     public bool IsOutofControl { get => isOutofControl; set => isOutofControl = value; }
     public bool IsRolling { get => isRolling; set => isRolling = value; }
-
-
     public float LastJump { get => lastJump; set => lastJump = value; }
     public float CurGroundSlopAngle { get => curGroundSlopAngle; set => curGroundSlopAngle = value; }
     public float CurFowardSlopAngle { get => curFowardSlopAngle; set => curFowardSlopAngle = value; }

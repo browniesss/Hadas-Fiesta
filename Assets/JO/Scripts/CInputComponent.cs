@@ -32,7 +32,7 @@ public class CInputComponent : BaseComponent
     //move 컴포넌트
     public CMoveComponent movecom;
     //Attack 컴포넌트
-
+    public CAttackComponent attackcom;
     //Defence 컴포넌트
     public CDefenceComponent defencecom;
     
@@ -93,7 +93,8 @@ public class CInputComponent : BaseComponent
         //왼쪽 마우스 클릭
         if(Input.GetMouseButtonDown(0))
         {
-            movecom.curval.IsAttacking = true;
+            attackcom.Attack();
+            //movecom.curval.IsAttacking = true;
         }
 
         //오른쪽 마우스 클릭

@@ -2568,6 +2568,7 @@ MonoBehaviour:
     Rolling: 32
     Run: 304
   movecom: {fileID: 0}
+  attackcom: {fileID: 0}
   defencecom: {fileID: 0}
 --- !u!54 &1380178428
 Rigidbody:
@@ -2652,6 +2653,7 @@ MonoBehaviour:
   Linkable: 0
   AttackNum: 0
   movecom: {fileID: 0}
+  animator: {fileID: 0}
   attckinfos:
   - AttackNum: 0
     animationPlaySpeed: 0
@@ -2850,7 +2852,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504932245}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf321b76b605e345a68d562d88c8f21, type: 3}
   m_Name: 
@@ -4050,6 +4052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b999d0a329d1a4fb4ff25396bcc2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  m_clipsnum: 0
+  m_clips: []
+  currentplayclipname: 
 --- !u!1 &2146656347
 GameObject:
   m_ObjectHideFlags: 0

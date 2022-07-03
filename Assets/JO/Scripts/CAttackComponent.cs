@@ -23,6 +23,8 @@ public class CAttackComponent : BaseComponent
 
     public int AttackNum = 0;
     public CMoveComponent movecom;
+
+    public AnimationController animator;
     //public CAnimationComponent animator;
 
     [System.Serializable]
@@ -62,7 +64,7 @@ public class CAttackComponent : BaseComponent
     }
 
 
-    //공격 중에는 1프레임 마다 
+    //공격 중에는 1프레임 마다 반복문을 돌면서 공격을 받는등의 상태 변화가 생기진 않았는지 확인한다.
     IEnumerator Cor_AttackTimeCounter()
     {
         Linkable = true;
@@ -94,12 +96,7 @@ public class CAttackComponent : BaseComponent
             AttackCount = 0;
         }
 
-        //if (animator == null)
-        //    animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
 
-        //animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", AttackCount);
-
-        //animator.SetBool(EnumTypes.eAnimationState.Attack, true);
         curval.IsAttacking = true;
     }
 
