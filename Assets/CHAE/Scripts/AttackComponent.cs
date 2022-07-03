@@ -61,8 +61,9 @@ public class AttackComponent : MonoBehaviour
                 Debug.Log(coll.name);
                 coll.enabled = true;
             }
-            animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", 0);
-            animator.SetBool(EnumTypes.eAnimationState.Attack, true);
+            //AnimationManager.Instance.Play(animator, "_Attack02");
+            //animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", 0);
+            //animator.SetBool(EnumTypes.eAnimationState.Attack, true);
             
             //AttackCount++;
         }
@@ -78,8 +79,8 @@ public class AttackComponent : MonoBehaviour
         }
 
         Debug.Log("°ø°Ý ³¡");
-        animator.SetBool(EnumTypes.eAnimationState.Idle, true);
-        animator.SetBool(EnumTypes.eAnimationState.Attack, false);
+        //animator.SetBool(EnumTypes.eAnimationState.Idle, true);
+        //animator.SetBool(EnumTypes.eAnimationState.Attack, false);
 
         foreach (Collider coll in colliders)
         {
