@@ -6,7 +6,7 @@ public class CAttackComponent : BaseComponent
 {
     //public AnimationClip[] Attack
     [SerializeField]
-    private int AttackCount;
+    //private int AttackCount;
 
     CurState curval;
 
@@ -24,7 +24,7 @@ public class CAttackComponent : BaseComponent
     public int AttackNum = 0;
     public CMoveComponent movecom;
 
-    public AnimationController animator;
+    //public AnimationController animator;
     //public CAnimationComponent animator;
 
     [System.Serializable]
@@ -46,18 +46,28 @@ public class CAttackComponent : BaseComponent
         public float NextMovementTimeVal;
 
         public float damage;
+
+        public GameObject Effect;
+
+        public Transform EffectPosRot;
     }
 
-    
+    public AnimationController animator;
 
+    public AnimationEventSystem eventsystem;
 
-    public AttackMovementInfo[] attckinfos;
+    public AttackMovementInfo[] attackinfos;
+
+    public float lastAttackTime = 0;
 
     void Start()
     {
         //animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
-        movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        //curval = movecom.curval;
+        
+        animator = GetComponentInChildren<AnimationController>();
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        eventsystem.AddEvent(null, null, AttackEnd);
+        
 
 
 
@@ -68,48 +78,76 @@ public class CAttackComponent : BaseComponent
     IEnumerator Cor_AttackTimeCounter()
     {
         Linkable = true;
+        float starttime;
+
 
         while(true)
         {
             //if()
 
-
+            yield return new WaitForSeconds(Time.deltaTime);
         }
-
-        yield return new WaitForSeconds(LinkAttackInterval);
-        Linkable = false;
     }
+
+
+
 
     public void Attack()
     {
+        if(movecom==null)
+        {
+            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            curval = movecom.curval;
+        }
+
         if (curval.IsAttacking)
             return;
 
+        if (curval.IsAttacking == false)
+            curval.IsAttacking = true;
 
-        if (Linkable)
+        Debug.Log("공격 들어옴");
+        float tempval = Time.time - lastAttackTime;
+        Debug.Log($"경과된 시간{tempval}, 연결시간{attackinfos[AttackNum].NextMovementTimeVal}");
+
+        if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
         {
-            AttackCount = (AttackCount + 1) % (int)EnumTypes.eAniAttack.AttackMax;
+            AttackNum = (AttackNum + 1) % (int)EnumTypes.eAniAttack.AttackMax;
 
         }
         else
         {
-            AttackCount = 0;
+            AttackNum = 0;
         }
 
+        
 
-        curval.IsAttacking = true;
+        Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
+        animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
+
+        
+
+
+
     }
 
+
+
+
     //공격애니메이션이 끝나면 해당 함수가 들어온다
-    public void AttackEnd(int num)
+    public void AttackEnd(string s_val)
     {
-        Debug.Log($"공격 끝 들어옴{num}");
+        Debug.Log($"공격 끝 들어옴 -> {s_val}");
+        if (curval.IsAttacking == true)
+            curval.IsAttacking = false;
+
+        lastAttackTime = Time.time;
         //animator.SetBool(EnumTypes.eAnimationState.Attack, false);
         //animator.SetBool(EnumTypes.eAnimationState.Idle, true);
         //LastAttackTime = Time.time;
         ////NowAttack = false;
         //StartCoroutine(Cor_AttackTimeCounter());
-        
+
     }
 
     //공격이 중간에 끊겨야 할때

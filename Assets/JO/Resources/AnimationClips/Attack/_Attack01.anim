@@ -86393,7 +86393,7 @@ AnimationClip:
   m_Events:
   - time: 0.76666665
     functionName: OnEndEvent
-    data: 
+    data: _Attack01
     objectReferenceParameter: {fileID: 11500000, guid: 493936a7c0275c4448585d020b7c31e8, type: 3}
     floatParameter: 0
     intParameter: 0

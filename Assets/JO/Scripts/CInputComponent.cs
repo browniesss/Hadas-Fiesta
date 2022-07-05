@@ -58,7 +58,7 @@ public class CInputComponent : BaseComponent
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
-        if (movecom.curval.IsRolling|| movecom.curval.IsSlip)
+        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking)
         {
             return;
         }
@@ -93,6 +93,8 @@ public class CInputComponent : BaseComponent
         //왼쪽 마우스 클릭
         if(Input.GetMouseButtonDown(0))
         {
+            if (attackcom == null)
+                attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
             attackcom.Attack();
             //movecom.curval.IsAttacking = true;
         }

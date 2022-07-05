@@ -59,6 +59,7 @@ namespace EnumTypes
     {
         Attack01,
         Attack02,
+        Attack03,
         AttackMax
     }
 
