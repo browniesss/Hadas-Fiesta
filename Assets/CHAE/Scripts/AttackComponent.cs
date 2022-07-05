@@ -13,16 +13,11 @@ public class AttackComponent : MonoBehaviour
     private bool NextAttack;
 
     public bool B_AttackOn;
-
-
-    
-
-    public CAnimationComponent animator;
-
-
+    public AnimationController animator;
     public int AttackCount;
-
-
+    public float AttackDelay;
+    
+    // public AttackMovementInfo[] attackinfos;
     private void Awake()
     {
 
@@ -30,14 +25,15 @@ public class AttackComponent : MonoBehaviour
         colliders = GetComponentsInChildren<Collider>();
         B_AttackOn = false;
         NextAttack = false;
-
-        AttackCount = 0;
+        AttackDelay = 1.0f;
+        AttackCount = 1;
 
     }
     void Start()
     {
-        animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
-
+        
+        animator = GetComponentInChildren<AnimationController>();
+        
     }
 
     // Update is called once per frame
@@ -49,23 +45,36 @@ public class AttackComponent : MonoBehaviour
             
         }
     }
+
+    IEnumerator Cor_NextAttackDelay()
+    {
+        NextAttack = true;
+        yield return new WaitForSeconds(AttackDelay);
+        NextAttack = false;
+        B_AttackOn = false;
+    }
+
     public void AttackOn()
     {
         if (!B_AttackOn)
         {
             B_AttackOn = true;
             Debug.Log("공격");
-
             foreach (Collider coll in colliders)
             {
                 Debug.Log(coll.name);
                 coll.enabled = true;
             }
-            //AnimationManager.Instance.Play(animator, "_Attack02");
-            //animator.SetInt($"{EnumTypes.eAnimationState.Attack}Num", 0);
-            //animator.SetBool(EnumTypes.eAnimationState.Attack, true);
-            
-            //AttackCount++;
+
+            if (NextAttack)
+            {
+                animator.Play($"_Attack0{0}",AttackCount);
+            }
+            else
+            {
+                animator.Play("_Attack01");
+            }
+           
         }
         
     }    
@@ -75,12 +84,10 @@ public class AttackComponent : MonoBehaviour
         if (animator == null)
         {
             Debug.Log("이거 실행");
-            animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+            
         }
 
-        Debug.Log("공격 끝");
-        //animator.SetBool(EnumTypes.eAnimationState.Idle, true);
-        //animator.SetBool(EnumTypes.eAnimationState.Attack, false);
+        Debug.Log("공격 끝");      
 
         foreach (Collider coll in colliders)
         {
@@ -88,8 +95,9 @@ public class AttackComponent : MonoBehaviour
             coll.enabled = false;
         }
        
-        B_AttackOn = false;
         
+        animator.Play("_Idle");
+        StartCoroutine(Cor_NextAttackDelay());
     }
     public void On_NextAttack()
     {

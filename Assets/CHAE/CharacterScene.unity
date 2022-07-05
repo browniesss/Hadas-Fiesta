@@ -1124,6 +1124,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackcom: {fileID: 0}
+--- !u!114 &1100561090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100561088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b999d0a329d1a4fb4ff25396bcc2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  m_clipsnum: 0
+  m_clips: []
+  currentplayclipname: 
 --- !u!1 &1108315201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,9 +1198,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536292114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dcff645e06f2bc48a1150ae27739d88, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c64825059b31894c97d457946b8d099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test_list: []
 --- !u!4 &1536292116
 Transform:
   m_ObjectHideFlags: 0
@@ -2131,7 +2148,7 @@ PrefabInstance:
     - target: {fileID: 95605575285994514, guid: 371694600d6b08f4fa8a81386b687f30, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: db50a4bddf11cdc46b354067f3f59308, type: 2}
+      objectReference: {fileID: 9100000, guid: 1c171db51981e76498ab9a0d6e5bd2d6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371694600d6b08f4fa8a81386b687f30, type: 3}
 --- !u!4 &2043327223 stripped
