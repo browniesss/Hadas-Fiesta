@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum State
+public enum State // 스테이트 
 {
     Init,
     Patrol_Enter,
@@ -22,13 +22,13 @@ public class FSM_AI
     public State now_State;
     public Battle_Character battle_Character;
 
-    public void AI_Initialize(Battle_Character bc)
+    public void AI_Initialize(Battle_Character bc) // AI 초기화 함수. 이 함수를 호출해서 초기화를 해줘야함.
     {
         now_State = State.Init;
         battle_Character = bc;
     }
 
-    public State AI_Update()
+    public State AI_Update() // 이 업데이트 함수를 호출해서 현재 State에 따라서 판단 후 판단 결과(상태)를 return 해줌.
     {
         switch (now_State)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 스테이트 처리기 함수
 public abstract class State_Handler : MonoBehaviour
 {
     public State state;
@@ -11,7 +12,7 @@ public abstract class State_Handler : MonoBehaviour
 
     public abstract void State_Handler_Update();
 
-    public void State_Handler_Initialize(Battle_Character b_c)
+    public void State_Handler_Initialize(Battle_Character b_c) // 스테이트 처리기 초기화 함수
     {
         battle_Character = b_c;
 
