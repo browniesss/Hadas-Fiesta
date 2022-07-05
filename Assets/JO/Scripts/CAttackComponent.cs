@@ -120,14 +120,16 @@ public class CAttackComponent : BaseComponent
             AttackNum = 0;
         }
 
-        
+        GameObject copyobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
+        copyobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
+        //copyobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
+        copyobj.transform.LookAt(movecom.com.FpRoot.forward);
+        Destroy(copyobj, 1.5f);
 
         Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
 
-        
-
-
+        //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name)/2);
 
     }
 

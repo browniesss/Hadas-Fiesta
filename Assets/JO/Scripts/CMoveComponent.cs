@@ -131,7 +131,44 @@ public class CMoveComponent : BaseComponent
     //}
 
 
+    //duration 시간동안 목표위치로 이동한다.
+    public void DoMove(Vector3 destpos, float duration)
+    {
+        Vector3 startpos = this.transform.position;
+        Vector3 directon = destpos - startpos;
+        float speed = directon.magnitude / duration;
 
+        StartCoroutine(CorDoMove(startpos, destpos, duration));
+    }
+
+    public void FowardDoMove(float distnace, float duratoin)
+    {
+        Vector3 direction = com.FpRoot.forward * distnace;
+        Vector3 dest = transform.position + direction;
+
+        StartCoroutine(CorDoMove(transform.position, dest, duratoin));
+
+    }
+
+    public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration)
+    {
+        float runtime = 0.0f;
+
+        while(true)
+        {
+            if(runtime>=duration)
+            {
+                this.transform.position = dest;
+                yield break;
+            }
+            runtime += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(start, dest, runtime / duration);
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+    }
 
     public void Move()
     {

@@ -51,10 +51,10 @@ public class CInputComponent : BaseComponent
         movecom.MouseMove = new Vector2(0, 0);
         movecom.MoveDir = new Vector3(0, 0, 0);
 
-        if(movecom.curval.IsAttacking)
-        {
-            return;
-        }
+        //if(movecom.curval.IsAttacking)
+        //{
+        //    return;
+        //}
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
