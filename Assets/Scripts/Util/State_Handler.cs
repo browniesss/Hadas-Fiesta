@@ -69,7 +69,7 @@ public abstract class State_Handler : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        battle_Character.Mana += 5; // 몬스터 마나 재생량을 더해주면 될듯.
+        battle_Character.Player_Mana += 5; // 몬스터 마나 재생량을 더해주면 될듯.
 
         StartCoroutine(Mana_Regen());
     }
@@ -77,6 +77,6 @@ public abstract class State_Handler : MonoBehaviour
     protected void Enemy_Skill_Rand()
     {
         battle_Character.next_Skill = Random.Range(1, 3); // 스킬 범위를 데이터를 받아와서 가진 스킬 수 만큼 중에 랜덤으로 나오게
-        battle_Character.Mana = 0;
+        battle_Character.Player_Mana = 0;
     }
 }

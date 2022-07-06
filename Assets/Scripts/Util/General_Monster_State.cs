@@ -59,7 +59,7 @@ public class General_Monster_State : State_Handler
 
     protected override void Attack_Process()
     {
-        if (battle_Character.Mana >= battle_Character.need_Mana)
+        if (battle_Character.Player_Mana >= battle_Character.need_Mana)
         {
             switch (battle_Character.next_Skill)
             {
