@@ -20,6 +20,9 @@ public class General_Monster_State : State_Handler
             case State.Attack:
                 Attack_Process();
                 break;
+            case State.Die_Enter:
+
+                break;
         }
     }
 
