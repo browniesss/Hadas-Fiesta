@@ -9,7 +9,7 @@ public class DataLoad_Save : MonoBehaviour
     [SerializeField]
     List<CharacterInformation> PlayerDB_List = new List<CharacterInformation>();
     [SerializeField]
-    List<MonsterInformation> MonsterDB_List = new List<MonsterInformation>();
+    public List<MonsterInformation> MonsterDB_List = new List<MonsterInformation>();
     [SerializeField]
     List<MonsterSkillInformation> MonsterSkillDB_List = new List<MonsterSkillInformation>();
     [SerializeField]
@@ -18,6 +18,10 @@ public class DataLoad_Save : MonoBehaviour
     List<Player_aconstant> Player_A_constantDB_List = new List<Player_aconstant>();
     [SerializeField]
     List<Monster_aconstant> Monster_A_constantDB_List = new List<Monster_aconstant>();
+
+
+    
+
     public void Init()
     {
 
@@ -128,9 +132,18 @@ public class DataLoad_Save : MonoBehaviour
         }
 
     }
+
+    public MonsterInformation TestScp(EnumScp.MonsterIndex testenum)
+    {
+        MonsterInformation testData = ScriptableObject.CreateInstance<MonsterInformation>();
+        testData = MonsterDB_List[(int)testenum];
+        return testData;
+        
+    }
     void Start()
     {
         Init();
+        //TestScp();
     }
 
     
