@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f26a1997cd0c3844996d797d272d37e, type: 3}
+  m_Name: Monster Data
+  m_EditorClassIdentifier: 
+  Number: 0
+  mon_Index: 
+  mon_nameKor: 
+  mon_Default: 0
+  mon_Type: 0
+  mon_Position: 0
+  mon_MaxHP: 0
+  mon_Atk: 0
+  mon_Def: 0
+  mon_Balance: 0
+  mon_moveSpeed: 0
+  dieDelay: 0
+  drop_Reward: 0
