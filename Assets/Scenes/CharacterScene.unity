@@ -3160,7 +3160,7 @@ MonoBehaviour:
     MovementDelay: 0
     NextMovementTimeVal: 0.5
     damage: 0
-    EffectStartTime: 0.3
+    EffectStartTime: 0.45
     Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
     EffectPosRot: {fileID: 1348734175}
   - AttackNum: 1
@@ -4811,7 +4811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b999d0a329d1a4fb4ff25396bcc2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anicontrol: {fileID: 9100000, guid: 1c171db51981e76498ab9a0d6e5bd2d6, type: 2}
   animator: {fileID: 0}
   m_clipsnum: 0
   m_clips: []

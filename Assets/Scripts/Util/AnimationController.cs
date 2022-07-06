@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using UnityEditor.Animations;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
@@ -25,8 +24,6 @@ public class AnimationController : MonoBehaviour
         {
             gameObject.AddComponent<Animator>();
         }
-
-
 
         //AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
         //if (anicontrol == null)
