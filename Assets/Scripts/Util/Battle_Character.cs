@@ -28,10 +28,19 @@ public class Battle_Character : MonoBehaviour
     public int Mana; // 몬스터 마나
     public int need_Mana; // 스킬 사용시 필요한 마나
     public int next_Skill;
+    public int Max_HP; // 최대 체력
+    public int Cur_HP; // 현재 체력
     protected Animator anim;
+
+    public void Stat_Initialize(MonsterInformation info)
+    {
+        //        st = ScriptableObject.CreateInstance<MonsterInformation>();
+
+    }
 
     protected void Initalize()
     {
+
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
 
@@ -51,7 +60,7 @@ public class Battle_Character : MonoBehaviour
     {
 
     }
-    
+
     public virtual void Skill_3()
     {
 

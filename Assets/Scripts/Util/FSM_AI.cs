@@ -14,6 +14,9 @@ public enum State // 스테이트
     Attack_Enter,
     Attack,
     Attack_Exit,
+    Die_Enter,
+    Die,
+    Die_Exit,
 }
 
 [System.Serializable]
@@ -66,6 +69,12 @@ public class FSM_AI
                     now_State = State.Trace_Enter;
                 }
                 break;
+        }
+
+        // any state 
+        if (battle_Character.Cur_HP <= 0)
+        {
+            now_State = State.Die_Enter;
         }
 
         return now_State;

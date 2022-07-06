@@ -3,82 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIInfo
 {
+    public GameObject obj;
+    public string path;
+    public bool active = false;
+    public bool Instance = false;
+}
+public class UIManager : Singleton<UIManager>
+{
+    private UIInfo uiinfo = new UIInfo();
+
+    public List<UIInfo> info = new List<UIInfo>();
     public List<Canvas> canvas;
-    private static UIManager instance = null;
+
+
     public enum CANVAS_NUM
     {
         ex_skill = 0,
         ex_Icon,
         sdf
     }
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
 
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    public static UIManager Instance
+    public void Prefabsload(string name, CANVAS_NUM x)
     {
-        get
+        bool same = false;
+        if (info.Count == 0)
         {
-            if(instance==null)
+           
+            GameObject obj = Resources.Load<GameObject>("Prefabs/" + name); //로드. 
+            uiinfo.obj = Instantiate(obj);
+            uiinfo.obj.transform.SetParent(canvas[(int)x].transform);
+            uiinfo.path = name;
+            uiinfo.obj.name = name;
+            
+            info.Add(uiinfo);
+        }
+        for (int i = 0; i < info.Count; i++)
+        {
+            //      Debug.Log(info[i].path);
+            if (info[i].path == name)
             {
-                return null;
+                same = true;
             }
-            return instance;
         }
-       
-    }
-    public GameObject Prefabsload(string name , CANVAS_NUM x)
-    {
-        GameObject obj=new GameObject();
-        if (GameObject.Find(name))
+        if (same)
         {
-            Debug.Log("찾음");
-            return GameObject.Find(name);
+            Debug.Log("이미있습니다");
         }
         else
         {
-             obj = Resources.Load<GameObject>("Prefabs/" + name);
-            Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity, canvas[(int)x].transform);
-            Debug.Log("생성");
+            GameObject obj = Resources.Load<GameObject>("Prefabs/" + name);
+            UIInfo tmp = new UIInfo();
+            tmp.obj = Instantiate(obj);
+            tmp.obj.transform.SetParent(canvas[(int)x].transform);
+            tmp.path = name;
+            tmp.obj.name = name;
+            info.Add(tmp);
+          
         }
-        return obj;
+
+        //    return obj;
+
     }
-    public void EnableUI(string name)
+    public void Show(string path)
     {
-        if(GameObject.Find(name))
+        for (int i = 0; i < info.Count; i++)
         {
-            GameObject a = GameObject.Find(name);
-            a.SetActive(false);
-        }    
+            if (info[i].path == path)
+            {
+                Debug.Log(info[i].path);
+                info[i].obj.SetActive(true);
+                // info[i].active = false;
+            }
+        }
     }
-    public void FirstView(string name)
+    public void Hide(string path)
     {
-        if(GameObject.Find(name))
+        for (int i = 0; i < info.Count; i++)
         {
-            GameObject a = GameObject.Find(name);
-            a.transform.SetAsFirstSibling();
+            if (info[i].path == path)
+            {
+                Debug.Log(info[i].path);
+                info[i].obj.SetActive(false);
+                // info[i].active = false;
+            }
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+
     }
 }
