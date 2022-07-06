@@ -8,6 +8,14 @@ public class AnimationEventSystem : MonoBehaviour
 {
 	Animator animator;
 
+	public AnimationClip[] clips;
+	//public AnimationEvent[][] eventlist;
+	public List<AnimationEvent[]> eventlist = new List<AnimationEvent[]>();
+
+	public Dictionary<string, AnimationEvent[]> eventdic = new Dictionary<string, AnimationEvent[]>();
+
+
+
 	public delegate void beginCallback(string s_val);
 	public delegate void midCallback(string s_val);
 	public delegate void endCallback(string s_val);
@@ -20,7 +28,19 @@ public class AnimationEventSystem : MonoBehaviour
 	private void Awake()
     {
 		animator = GetComponent<Animator>();
+		clips = animator.runtimeAnimatorController.animationClips;
+		
+		
+		//for(int i=0;i<clips.Length;i++)
+  //      {
+		//	eventdic.Add(clips[i].name, clips[i].events);
+		//	eventlist.Add(clips[i].events);
+		//}
 
+  //      AnimationEvent myevent;
+		//AnimationEventEffects effects;
+		//effects.
+		//myevent.
 		//AnimationClip clip;
 		//clip.events
     }
