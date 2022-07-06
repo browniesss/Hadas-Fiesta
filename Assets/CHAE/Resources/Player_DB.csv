@@ -1,0 +1,2 @@
+player_HP,player_Def,player_MP,player_Stamina,player_mSpeed,player_Balance,player_Atk1,player_Stadown1,player_MPup1,player_BalDown1,player_Atk2,player_Stadown2,player_MPup2,player_BalDown2,player_Atk3,player_Stadown3,player_MPup3,player_BalDown3
+200,10,100,150,5,120,10,20,15,5,10,20,15,5,20,30,20,10

@@ -1,0 +1,11 @@
+,,,,,,,,,
+Mon_Skill_List Table,,,,,,,,,
+,,,,,,,,,
+,,,타입,,,,,,
+스킬명 (한),스킬명 (영),스킬 ID,스킬 타입,타겟 타입,데미지,쿨타임,시전 시간,시전 마나,공격 횟수
+skill_Name_Kor,skill_Name_En,skill_ID,skill_Type,skill_Targetyp,skill_dmg,skill_Cool,skill_Casting,skill_MP,skill_AtkCount
+string,string,int,int,int,int,float,float,float,int
+크게 휘두르기,sword_Swing,,,,,,,,
+난무 돌진,,,,,,,,,
+분신술,,,,,,,,,
+칼 낙뢰,,,,,,,,,
