@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 [System.Serializable]
@@ -40,9 +40,9 @@ public class AnimationInfos
             //Debug.Log($"{i}¹ø, {param[i].name}, {param[i].type}");
         }
 
-        AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
-        if (anicontrol == null)
-            Debug.Log("Is Null!");
+        //AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
+        //if (anicontrol == null)
+        //    Debug.Log("Is Null!");
 
         m_clips = animator.runtimeAnimatorController.animationClips;
 

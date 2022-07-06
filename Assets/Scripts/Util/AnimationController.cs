@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [Header("애니메이션들이 등록된 애니메이션 컨트롤러가 필요")]
-    public AnimatorController anicontrol;
+    //[Header("애니메이션들이 등록된 애니메이션 컨트롤러가 필요")]
+    //public AnimatorController anicontrol;
     [Header("확인용")]
     public Animator animator;
     public int m_clipsnum;
@@ -32,7 +32,7 @@ public class AnimationController : MonoBehaviour
         //if (anicontrol == null)
         //    Debug.Log("Is Null!");
 
-        animator.runtimeAnimatorController = anicontrol;
+        //animator.runtimeAnimatorController = anicontrol;
 
         //AnimatorController anicontroll = anicontroll.c
 
