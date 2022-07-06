@@ -1,17 +1,4 @@
-,,,,,
-Mon_Target Table,,,,,
-,,,,,
-순위,이름,,위치,,
-피격 대상 순위,번호,객체 ID,피격대상 위치,현위치,몬스터와의 거리
-Target_Rank,Number,Character_ID,target_Location,mon_Location,mon_Range
-int,int,int,Vector3,Vector3,float
-1,2,33330211,"10,0,0","5,0,0",5
-2,3,33330212,"15,0,4","5,0,0",7
-3,1,33330312,"20,0,0","5,0,0",15
-…,…,…,…,…,…
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
+Target_Rank,Number,Character_ID,target_Location1,target_Location2,target_Location3,mon_Location1,mon_Location2,mon_Location3,mon_Range
+1,2,33330211,10,0,0,5,0,0,5
+2,3,33330212,15,0,4,5,0,0,7
+3,1,33330312,20,0,0,5,0,0,15

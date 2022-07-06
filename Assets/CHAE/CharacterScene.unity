@@ -498,6 +498,7 @@ MonoBehaviour:
   B_AttackOn: 0
   animator: {fileID: 0}
   AttackCount: 0
+  AttackDelay: 0
 --- !u!1 &574279981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c64825059b31894c97d457946b8d099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test_list: []
+  PlayerDB_List: []
+  MonsterDB_List: []
+  MonsterSkillDB_List: []
+  MonsterTargetDB_List: []
+  Player_A_constantDB_List: []
+  Monster_A_constantDB_List: []
 --- !u!4 &1536292116
 Transform:
   m_ObjectHideFlags: 0
