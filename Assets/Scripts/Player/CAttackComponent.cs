@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//jo
 public class CAttackComponent : BaseComponent
 {
     //public AnimationClip[] Attack
@@ -47,6 +48,8 @@ public class CAttackComponent : BaseComponent
 
         public float damage;
 
+        public float EffectStartTime;
+
         public GameObject Effect;
 
         public Transform EffectPosRot;
@@ -59,6 +62,10 @@ public class CAttackComponent : BaseComponent
     public AttackMovementInfo[] attackinfos;
 
     public float lastAttackTime = 0;
+
+    public delegate void Invoker();
+
+    
 
     void Start()
     {
@@ -75,16 +82,17 @@ public class CAttackComponent : BaseComponent
 
 
     //공격 중에는 1프레임 마다 반복문을 돌면서 공격을 받는등의 상태 변화가 생기진 않았는지 확인한다.
-    IEnumerator Cor_AttackTimeCounter()
+    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
-        Linkable = true;
-        float starttime;
-
+        float starttime = Time.time;
 
         while(true)
         {
-            //if()
-
+            if((Time.time - starttime)>=time)
+            {
+                invoker.Invoke();
+                yield break;
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -120,11 +128,7 @@ public class CAttackComponent : BaseComponent
             AttackNum = 0;
         }
 
-        GameObject copyobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
-        copyobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
-        //copyobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
-        copyobj.transform.LookAt(movecom.com.FpRoot.forward);
-        Destroy(copyobj, 1.5f);
+        StartCoroutine(Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect));
 
         Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
@@ -133,6 +137,16 @@ public class CAttackComponent : BaseComponent
 
     }
 
+    public void CreateEffect()
+    {
+        GameObject copyobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
+        copyobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
+        copyobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
+        //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+
+        Destroy(copyobj, 1.5f);
+    }
 
 
 

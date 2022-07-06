@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AnimationEventSystem : MonoBehaviour
 {
-	Animator animator;
+	AnimationController animator;
 
 	public AnimationClip[] clips;
 	//public AnimationEvent[][] eventlist;
@@ -27,8 +27,7 @@ public class AnimationEventSystem : MonoBehaviour
 
 	private void Awake()
     {
-		animator = GetComponent<Animator>();
-		clips = animator.runtimeAnimatorController.animationClips;
+		
 		
 		
 		//for(int i=0;i<clips.Length;i++)
@@ -45,20 +44,26 @@ public class AnimationEventSystem : MonoBehaviour
 		//clip.events
     }
 
- //   public void Play(string trigger,
-	//	System.Action beginCallback = null,
-	//	System.Action midCallback = null,
-	//	System.Action endCallback = null
-	//	)
-	//{
-	//	GetComponent<Animator>().SetTrigger(trigger);
-	//	_beginCallback = beginCallback;
-	//	_midCallback = midCallback;
-	//	_endCallback = endCallback;
-	//}
+    private void Start()
+    {
+		animator = GetComponent<AnimationController>();
+		clips = animator.GetAnimationClips();
+	}
 
-	//애니메이션이벤트에 함수를 등록 하려면 해당 이벤트를 가지고 있는 애니메이션클립의 이름을 같이 넣어 준다.
-	public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
+    //   public void Play(string trigger,
+    //	System.Action beginCallback = null,
+    //	System.Action midCallback = null,
+    //	System.Action endCallback = null
+    //	)
+    //{
+    //	GetComponent<Animator>().SetTrigger(trigger);
+    //	_beginCallback = beginCallback;
+    //	_midCallback = midCallback;
+    //	_endCallback = endCallback;
+    //}
+
+    //애니메이션이벤트에 함수를 등록 하려면 해당 이벤트를 가지고 있는 애니메이션클립의 이름을 같이 넣어 준다.
+    public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
     {
 		if(begin != null)
 			_beginCallback += begin;

@@ -5,26 +5,50 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
+    [Header("애니메이션들이 등록된 애니메이션 컨트롤러가 필요")]
+    public AnimatorController anicontrol;
+    [Header("확인용")]
     public Animator animator;
     public int m_clipsnum;
     public AnimationClip[] m_clips;
-
     public string currentplayclipname;
-
 
     void Start()
     {
 
-        if(!TryGetComponent<Animator>(out animator))
+        
+    }
+
+    private void Awake()
+    {
+        if (!TryGetComponent<Animator>(out animator))
         {
             gameObject.AddComponent<Animator>();
         }
 
-        AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
-        if (anicontrol == null)
-            Debug.Log("Is Null!");
+
+
+        //AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
+        //if (anicontrol == null)
+        //    Debug.Log("Is Null!");
+
+        animator.runtimeAnimatorController = anicontrol;
+
+        //AnimatorController anicontroll = anicontroll.c
+
         m_clips = animator.runtimeAnimatorController.animationClips;
     }
+
+    public void SetAnimationClips(AnimationClip[] clips)
+    {
+
+    }
+
+    public void SetAnimator(Animator animator)
+    {
+
+    }
+
 
     //선택한 클립의 총 길이를 알려준다.
     public float GetClipLength(string pname)

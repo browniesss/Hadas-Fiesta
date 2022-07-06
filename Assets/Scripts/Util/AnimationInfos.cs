@@ -43,6 +43,7 @@ public class AnimationInfos
         AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
         if (anicontrol == null)
             Debug.Log("Is Null!");
+
         m_clips = animator.runtimeAnimatorController.animationClips;
 
         //AnimationEvent e_event;

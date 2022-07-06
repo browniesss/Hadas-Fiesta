@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//jo
 [System.Serializable]
 public class CurState
 {
@@ -25,7 +27,6 @@ public class CurState
     private bool isFowordBlock = false;
     [SerializeField]
     private bool isOnTheSlop = false;
-
     [SerializeField]
     private bool isAttacking = false;
     //[SerializeField]
