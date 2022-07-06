@@ -25,12 +25,12 @@ public class DataLoad_Save : MonoBehaviour
     public void Init()
     {
 
-        List<Dictionary<string, object>> Player_db_Dialog = LoadFile.Read("Player_DB");
-        List<Dictionary<string, object>> Monster_db_Dialog = LoadFile.Read("Monster_DB");
-        List<Dictionary<string, object>> MonsterSkill_db_Dialog = LoadFile.Read("MonsterSkill_DB");
-        List<Dictionary<string, object>> MonsterTarget_db_Dialog = LoadFile.Read("MonsterTarget_DB");
-        List<Dictionary<string, object>> Player_A_constant_db_Dialog = LoadFile.Read("Player_a constant_DB");
-        List<Dictionary<string, object>> Monster_A_constant_db_Dialog = LoadFile.Read("Monster_a constant_DB");
+        List<Dictionary<string, object>> Player_db_Dialog = LoadFile.Read("CSV/Player_DB");
+        List<Dictionary<string, object>> Monster_db_Dialog = LoadFile.Read("CSV/Monster_DB");
+        List<Dictionary<string, object>> MonsterSkill_db_Dialog = LoadFile.Read("CSV/MonsterSkill_DB");
+        List<Dictionary<string, object>> MonsterTarget_db_Dialog = LoadFile.Read("CSV/MonsterTarget_DB");
+        List<Dictionary<string, object>> Player_A_constant_db_Dialog = LoadFile.Read("CSV/Player_a constant_DB");
+        List<Dictionary<string, object>> Monster_A_constant_db_Dialog = LoadFile.Read("CSV/Monster_a constant_DB");
 
         for (int i = 0; i < Player_db_Dialog.Count; i++)
         {
