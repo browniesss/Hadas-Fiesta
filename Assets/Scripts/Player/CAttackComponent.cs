@@ -130,7 +130,12 @@ public class CAttackComponent : BaseComponent
         Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
 
-        //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name)/2);
+        movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name)/2);
+
+    }
+
+    public void AttackMove(string clipname)
+    {
 
     }
 
@@ -152,6 +157,9 @@ public class CAttackComponent : BaseComponent
     public void AttackEnd(string s_val)
     {
         Debug.Log($"공격 끝 들어옴 -> {s_val}");
+
+
+
         if (curval.IsAttacking == true)
             curval.IsAttacking = false;
 

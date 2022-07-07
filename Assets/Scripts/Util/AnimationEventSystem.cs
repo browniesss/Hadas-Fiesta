@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 //애니메이션 이벤트들을 관리
 public class AnimationEventSystem : MonoBehaviour
@@ -24,6 +24,8 @@ public class AnimationEventSystem : MonoBehaviour
 	public midCallback _midCallback;
 	public endCallback _endCallback;
 
+	public UnityEvent beginCallBack;
+	public UnityAction begi;
 
 	private void Awake()
     {
@@ -60,7 +62,7 @@ public class AnimationEventSystem : MonoBehaviour
     }
 
 	//Animation Event
-	public void OnBeginEvent(string s_val)
+	public void OnBeginEventString(string s_val)
 	{
 		//if (null != _beginCallback)
 		//	_beginCallback();
@@ -69,16 +71,58 @@ public class AnimationEventSystem : MonoBehaviour
 		
 	}
 
-	public void OnMidEvent(string s_val)
+	public void OnMidEventString(string s_val)
 	{
 		_midCallback?.Invoke(s_val);
 	}
 
-	public void OnEndEvent(string s_val)
+	public void OnEndEventString(string s_val)
 	{
 
 		//Debug.Log("Animaton End Event");
 		_endCallback?.Invoke(s_val);
 	}
+
+	//public void OnBeginEventFloat(float s_val)
+	//{
+	//	//if (null != _beginCallback)
+	//	//	_beginCallback();
+
+	//	//_beginCallback?.Invoke(s_val);
+
+	//}
+
+	//public void OnMidEventFloat(float s_val)
+	//{
+	//	//_midCallback?.Invoke(s_val);
+	//}
+
+	//public void OnEndEventFloat(float s_val)
+	//{
+
+	//	//Debug.Log("Animaton End Event");
+	//	//_endCallback?.Invoke(s_val);
+	//}
+
+	//public void OnBeginEventInt(int s_val)
+	//{
+	//	//if (null != _beginCallback)
+	//	//	_beginCallback();
+
+	//	//_beginCallback?.Invoke(s_val);
+
+	//}
+
+	//public void OnMidEventInt(int s_val)
+	//{
+	//	//_midCallback?.Invoke(s_val);
+	//}
+
+	//public void OnEndEventInt(int s_val)
+	//{
+
+	//	//Debug.Log("Animaton End Event");
+	//	//_endCallback?.Invoke(s_val);
+	//}
 }
 
