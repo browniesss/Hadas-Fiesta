@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f26a1997cd0c3844996d797d272d37e, type: 3}
   m_Name: Sliem Data
   m_EditorClassIdentifier: 
-  Number: 0
+  Number: 20
   mon_Index: 
   mon_nameKor: 
-  mon_Default: 0
-  mon_Type: 0
+  mon_Default: 12
+  mon_Type: 12
   mon_Position: 0
   mon_MaxHP: 0
   mon_Atk: 0

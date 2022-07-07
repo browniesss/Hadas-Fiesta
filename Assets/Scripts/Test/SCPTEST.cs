@@ -9,10 +9,17 @@ public class SCPTEST : MonoBehaviour
 
     public MonsterInformation data;   
     public DataLoad_Save TestDataLoad;
+
+
+    
+
     void Start()
     {
         data = ScriptableObject.CreateInstance<MonsterInformation>();
-        data = TestDataLoad.Get_MonsterDB(EnumScp.MonsterIndex.mon_02_01);      
+        data = TestDataLoad.Get_MonsterDB(EnumScp.MonsterIndex.mon_02_01);  
+        
+        
+
         Debug.Log(data.P_mon_nameKor);
 
         //Debug.Log(StaticClass.Add);
