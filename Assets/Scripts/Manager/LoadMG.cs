@@ -44,7 +44,7 @@ public class LoadMG : MonoBehaviour
         {
             //디비 받아오기
             data = ScriptableObject.CreateInstance<MonsterInformation>();
-            data = TestDataLoad.TestScp(tempindex);
+            data = TestDataLoad.Get_MonsterDB(tempindex);
             tempindex++;
             //혹시 몬스터 넘어가면 초기화
             if(tempindex<=EnumScp.MonsterIndex.Max)

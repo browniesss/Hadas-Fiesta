@@ -133,13 +133,44 @@ public class DataLoad_Save : MonoBehaviour
 
     }
 
-    public MonsterInformation TestScp(EnumScp.MonsterIndex testenum)
+    public MonsterInformation Get_MonsterDB(EnumScp.MonsterIndex testenum)
     {
         MonsterInformation testData = ScriptableObject.CreateInstance<MonsterInformation>();
         testData = MonsterDB_List[(int)testenum];
         return testData;
         
     }
+    public CharacterInformation Get_PlayerDB(EnumScp.PlayerDBIndex testenum)
+    {
+        CharacterInformation testData = ScriptableObject.CreateInstance<CharacterInformation>();
+        testData = PlayerDB_List[(int)testenum];
+        return testData;
+    }
+    public MonsterSkillInformation Get_MonsterSkillDB(EnumScp.MonsterSkill testenum)
+    {
+        MonsterSkillInformation testData = ScriptableObject.CreateInstance<MonsterSkillInformation>();
+        testData = MonsterSkillDB_List[(int)testenum];
+        return testData;
+    }
+    public MonsterTargetInformation Get_MonsterTargetDB(EnumScp.MonsterTarget testenum)
+    {
+        MonsterTargetInformation testData = ScriptableObject.CreateInstance<MonsterTargetInformation>();
+        testData = MonsterTargetDB_List[(int)testenum];
+        return testData;
+    }
+    public Monster_aconstant Get_Monster_A_ConstantDB(EnumScp.A_Constant testenum)
+    {
+        Monster_aconstant testData = ScriptableObject.CreateInstance<Monster_aconstant>();
+        testData = Monster_A_constantDB_List[(int)testenum];
+        return testData;
+    }
+    public Player_aconstant Get_Player_A_ConstantDB(EnumScp.A_Constant testenum)
+    {
+        Player_aconstant testData = ScriptableObject.CreateInstance<Player_aconstant>();
+        testData = Player_A_constantDB_List[(int)testenum];
+        return testData;
+    }
+
     void Start()
     {
         Init();
