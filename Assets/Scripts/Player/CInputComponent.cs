@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*유저의 입력을 처리한다.*/
 public class CInputComponent : BaseComponent
 {
+    //캐릭터의 모든 컴포넌트를 관리하기 쉽게 하기 위해 basecomponent를 상속받은 스크립트들을 componentmanager에서 관리한다.
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.InputCom;
     }
-
+    
+    //사용할 키 지정
     [System.Serializable]
     public class KeySetting
     {
@@ -25,19 +29,20 @@ public class CInputComponent : BaseComponent
         public KeyCode Run = KeyCode.LeftShift;
     }
 
+    [Header("Keys")]
     public KeySetting _key = new KeySetting();
 
     //input에서 필요한 컴포넌트들
-
-    //move 컴포넌트
+    [Header("Components")]
+    //1. move 컴포넌트
     public CMoveComponent movecom;
-    //Attack 컴포넌트
+    //2. Attack 컴포넌트
     public CAttackComponent attackcom;
-    //Defence 컴포넌트
+    //3. Defence 컴포넌트
     public CDefenceComponent defencecom;
     
    
-
+    //키와 마우스 입력을 처리한다.
     void KeyInput()
     {
         if (movecom == null)
@@ -48,39 +53,35 @@ public class CInputComponent : BaseComponent
         float v = 0;
         float h = 0;
 
-        movecom.MouseMove = new Vector2(0, 0);
-        movecom.MoveDir = new Vector3(0, 0, 0);
-
-        //if(movecom.curval.IsAttacking)
-        //{
-        //    return;
-        //}
+        movecom.MouseMove = new Vector2(0, 0);//마우스 움직임
+        movecom.MoveDir = new Vector3(0, 0, 0);//wasd 키 입력에 따른 이동 방향
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
-        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking)
+        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
         {
             return;
         }
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
+        //wasd 처리
         if (Input.GetKey(_key.foward)) v += 1.0f;
         if (Input.GetKey(_key.back)) v -= 1.0f;
         if (Input.GetKey(_key.left)) h -= 1.0f;
         if (Input.GetKey(_key.right)) h += 1.0f;
 
+        movecom.MoveDir = new Vector3(h, 0, v);
+
+        //left shift 처리
         if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
         else movecom.curval.IsRunning = false;
 
-        
-
-        movecom.MoveDir = new Vector3(h, 0, v);
-
+        //space 처리
         if (Input.GetKey(_key.Rolling))
             movecom.Rolling();
 
-
+        //이동값이 조금이라도 있으면 움직이는중으로 판단
         if (movecom.MoveDir.magnitude > 0 )
         {
             movecom.curval.IsMoving = true;

@@ -559,12 +559,12 @@ public class Character3DMove: MonoBehaviour
         {
 
             //AnimationManager.Instance.SetBool(GetComponentInChildren<Animator>().GetInstanceID(), "Move", true);
-            AnimationClip[] clips = AnimationManager.Instance.GetAnimationClips(GetComponentInChildren<Animator>());
-            foreach(var a in clips)
-            {
-                Debug.Log($"애니메이션 클립들 받아옴 개수 => {clips.Length} {a.name}");
-            }
-            AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), clips[Random.Range(0,clips.Length)].name);
+            //AnimationClip[] clips = AnimationManager.Instance.GetAnimationClips(GetComponentInChildren<Animator>());
+            //foreach(var a in clips)
+            //{
+            //    Debug.Log($"애니메이션 클립들 받아옴 개수 => {clips.Length} {a.name}");
+            //}
+            //AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), clips[Random.Range(0,clips.Length)].name);
 
             Debug.Log($"애니메이션 출력 ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
         }

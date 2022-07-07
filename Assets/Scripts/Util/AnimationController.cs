@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*사용할 모든 클립들이 등록되어있는 animation controller 가 연결된 animator 가 필요
+  GetAnimationClips()를 이용하여 현재 등록된 클립들을 받아오든지, 직접 입력하던지 해서 재생을 원하는 클립의 이름을 알아와서
+  Play(클립이름, 재생속도, 재생시간, 블렌딩속도) 함수를 이용해 재생*/
 public class AnimationController : MonoBehaviour
 {
     //[Header("애니메이션들이 등록된 애니메이션 컨트롤러가 필요")]
@@ -12,39 +16,60 @@ public class AnimationController : MonoBehaviour
     public AnimationClip[] m_clips;
     public string currentplayclipname;
 
-    void Start()
-    {
+    public delegate void Invoker();
 
-        
-    }
+
 
     private void Awake()
     {
         if (!TryGetComponent<Animator>(out animator))
         {
-            gameObject.AddComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
+            if(animator==null)
+            {
+                Debug.Log($"{gameObject.name} animator component 없음!");
+            }
         }
-
-        //AnimatorController anicontrol = animator.runtimeAnimatorController as AnimatorController;
-        //if (anicontrol == null)
-        //    Debug.Log("Is Null!");
-
-        //animator.runtimeAnimatorController = anicontrol;
-
-        //AnimatorController anicontroll = anicontroll.c
 
         m_clips = animator.runtimeAnimatorController.animationClips;
     }
 
-    public void SetAnimationClips(AnimationClip[] clips)
+    
+
+    //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
+    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f)
     {
 
+        if (pname == currentplayclipname)
+        {
+            return;
+        }
+
+        if(PlayTime!=0)
+        {
+            StartCoroutine(Cor_TimeCounter(PlayTime, Stop));
+        }
+
+        SetPlaySpeed(PlaySpeed);
+
+        currentplayclipname = pname;
+        animator.CrossFade(pname, blendingtime);
     }
 
-    public void SetAnimator(Animator animator)
-    {
+    ////클립이름, 재생속도 (기본이 1배속), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
+    //public void Play(string pname, float PlaySpeed = 1.0f, float blendingtime = 0.1f)
+    //{
 
-    }
+    //    if (pname == currentplayclipname)
+    //    {
+    //        return;
+    //    }
+
+    //    SetPlaySpeed(PlaySpeed);
+
+    //    currentplayclipname = pname;
+    //    animator.CrossFade(pname, blendingtime);
+    //}
 
 
     //선택한 클립의 총 길이를 알려준다.
@@ -100,42 +125,46 @@ public class AnimationController : MonoBehaviour
         animator.speed = 1.0f;
     }
 
-    //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
-    public void Play(string pname, float PlaySpeed=1.0f, float PlayTime=0,float blendingtime = 0.1f)
-    {
-        
-        if (pname == currentplayclipname)
-        {
-            //Debug.Log("재생중인거 재생");
-            return;
-        }
-        SetPlaySpeed(PlaySpeed);
+    
 
-        currentplayclipname = pname;
-        animator.CrossFade(pname, blendingtime);
-    }
+    //public IEnumerator CountTime(string playname, float desttime)
+    //{
+    //    float starttime = Time.time;
+    //    Debug.Log($"코루틴 들어옴");
+    //    while (true)
+    //    {
+    //        if (Time.time - starttime >= desttime)
+    //        {
+    //            Debug.Log($"{playname} 애니메이션 실행함");
+    //            animator.Play(playname);
+    //            yield break;
+    //        }
 
-    public IEnumerator CountTime(string playname, float desttime)
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+
+    //}
+
+
+    //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
+    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
-        Debug.Log($"코루틴 들어옴");
+
         while (true)
         {
-            if (Time.time - starttime >= desttime)
+            if ((Time.time - starttime) >= time)
             {
-                Debug.Log($"{playname} 애니메이션 실행함");
-                animator.Play(playname);
+                invoker.Invoke();
                 yield break;
             }
-
             yield return new WaitForSeconds(Time.deltaTime);
         }
-
     }
 
     //public void Play(string pname, int layer, float normalizedTime)
     //{
-        
+
     //    if (pname == currentplayclipname)
     //    {
     //        //Debug.Log("재생중인거 재생");

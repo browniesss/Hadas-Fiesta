@@ -80,8 +80,7 @@ public class CAttackComponent : BaseComponent
 
     }
 
-
-    //공격 중에는 1프레임 마다 반복문을 돌면서 공격을 받는등의 상태 변화가 생기진 않았는지 확인한다.
+    //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -96,8 +95,6 @@ public class CAttackComponent : BaseComponent
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
-
-
 
 
     public void Attack()
@@ -137,6 +134,7 @@ public class CAttackComponent : BaseComponent
 
     }
 
+    //공격 이펙트를 생성
     public void CreateEffect()
     {
         GameObject copyobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
