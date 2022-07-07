@@ -246,6 +246,13 @@ public class CMoveComponent : BaseComponent
                 ////com.animator.SetPlaySpeed(1.0f);
                 //com.animator.Play(string.Format("_Attack0{0}", num));
             }
+            else if (curval.IsGuard)
+            {
+                //int num  = GetComponent<CAttackComponent>().AttackNum;
+                ////com.animator.SetPlaySpeed(1.0f);
+                //com.animator.Play(string.Format("_Attack0{0}", num));
+                com.animator.Play("_Guard");
+            }
             else
             {
                 //com.animator.SetPlaySpeed(1f);

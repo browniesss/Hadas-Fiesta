@@ -39,7 +39,7 @@ public class CInputComponent : BaseComponent
     //2. Attack 컴포넌트
     public CAttackComponent attackcom;
     //3. Defence 컴포넌트
-    public CDefenceComponent defencecom;
+    public CGuardComponent defencecom;
     
    
     //키와 마우스 입력을 처리한다.
@@ -58,7 +58,7 @@ public class CInputComponent : BaseComponent
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
-        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
+        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
         {
             return;
         }
@@ -101,7 +101,15 @@ public class CInputComponent : BaseComponent
         }
 
         //오른쪽 마우스 클릭
-        Input.GetMouseButtonDown(1);
+        if(Input.GetMouseButtonDown(1))
+        {
+            movecom.curval.IsGuard = true;
+            
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            movecom.curval.IsGuard = false;
+        }
 
         //키 입력
         KeyInput();

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//해당 컴포넌트를 등록하면 애니메이터에 등록되어 있는 애니메이션 클립들의 이벤트들을 감시한다.
 
+//애니메이션 이벤트들을 관리
 public class AnimationEventSystem : MonoBehaviour
 {
 	AnimationController animator;
@@ -27,9 +27,7 @@ public class AnimationEventSystem : MonoBehaviour
 
 	private void Awake()
     {
-		
-		
-		
+
 		//for(int i=0;i<clips.Length;i++)
   //      {
 		//	eventdic.Add(clips[i].name, clips[i].events);
@@ -49,18 +47,6 @@ public class AnimationEventSystem : MonoBehaviour
 		animator = GetComponent<AnimationController>();
 		clips = animator.GetAnimationClips();
 	}
-
-    //   public void Play(string trigger,
-    //	System.Action beginCallback = null,
-    //	System.Action midCallback = null,
-    //	System.Action endCallback = null
-    //	)
-    //{
-    //	GetComponent<Animator>().SetTrigger(trigger);
-    //	_beginCallback = beginCallback;
-    //	_midCallback = midCallback;
-    //	_endCallback = endCallback;
-    //}
 
     //애니메이션이벤트에 함수를 등록 하려면 해당 이벤트를 가지고 있는 애니메이션클립의 이름을 같이 넣어 준다.
     public void AddEvent(beginCallback begin, midCallback mid, endCallback end)

@@ -20,8 +20,6 @@ public class DataLoad_Save : MonoBehaviour
     List<Monster_aconstant> Monster_A_constantDB_List = new List<Monster_aconstant>();
 
 
-    
-
     public void Init()
     {
 

@@ -29,6 +29,9 @@ public class CurState
     private bool isOnTheSlop = false;
     [SerializeField]
     private bool isAttacking = false;
+    [SerializeField]
+    private bool isGuard = false;
+
     //[SerializeField]
     //private bool isAttacked = false;
     [SerializeField]
@@ -77,4 +80,5 @@ public class CurState
     public Vector3 CurVirVelocity { get => curVirVelocity; set => curVirVelocity = value; }
     public float MoveAccel { get => moveAccel; set => moveAccel = value; }
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
+    public bool IsGuard { get => isGuard; set => isGuard = value; }
 }
