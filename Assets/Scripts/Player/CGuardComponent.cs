@@ -5,27 +5,20 @@ using UnityEngine;
 public class CGuardComponent : BaseComponent
 {
     [Header("Guard Options")]
-    public float GuardTime;
-    public int MaxGuardGauge;
+    public float GuardTime;//최대로 가드를 할 수 있는 시간
+    public int MaxGuardGauge;//
 
     [Header("Cur Values")]
     public int CurGuardGauge;
     public bool nowGuard;
     public float GaugeDownInterval;
 
-    public bool p_NowGuard
-    {
-        get
-        {
-            return nowGuard;
-        }
-        set
-        {
-            nowGuard = value;
-        }
-    }
-        
 
+        
+    public void Guard()
+    {
+
+    }
 
     //
     public void GaugeDown()
