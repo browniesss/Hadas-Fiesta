@@ -29,6 +29,8 @@ public abstract class State_Handler : MonoBehaviour
 
     protected abstract void Attack_Process();
 
+    protected abstract void Die_Process();
+
     protected IEnumerator patrol_Think_Coroutine()  // 다음 목적지 생각하는 코루틴
     {
         yield return new WaitForSeconds(1f);
@@ -79,4 +81,5 @@ public abstract class State_Handler : MonoBehaviour
         battle_Character.next_Skill = Random.Range(1, 3); // 스킬 범위를 데이터를 받아와서 가진 스킬 수 만큼 중에 랜덤으로 나오게
         battle_Character.Player_Mana = 0;
     }
+
 }

@@ -20,8 +20,8 @@ public class General_Monster_State : State_Handler
             case State.Attack:
                 Attack_Process();
                 break;
-            case State.Die_Enter:
-
+            case State.Die:
+                Die_Process();
                 break;
         }
     }
@@ -79,5 +79,10 @@ public class General_Monster_State : State_Handler
 
 
         }
+    }
+
+    protected override void Die_Process()
+    {
+        battle_Character.Die_Process();
     }
 }

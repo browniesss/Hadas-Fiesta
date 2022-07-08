@@ -69,6 +69,12 @@ public class FSM_AI
                     now_State = State.Trace_Enter;
                 }
                 break;
+            case State.Die_Enter:
+                now_State = State.Die;
+                break;
+            case State.Die:
+
+                break;
         }
 
         // any state 

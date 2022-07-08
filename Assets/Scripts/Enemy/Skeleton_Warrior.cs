@@ -53,4 +53,9 @@ public class Skeleton_Warrior : Battle_Character
     {
         Debug.Log("찌르기 발동");
     }
+
+    public override void Die_Process() // 죽을때 호출되는 함수 (부활 처리해야함)
+    {
+
+    }
 }

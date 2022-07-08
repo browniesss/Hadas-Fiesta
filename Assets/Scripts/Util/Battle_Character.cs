@@ -105,4 +105,9 @@ public class Battle_Character : MonoBehaviour
     {
 
     }
+
+    public virtual void Die_Process()
+    {
+
+    }
 }
