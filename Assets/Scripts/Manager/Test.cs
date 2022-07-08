@@ -40,5 +40,10 @@ public class Test : MonoBehaviour
 
             UIManager.Instance.Show("Test2");
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            
+            UIManager.Instance.Remove("Test2");
+        }
     }
 }

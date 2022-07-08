@@ -25,24 +25,13 @@ public class UIManager : Singleton<UIManager>
         sdf
     }
 
-    public void Prefabsload(string name, CANVAS_NUM x)
+    public GameObject Prefabsload(string name, CANVAS_NUM x , Transform a = null)
     {
         bool same = false;
-        if (info.Count == 0)
-        {
-           
-            GameObject obj = Resources.Load<GameObject>("Prefabs/" + name); //·Îµå. 
-            uiinfo.obj = Instantiate(obj);
-            uiinfo.obj.transform.SetParent(canvas[(int)x].transform);
-            uiinfo.path = name;
-            uiinfo.obj.name = name;
-            
-            info.Add(uiinfo);
-        }
         for (int i = 0; i < info.Count; i++)
         {
             //      Debug.Log(info[i].path);
-            if (info[i].path == name)
+            if (info[i].path == name && info[i].path != "Test2")
             {
                 same = true;
             }
@@ -59,11 +48,14 @@ public class UIManager : Singleton<UIManager>
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;
             tmp.obj.name = name;
+            tmp.active = true;
             info.Add(tmp);
-          
+
+            Debug.Log(canvas[(int)x].transform);
+            return info[info.Count-1].obj;
         }
 
-        //    return obj;
+            return null;
 
     }
     public void Show(string path)
@@ -74,7 +66,7 @@ public class UIManager : Singleton<UIManager>
             {
                 Debug.Log(info[i].path);
                 info[i].obj.SetActive(true);
-                // info[i].active = false;
+                info[i].active = true;
             }
         }
     }
@@ -86,7 +78,21 @@ public class UIManager : Singleton<UIManager>
             {
                 Debug.Log(info[i].path);
                 info[i].obj.SetActive(false);
-                // info[i].active = false;
+                info[i].active = false;
+            }
+        }
+    }
+    public void Remove(string path)
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].path == path && info[i].active==true)
+            {
+                Debug.Log(info.Count);
+                Destroy(info[i].obj);
+                info.Remove(info[i]);
+                i = 0;
+                continue;
             }
         }
     }

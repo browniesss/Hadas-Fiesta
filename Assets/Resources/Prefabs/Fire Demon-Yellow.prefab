@@ -134,6 +134,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
@@ -328,19 +329,19 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2542414832911508685}
-  serializedVersion: 7
+  serializedVersion: 8
   lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
+  emitterVelocityMode: 0
   looping: 1
   prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -854,6 +855,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 20
+    customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5015,6 +5017,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
@@ -6056,11 +6059,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   Attack_Range: 1.5
+  Mana: 0
+  need_Mana: 0
   is_Target_Set: 0
   return_Pos: {x: 0, y: 0, z: 0}
   cur_State: 0
   cur_Target: {fileID: 0}
   next_Skill: 0
+  enemy_isDie: 0
+  defense: 0
   destination_Pos: {x: 0, y: 0, z: 0}
 --- !u!114 &2542414830974982054
 MonoBehaviour:
@@ -6076,11 +6083,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   Attack_Range: 1.5
+  Mana: 0
+  need_Mana: 0
   is_Target_Set: 0
   return_Pos: {x: 0, y: 0, z: 0}
   cur_State: 0
   cur_Target: {fileID: 0}
   next_Skill: 0
+  enemy_isDie: 0
+  defense: 0
   destination_Pos: {x: 0, y: 0, z: 0}
   Now_HP: 100
   Mob_Skill_divide: 0
