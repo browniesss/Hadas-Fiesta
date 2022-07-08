@@ -482,7 +482,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406600667}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1406600669
 Camera:
   m_ObjectHideFlags: 0
@@ -867,6 +867,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2542414830974982054, guid: 6d278439ed71ae94e8b878b6f4618df3, type: 3}
+      propertyPath: hpBarPrefab
+      value: 
+      objectReference: {fileID: 336713852889080152, guid: cea171b0332ea0e4c8c9680236fc8f98, type: 3}
+    - target: {fileID: 2542414830974982054, guid: 6d278439ed71ae94e8b878b6f4618df3, type: 3}
+      propertyPath: enemyHpBarSlider
+      value: 
+      objectReference: {fileID: 7123961063303215925, guid: cea171b0332ea0e4c8c9680236fc8f98, type: 3}
     - target: {fileID: 2542414830974982057, guid: 6d278439ed71ae94e8b878b6f4618df3, type: 3}
       propertyPath: m_Constraints
       value: 124
