@@ -84,11 +84,15 @@ public class Battle_Character : MonoBehaviour
         destination_Pos = transform.position;
 
         // 여기서 switch 로 종류에 따라 스테이트 처리기 분리
-        //state_handler = new General_Monster_State();
         state_handler = gameObject.AddComponent<General_Monster_State>();
 
         state_handler.State_Handler_Initialize(this);
         //anim = GetComponent<Animator>();
+    }
+
+    public void Damaged(float damage_Amount) // 공격 받았을 시 호출될 함수
+    {
+        Cur_HP -= (Armor - damage_Amount);
     }
 
     public virtual void Skill_1()
