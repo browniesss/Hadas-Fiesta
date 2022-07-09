@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MonsterPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: MonsterPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5ae104b482670fb41a3a0717e7b9039a
+  m_SerializeEntries:
+  - m_GUID: 6d3c96368e8d3c54f956615b6390466b
+    m_Address: Prefabs/Susu_
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Monster
+  - m_GUID: df42f27fec159c34ba416df450d6358b
+    m_Address: Prefabs/susu
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Monster
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a0fd1e256a56934498b269cd79a2cf74, type: 2}
+    - {fileID: 11400000, guid: ffb053470f47c7d4ca3933de0aa11111, type: 2}
