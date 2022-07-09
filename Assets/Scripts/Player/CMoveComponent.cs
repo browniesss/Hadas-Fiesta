@@ -147,7 +147,6 @@ public class CMoveComponent : BaseComponent
         Vector3 dest = transform.position + direction;
 
         StartCoroutine(CorDoMove(transform.position, dest, duratoin));
-
     }
 
     public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration)
@@ -238,7 +237,7 @@ public class CMoveComponent : BaseComponent
             if(curval.IsRolling)
             {
                 //com.animator.SetPlaySpeed(1.8f);
-                com.animator.Play("_Rolling",1.8f);
+                com.animator.Play("_Rolling",2.3f);
             }
             else if(curval.IsAttacking)
             {
@@ -251,7 +250,7 @@ public class CMoveComponent : BaseComponent
                 //int num  = GetComponent<CAttackComponent>().AttackNum;
                 ////com.animator.SetPlaySpeed(1.0f);
                 //com.animator.Play(string.Format("_Attack0{0}", num));
-                com.animator.Play("_Guard");
+                com.animator.Play("_Guard",2.0f);
             }
             else
             {
@@ -350,14 +349,14 @@ public class CMoveComponent : BaseComponent
         //speed -= 1.0f;
         //speed = Mathf.Abs(speed);
        // Debug.Log($"{temptime}*={speed}");
-        temptime /= 1.8f;
+        temptime /= 2.3f;
         
         int tempval = (int)(temptime / 0.016f);
         Debug.Log($"{temptime}/{0.016} -> {tempval}È¸ ¹Ýº¹");
         int i = 0;
         Vector3 tempmove = Vector3.zero;
         tempmove = com.FpRoot.forward; 
-        tempmove *= 100;
+        tempmove *= 80;
 
         Vector3 dest = this.transform.position + tempmove; 
 

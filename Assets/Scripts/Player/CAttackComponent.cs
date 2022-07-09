@@ -53,6 +53,10 @@ public class CAttackComponent : BaseComponent
         public GameObject Effect;
 
         public Transform EffectPosRot;
+
+        public float movedis;
+
+        public float movetime;
     }
 
     public AnimationController animator;
@@ -73,9 +77,7 @@ public class CAttackComponent : BaseComponent
         
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        eventsystem.AddEvent(null, null, AttackEnd);
-        
-
+        eventsystem.AddEvent(null, AttackMove, AttackEnd);
 
 
     }
@@ -111,9 +113,9 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
 
-        Debug.Log("공격 들어옴");
+        //Debug.Log("공격 들어옴");
         float tempval = Time.time - lastAttackTime;
-        Debug.Log($"경과된 시간{tempval}, 연결시간{attackinfos[AttackNum].NextMovementTimeVal}");
+        //Debug.Log($"경과된 시간{tempval}, 연결시간{attackinfos[AttackNum].NextMovementTimeVal}");
 
         if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
         {
@@ -127,16 +129,25 @@ public class CAttackComponent : BaseComponent
 
         StartCoroutine(Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect));
 
-        Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
+        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
 
-        movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name)/2);
+        
 
     }
 
     public void AttackMove(string clipname)
     {
+        for(int i=0;i<attackinfos.Length;i++)
+        {
+            if(attackinfos[i].aniclip.name == clipname)
+            {
+                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
+                movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
 
+                break;
+            }
+        }
     }
 
     //공격 이펙트를 생성
@@ -156,7 +167,7 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다
     public void AttackEnd(string s_val)
     {
-        Debug.Log($"공격 끝 들어옴 -> {s_val}");
+        //Debug.Log($"공격 끝 들어옴 -> {s_val}");
 
 
 

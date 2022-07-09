@@ -39,7 +39,7 @@ public class CInputComponent : BaseComponent
     //2. Attack 컴포넌트
     public CAttackComponent attackcom;
     //3. Defence 컴포넌트
-    public CGuardComponent defencecom;
+    public CGuardComponent guardcom;
     
    
     //키와 마우스 입력을 처리한다.
@@ -88,6 +88,29 @@ public class CInputComponent : BaseComponent
         }
     }
 
+    //IEnumerator tempdid;
+    //IEnumerator Cor_Test(float time)
+    //{
+    //    int i = 0;
+    //    Debug.Log($"다시시작");
+    //    while (true)
+    //    {
+    //        //if ((Time.time - starttime) >= time)
+    //        //{
+    //        //    Debug.Log("시간다됨");
+    //        //    invoker.Invoke();
+    //        //    coroutine = null;
+    //        //    //playingCor = false;
+    //        //    yield break;
+    //        //}
+    //        if (i >= 100)
+    //            yield break;
+
+    //        Debug.Log($"코루틴{i}");
+    //        i++;
+    //        yield return new WaitForSeconds(1.0f);
+    //    }
+    //}
 
     void Update()
     {
@@ -103,12 +126,18 @@ public class CInputComponent : BaseComponent
         //오른쪽 마우스 클릭
         if(Input.GetMouseButtonDown(1))
         {
-            movecom.curval.IsGuard = true;
-            
+            if (guardcom == null)
+                guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom.Guard();
+            //movecom.curval.IsGuard = true;
+
         }
         if(Input.GetMouseButtonUp(1))
         {
-            movecom.curval.IsGuard = false;
+            if (guardcom == null)
+                guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom.GuardDown();
+            //movecom.curval.IsGuard = false;
         }
 
         //키 입력
