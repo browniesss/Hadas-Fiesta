@@ -63,6 +63,24 @@ namespace EnumTypes
         AttackMax
     }
 
+    public enum eCharacterState
+    {
+        Idle,//movecom
+        Walk,//movecom
+        Run,//movecom
+        Attack01,//attackcom
+        Attack02,//attackcom
+        Attack03,//attackcom
+        Rolling,//movecom
+        Guard,//guardcom
+        GuardStun,//battlesystem
+        DamagedStun,//movecom
+        DamagedKnockBack,//movecom
+        Slip,//movecom
+        OutOfControl,//move, battelsys, guard
+        StateMax
+    }
+
     //public enum eAnimationClips
     //{
     //    Idle01,

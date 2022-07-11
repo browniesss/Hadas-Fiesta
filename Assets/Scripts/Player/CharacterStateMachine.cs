@@ -7,78 +7,61 @@ using UnityEngine;
 //
 public class CharacterStateMachine : MonoBehaviour
 {
-    public enum E_CharacterState
-    {
-        Idle,//movecom
-        Walk,//movecom
-        Run,//movecom
-        Attack01,//attackcom
-        Attack02,//attackcom
-        Attack03,//attackcom
-        Rolling,//movecom
-        Guard,//guardcom
-        GuardStun,//battlesystem
-        DamagedStun,//movecom
-        DamagedKnockBack,//movecom
-        Slip,//movecom
-        OutOfControl,//move, battelsys, guard
-        StateMax
-    }
-
     [System.Serializable]
     public class AnimationBlendingTimeSet
     {
-        public E_CharacterState prestate;
-        public E_CharacterState changestate;
+        public EnumTypes.eCharacterState prestate;
+        public EnumTypes.eCharacterState changestate;
         [Range(0.0f, 5.0f)]
         public float blendtime;
         
     }
 
+    //모션의 딜레이는 각각의 모션이 종료할때 각자가 가지고 있도록 한다.
+
     public List<AnimationBlendingTimeSet> animationBlendingTimeSets = new List<AnimationBlendingTimeSet>();
     //curstate
-    public E_CharacterState CurState;
+    public EnumTypes.eCharacterState CurState;
     //
-    public E_CharacterState PreState;
+    public EnumTypes.eCharacterState PreState;
 
     //상태 변화에 따라 애니메이션을 바꿔준다.
-    public void SetState(E_CharacterState state)
+    public void SetState(EnumTypes.eCharacterState state)
     {
         PreState = CurState;
         CurState = state;
 
-        switch(CurState)
-        {
-            //달리기->기본, 공격1타->기본, 공격2타->기본, 공격3타->기본, 걷기->기본, 구르기->기본
-            case E_CharacterState.Idle:
+        //switch(CurState)
+        //{
+        //    //달리기->기본, 공격1타->기본, 공격2타->기본, 공격3타->기본, 걷기->기본, 구르기->기본
+        //    case E_CharacterState.Idle:
 
-                break;
-
+        //        break;
             
-            case E_CharacterState.Rolling:
+        //    case E_CharacterState.Rolling:
 
-                break;
-            case E_CharacterState.Guard:
+        //        break;
+        //    case E_CharacterState.Guard:
 
-                break;
-            case E_CharacterState.Slip:
+        //        break;
+        //    case E_CharacterState.Slip:
 
-                break;
-            case E_CharacterState.OutOfControl:
+        //        break;
+        //    case E_CharacterState.OutOfControl:
 
-                break;
-        }
+        //        break;
+        //}
 
 
 
     }
 
-    public E_CharacterState GetState()
+    public EnumTypes.eCharacterState GetState()
     {
         return CurState;
     }
 
-    public E_CharacterState GetPreState()
+    public EnumTypes.eCharacterState GetPreState()
     {
         return PreState;
     }

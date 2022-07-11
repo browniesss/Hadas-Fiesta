@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//jo
+//move에서 사용하는 변수들
+//해당 값이 변경되면 해당되는 state 변경이 필요
 [System.Serializable]
 public class CurState
 {
@@ -58,27 +59,152 @@ public class CurState
     //public Vector2 MouseMove { get => mouseMove; set => mouseMove = value; }
     //public Vector3 MoveDir { get => moveDir; set => moveDir = value; }
     //public Vector3 WorldMove { get => worldMove; set => worldMove = value; }
-    public bool IsCursorActive { get => isCursorActive; set => isCursorActive = value; }
-    public bool IsFPP { get => isFPP; set => isFPP = value; }
-    public bool IsMoving { get => isMoving; set => isMoving = value; }
-    public bool IsRunning { get => isRunning; set => isRunning = value; }
-    public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
-    public bool IsJumping { get => isJumping; set => isJumping = value; }
-    public bool IsFalling { get => isFalling; set => isFalling = value; }
-    public bool IsSlip { get => isSlip; set => isSlip = value; }
-    public bool IsFowordBlock { get => isFowordBlock; set => isFowordBlock = value; }
-    public bool IsOnTheSlop { get => isOnTheSlop; set => isOnTheSlop = value; }
+    public bool IsCursorActive { 
+        get => isCursorActive; 
+        set => isCursorActive = value; 
+    }
+    public bool IsFPP { 
+        get => isFPP; 
+        set => isFPP = value; 
+    }
+    public bool IsMoving { 
+        get
+        {
+            return isMoving;
+        }
+        set
+        {
+            isMoving = value;
+            if(value)
+            {
+
+            }
+        }
+        
+    }
+    public bool IsRunning { 
+        get
+        {
+            return isRunning;
+        }
+        set
+        {
+            isRunning = value;
+        }
+    }
+    public bool IsGrounded { 
+        get => isGrounded;
+        set => isGrounded = value; 
+    }
+    public bool IsJumping { 
+        get => isJumping; 
+        set => isJumping = value; 
+    }
+    public bool IsFalling { 
+        get
+        {
+            return isFalling;
+        }
+        set
+        {
+            isFalling = value;
+        } 
+    }
+    public bool IsSlip { 
+        get
+        {
+            return isSlip;
+        }
+        set
+        {
+            isSlip = value;
+        }
+    }
+    public bool IsFowordBlock { 
+        get => isFowordBlock; 
+        set => isFowordBlock = value;
+    }
+    public bool IsOnTheSlop { 
+        get => isOnTheSlop; 
+        set => isOnTheSlop = value; 
+    }
     //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
-    public bool IsOutofControl { get => isOutofControl; set => isOutofControl = value; }
-    public bool IsRolling { get => isRolling; set => isRolling = value; }
-    public float LastJump { get => lastJump; set => lastJump = value; }
-    public float CurGroundSlopAngle { get => curGroundSlopAngle; set => curGroundSlopAngle = value; }
-    public float CurFowardSlopAngle { get => curFowardSlopAngle; set => curFowardSlopAngle = value; }
-    public Vector3 CurGroundNomal { get => curGroundNomal; set => curGroundNomal = value; }
-    public Vector3 CurGroundCross { get => curGroundCross; set => curGroundCross = value; }
-    public Vector3 CurHorVelocity { get => curHorVelocity; set => curHorVelocity = value; }
-    public Vector3 CurVirVelocity { get => curVirVelocity; set => curVirVelocity = value; }
-    public float MoveAccel { get => moveAccel; set => moveAccel = value; }
-    public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
-    public bool IsGuard { get => isGuard; set => isGuard = value; }
+    public bool IsOutofControl { 
+        get
+        {
+            return isOutofControl;
+        }
+        set
+        {
+            isOutofControl = value;
+        }
+    }
+    public bool IsRolling { 
+        get
+        {
+            return isRolling;
+        }
+        set
+        {
+            isRolling = value;
+        }
+    }
+    public float LastJump { 
+        get => lastJump; 
+        set => lastJump = value;
+    }
+    public float CurGroundSlopAngle { 
+        get => curGroundSlopAngle; 
+        set => curGroundSlopAngle = value; 
+    }
+    public float CurFowardSlopAngle { 
+        get => curFowardSlopAngle; 
+        set => curFowardSlopAngle = value; 
+    }
+    public Vector3 CurGroundNomal { 
+        get => curGroundNomal; 
+        set => curGroundNomal = value; 
+    }
+    public Vector3 CurGroundCross { 
+        get => curGroundCross; 
+        set => curGroundCross = value; 
+    }
+    public Vector3 CurHorVelocity { 
+        get => curHorVelocity; 
+        set => curHorVelocity = value; 
+    }
+    public Vector3 CurVirVelocity { 
+        get => curVirVelocity; 
+        set => curVirVelocity = value;
+    }
+    public float MoveAccel { 
+        get
+        {
+            return moveAccel;
+        }
+        set
+        {
+            moveAccel = value;
+        }
+    }
+    public bool IsAttacking { 
+        get
+        {
+            return isAttacking;
+        }
+        set
+        {
+            isAttacking = value;
+        }  
+    }
+    public bool IsGuard { 
+        get
+        {
+            return isGuard;
+        }
+        set
+        {
+            isGuard = value;
+        }
+    }
 }

@@ -25,6 +25,17 @@ public abstract class BaseComponent : MonoBehaviour
         InitComtype();
     }
 
+    public virtual void InitSetting()
+    {
+        
+    }
+
+
+    public virtual void Update()
+    {
+
+    }
+
     //public abstract BaseComponent GetComponent();
     //public abstract void SetComponent();
 
