@@ -5832,9 +5832,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380178431}
-  - component: {fileID: 1380178430}
   - component: {fileID: 1380178429}
   - component: {fileID: 1380178428}
+  - component: {fileID: 1380178430}
+  - component: {fileID: 1380178434}
   - component: {fileID: 1380178427}
   - component: {fileID: 1380178426}
   - component: {fileID: 1380178432}
@@ -6105,6 +6106,21 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
+--- !u!114 &1380178434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380178425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b69a6adf6433e4e92be0c6e93cc370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationBlendingTimeSets: []
+  CurState: 0
+  PreState: 0
 --- !u!1 &1395338899
 GameObject:
   m_ObjectHideFlags: 0

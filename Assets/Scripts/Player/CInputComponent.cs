@@ -48,7 +48,7 @@ public class CInputComponent : BaseComponent
         if (movecom == null)
             movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
-        movecom.curval.IsMoving = false;
+        
 
         float v = 0;
         float h = 0;
@@ -58,10 +58,29 @@ public class CInputComponent : BaseComponent
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
 
-        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
+        //space 처리
+        if (Input.GetKey(_key.Rolling))
+            movecom.Rolling();
+
+        CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
+
+
+        if (state == CharacterStateMachine.eCharacterState.Attack|| 
+            state == CharacterStateMachine.eCharacterState.Rolling||
+            state == CharacterStateMachine.eCharacterState.Guard|| 
+            state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
+            movecom.curval.IsMoving = false;
             return;
         }
+
+        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
+        {
+            movecom.curval.IsMoving = false;
+            return;
+        }
+
+        movecom.curval.IsMoving = false;
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
@@ -77,15 +96,40 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
         else movecom.curval.IsRunning = false;
 
-        //space 처리
-        if (Input.GetKey(_key.Rolling))
-            movecom.Rolling();
+        
 
         //이동값이 조금이라도 있으면 움직이는중으로 판단
         if (movecom.MoveDir.magnitude > 0 )
         {
             movecom.curval.IsMoving = true;
+            //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
         }
+        else
+        {
+            CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+        }
+
+
+        if (movecom.curval.IsMoving)
+        {
+            if (movecom.curval.IsRunning)
+            {
+                //com.animator.SetPlaySpeed(1f);
+                movecom.com.animator.Play("_Dash");
+
+            }
+            else
+            {
+                //com.animator.SetPlaySpeed( 1f);
+                movecom.com.animator.Play("_Walk");
+            }
+        }
+        else
+        {
+            movecom.com.animator.Play("_Idle");
+        }
+
+
     }
 
     //IEnumerator tempdid;

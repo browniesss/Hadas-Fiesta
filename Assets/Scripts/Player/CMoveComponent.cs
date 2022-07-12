@@ -220,26 +220,27 @@ public class CMoveComponent : BaseComponent
 
         if (curval.IsMoving)
         {
-            if(curval.IsRunning)
+            if (curval.IsRunning)
             {
                 //com.animator.SetPlaySpeed(1f);
-                com.animator.Play("_Dash");
+                //com.animator.Play("_Dash");
 
             }
             else
             {
                 //com.animator.SetPlaySpeed( 1f);
-                com.animator.Play("_Walk");
+                //com.animator.Play("_Walk");
             }
         }
         else
         {
-            if(curval.IsRolling)
+            if (curval.IsRolling)
             {
                 //com.animator.SetPlaySpeed(1.8f);
-                com.animator.Play("_Rolling",2.3f);
+                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
+                //com.animator.Play("_Rolling", 2.3f);
             }
-            else if(curval.IsAttacking)
+            else if (curval.IsAttacking)
             {
                 //int num  = GetComponent<CAttackComponent>().AttackNum;
                 ////com.animator.SetPlaySpeed(1.0f);
@@ -250,17 +251,19 @@ public class CMoveComponent : BaseComponent
                 //int num  = GetComponent<CAttackComponent>().AttackNum;
                 ////com.animator.SetPlaySpeed(1.0f);
                 //com.animator.Play(string.Format("_Attack0{0}", num));
-                com.animator.Play("_Guard",2.0f);
+                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
+                //com.animator.Play("_Guard", 2.0f);
             }
             else
             {
                 //com.animator.SetPlaySpeed(1f);
-                com.animator.Play("_Idle");
+                //com.animator.Play("_Idle");
+                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
             }
-            
-            
+
+
         }
-            
+
 
     }
 
@@ -339,6 +342,8 @@ public class CMoveComponent : BaseComponent
 
         //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
+
+        com.animator.Play("_Rolling", 2.3f);
         StartCoroutine(Rolling_Coroutine(com.animator.GetClipLength("_Rolling")));
     }
 
@@ -352,7 +357,7 @@ public class CMoveComponent : BaseComponent
         temptime /= 2.3f;
         
         int tempval = (int)(temptime / 0.016f);
-        Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
+        //Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
         int i = 0;
         Vector3 tempmove = Vector3.zero;
         tempmove = com.FpRoot.forward; 

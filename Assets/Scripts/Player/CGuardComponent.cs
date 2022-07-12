@@ -28,6 +28,8 @@ public class CGuardComponent : BaseComponent
 
         movecom.curval.IsGuard = true;
 
+        movecom.com.animator.Play("_Guard", 2.0f);
+
         if (coroutine != null)
         {
             //playingCor = false;
@@ -56,6 +58,7 @@ public class CGuardComponent : BaseComponent
             
 
         movecom.curval.IsGuard = false;
+        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
     }
 
     //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용

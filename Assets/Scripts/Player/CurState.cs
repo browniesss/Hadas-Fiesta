@@ -75,12 +75,11 @@ public class CurState
         set
         {
             isMoving = value;
-            if(value)
-            {
-
-            }
+            if (isMoving)
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
+            //else
+            //    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
         }
-        
     }
     public bool IsRunning { 
         get
@@ -147,6 +146,14 @@ public class CurState
         set
         {
             isRolling = value;
+            if (isRolling)
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
+            }
+            else
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+            }
         }
     }
     public float LastJump { 
@@ -195,6 +202,14 @@ public class CurState
         set
         {
             isAttacking = value;
+            if (isAttacking)
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Attack);
+            }
+            else
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+            }
         }  
     }
     public bool IsGuard { 
@@ -205,6 +220,19 @@ public class CurState
         set
         {
             isGuard = value;
+
+            if (isGuard)
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
+                //Debug.Log("guardµé¾î¿È");
+            }
+            else
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                //Debug.Log("guard³ª°¨");
+            }
+                
+
         }
     }
 }
