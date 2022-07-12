@@ -69,9 +69,6 @@ public class Skeleton_Warrior : Battle_Character
         // 부활하는 애니메이션 재생 후 
         ai.AI_Initialize(this);
 
-        Debug.Log("처리완료");
-        Debug.Log(ai.now_State);
-
         Cur_HP = 100;
     }
 }
