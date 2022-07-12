@@ -31,6 +31,8 @@ public abstract class State_Handler : MonoBehaviour
 
     protected abstract void Die_Process();
 
+    protected abstract void Return_Process();
+
     protected IEnumerator patrol_Think_Coroutine()  // 다음 목적지 생각하는 코루틴
     {
         yield return new WaitForSeconds(1f);

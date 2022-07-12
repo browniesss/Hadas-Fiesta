@@ -20,6 +20,9 @@ public class General_Monster_State : State_Handler
             case State.Attack:
                 Attack_Process();
                 break;
+            case State.Return:
+                Return_Process();
+                break;
             case State.Die:
                 Die_Process();
                 break;
@@ -55,6 +58,11 @@ public class General_Monster_State : State_Handler
     protected override void Trace_Process()
     {
         Destination_Move(battle_Character.cur_Target.transform.position);
+    }
+
+    protected override void Return_Process()
+    {
+        Destination_Move(battle_Character.destination_Pos);
     }
 
     protected override void Attack_Process()

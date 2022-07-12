@@ -13,8 +13,7 @@ ex ) 원거리, 근거리 처럼 다른 스테이트 프로세스를 수행해야 한다면
 
 public class Battle_Character : MonoBehaviour
 {
-    [SerializeField]
-    protected FSM_AI ai = new FSM_AI();
+    public FSM_AI ai = new FSM_AI();
 
     [SerializeField]
     protected State_Handler state_handler;

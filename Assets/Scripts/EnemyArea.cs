@@ -6,14 +6,14 @@ public class EnemyArea : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
-            other.GetComponent<Enemy>().Enemy_Return_Set();
+            other.GetComponent<Battle_Character>().ai.Return_Set();
         }
     }
 
@@ -25,6 +25,6 @@ public class EnemyArea : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

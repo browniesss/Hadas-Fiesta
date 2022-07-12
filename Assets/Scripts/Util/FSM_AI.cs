@@ -17,6 +17,8 @@ public enum State // 스테이트
     Die_Enter,
     Die,
     Die_Exit,
+    Return,
+    Wait,
 }
 
 [System.Serializable]
@@ -52,7 +54,7 @@ public class FSM_AI
                         if (cols[i].tag == "Player")
                         {
                             battle_Character.cur_Target = cols[i].gameObject;
-                            now_State = State.Trace_Enter;
+                            now_State = State.Trace;
                         }
                     }
                 }
@@ -66,23 +68,34 @@ public class FSM_AI
             case State.Attack:
                 if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range)) // 사정 거리 내에 있다면 
                 {
-                    now_State = State.Trace_Enter;
+                    now_State = State.Trace;
                 }
                 break;
             case State.Die_Enter:
                 now_State = State.Die;
                 break;
             case State.Die:
-
+                now_State = State.Wait;
+                break;
+            case State.Return:
+                if ((Vector3.Distance(battle_Character.transform.position, battle_Character.destination_Pos) <= 0.5f)) // 사정 거리 내에 있다면 
+                {
+                    now_State = State.Init;
+                }
                 break;
         }
 
         // any state 
-        if (battle_Character.Cur_HP <= 0)
+        if (battle_Character.Cur_HP <= 0 && now_State != State.Wait && now_State != State.Die)
         {
             now_State = State.Die_Enter;
         }
 
         return now_State;
+    }
+
+    public void Return_Set()
+    {
+        now_State = State.Return;
     }
 }

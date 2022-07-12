@@ -56,6 +56,22 @@ public class Skeleton_Warrior : Battle_Character
 
     public override void Die_Process() // 죽을때 호출되는 함수 (부활 처리해야함)
     {
+        StartCoroutine(Skeleton_Warrior_Revival());
+    }
 
+    IEnumerator Skeleton_Warrior_Revival()
+    {
+        // 사망하는 애니메이션 처리
+
+        yield return new WaitForSeconds(5f); // 5초 안에 떄리지 않았다면
+
+        Debug.Log("부활부활");
+        // 부활하는 애니메이션 재생 후 
+        ai.AI_Initialize(this);
+
+        Debug.Log("처리완료");
+        Debug.Log(ai.now_State);
+
+        Cur_HP = 100;
     }
 }
