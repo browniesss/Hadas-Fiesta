@@ -16,8 +16,7 @@ public class SlimeMonster : Enemy
 
     public Canvas enemyHpBarCanvas;
     //public Slider enemyHpBarSlider; //Slider의 초기 세팅, Hp 갱신에 사용할 Slider를 담을 변수
-
-
+    private EnemyHpbar MyHpbar;
   //  public Vector3 hpBarOffset = new Vector3(-0.5f, 2.4f, 0);
     protected override void Enemy_Attack()
     {
@@ -101,28 +100,30 @@ public class SlimeMonster : Enemy
     {
         SkillFsm();
         Enemy_FSM();
+        MyHpbar.hit();
+
     }
     public void SetHpBar()
     {
-
-        // var _hpbar = hpBar.GetComponent<EnemyHpbar>();
-        // _hpbar.enemyTr = this.gameObject.transform;
-        // _hpbar.offset = hpBarOffset;
-
-         enemyHpBarCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-     //    GameObject hpBar = Instantiate<GameObject>(hpBarPrefab, enemyHpBarCanvas.transform);
-
-       
+        enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
         GameObject hpBar = UIManager.Instance.Prefabsload("Enemy HpBar Slider", UIManager.CANVAS_NUM.ex_skill);
-
 
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
       //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = this.gameObject.transform;
         _hpbar.offset = hpBarOffset;
+        _hpbar.Maxhp = Now_HP;
+        _hpbar.Curhp = Now_HP;
+        var _test = hpBar.GetComponent<Slider>();
+        _hpbar.myhp =_test;
+        MyHpbar = _hpbar;
 
         Debug.Log(enemyHpBarCanvas.transform);
-       
+         
     }
-
+    public void Hitdamage()
+    {
+        MyHpbar.Curhp = MyHpbar.Curhp - 5f;
+        MyHpbar.hit();
+    }
 }

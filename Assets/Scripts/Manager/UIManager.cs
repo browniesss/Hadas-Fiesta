@@ -30,8 +30,8 @@ public class UIManager : Singleton<UIManager>
         bool same = false;
         for (int i = 0; i < info.Count; i++)
         {
-            //      Debug.Log(info[i].path);
-            if (info[i].path == name && info[i].path != "Test2")
+            //Debug.Log(info[i].path);
+            if (info[i].path == name && info[i].path != "Enemy HpBar Slider")
             {
                 same = true;
             }
@@ -44,20 +44,21 @@ public class UIManager : Singleton<UIManager>
         {
             GameObject obj = Resources.Load<GameObject>("Prefabs/" + name);
             UIInfo tmp = new UIInfo();
-            tmp.obj = Instantiate(obj);
+            tmp.obj = Instantiate(obj, canvas[(int)x].transform);
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;
             tmp.obj.name = name;
             tmp.active = true;
             info.Add(tmp);
-
+          //   GameObject hpBar = Instantiate<GameObject>(hpBarPrefab, enemyHpBarCanvas.transform);
             Debug.Log(canvas[(int)x].transform);
             return info[info.Count-1].obj;
         }
-
             return null;
-
     }
+    // (예 아니오 팝업 ) 쇼메세지 .
+    // 쇼메세지에서 인수를 받아서 콜백을한다 . 
+    // 마우스커서 컨트롤 
     public void Show(string path)
     {
         for (int i = 0; i < info.Count; i++)
