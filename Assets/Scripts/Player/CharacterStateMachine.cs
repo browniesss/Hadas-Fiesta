@@ -59,7 +59,7 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
     {
         if (CurState != state)
         {
-            Debug.Log($"{state} µé¾î¿È");
+            //Debug.Log($"{state} µé¾î¿È");
             PreState = CurState;
             CurState = state;
         }

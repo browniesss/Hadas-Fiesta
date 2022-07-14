@@ -157,12 +157,13 @@ public class CMoveComponent : BaseComponent
         {
             if(runtime>=duration)
             {
-                this.transform.position = dest;
+                //this.transform.position = dest;
                 yield break;
             }
             runtime += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(start, dest, runtime / duration);
+            if(!curval.IsFowordBlock)
+                transform.position = Vector3.Lerp(start, dest, runtime / duration);
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -373,7 +374,8 @@ public class CMoveComponent : BaseComponent
                 yield break;
             }
 
-            this.transform.position = Vector3.Lerp(this.transform.position, dest, Time.deltaTime);
+            if(!curval.IsFowordBlock)
+                this.transform.position = Vector3.Lerp(this.transform.position, dest, Time.deltaTime);
 
             //com.CharacterRig.velocity = new Vector3(tempmove.x, tempmove.y, tempmove.z);
 
