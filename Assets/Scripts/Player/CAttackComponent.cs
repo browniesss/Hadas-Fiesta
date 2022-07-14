@@ -5,28 +5,13 @@ using UnityEngine;
 //jo
 public class CAttackComponent : BaseComponent
 {
-    //public AnimationClip[] Attack
     [SerializeField]
-    //private int AttackCount;
-
     CurState curval;
-
-    [Range(0.0f,5.0f)]
-    [Tooltip("공격 모션이 끝나고 해당 시간 안에 공격버튼을 클릭해야지 연결동작이 진행")]
-    public float LinkAttackInterval;
 
     public float LastAttackTime;
 
-    //public bool NowAttack;
-
-    //
-    public bool Linkable;
-
     public int AttackNum = 0;
     public CMoveComponent movecom;
-
-    //public AnimationController animator;
-    //public CAnimationComponent animator;
 
     [System.Serializable]
     public class AttackMovementInfo
@@ -59,11 +44,44 @@ public class CAttackComponent : BaseComponent
         public float movetime;
     }
 
+    //스킬도 여기서 한번에 처리
+    [System.Serializable]
+    public class SkillInfo
+    {
+        public string SkillName;
+
+        public int SkillNum;
+
+        public AnimationClip aniclip;
+
+        public float animationPlaySpeed;
+
+        public float MovementDelay;
+
+        public float NextMovementTimeVal;
+
+        public float damage;
+
+        public GameObject Effect;
+
+        public float EffectStartTime;
+
+        public Transform EffectPosRot;
+
+        public float Movedis;
+
+        public float MoveTime;
+
+    }
+
+
     public AnimationController animator;
 
     public AnimationEventSystem eventsystem;
 
     public AttackMovementInfo[] attackinfos;
+
+    public SkillInfo[] skillinfos;
 
     public float lastAttackTime = 0;
 
@@ -96,6 +114,26 @@ public class CAttackComponent : BaseComponent
             }
             yield return new WaitForSeconds(Time.deltaTime);
         }
+    }
+
+    //스킬을 재생해준다.
+    public void SkillAttack(int skillnum)
+    {
+        if (skillnum < 0 || skillnum > skillinfos.Length)
+            return;
+
+        if (movecom == null)
+        {
+            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            curval = movecom.curval;
+        }
+
+        if (curval.IsAttacking)
+            return;
+
+
+        StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
+        animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
 
 
@@ -145,9 +183,19 @@ public class CAttackComponent : BaseComponent
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
 
-                break;
+                return;
             }
         }
+
+        for(int i=0;i<skillinfos.Length;i++)
+        {
+            if(skillinfos[i].aniclip.name == clipname)
+            {
+                movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
+                return;
+            }
+        }
+
     }
 
     //공격 이펙트를 생성

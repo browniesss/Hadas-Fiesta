@@ -27,6 +27,12 @@ public class CInputComponent : BaseComponent
         public KeyCode Rolling = KeyCode.Space;
 
         public KeyCode Run = KeyCode.LeftShift;
+
+        public KeyCode skill01 = KeyCode.Alpha1;
+
+        public KeyCode skill02 = KeyCode.Alpha2;
+
+        public KeyCode skill03 = KeyCode.Alpha3;
     }
 
     [Header("Keys")]
@@ -52,37 +58,88 @@ public class CInputComponent : BaseComponent
 
         float v = 0;
         float h = 0;
+        movecom.curval.IsMoving = false;
+
 
         movecom.MouseMove = new Vector2(0, 0);//마우스 움직임
         movecom.MoveDir = new Vector3(0, 0, 0);//wasd 키 입력에 따른 이동 방향
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-
-        //space 처리
-        if (Input.GetKey(_key.Rolling))
-            movecom.Rolling();
-
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
 
 
-        if (state == CharacterStateMachine.eCharacterState.Attack|| 
+
+        if (state == CharacterStateMachine.eCharacterState.Attack||
             state == CharacterStateMachine.eCharacterState.Rolling||
-            state == CharacterStateMachine.eCharacterState.Guard|| 
+             
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
-            movecom.curval.IsMoving = false;
+            //movecom.curval.IsMoving = false;
             return;
         }
 
-        if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
+        //if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
+        //{
+        //    movecom.curval.IsMoving = false;
+        //    return;
+        //}
+
+        
+
+        //왼쪽 마우스 클릭
+        if (Input.GetMouseButtonDown(0))
         {
-            movecom.curval.IsMoving = false;
+            LeftMouseDown();
             return;
         }
 
-        movecom.curval.IsMoving = false;
+        //오른쪽 마우스 클릭
+        if (Input.GetMouseButtonDown(1))
+        {
+            RightMouseDown();
+            return;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            RightMouseUp();
+            return;
+        }
+
+        if(state == CharacterStateMachine.eCharacterState.Guard)
+        {
+            //movecom.curval.IsMoving = false;
+            return;
+        }
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
+
+        //space 처리
+        //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
+        if (Input.GetKey(_key.Rolling))
+        {
+            movecom.Rolling();
+            return;
+        }
+
+        if (Input.GetKey(_key.skill01))
+        {
+            SkillAttack(0);
+            return;
+        }
+            
+
+        if (Input.GetKey(_key.skill02))
+        {
+            SkillAttack(1);
+            return;
+        }
+
+        if (Input.GetKey(_key.skill03))
+        {
+            SkillAttack(2);
+            return;
+        }
 
         //wasd 처리
         if (Input.GetKey(_key.foward)) v += 1.0f;
@@ -132,57 +189,63 @@ public class CInputComponent : BaseComponent
 
     }
 
-    //IEnumerator tempdid;
-    //IEnumerator Cor_Test(float time)
-    //{
-    //    int i = 0;
-    //    Debug.Log($"다시시작");
-    //    while (true)
-    //    {
-    //        //if ((Time.time - starttime) >= time)
-    //        //{
-    //        //    Debug.Log("시간다됨");
-    //        //    invoker.Invoke();
-    //        //    coroutine = null;
-    //        //    //playingCor = false;
-    //        //    yield break;
-    //        //}
-    //        if (i >= 100)
-    //            yield break;
+    void LeftMouseDown()
+    {
+        if (attackcom == null)
+            attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+        attackcom.Attack();
+    }
 
-    //        Debug.Log($"코루틴{i}");
-    //        i++;
-    //        yield return new WaitForSeconds(1.0f);
-    //    }
-    //}
+
+    void RightMouseDown()
+    {
+        if (guardcom == null)
+            guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+        guardcom.Guard();
+    }
+
+    void RightMouseUp()
+    {
+        if (guardcom == null)
+            guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+        guardcom.GuardDown();
+    }
+    
+    void SkillAttack(int num)
+    {
+        if (attackcom == null)
+            attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+        attackcom.SkillAttack(num);
+    }
 
     void Update()
     {
-        //왼쪽 마우스 클릭
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (attackcom == null)
-                attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
-            attackcom.Attack();
-            //movecom.curval.IsAttacking = true;
-        }
+        ////왼쪽 마우스 클릭
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    if (attackcom == null)
+        //        attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+        //    attackcom.Attack();
+        //    //movecom.curval.IsAttacking = true;
+        //}
 
-        //오른쪽 마우스 클릭
-        if(Input.GetMouseButtonDown(1))
-        {
-            if (guardcom == null)
-                guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
-            guardcom.Guard();
-            //movecom.curval.IsGuard = true;
+        ////오른쪽 마우스 클릭
+        //if(Input.GetMouseButtonDown(1))
+        //{
+        //    if (guardcom == null)
+        //        guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+        //    guardcom.Guard();
+        //    //movecom.curval.IsGuard = true;
 
-        }
-        if(Input.GetMouseButtonUp(1))
-        {
-            if (guardcom == null)
-                guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
-            guardcom.GuardDown();
-            //movecom.curval.IsGuard = false;
-        }
+        //}
+
+        //if(Input.GetMouseButtonUp(1))
+        //{
+        //    if (guardcom == null)
+        //        guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+        //    guardcom.GuardDown();
+        //    //movecom.curval.IsGuard = false;
+        //}
 
         //키 입력
         KeyInput();
