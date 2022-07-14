@@ -89,9 +89,9 @@ public class Battle_Character : MonoBehaviour
         //anim = GetComponent<Animator>();
     }
 
-    public void Damaged(float damage_Amount) // 공격 받았을 시 호출될 함수
+    public virtual void Damaged(float damage_Amount) // 공격 받았을 시 호출될 함수
     {
-        Cur_HP -= (Armor - damage_Amount);
+        Cur_HP -= (damage_Amount - Armor);
     }
 
     public virtual void Skill_1()

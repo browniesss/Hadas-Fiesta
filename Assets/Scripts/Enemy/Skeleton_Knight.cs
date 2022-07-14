@@ -18,6 +18,9 @@ public class Skeleton_Knight : Battle_Character
     {
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Damaged(5);
     }
 
     public override void Skill_1() // 스켈레톤 나이트 1번스킬 
@@ -48,6 +51,13 @@ public class Skeleton_Knight : Battle_Character
 
             spawned_enemy.transform.position = transform.position + v;
         }
+    }
+
+    public override void Damaged(float damage_Amount)
+    {
+        base.Damaged(damage_Amount);
+
+        Debug.Log("나데미지");
     }
 
 }
