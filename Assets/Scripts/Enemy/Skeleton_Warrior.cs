@@ -16,34 +16,6 @@ public class Skeleton_Warrior : Battle_Character
         state_handler.State_Handler_Update();
     }
 
-    //protected override void Enemy_Die()
-    //{
-    //    enemy_isDie = true;
-    //    cur_State = -1;
-
-    //    AnimatorControllerParameter[] parameters = anim.parameters;
-
-    //    foreach (var parameter in parameters)
-    //    {
-    //        anim.SetBool(parameter.name, false);
-    //    }
-    //    anim.SetBool("isDie", true);
-
-    //    StartCoroutine(Skeleton_Warrior_Revival());
-    //}
-
-    //IEnumerator Skeleton_Warrior_Revival()
-    //{
-    //    yield return new WaitForSeconds(5f);
-
-    //    anim.SetBool("isDie", false);
-
-    //    yield return new WaitForSeconds(2f);
-    //    enemy_isDie = false;
-    //    cur_State = 1;
-    //}
-
-
     public override void Skill_1() // 스켈레톤 워리어 1번스킬 내려치기
     {
         Debug.Log("내려치기 발동");
