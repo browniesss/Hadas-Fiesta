@@ -17,7 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 1
+  m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
@@ -33,9 +33,9 @@ MonoBehaviour:
   m_MonoScriptBundleNaming: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 25f5034769d70e94fbca517c40d68301
+    m_Id: adf57447d8b638e47b18e6e28edabbf5
   m_RemoteCatalogLoadPath:
-    m_Id: d927fc81d942ab8409fd9b25adfbc137
+    m_Id: f8ad65e2b5634054e8c794e764e90d89
   m_ContentStateBuildPath: 
   m_overridePlayerVersion: 
   m_GroupAssets:
@@ -67,7 +67,7 @@ MonoBehaviour:
       - m_Id: 25f5034769d70e94fbca517c40d68301
         m_Value: ServerData/[BuildTarget]
       - m_Id: d927fc81d942ab8409fd9b25adfbc137
-        m_Value: https://s3.ap-northeast-2.amazonaws.com/hadas.test/[BuildTarget]
+        m_Value: http://localhost/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 9dc5875c765b3734aa08146b07b76d60
       m_Name: BuildTarget

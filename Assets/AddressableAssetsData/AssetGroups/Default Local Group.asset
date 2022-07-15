@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 7bf7f5729dc605840ac1c48981bd9c9b
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: d1469fb3fd6cfb84e9fcaad9c9adcfdb
+    m_Address: Prefabs/Appoint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Monster
+  - m_GUID: ac63b7585ae01764297ce3f72b06fba7
+    m_Address: Prefabs/ShootingTempPre
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Monster
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
