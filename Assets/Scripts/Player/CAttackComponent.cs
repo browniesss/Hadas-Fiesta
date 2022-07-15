@@ -83,6 +83,10 @@ public class CAttackComponent : BaseComponent
 
     public SkillInfo[] skillinfos;
 
+    public GameObject effectobj;
+
+    public Transform preparent;
+
     public float lastAttackTime = 0;
 
     public delegate void Invoker();
@@ -131,8 +135,10 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking)
             return;
 
+        if (curval.IsAttacking == false)
+            curval.IsAttacking = true;
 
-        StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
+        //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
 
@@ -201,13 +207,17 @@ public class CAttackComponent : BaseComponent
     //공격 이펙트를 생성
     public void CreateEffect()
     {
-        GameObject copyobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
-        copyobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
-        copyobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
+        effectobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
+        effectobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
+        effectobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
+
+        preparent = effectobj.transform.parent;
+        effectobj.transform.parent = attackinfos[AttackNum].EffectPosRot;
         //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
 
 
-        Destroy(copyobj, 1.5f);
+        Destroy(effectobj, 1.5f);
+        //effectobj = null;
     }
 
 
@@ -217,7 +227,10 @@ public class CAttackComponent : BaseComponent
     {
         //Debug.Log($"공격 끝 들어옴 -> {s_val}");
 
-
+        if(effectobj!=null)
+        {
+            effectobj.transform.parent = preparent;
+        }
 
         if (curval.IsAttacking == true)
             curval.IsAttacking = false;

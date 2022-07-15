@@ -5974,6 +5974,9 @@ MonoBehaviour:
     back: 115
     Rolling: 32
     Run: 304
+    skill01: 49
+    skill02: 50
+    skill03: 51
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}
@@ -6077,9 +6080,7 @@ MonoBehaviour:
     curHorVelocity: {x: 0, y: 0, z: 0}
     curVirVelocity: {x: 0, y: 0, z: 0}
     moveAccel: 0
-  LinkAttackInterval: 0
   LastAttackTime: 0
-  Linkable: 0
   AttackNum: 0
   movecom: {fileID: 0}
   animator: {fileID: 0}
@@ -6118,6 +6119,19 @@ MonoBehaviour:
     EffectPosRot: {fileID: 942469596}
     movedis: 5
     movetime: 0.3
+  skillinfos:
+  - SkillName: Skill01
+    SkillNum: 0
+    aniclip: {fileID: 7400000, guid: a76d7c4bcbef6914d9ef750535f17a37, type: 2}
+    animationPlaySpeed: 1.8
+    MovementDelay: 0
+    NextMovementTimeVal: 0
+    damage: 0
+    Effect: {fileID: 0}
+    EffectStartTime: 0
+    EffectPosRot: {fileID: 0}
+    Movedis: 0
+    MoveTime: 0
   lastAttackTime: 0
 --- !u!114 &1380178433
 MonoBehaviour:
