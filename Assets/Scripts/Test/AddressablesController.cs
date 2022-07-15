@@ -9,7 +9,9 @@ public class AddressablesController : MonoBehaviour
 	private string _label;
 	bool flag = true;
 	[SerializeField]
-	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
+//	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
+	private List<GameObject> _createdObjs = new List<GameObject>();
+
 
 	private void Start()
 	{
@@ -86,10 +88,12 @@ public class AddressablesController : MonoBehaviour
 
 	public void tempdes()
 	{
-		foreach (var obj in _createdObjs)
-		{
-			Destroy_Obj(obj);
-		}
+		//foreach (var obj in _createdObjs)
+		//{
+		//	Destroy_Obj(obj);
+		//}
+
+		Destroy_Obj(_createdObjs[0]); 
 
 	}
 

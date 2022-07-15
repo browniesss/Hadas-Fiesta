@@ -4,6 +4,44 @@ using UnityEngine;
 
 public class GameMG : Singleton<GameMG>
 {
+    public float PlayTime;  //플레이 시간 저장
+    private float time_start;
+    private float time_current;
+    private float time_Max = 5f;
+    private bool isEnded;
+
+    //플레이 시간
+    private void Check_Timer()
+    {
+        time_current = Time.time - time_start;
+        if (time_current < time_Max)
+        {
+           // text_Timer.text = $"{time_current:N2}";
+            Debug.Log(time_current);
+        }
+        else if (!isEnded)
+        {
+            End_Timer();
+        }
+    }
+
+    private void End_Timer()
+    {
+        Debug.Log("End");
+        time_current = time_Max;
+       // text_Timer.text = $"{time_current:N2}";
+        isEnded = true;
+    }
+
+
+    private void Reset_Timer()
+    {
+        time_start = Time.time;
+        time_current = 0;
+      //  text_Timer.text = $"{time_current:N2}";
+        isEnded = false;
+        Debug.Log("Start");
+    }
 
     void startGame()
     {
@@ -26,10 +64,23 @@ public class GameMG : Singleton<GameMG>
     //스탯 클래스 
     //스킬 데이터 계산
 
+    public void Damage_calculator()
+    {
+        //데미지= (가해)공격력 - (피해)방어력 
+    }
+
+    void Update()
+    {
+        if (isEnded)
+            return;
+
+        Check_Timer();
+    }
+
 
     void Start()
     {
-        
+        Reset_Timer();
     }
 
 }
