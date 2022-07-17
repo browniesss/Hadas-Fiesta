@@ -11,7 +11,7 @@ public class AddressablesController : MonoBehaviour
 	[SerializeField]
 //	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
 	private List<GameObject> _createdObjs = new List<GameObject>();
-
+	GameObject tempob;
 
 	private void Start()
 	{
@@ -76,27 +76,101 @@ public class AddressablesController : MonoBehaviour
 		
 	}
 
-    void add()
+	//내가 올린거에서 prefabsName 일치하는 프리팹 생성 반환.
+	public GameObject AddClone(string prefabsName)
+	{
+		GameObject tempGameobj = null;
+
+		foreach (var obj in AddressablesLoader.tempobj)
+		{
+			if (obj.name == prefabsName)
+			{
+				tempGameobj = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+				flag = false;
+				break;
+			}
+		}
+		return tempGameobj;
+	}
+
+
+	//이름으로 썼으면 addAsset해주기
+	public async void LoadResource(string name)
+	{
+		await AddressablesLoader.InitAssets_name(name);
+	}
+
+	public async void LoadResource(string name, string prefab)
+	{
+		await AddressablesLoader.InitAssets_name(name);
+		tempob = AddClone(prefab);
+	}
+
+
+	//개수 리스트로 받아가기?  보류? ->풀링 하고나서ㄱㄱ
+	//public GameObject AddClone<T>(string prefabsName,List<GameObject> saveCloneList)
+	//{
+	//	GameObject tempGameobj = null;
+
+	//	foreach (var obj in AddressablesLoader.tempobj)
+	//	{
+	//		if (obj.name == prefabsName)
+	//		{
+	//			saveCloneList.Add(Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity));
+	//			flag = false;
+	//			break;
+	//		}
+	//	}
+	//	return tempGameobj;
+	//}
+
+
+	//네임으로 생성할 때 예시...?
+	void add()
+	{
+
+		foreach (var obj in AddressablesLoader.tempobj)
+		{
+			tempob = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+			flag = false;
+		}
+		//AddressablesLoader.tempobj.Clear();
+	}
+
+
+	//리스트로 삭제 할 때 예시..?
+	public void tempdes()
 	{
 		foreach (var obj in AddressablesLoader.tempobj)
 		{
-			Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+			GameObject tem = obj;
+			Destroy_Obj(ref tem, tempob);
+			break;
 		}
-		AddressablesLoader.tempobj.Clear();
-		flag = false;
 	}
 
-	public void tempdes()
+
+	public void Destroy_Obj(ref GameObject deleteMemory, GameObject deleteobj)  //메모리 해제 할 오브젝트,삭제할 오브젝트.
 	{
-		//foreach (var obj in _createdObjs)
-		//{
-		//	Destroy_Obj(obj);
-		//}
-
-		Destroy_Obj(_createdObjs[0]); 
-
+		if (!Addressables.ReleaseInstance(deleteMemory))
+		{
+			Destroy(deleteobj);
+			Addressables.ReleaseInstance(deleteMemory);
+			AddressablesLoader.tempobj.Remove(deleteMemory);
+			Debug.Log("객체 메모리 삭제");
+		}
 	}
 
+	//주의점 -> 메모리 해제 하시기 전에 메모리를 사용하는 오브젝트들을 전부 destroy 하고 함수 호출해주세요!
+	public void Destroy_Obj(ref GameObject deleteMemory)  //메모리 해제 할 오브젝트.
+	{
+		if (!Addressables.ReleaseInstance(deleteMemory))
+		{
+			Addressables.ReleaseInstance(deleteMemory);
+			AddressablesLoader.tempobj.Remove(deleteMemory);
+			Debug.Log("메모리 삭제");
+		}
+	}
 
 	public void Destroy_Obj(GameObject obj)  //삭제할 오브젝트
 	{

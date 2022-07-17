@@ -42,6 +42,20 @@ public static class AddressablesLoader
 		//createdObjs.Add(operationHandle.Result as T);
 
 	}
+	//이름으로 생성
+	//리스트 필요없이 메모리 할당만 할 때
+	//Addressables.ReleaseInstance();
+	public static async Task InitAssets_name(string object_name)
+	{
+		//AsyncOperationHandle<GameObject> operationHandle=
+		// Addressables.LoadAssetAsync<GameObject>(object_name);
+
+		Addressables.LoadAssetAsync<GameObject>(object_name).Completed += ObjectLoadDone;
+
+		// yield return operationHandle;
+
+		//createdObjs.Add(operationHandle.Result as T
+	}
 
 	private static void ObjectLoadDone(AsyncOperationHandle<GameObject> obj)
 	{
