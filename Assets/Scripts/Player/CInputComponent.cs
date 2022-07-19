@@ -71,7 +71,6 @@ public class CInputComponent : BaseComponent
 
         if (state == CharacterStateMachine.eCharacterState.Attack||
             state == CharacterStateMachine.eCharacterState.Rolling||
-             
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
             //movecom.curval.IsMoving = false;

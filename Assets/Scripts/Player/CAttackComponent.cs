@@ -225,10 +225,11 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다
     public void AttackEnd(string s_val)
     {
-        //Debug.Log($"공격 끝 들어옴 -> {s_val}");
+        
 
         if(effectobj!=null)
         {
+            Debug.Log($"공격 끝 들어옴 -> {s_val}");
             effectobj.transform.parent = preparent;
         }
 

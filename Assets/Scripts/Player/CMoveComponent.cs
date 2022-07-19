@@ -177,7 +177,6 @@ public class CMoveComponent : BaseComponent
 
         WorldMove *= (curval.IsRunning) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
 
-
         if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock)
         {
             WorldMove.x = 0;
@@ -219,51 +218,51 @@ public class CMoveComponent : BaseComponent
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
 
-        if (curval.IsMoving)
-        {
-            if (curval.IsRunning)
-            {
-                //com.animator.SetPlaySpeed(1f);
-                //com.animator.Play("_Dash");
+        //if (curval.IsMoving)
+        //{
+        //    if (curval.IsRunning)
+        //    {
+        //        //com.animator.SetPlaySpeed(1f);
+        //        //com.animator.Play("_Dash");
 
-            }
-            else
-            {
-                //com.animator.SetPlaySpeed( 1f);
-                //com.animator.Play("_Walk");
-            }
-        }
-        else
-        {
-            if (curval.IsRolling)
-            {
-                //com.animator.SetPlaySpeed(1.8f);
-                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
-                //com.animator.Play("_Rolling", 2.3f);
-            }
-            else if (curval.IsAttacking)
-            {
-                //int num  = GetComponent<CAttackComponent>().AttackNum;
-                ////com.animator.SetPlaySpeed(1.0f);
-                //com.animator.Play(string.Format("_Attack0{0}", num));
-            }
-            else if (curval.IsGuard)
-            {
-                //int num  = GetComponent<CAttackComponent>().AttackNum;
-                ////com.animator.SetPlaySpeed(1.0f);
-                //com.animator.Play(string.Format("_Attack0{0}", num));
-                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
-                //com.animator.Play("_Guard", 2.0f);
-            }
-            else
-            {
-                //com.animator.SetPlaySpeed(1f);
-                //com.animator.Play("_Idle");
-                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
-            }
+        //    }
+        //    else
+        //    {
+        //        //com.animator.SetPlaySpeed( 1f);
+        //        //com.animator.Play("_Walk");
+        //    }
+        //}
+        //else
+        //{
+        //    if (curval.IsRolling)
+        //    {
+        //        //com.animator.SetPlaySpeed(1.8f);
+        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
+        //        //com.animator.Play("_Rolling", 2.3f);
+        //    }
+        //    else if (curval.IsAttacking)
+        //    {
+        //        //int num  = GetComponent<CAttackComponent>().AttackNum;
+        //        ////com.animator.SetPlaySpeed(1.0f);
+        //        //com.animator.Play(string.Format("_Attack0{0}", num));
+        //    }
+        //    else if (curval.IsGuard)
+        //    {
+        //        //int num  = GetComponent<CAttackComponent>().AttackNum;
+        //        ////com.animator.SetPlaySpeed(1.0f);
+        //        //com.animator.Play(string.Format("_Attack0{0}", num));
+        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
+        //        //com.animator.Play("_Guard", 2.0f);
+        //    }
+        //    else
+        //    {
+        //        //com.animator.SetPlaySpeed(1f);
+        //        //com.animator.Play("_Idle");
+        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+        //    }
 
 
-        }
+        //}
 
 
     }

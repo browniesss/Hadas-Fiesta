@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //애니메이션 이벤트들을 관리
+//애니메이션 이벤트에 해당 함수들 OnBeginEventString, OnMidEventString, OnEndEventString 을 등록해주고
+//각 이벤트들의 대리자에 실행하고자 하는 함수를 AddEvent(beginCallback begin, midCallback mid, endCallback end) 함수를 이용해 연결시켜주면 이벤트가 실행되면 해당 함수가 실행됨
+
 public class AnimationEventSystem : MonoBehaviour
 {
 	AnimationController animator;
@@ -30,18 +33,6 @@ public class AnimationEventSystem : MonoBehaviour
 	private void Awake()
     {
 
-		//for(int i=0;i<clips.Length;i++)
-  //      {
-		//	eventdic.Add(clips[i].name, clips[i].events);
-		//	eventlist.Add(clips[i].events);
-		//}
-
-  //      AnimationEvent myevent;
-		//AnimationEventEffects effects;
-		//effects.
-		//myevent.
-		//AnimationClip clip;
-		//clip.events
     }
 
     private void Start()
@@ -78,51 +69,8 @@ public class AnimationEventSystem : MonoBehaviour
 
 	public void OnEndEventString(string s_val)
 	{
-
-		//Debug.Log("Animaton End Event");
 		_endCallback?.Invoke(s_val);
 	}
 
-	//public void OnBeginEventFloat(float s_val)
-	//{
-	//	//if (null != _beginCallback)
-	//	//	_beginCallback();
-
-	//	//_beginCallback?.Invoke(s_val);
-
-	//}
-
-	//public void OnMidEventFloat(float s_val)
-	//{
-	//	//_midCallback?.Invoke(s_val);
-	//}
-
-	//public void OnEndEventFloat(float s_val)
-	//{
-
-	//	//Debug.Log("Animaton End Event");
-	//	//_endCallback?.Invoke(s_val);
-	//}
-
-	//public void OnBeginEventInt(int s_val)
-	//{
-	//	//if (null != _beginCallback)
-	//	//	_beginCallback();
-
-	//	//_beginCallback?.Invoke(s_val);
-
-	//}
-
-	//public void OnMidEventInt(int s_val)
-	//{
-	//	//_midCallback?.Invoke(s_val);
-	//}
-
-	//public void OnEndEventInt(int s_val)
-	//{
-
-	//	//Debug.Log("Animaton End Event");
-	//	//_endCallback?.Invoke(s_val);
-	//}
 }
 
