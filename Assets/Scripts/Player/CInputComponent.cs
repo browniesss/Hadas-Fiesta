@@ -52,7 +52,7 @@ public class CInputComponent : BaseComponent
     void KeyInput()
     {
         if (movecom == null)
-            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
         
 
@@ -191,7 +191,7 @@ public class CInputComponent : BaseComponent
     void LeftMouseDown()
     {
         if (attackcom == null)
-            attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         attackcom.Attack();
     }
 
@@ -199,21 +199,21 @@ public class CInputComponent : BaseComponent
     void RightMouseDown()
     {
         if (guardcom == null)
-            guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
         guardcom.Guard();
     }
 
     void RightMouseUp()
     {
         if (guardcom == null)
-            guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
         guardcom.GuardDown();
     }
     
     void SkillAttack(int num)
     {
         if (attackcom == null)
-            attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         attackcom.SkillAttack(num);
     }
 

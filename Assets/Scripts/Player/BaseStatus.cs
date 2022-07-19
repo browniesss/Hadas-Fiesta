@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //레벨이 변할때마다 캐릭터 스탯 정보들을 받아와서 초기화 해준다.
-public class BaseStatus:MonoBehaviour
+public class BaseStatus
 {
     [Header("=========================")]
     [Header("Status")]
@@ -29,6 +29,10 @@ public class BaseStatus:MonoBehaviour
     private float maxMP;
     [SerializeField]
     private float curMP;
+    [SerializeField]
+    private int curExp;
+    [SerializeField]
+    private int nextExp;
 
 
     [SerializeField]
@@ -62,19 +66,13 @@ public class BaseStatus:MonoBehaviour
     public float CurBalance { get => curBalance; set => curBalance = value; }
     public float MaxMP { get => maxMP; set => maxMP = value; }
     public float CurMP { get => curMP; set => curMP = value; }
+    public int CurExp { get => curExp; set => curExp = value; }
+    public int NextExp { get => nextExp; set => nextExp = value; }
 
-    private void Awake()
+    public void Init(DataLoad_Save DBController)
     {
+        this.DBController = DBController;
         CharacterDBInfo = ScriptableObject.CreateInstance<CharacterInformation>();
-
-
-
-    }
-
-    //db에서 캐릭터 데이터를 받아온다.
-    public virtual void Start()
-    {
         CurLevel = 1;
     }
-
 }

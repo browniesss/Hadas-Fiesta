@@ -61,6 +61,10 @@ public class CMoveComponent : BaseComponent
         public float RollingTime;
 
         public float RollingDontHitTime;
+
+        public float KnockDownTime;
+
+        public float KnockBackTime;
     }
 
     public Vector2 MouseMove = Vector2.zero;
@@ -81,6 +85,8 @@ public class CMoveComponent : BaseComponent
 
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
+
+    public delegate void Invoker();
 
     [Header("============TestVals============")]
 
@@ -103,7 +109,7 @@ public class CMoveComponent : BaseComponent
             TryGetComponent<CheckAround>(out checkaround);
         }
 
-        inputcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.InputCom) as CInputComponent;
+        inputcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.InputCom) as CInputComponent;
         //if (inputcom == null)
         //    Debug.Log("MoveCom 오류 inputcom = null");
 
@@ -268,6 +274,7 @@ public class CMoveComponent : BaseComponent
     }
 
 
+
     //모든 회전이 완료된 다음에 동작해야 한다.
     //x,z축의 움직임을 담당 y축의 움직임은 따로 관리
     public void HorVelocity()
@@ -325,8 +332,49 @@ public class CMoveComponent : BaseComponent
     }
 
 
+    public void KnockDown()
+    {
+        //이미 넉다운 중일때 해당 함수가 다시 들어오면 넉다운 끝
+        if(curval.IsKnockDown)
+        {
+            curval.IsKnockDown = false;
+            return;
+        }
+
+        //StartCoroutine(Cor_TimeCounter(moveoption.KnockDownTime, KnockDown));
+
+    }
+
+    public void KnockBack()
+    {
+        //이미 넉백 중 일때 해당 함수가 다시 들어오면 넉백 끝
+        if(curval.IsKnockBack)
+        {
+            curval.IsKnockBack = false;
+            return;
+        }
+
+
+
+    }
 
     
+
+    //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
+    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
+    {
+        float starttime = Time.time;
+
+        while (true)
+        {
+            if ((Time.time - starttime) >= time)
+            {
+                invoker.Invoke();
+                yield break;
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
 
     //구르기
     public void Rolling()

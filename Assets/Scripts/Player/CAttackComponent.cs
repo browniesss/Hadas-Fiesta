@@ -128,7 +128,7 @@ public class CAttackComponent : BaseComponent
 
         if (movecom == null)
         {
-            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
 
@@ -147,7 +147,7 @@ public class CAttackComponent : BaseComponent
     {
         if(movecom==null)
         {
-            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
 

@@ -8,7 +8,10 @@ public class CGuardComponent : BaseComponent
 
     [Header("============Guard Options============")]
     public float GuardTime;//최대로 가드를 할 수 있는 시간
+    public float GuardKnockBackTime;
     public int MaxGuardGauge;//
+
+
 
     [Header("============Cur Values============")]
     public int CurGuardGauge;
@@ -21,7 +24,7 @@ public class CGuardComponent : BaseComponent
     public void Guard()
     {
         if (movecom == null)
-            movecom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
         if (movecom.curval.IsGuard)
             return;
@@ -81,6 +84,11 @@ public class CGuardComponent : BaseComponent
         }
     }
 
+
+    public void GuardKnockBack()
+    {
+
+    }
 
     public override void InitComtype()
     {

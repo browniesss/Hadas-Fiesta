@@ -32,11 +32,16 @@ public class CurState
     private bool isAttacking = false;
     [SerializeField]
     private bool isGuard = false;
+    [SerializeField]
+    private bool isKnockBack = false;
+    [SerializeField]
+    private bool isKnockDown = false;
+
 
     //[SerializeField]
     //private bool isAttacked = false;
-    [SerializeField]
-    private bool isOutofControl = false;
+    //[SerializeField]
+    //private bool isOutofControl = false;
     [SerializeField]
     private bool isRolling = false;
     [SerializeField]
@@ -128,16 +133,16 @@ public class CurState
         set => isOnTheSlop = value; 
     }
     //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
-    public bool IsOutofControl { 
-        get
-        {
-            return isOutofControl;
-        }
-        set
-        {
-            isOutofControl = value;
-        }
-    }
+    //public bool IsOutofControl { 
+    //    get
+    //    {
+    //        return isOutofControl;
+    //    }
+    //    set
+    //    {
+    //        isOutofControl = value;
+    //    }
+    //}
     public bool IsRolling { 
         get
         {
@@ -233,6 +238,45 @@ public class CurState
             }
                 
 
+        }
+    }
+
+    public bool IsKnockBack { 
+        get
+        {
+            return isKnockBack;
+        }
+        set
+        {
+            isKnockBack = value;
+
+            if (isKnockBack)
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+            }
+            else
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+            }
+        }
+    }
+    public bool IsKnockDown {
+        get
+        {
+            return IsKnockDown;
+        }
+        set
+        {
+            IsKnockDown = value;
+
+            if (IsKnockDown)
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+            }
+            else
+            {
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+            }
         }
     }
 }

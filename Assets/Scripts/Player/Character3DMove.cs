@@ -537,7 +537,7 @@ public class Character3DMove: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        com.animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        com.animator = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
     }
 
     // Update is called once per frame
