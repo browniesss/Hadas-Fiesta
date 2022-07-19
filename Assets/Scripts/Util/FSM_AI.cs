@@ -78,7 +78,7 @@ public class FSM_AI
                 now_State = State.Wait;
                 break;
             case State.Return:
-                if ((Vector3.Distance(battle_Character.transform.position, battle_Character.destination_Pos) <= 0.5f)) // 사정 거리 내에 있다면 
+                if ((Vector3.Distance(battle_Character.transform.position, battle_Character.return_Pos) <= 0.5f)) // 사정 거리 내에 있다면 
                 {
                     now_State = State.Init;
                 }

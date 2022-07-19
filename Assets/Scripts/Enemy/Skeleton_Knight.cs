@@ -7,6 +7,9 @@ public class Skeleton_Knight : Battle_Character
     [SerializeField]
     private GameObject spawn_Skeleton_Prefab; // 소환할 스켈레톤 몬스터 프리팹
 
+    [SerializeField]
+    private bool isPassive = false; // 패시브 스킬 ( 스킬 3번 ) 이 발동되었는지 체크할 bool 변수
+
     // 방패를 들고 이동하고 방패를 들어올린 쪽에서 입는 데미지는 감소하기 때문에 콜라이더를 하나 더 만들어줘야함.
     void Start()
     {
@@ -58,6 +61,12 @@ public class Skeleton_Knight : Battle_Character
         base.Damaged(damage_Amount);
 
         Debug.Log("나데미지");
+
+        if (Cur_HP <= (Max_HP / 2) && !isPassive)
+        {
+            isPassive = true;
+            Skill_3();
+        }
     }
 
 }

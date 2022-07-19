@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // 스테이트 처리기 함수
 public abstract class State_Handler : MonoBehaviour
@@ -10,11 +11,20 @@ public abstract class State_Handler : MonoBehaviour
     [SerializeField]
     protected Battle_Character battle_Character;
 
+    [SerializeField]
+    protected NavMeshAgent navMesh;
+
+    [SerializeField]
+    protected Animator anim;
+
     public abstract void State_Handler_Update();
 
     public void State_Handler_Initialize(Battle_Character b_c) // 스테이트 처리기 초기화 함수
     {
         battle_Character = b_c;
+
+        navMesh = battle_Character.GetComponent<NavMeshAgent>();
+        anim = battle_Character.GetComponent<Animator>();
 
         StartCoroutine(Mana_Regen());
     }
@@ -45,18 +55,21 @@ public abstract class State_Handler : MonoBehaviour
         battle_Character.patrol_Start = false;
     }
 
-    protected void Destination_Move(Vector3 in_destination_Pos)
+    protected bool Destination_Move(Vector3 in_destination_Pos)
     {
-        battle_Character.transform.position = Vector3.MoveTowards(battle_Character.transform.position,
-                                                                 in_destination_Pos,
-                                                                 Time.deltaTime * 5f);
+        navMesh.SetDestination(in_destination_Pos);
 
-        if (Vector3.Distance(battle_Character.transform.position, in_destination_Pos) <= 0.5f)
+        Vector3 charPos = new Vector3(battle_Character.transform.position.x, 0, battle_Character.transform.position.z);
+        Vector3 desPos = new Vector3(in_destination_Pos.x, 0, in_destination_Pos.z);
+
+        if (Vector3.Distance(charPos, desPos) <= 0.5f)
         {
+            navMesh.velocity = Vector3.zero;
             //if (cur_State == 4)
             //    anim.SetBool("isReturn", false);
             //else
             //  anim.SetBool("isWalk", false);
+            return true;
         }
         else
         {
@@ -65,7 +78,8 @@ public abstract class State_Handler : MonoBehaviour
             //else
             //    anim.SetBool("isWalk", true);
 
-            battle_Character.transform.LookAt(in_destination_Pos);
+            //battle_Character.transform.LookAt(in_destination_Pos);
+            return false;
         }
     }
 
