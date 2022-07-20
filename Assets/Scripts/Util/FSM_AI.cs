@@ -21,6 +21,11 @@ public enum State // 스테이트
     Wait,
 }
 
+/*
+ 다음 스킬을 어떤 패턴, 어떤 방식으로 굴러가야 하는지 검사하는것도 해줘야함.
+어떤 패턴뒤에는 어떤 패턴이 안나오고 이런식이 있을 수 있기 때문에
+ */
+
 [System.Serializable]
 public class FSM_AI
 {

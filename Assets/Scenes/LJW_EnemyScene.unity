@@ -708,6 +708,7 @@ MonoBehaviour:
   drop_Reward: 0
   patrol_Start: 0
   mon_attack_Power: 0
+  mon_find_Range: 0
   cur_Target: {fileID: 0}
   Attack_Range: 0
   need_Mana: 0
@@ -943,6 +944,7 @@ MonoBehaviour:
   drop_Reward: 0
   patrol_Start: 0
   mon_attack_Power: 0
+  mon_find_Range: 5
   cur_Target: {fileID: 0}
   Attack_Range: 0
   need_Mana: 0

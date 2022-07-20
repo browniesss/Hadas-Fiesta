@@ -69,4 +69,26 @@ public class Skeleton_Knight : Battle_Character
         }
     }
 
+    public override void Attack_Process()
+    {
+        if (Player_Mana >= need_Mana)
+        {
+            switch (next_Skill)
+            {
+                case 1: // 1번 스킬
+                    Skill_1();
+                    break;
+                case 2: // 2번 스킬
+                    Skill_2();
+                    break;
+                    // 스킬에 따라 진행
+            }
+            //Enemy_Skill_Rand(); // 다음 스킬 찾기
+        }
+        else // 기본 공격
+        {
+            // 기본 공격 코드
+            //anim.SetBool("isAttack", true);
+        }
+    }
 }

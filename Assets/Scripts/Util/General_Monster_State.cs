@@ -78,25 +78,7 @@ public class General_Monster_State : State_Handler
 
     protected override void Attack_Process()
     {
-        if (battle_Character.Player_Mana >= battle_Character.need_Mana)
-        {
-            switch (battle_Character.next_Skill)
-            {
-                case 1: // 1번 스킬
-                    battle_Character.Skill_1();
-                    break;
-                case 2: // 2번 스킬
-                    battle_Character.Skill_2();
-                    break;
-                    // 스킬에 따라 진행
-            }
-            Enemy_Skill_Rand();
-        }
-        else // 기본 공격
-        {
-            // 기본 공격 코드
-            //anim.SetBool("isAttack", true);
-        }
+        battle_Character.Attack_Process();
     }
 
     protected override void Die_Process()

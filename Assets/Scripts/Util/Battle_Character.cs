@@ -117,4 +117,9 @@ public class Battle_Character : MonoBehaviour
     {
 
     }
+
+    public virtual void Attack_Process()
+    {
+
+    }
 }

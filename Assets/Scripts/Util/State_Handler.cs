@@ -11,8 +11,7 @@ public abstract class State_Handler : MonoBehaviour
     [SerializeField]
     protected Battle_Character battle_Character;
 
-    [SerializeField]
-    protected NavMeshAgent navMesh;
+    public NavMeshAgent navMesh;
 
     [SerializeField]
     protected Animator anim;
