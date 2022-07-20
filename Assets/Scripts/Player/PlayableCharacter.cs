@@ -62,15 +62,14 @@ public class PlayableCharacter : MonoBehaviour
     }
 
 
-
     /*플레이어 캐릭터 상호작용 메소드*/
 
     /*플에이어가 공격을 받았을때
       현재 플레이어의 상태에 따라서 넉백, 가드넉백, 회피 등등의 동작을 결정한다.*/
-    public void Damaged(float damage)
+    public void BeAttacked(float damage)
     {
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
-        CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        
 
         //1. 무조건 공격이 성공하는 상태(Idle, Move, Attack, OutOfControl)
         if (state == CharacterStateMachine.eCharacterState.Idle ||
@@ -78,29 +77,45 @@ public class PlayableCharacter : MonoBehaviour
             state == CharacterStateMachine.eCharacterState.Attack ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
-            //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
-            float finaldamage = damage - status.Defense;
-            status.CurHP -= finaldamage;
-            if (finaldamage >= 80)
-            {
-                movecom.KnockDown();
-            }
-            else
-            {
-                movecom.KnockBack();
-            }
+            Damaged(damage);
         }
 
-        //2. 가드중
+        //2. 가드중 
+        //밸런스게이지가 충분이 남아 있으면 가드에 성공하고 밸런스 게이지를 감소 시킨다.
+        //밸런스 게이지가 충분히 남아 있지 않으면 가드에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Guard)
         {
+            CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CGuardComponent;
 
+            guardcom.Damaged_Guard(damage);
         }
 
         //3. 회피중
+        //캐릭터가 회피중이고 무적시간일때는 공격 회피에 성공하고
+        //캐릭터가 회피중이지만 무적시간이 아닐때는 회피에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Rolling)
         {
+            CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
+            movecom.Damaged_Rolling(damage);
+        }
+
+    }
+
+    
+    public void Damaged(float damage)
+    {
+        CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
+        float finaldamage = damage - status.Defense;
+        status.CurHP -= finaldamage;
+        if (finaldamage >= 80)
+        {
+            movecom.KnockDown();
+        }
+        else
+        {
+            movecom.KnockBack();
         }
     }
 

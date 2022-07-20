@@ -15,7 +15,7 @@ public class AnimationController : MonoBehaviour
     public int m_clipsnum;
     public AnimationClip[] m_clips;
     public string currentplayclipname;
-
+    public float prespeed;
     public delegate void Invoker();
 
     
@@ -54,6 +54,7 @@ public class AnimationController : MonoBehaviour
         SetPlaySpeed(PlaySpeed);
 
         currentplayclipname = pname;
+
         animator.CrossFade(pname, blendingtime);
     }
 
@@ -114,16 +115,22 @@ public class AnimationController : MonoBehaviour
     }
 
     //재생 일시정지
-    public void Pause(float pausetime)
+    public void Pause()
     {
+        prespeed = animator.speed;
         animator.speed = 0;
         //animator.CrossFade()
     }
 
     //다시 재생
-    public void resume()
+    public void Resume()
     {
-        animator.speed = 1.0f;
+        if(prespeed!=0)
+            animator.speed = prespeed;
+        else
+            animator.speed = 1.0f;
+
+        prespeed = 0;
     }
 
     

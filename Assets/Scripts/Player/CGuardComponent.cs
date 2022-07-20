@@ -10,7 +10,7 @@ public class CGuardComponent : BaseComponent
     public float GuardTime;//최대로 가드를 할 수 있는 시간
     public float GuardKnockBackTime;
     public int MaxGuardGauge;//
-
+    public int BalanceDecreaseVal;
 
 
     [Header("============Cur Values============")]
@@ -85,6 +85,22 @@ public class CGuardComponent : BaseComponent
     }
 
 
+    //가드중일때 데미지가 들어왔을때는 이쪽으로 들어온다.
+    public void Damaged_Guard(float damage)
+    {
+        if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
+        {
+            PlayableCharacter.Instance.status.CurBalance -= BalanceDecreaseVal;
+            GuardKnockBack();
+        }
+        else
+        {
+            PlayableCharacter.Instance.Damaged(damage);
+        }
+    }
+
+
+    //가드넉백상태는 outofcontrol 상태로 넘어가지 않고 가드중인 상태인 것으로 한다.
     public void GuardKnockBack()
     {
 

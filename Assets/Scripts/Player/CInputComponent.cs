@@ -246,6 +246,18 @@ public class CInputComponent : BaseComponent
         //    //movecom.curval.IsGuard = false;
         //}
 
+        //넉백 테스트
+        if(Input.GetKey(KeyCode.U))
+        {
+            movecom.KnockBack();
+        }
+
+        //넉다운 테스트
+        if (Input.GetKey(KeyCode.I))
+        {
+            movecom.KnockDown();
+        }
+
         //키 입력
         KeyInput();
     }

@@ -99,7 +99,20 @@ public class CAttackComponent : BaseComponent
         
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        eventsystem.AddEvent(null, AttackMove, AttackEnd);
+
+        for(int i=0;i<attackinfos.Length;i++)
+        {
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null), 
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(attackinfos[i].aniclip.name,AttackMove), 
+                new KeyValuePair<string, AnimationEventSystem.endCallback > (attackinfos[i].aniclip.name, AttackEnd));
+        }
+        for(int i=0;i<skillinfos.Length;i++)
+        {
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
+                new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
+        }
+        //eventsystem.AddEvent(null, new KeyValuePair<string, AnimationEventSystem.midCallback>() AttackMove, AttackEnd);
 
 
     }
