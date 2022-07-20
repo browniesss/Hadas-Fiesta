@@ -44,7 +44,7 @@ public class FSM_AI
                 now_State = State.Patrol;
                 break;
             case State.Patrol:
-                Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, 10f);
+                Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, battle_Character.mon_find_Range);
                 //, 1 << 8); // 비트 연산자로 8번째 레이어
 
                 if (cols.Length > 0)

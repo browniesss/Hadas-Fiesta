@@ -52,6 +52,7 @@ public class Battle_Character : MonoBehaviour
     public int drop_Reward; // 몬스터의 보상
     public bool patrol_Start = false; // 탐색 시작
     public float mon_attack_Power; // 몬스터 공격력
+    public float mon_find_Range; // 탐지범위
 
     [Header("Etc Stats")]
     public GameObject cur_Target;
@@ -83,7 +84,10 @@ public class Battle_Character : MonoBehaviour
         destination_Pos = transform.position;
 
         // 여기서 switch 로 종류에 따라 스테이트 처리기 분리
-        state_handler = gameObject.AddComponent<General_Monster_State>();
+        if (Character_Name == "Slime")
+            state_handler = gameObject.AddComponent<Slime_State_Handler>();
+        else
+            state_handler = gameObject.AddComponent<General_Monster_State>();
 
         state_handler.State_Handler_Initialize(this);
         //anim = GetComponent<Animator>();

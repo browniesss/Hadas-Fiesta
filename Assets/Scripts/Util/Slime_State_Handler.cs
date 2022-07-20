@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class General_Monster_State : State_Handler
+public class Slime_State_Handler : State_Handler
 {
     public override void State_Handler_Update()
     {
@@ -17,7 +17,7 @@ public class General_Monster_State : State_Handler
             case State.Trace:
                 Trace_Process();
                 break;
-            case State.Attack:
+            case State.Attack: // 슬라임은 붙어있는 상태
                 Attack_Process();
                 break;
             case State.Return:
@@ -36,6 +36,9 @@ public class General_Monster_State : State_Handler
 
     protected override void Patrol_Process()
     {
+        if (battle_Character.GetComponent<Slime>().OnTree)
+            return;
+
         Vector3 charPos = new Vector3(battle_Character.transform.position.x, 0, battle_Character.transform.position.z);
         Vector3 desPos = new Vector3(battle_Character.destination_Pos.x, 0, battle_Character.destination_Pos.z);
 
@@ -64,11 +67,18 @@ public class General_Monster_State : State_Handler
 
     protected override void Trace_Process()
     {
-        Destination_Move(battle_Character.cur_Target.transform.position);
+        if (battle_Character.GetComponent<Slime>().OnTree)
+        {
+            Vector3 dirVec = battle_Character.cur_Target.transform.position - battle_Character.transform.position;
+            battle_Character.GetComponent<Rigidbody>().AddForce(dirVec * 10f * Time.deltaTime, ForceMode.Impulse);
+
+            battle_Character.GetComponent<Slime>().OnTree = false;
+        }
+        else
+            Destination_Move(battle_Character.cur_Target.transform.position);
 
         //anim.SetBool("isWalk", true);
     }
-
     protected override void Return_Process()
     {
         Destination_Move(battle_Character.return_Pos);
@@ -84,9 +94,6 @@ public class General_Monster_State : State_Handler
             {
                 case 1: // 1번 스킬
                     battle_Character.Skill_1();
-                    break;
-                case 2: // 2번 스킬
-                    battle_Character.Skill_2();
                     break;
                     // 스킬에 따라 진행
             }
