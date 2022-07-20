@@ -14,7 +14,7 @@ public class MonsterInformation : ScriptableObject
     public string P_mon_Index { get { return mon_Index; } }
     [SerializeField]
     private string mon_nameKor;
-    public string P_mon_nameKor { get { return mon_nameKor; } }
+    public string P_mon_nameKor { get { return mon_nameKor; } set { mon_nameKor = value; } }
     [SerializeField]
     private int mon_Default; //enum
     public int P_mon_Default { get { return mon_Default; } }

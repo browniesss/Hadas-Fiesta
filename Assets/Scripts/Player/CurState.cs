@@ -263,13 +263,13 @@ public class CurState
     public bool IsKnockDown {
         get
         {
-            return IsKnockDown;
+            return isKnockDown;
         }
         set
         {
-            IsKnockDown = value;
+            isKnockDown = value;
 
-            if (IsKnockDown)
+            if (isKnockDown)
             {
                 CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
             }

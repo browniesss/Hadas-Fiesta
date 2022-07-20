@@ -69873,14 +69873,21 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: OnBeginEventString
-    data: 
+    data: _Damaged
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.26666668
+    functionName: OnMidEventString
+    data: _Damaged
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6
     functionName: OnEndEventString
-    data: 
+    data: _Damaged
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

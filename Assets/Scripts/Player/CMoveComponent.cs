@@ -33,6 +33,7 @@ public class CMoveComponent : BaseComponent
     [System.Serializable]
     public class MoveOption
     {
+        [Header("==================이동 관련 변수들==================")]
         [SerializeField]
         public float RotMouseSpeed = 10f;
         [SerializeField]
@@ -55,16 +56,29 @@ public class CMoveComponent : BaseComponent
         public float MaxSlop = 70;
         [SerializeField]
         public float SlopAccel;//(중력값과 같이 미끌어질때 점점증가될 값)
+        [Header("==================회피 관련 변수들==================")]
+        public AnimationClip RollingClip;
 
-        public float RollingDistance;
+        public float RollingClipPlaySpeed = 2.3f;
+
+        public float RollingDistance = 80;
 
         public float RollingTime;
 
-        public float RollingDontHitTime;
+        public float RollingFreeDamageTime;
+
+
+        [Header("==================피격 관련 변수들==================")]
+        public AnimationClip KnockDownClip;
+
+        public AnimationClip KnockBackClip;
 
         public float KnockDownTime;
 
         public float KnockBackTime;
+
+        //[Range(0.0f, RollingTime)]
+        
     }
 
     public Vector2 MouseMove = Vector2.zero;
@@ -83,10 +97,14 @@ public class CMoveComponent : BaseComponent
 
     public CInputComponent inputcom = null;
 
+    public float RollingStartTime;
+
+    public AnimationEventSystem eventsystem;
+
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
 
-    public delegate void Invoker();
+    public delegate void Invoker(string s_val);
 
     [Header("============TestVals============")]
 
@@ -109,6 +127,7 @@ public class CMoveComponent : BaseComponent
             TryGetComponent<CheckAround>(out checkaround);
         }
 
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
         inputcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.InputCom) as CInputComponent;
         //if (inputcom == null)
         //    Debug.Log("MoveCom 오류 inputcom = null");
@@ -126,8 +145,20 @@ public class CMoveComponent : BaseComponent
         //if (com.animator == null)
         //    Debug.Log("MoveCom 오류 com.animator = null");
 
+
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(moveoption.KnockDownClip.name, KnockDownPause),
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockDownClip.name, KnockDownEnd));
+
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBakcEnd));
+
+
         ChangePerspective();
         ShowCursor(false);
+
+
     }
 
 
@@ -147,6 +178,7 @@ public class CMoveComponent : BaseComponent
         StartCoroutine(CorDoMove(startpos, destpos, duration));
     }
 
+    //duration 시간동안 목표위치로 이동한다.
     public void FowardDoMove(float distnace, float duratoin)
     {
         Vector3 direction = com.FpRoot.forward * distnace;
@@ -224,53 +256,6 @@ public class CMoveComponent : BaseComponent
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
 
-        //if (curval.IsMoving)
-        //{
-        //    if (curval.IsRunning)
-        //    {
-        //        //com.animator.SetPlaySpeed(1f);
-        //        //com.animator.Play("_Dash");
-
-        //    }
-        //    else
-        //    {
-        //        //com.animator.SetPlaySpeed( 1f);
-        //        //com.animator.Play("_Walk");
-        //    }
-        //}
-        //else
-        //{
-        //    if (curval.IsRolling)
-        //    {
-        //        //com.animator.SetPlaySpeed(1.8f);
-        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
-        //        //com.animator.Play("_Rolling", 2.3f);
-        //    }
-        //    else if (curval.IsAttacking)
-        //    {
-        //        //int num  = GetComponent<CAttackComponent>().AttackNum;
-        //        ////com.animator.SetPlaySpeed(1.0f);
-        //        //com.animator.Play(string.Format("_Attack0{0}", num));
-        //    }
-        //    else if (curval.IsGuard)
-        //    {
-        //        //int num  = GetComponent<CAttackComponent>().AttackNum;
-        //        ////com.animator.SetPlaySpeed(1.0f);
-        //        //com.animator.Play(string.Format("_Attack0{0}", num));
-        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
-        //        //com.animator.Play("_Guard", 2.0f);
-        //    }
-        //    else
-        //    {
-        //        //com.animator.SetPlaySpeed(1f);
-        //        //com.animator.Play("_Idle");
-        //        //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
-        //    }
-
-
-        //}
-
-
     }
 
 
@@ -331,34 +316,68 @@ public class CMoveComponent : BaseComponent
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
+    
+
 
     public void KnockDown()
     {
-        //이미 넉다운 중일때 해당 함수가 다시 들어오면 넉다운 끝
+        //이미 넉다운 중일때 해당 함수가 다시 들어오면 그냥 리턴
         if(curval.IsKnockDown)
         {
-            curval.IsKnockDown = false;
+            //curval.IsKnockDown = false;
             return;
         }
 
-        //StartCoroutine(Cor_TimeCounter(moveoption.KnockDownTime, KnockDown));
+        curval.IsKnockDown = true;
+
+        com.animator.Play(moveoption.KnockDownClip.name);
+    }
+
+
+    public void KnockDownPause(string s_val)
+    {
+        
+        if (com.animator.GetPlaySpeed() != 0.0f)
+        {
+            Debug.Log("멈춤");
+            com.animator.Pause();
+            StartCoroutine(Cor_TimeCounter(moveoption.KnockBackTime, KnockDownPause));
+        }
+        else
+        {
+            Debug.Log("다시시작");
+            com.animator.Resume();
+        }
 
     }
+
+    public void KnockDownEnd(string s_val)
+    {
+        Debug.Log($"{s_val} 들어옴");
+        curval.IsKnockDown = false;
+    }
+
 
     public void KnockBack()
     {
-        //이미 넉백 중 일때 해당 함수가 다시 들어오면 넉백 끝
+
+        //이미 넉백 중 일때 해당 함수가 다시 들어오면 다시 넉백 실행
         if(curval.IsKnockBack)
         {
-            curval.IsKnockBack = false;
+            //curval.IsKnockBack = false;
             return;
         }
 
+        curval.IsKnockBack = true;
 
-
+        com.animator.Play(moveoption.KnockBackClip.name);
     }
 
-    
+    public void KnockBakcEnd(string s_val)
+    {
+        Debug.Log($"{s_val} 들어옴");
+        curval.IsKnockBack = false;
+    }
 
     //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
@@ -369,14 +388,28 @@ public class CMoveComponent : BaseComponent
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke();
+                invoker.Invoke("");
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 
+    public void Damaged_Rolling(float damage)
+    {
+        if(curval.IsRolling&&Time.time-RollingStartTime<=moveoption.RollingFreeDamageTime)
+        {
+            return;
+        }
+        else
+        {
+            PlayableCharacter.Instance.Damaged(damage);
+        }
+    }
+
+
     //구르기
+    //무적시간은 처음 구르기가 시작된 시점부터 카운트한다.
     public void Rolling()
     {
         //이미 구르고 있으면 구르지 못한다.
@@ -391,25 +424,28 @@ public class CMoveComponent : BaseComponent
         //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
 
-        com.animator.Play("_Rolling", 2.3f);
+        com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed);
+
+        //FowardDoMove(10, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed);
+
         StartCoroutine(Rolling_Coroutine(com.animator.GetClipLength("_Rolling")));
+
+        RollingStartTime = Time.time;
     }
 
     IEnumerator Rolling_Coroutine(float time)
     {
         float temptime = time;
-        //float speed = AnimationManager.Instance.GetPlaySpeed(com.animator);
-        //speed -= 1.0f;
-        //speed = Mathf.Abs(speed);
-       // Debug.Log($"{temptime}*={speed}");
-        temptime /= 2.3f;
-        
+        temptime /= moveoption.RollingClipPlaySpeed;
+
+
         int tempval = (int)(temptime / 0.016f);
         //Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
+
         int i = 0;
         Vector3 tempmove = Vector3.zero;
         tempmove = com.FpRoot.forward; 
-        tempmove *= 80;
+        tempmove *= moveoption.RollingDistance;
 
         Vector3 dest = this.transform.position + tempmove; 
 

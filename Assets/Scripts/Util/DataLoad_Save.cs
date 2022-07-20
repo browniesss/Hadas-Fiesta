@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataLoad_Save : MonoBehaviour
+public class DataLoad_Save : Singleton<DataLoad_Save>
 {
     [SerializeField]
     Dictionary<string, List<Information>> Dic_Data_Test = new Dictionary<string, List<Information>>();
