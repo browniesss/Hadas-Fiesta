@@ -2268,6 +2268,7 @@ GameObject:
   - component: {fileID: 1018337689}
   - component: {fileID: 1018337691}
   - component: {fileID: 1018337690}
+  - component: {fileID: 1018337692}
   m_Layer: 0
   m_Name: Object003
   m_TagString: Untagged
@@ -2339,6 +2340,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018337688}
   m_Mesh: {fileID: -3531946766418785785, guid: 305d94feb55d55945a0ec5b36faae68a, type: 3}
+--- !u!65 &1018337692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018337688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.52351916, y: 2.577088, z: 0.098494455}
+  m_Center: {x: -0.00000016182389, y: -0.9049856, z: -0.00000029012583}
 --- !u!1001 &1043932718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8166,8 +8180,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2144195991}
   - component: {fileID: 2144195992}
-  - component: {fileID: 2144195994}
   - component: {fileID: 2144195993}
+  - component: {fileID: 2144195994}
   m_Layer: 0
   m_Name: "\uB9AC\uAE45"
   m_TagString: Untagged
