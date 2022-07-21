@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c5bb2e34fb354eba179eaaa514119, type: 3}
+  m_Name: 1_PlayerAttack Data
+  m_EditorClassIdentifier: 
+  AttackNum: 0
+  animationPlaySpeed: 1
+  aniclip: {fileID: 7400000, guid: d1e750001102c4d44a993077e1cf25d2, type: 2}
+  MovementDelay: 0
+  NextMovementTimeVal: 0.5
+  damage: 0
+  EffectStartTime: 0.45
+  Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
+  EffectPosRot: {fileID: 6951158457944230512, guid: dedf70d4c324d8248b76c3c5c5d3e5b3, type: 3}
+  movedis: 3
+  movetime: 0.1
