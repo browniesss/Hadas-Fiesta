@@ -8,16 +8,27 @@ public class Slime : Battle_Character
 
     public bool OnTree = true; // 나무 위에 있는지
 
+    public bool isJump = false; // 점프 중인지 체크
+
     void Start()
     {
         Initalize();
         ai.AI_Initialize(this);
     }
 
+    Vector3 dirvec;
     void Update()
     {
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
+
+        if (cur_Target != null)
+        {
+            dirvec = cur_Target.transform.position - transform.position;
+            dirvec += new Vector3(0, 8, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+            GetComponent<Rigidbody>().AddForce(dirvec * 200f);
     }
 
     private void OnDrawGizmos()
@@ -29,6 +40,29 @@ public class Slime : Battle_Character
     public override void Skill_1() // 슬라임 1번 스킬 ( 흡수 ) 
     {
         Debug.Log("흡수 발동");
+
+        state_handler.navMesh.enabled = false;
+
+        Vector3 dirvec = cur_Target.transform.position - transform.position;
+        dirvec += new Vector3(0, 8, 0);
+
+        GetComponent<Rigidbody>().AddForce(dirvec * 500f);
+
+        ai.now_State = State.Next_Wait;
+
+        Player_Mana = 0;
+
+        StartCoroutine(Skill_Coroutine());
+    }
+
+    IEnumerator Skill_Coroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        state_handler.navMesh.enabled = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        ai.now_State = State.Patrol_Enter;
     }
 
     public override void Skill_2() // 분열 ( 죽으면 부활 )  

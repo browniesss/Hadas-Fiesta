@@ -100,7 +100,7 @@ public class Battle_Character : MonoBehaviour
 
         state_handler.State_Handler_Initialize(this);
 
-        attack_Collider = GetComponentInChildren<Enemy_Weapon>().gameObject;
+        attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
         //anim = GetComponent<Animator>();
     }
 

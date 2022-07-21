@@ -22,7 +22,7 @@ public abstract class State_Handler : MonoBehaviour
     {
         battle_Character = b_c;
 
-        navMesh = battle_Character.GetComponent<NavMeshAgent>();
+        navMesh = battle_Character?.GetComponent<NavMeshAgent>();
         anim = battle_Character.GetComponent<Animator>();
 
         StartCoroutine(Mana_Regen());
@@ -56,6 +56,9 @@ public abstract class State_Handler : MonoBehaviour
 
     protected bool Destination_Move(Vector3 in_destination_Pos)
     {
+        if (!navMesh.enabled)
+            return false;
+
         navMesh.SetDestination(in_destination_Pos);
 
         Vector3 charPos = new Vector3(battle_Character.transform.position.x, 0, battle_Character.transform.position.z);

@@ -19,6 +19,7 @@ public enum State // 스테이트
     Die_Exit,
     Return,
     Wait,
+    Next_Wait, 
 }
 
 /*

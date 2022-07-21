@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 1231096003}
   - component: {fileID: 1231096002}
   - component: {fileID: 1231096001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,15 +874,15 @@ GameObject:
   - component: {fileID: 1949588658}
   - component: {fileID: 1949588657}
   - component: {fileID: 1949588656}
-  - component: {fileID: 1949588655}
   - component: {fileID: 1949588661}
+  - component: {fileID: 1949588655}
   m_Layer: 0
   m_Name: TestSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &1949588655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -890,18 +890,18 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949588654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 250
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 2
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -927,7 +927,7 @@ MonoBehaviour:
   Cur_HP: 55
   Armor: 0
   balance_gauge: 0
-  move_Speed: 0
+  move_Speed: 3
   Player_Mana: 0
   Player_Stamina: 0
   player_Atk_1: 0
@@ -950,10 +950,10 @@ MonoBehaviour:
   drop_Reward: 0
   patrol_Start: 0
   mon_attack_Power: 0
-  mon_find_Range: 5
+  mon_find_Range: 6
   cur_Target: {fileID: 0}
-  Attack_Range: 0
-  need_Mana: 0
+  Attack_Range: 4
+  need_Mana: 20
   next_Skill: 0
   attack_Collider: {fileID: 0}
   attack_Type: 0
@@ -963,6 +963,7 @@ MonoBehaviour:
   enemy_Skill_3_damage: 0
   isDivide: 0
   OnTree: 1
+  isJump: 0
 --- !u!65 &1949588657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1048,14 +1049,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949588654}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1001 &2094588809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1070,6 +1071,10 @@ PrefabInstance:
     - target: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
       propertyPath: m_Name
       value: Skeleton_Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4585744437083480609, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
       propertyPath: m_RootOrder

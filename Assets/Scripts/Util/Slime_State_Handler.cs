@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class Slime_State_Handler : State_Handler
                 break;
             case State.Attack: // 슬라임은 붙어있는 상태
                 Attack_Process();
+                break;
+            case State.Next_Wait:
+                Next_Wait_Process();
                 break;
             case State.Return:
                 Return_Process();
@@ -60,6 +64,7 @@ public class Slime_State_Handler : State_Handler
         }
     }
 
+
     protected override void Patrol_Exit_Process()
     {
 
@@ -69,15 +74,32 @@ public class Slime_State_Handler : State_Handler
     {
         if (battle_Character.GetComponent<Slime>().OnTree)
         {
-            Vector3 dirVec = battle_Character.cur_Target.transform.position - battle_Character.transform.position;
-            battle_Character.GetComponent<Rigidbody>().AddForce(dirVec * 10f * Time.deltaTime, ForceMode.Impulse);
+            //Vector3 dirVec = battle_Character.cur_Target.transform.position - battle_Character.transform.position;
+            //battle_Character.GetComponent<Rigidbody>().AddForce(dirVec * 10f * Time.deltaTime, ForceMode.Impulse);
+
+            Vector3 dirvec = battle_Character.cur_Target.transform.position - transform.position;
+            dirvec += new Vector3(0, 8, 0);
+
+            GetComponent<Rigidbody>().AddForce(dirvec * 500f);
 
             battle_Character.GetComponent<Slime>().OnTree = false;
         }
         else
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, 0.5f, LayerMask.GetMask("Ground")))
+            {
+                if (!navMesh.enabled)
+                {
+                    navMesh.enabled = true;
+                    battle_Character.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
+
+            }
+
             Destination_Move(battle_Character.cur_Target.transform.position);
 
-        //anim.SetBool("isWalk", true);
+            //anim.SetBool("isWalk", true);
+        }
     }
     protected override void Return_Process()
     {
@@ -90,19 +112,21 @@ public class Slime_State_Handler : State_Handler
     {
         if (battle_Character.Player_Mana >= battle_Character.need_Mana)
         {
-            switch (battle_Character.next_Skill)
-            {
-                case 1: // 1번 스킬
-                    battle_Character.Skill_1();
-                    break;
-                    // 스킬에 따라 진행
-            }
-            Enemy_Skill_Rand();
+            battle_Character.Skill_1();
         }
-        else // 기본 공격
+    }
+
+    void Next_Wait_Process()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground")))
         {
-            // 기본 공격 코드
-            //anim.SetBool("isAttack", true);
+            if (!navMesh.enabled)
+            {
+                navMesh.enabled = true;
+                battle_Character.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                battle_Character.ai.now_State = State.Patrol_Enter;
+            }
         }
     }
 
