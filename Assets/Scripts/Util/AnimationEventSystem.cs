@@ -63,8 +63,6 @@ public class AnimationEventSystem : MonoBehaviour
 			EndEventInvokers.Add(end.Key, end.Value);
 	}
 
-	
-
 	//Animation Event
 	public void OnBeginEventString(string s_val)
 	{
