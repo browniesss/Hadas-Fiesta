@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bow_Monster : Battle_Character
 {
+    [SerializeField]
+    private float Knife_Range; // 근접 사거리 
+
     void Start()
     {
         Initalize();
@@ -18,8 +21,7 @@ public class Bow_Monster : Battle_Character
 
     public override void Skill_1() // 선발 돌격대 1번스킬 찌르기
     {
-        Debug.Log("돌진 찌르기 발동");
-        state_handler.navMesh.speed *= 3f;
+        Debug.Log("찌르기 발동");
     }
 
     public override void Die_Process() // 죽을때 호출되는 함수
@@ -44,6 +46,14 @@ public class Bow_Monster : Battle_Character
         {
             // 기본 공격 코드
             //anim.SetBool("isAttack", true);
+            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Knife_Range) // 근접 사거리 보다 가깝게 있다면
+            {
+                // 근접공격
+            }
+            else
+            {
+                // 활 공격
+            }
         }
     }
 }

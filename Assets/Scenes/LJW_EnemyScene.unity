@@ -713,6 +713,12 @@ MonoBehaviour:
   Attack_Range: 0
   need_Mana: 0
   next_Skill: 0
+  attack_Collider: {fileID: 0}
+  attack_Type: 0
+  isAttack_Effect: 0
+  enemy_Skill_1_damage: 0
+  enemy_Skill_2_damage: 0
+  enemy_Skill_3_damage: 0
 --- !u!4 &1726810992
 Transform:
   m_ObjectHideFlags: 0
@@ -876,7 +882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &1949588655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -949,6 +955,12 @@ MonoBehaviour:
   Attack_Range: 0
   need_Mana: 0
   next_Skill: 0
+  attack_Collider: {fileID: 0}
+  attack_Type: 0
+  isAttack_Effect: 0
+  enemy_Skill_1_damage: 0
+  enemy_Skill_2_damage: 0
+  enemy_Skill_3_damage: 0
   isDivide: 0
   OnTree: 1
 --- !u!65 &1949588657
@@ -1052,24 +1064,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4585744435875142265, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
-      propertyPath: Cur_HP
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4585744435875142265, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
-      propertyPath: Max_HP
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4585744435875142265, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
-      propertyPath: move_Speed
+      propertyPath: mon_find_Range
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
       propertyPath: m_Name
       value: Skeleton_Warrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4585744437083480609, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
       propertyPath: m_RootOrder

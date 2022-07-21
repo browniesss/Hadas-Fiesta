@@ -16,4 +16,12 @@ namespace Enemy_Enum
         Preemptive = 1, // 선공형
         Non_Preemptive,  // 비선공형
     }
+
+    public enum Enemy_Attack_Type
+    {
+        Skill_1_sel,
+        Skill_2_sel,
+        Skill_3_sel,
+        Normal_Attack,
+    }
 }

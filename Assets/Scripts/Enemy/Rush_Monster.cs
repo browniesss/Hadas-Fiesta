@@ -20,11 +20,18 @@ public class Rush_Monster : Battle_Character
     {
         Debug.Log("돌진 찌르기 발동");
         state_handler.navMesh.speed *= 3f;
+
+        attack_Type = Enemy_Enum.Enemy_Attack_Type.Skill_1_sel;
     }
 
     public override void Die_Process() // 죽을때 호출되는 함수
     {
 
+    }
+
+    public override void Attack_Effect(GameObject obj) // 때릴 시 넉백 등 효과.
+    {
+        //obj.
     }
 
     public override void Attack_Process()
@@ -44,6 +51,10 @@ public class Rush_Monster : Battle_Character
         {
             // 기본 공격 코드
             //anim.SetBool("isAttack", true);
+
+            attack_Type = Enemy_Enum.Enemy_Attack_Type.Normal_Attack;
+
+            isAttack_Effect = true;
         }
     }
 }

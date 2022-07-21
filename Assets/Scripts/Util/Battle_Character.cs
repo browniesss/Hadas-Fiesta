@@ -61,6 +61,16 @@ public class Battle_Character : MonoBehaviour
     public int next_Skill;
     protected Animator anim;
 
+    [Header("=============================")]
+    [Header("Attack Related")]
+    [SerializeField]
+    protected GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
+    public Enemy_Attack_Type attack_Type; // 공격 타입
+    public bool isAttack_Effect; // 공격에 효과가 있는지
+    public float enemy_Skill_1_damage;
+    public float enemy_Skill_2_damage;
+    public float enemy_Skill_3_damage;
+
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();
@@ -79,7 +89,6 @@ public class Battle_Character : MonoBehaviour
 
     protected void Initalize()
     {
-
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
 
@@ -90,6 +99,8 @@ public class Battle_Character : MonoBehaviour
             state_handler = gameObject.AddComponent<General_Monster_State>();
 
         state_handler.State_Handler_Initialize(this);
+
+        attack_Collider = GetComponentInChildren<Enemy_Weapon>().gameObject;
         //anim = GetComponent<Animator>();
     }
 
@@ -119,6 +130,11 @@ public class Battle_Character : MonoBehaviour
     }
 
     public virtual void Attack_Process()
+    {
+
+    }
+
+    public virtual void Attack_Effect(GameObject obj) // 때릴 시 넉백 등 효과.
     {
 
     }
