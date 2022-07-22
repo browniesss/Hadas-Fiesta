@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Monster
   - m_GUID: df42f27fec159c34ba416df450d6358b
-    m_Address: Prefabs/susu
+    m_Address: susu
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
