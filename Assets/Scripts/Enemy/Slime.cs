@@ -54,7 +54,7 @@ public class Slime : Battle_Character
         Vector3 dirvec = cur_Target.transform.position - transform.position;
         dirvec += new Vector3(0, 8, 0);
         Debug.Log(dirvec);
-        GetComponent<Rigidbody>().AddForce(dirvec * 500f);
+        GetComponent<Rigidbody>().AddForce(dirvec * 400f);
 
         ai.now_State = State.Next_Wait;
 
@@ -79,15 +79,18 @@ public class Slime : Battle_Character
     {
         if (collision.gameObject.tag == "Player" && ai.now_State == State.Next_Wait)
         {
+            //offset = collision.transform.position - collision.contacts[0].point;
+
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             StopCoroutine(coroutine);
 
             GetComponent<Rigidbody>().useGravity = false;
 
             attached_Player = collision.gameObject;
 
-            ai.now_State = State.Attack;
+            transform.parent = attached_Player.transform;
 
-            offset = collision.transform.position - collision.contacts[0].point;
+            ai.now_State = State.Attack;
         }
     }
 

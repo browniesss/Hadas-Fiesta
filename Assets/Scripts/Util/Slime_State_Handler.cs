@@ -128,7 +128,7 @@ public class Slime_State_Handler : State_Handler
         }
         else if (slime_component.attached_Player != null)
         {
-            battle_Character.transform.position = slime_component.attached_Player.transform.position + slime_component.offset;
+            //battle_Character.transform.position = slime_component.attached_Player.transform.position + slime_component.offset;
         }
     }
 
