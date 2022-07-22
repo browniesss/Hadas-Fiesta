@@ -10,6 +10,12 @@ public class GameMG : Singleton<GameMG>
     private float time_Max = 5f;
     private bool isEnded;
 
+    ObjectManager _objManager = new ObjectManager();
+    ResourceManager _resourceManager = new ResourceManager();
+
+    public static ObjectManager ObjManager { get { return Instance._objManager; } }
+    public static ResourceManager Resource { get { return Instance._resourceManager; } }
+
     //플레이 시간
     private void Check_Timer()
     {
