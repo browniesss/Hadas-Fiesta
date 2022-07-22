@@ -10,6 +10,12 @@ public class Slime : Battle_Character
 
     public bool isJump = false; // 점프 중인지 체크
 
+    public GameObject attached_Player; // 붙어있는 플레이어
+
+    public Vector3 offset;
+
+    IEnumerator coroutine;
+
     void Start()
     {
         Initalize();
@@ -22,13 +28,15 @@ public class Slime : Battle_Character
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
 
-        if (cur_Target != null)
-        {
-            dirvec = cur_Target.transform.position - transform.position;
-            dirvec += new Vector3(0, 8, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-            GetComponent<Rigidbody>().AddForce(dirvec * 200f);
+        //if (cur_Target != null)
+        //{
+        //    dirvec = cur_Target.transform.position - transform.position;
+        //    dirvec += new Vector3(0, 8, 0);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    GetComponent<Rigidbody>().AddForce(dirvec * 200f);
+
+
     }
 
     private void OnDrawGizmos()
@@ -45,14 +53,16 @@ public class Slime : Battle_Character
 
         Vector3 dirvec = cur_Target.transform.position - transform.position;
         dirvec += new Vector3(0, 8, 0);
-
+        Debug.Log(dirvec);
         GetComponent<Rigidbody>().AddForce(dirvec * 500f);
 
         ai.now_State = State.Next_Wait;
 
         Player_Mana = 0;
 
-        StartCoroutine(Skill_Coroutine());
+        coroutine = Skill_Coroutine();
+
+        StartCoroutine(coroutine);
     }
 
     IEnumerator Skill_Coroutine()
@@ -63,6 +73,22 @@ public class Slime : Battle_Character
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         ai.now_State = State.Patrol_Enter;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && ai.now_State == State.Next_Wait)
+        {
+            StopCoroutine(coroutine);
+
+            GetComponent<Rigidbody>().useGravity = false;
+
+            attached_Player = collision.gameObject;
+
+            ai.now_State = State.Attack;
+
+            offset = collision.transform.position - collision.contacts[0].point;
+        }
     }
 
     public override void Skill_2() // 분열 ( 죽으면 부활 )  

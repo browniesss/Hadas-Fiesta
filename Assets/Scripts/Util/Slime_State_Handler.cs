@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Slime_State_Handler : State_Handler
 {
+    [SerializeField]
+    private Slime slime_component;
+
     public override void State_Handler_Update()
     {
         switch (state)
@@ -31,6 +34,13 @@ public class Slime_State_Handler : State_Handler
                 Die_Process();
                 break;
         }
+    }
+
+    public override void State_Handler_Initialize(Battle_Character b_c) // 스테이트 처리기 초기화 함수
+    {
+        base.State_Handler_Initialize(b_c);
+
+        slime_component = battle_Character.GetComponent<Slime>();
     }
 
     protected override void Patrol_Enter_Process()
@@ -80,7 +90,7 @@ public class Slime_State_Handler : State_Handler
             Vector3 dirvec = battle_Character.cur_Target.transform.position - transform.position;
             dirvec += new Vector3(0, 8, 0);
 
-            GetComponent<Rigidbody>().AddForce(dirvec * 500f);
+            GetComponent<Rigidbody>().AddForce(dirvec * 350f);
 
             battle_Character.GetComponent<Slime>().OnTree = false;
         }
@@ -110,9 +120,15 @@ public class Slime_State_Handler : State_Handler
 
     protected override void Attack_Process()
     {
-        if (battle_Character.Player_Mana >= battle_Character.need_Mana)
+
+        if (battle_Character.Player_Mana >= battle_Character.need_Mana && slime_component.attached_Player == null)
         {
+            Debug.Log("스킬발동");
             battle_Character.Skill_1();
+        }
+        else if (slime_component.attached_Player != null)
+        {
+            battle_Character.transform.position = slime_component.attached_Player.transform.position + slime_component.offset;
         }
     }
 
