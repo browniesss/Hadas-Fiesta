@@ -66,4 +66,18 @@ public static class AddressablesLoader
 
 	}
 
+	public static GameObject returnAssets(string object_name)
+    {
+		GameObject tempobj=null;
+
+		Addressables.LoadAssetAsync<GameObject>(object_name).Completed += (handle) =>
+		 {
+			 tempobj = handle.Result;
+			 Debug.Log(tempobj.name);
+		 };
+
+		return tempobj;
+	}
+
+
 }

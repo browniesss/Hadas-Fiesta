@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1659274734}
         m_TargetAssemblyTypeName: AddressablesController, Assembly-CSharp
-        m_MethodName: tempdes
+        m_MethodName: testLoadAsset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777581608}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5471f1d9ffce9f540bfba9e98fb3bfe8, type: 3}
   m_Name: 

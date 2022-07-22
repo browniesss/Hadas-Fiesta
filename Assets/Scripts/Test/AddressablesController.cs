@@ -33,6 +33,13 @@ public class AddressablesController : MonoBehaviour
 
 	}
 
+	public void testLoadAsset()
+    {
+
+		GameObject temp= LoadAsset("susu");
+		Instantiate(temp,new Vector3(0,0,0),Quaternion.identity);
+	}
+
 	void temp_Show_list()
 	{
 		Debug.Log("이름보기");
@@ -149,6 +156,12 @@ public class AddressablesController : MonoBehaviour
 		}
 	}
 
+	public GameObject LoadAsset(string name)
+    {
+		GameObject temp =AddressablesLoader.returnAssets(name);
+		_createdObjs.Add(temp);
+		return temp;
+	}
 
 	public void Destroy_Obj(ref GameObject deleteMemory, GameObject deleteobj)  //메모리 해제 할 오브젝트,삭제할 오브젝트.
 	{
