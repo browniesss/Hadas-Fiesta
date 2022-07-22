@@ -28,6 +28,10 @@ public class PlayableCharacter : MonoBehaviour
         }
     }
 
+
+
+    //public CharacterInformation CharacterDBInfo;
+
     /*초기화*/
     private void Awake()
     {
@@ -37,12 +41,18 @@ public class PlayableCharacter : MonoBehaviour
     /*초기화*/
     private void Start()
     {
+        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
+        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
 
         foreach (BaseComponent a in temp)
         {
             components[(int)a.p_comtype] = a;
         }
+
+        status = new BaseStatus();
+        status.Init(DataLoad_Save.Instance);
     }
 
     /*Component 관련 메소드*/
@@ -71,10 +81,9 @@ public class PlayableCharacter : MonoBehaviour
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
         
 
-        //1. 무조건 공격이 성공하는 상태(Idle, Move, Attack, OutOfControl)
+        //1. 무조건 공격이 성공하는 상태(Idle, Move, OutOfControl)
         if (state == CharacterStateMachine.eCharacterState.Idle ||
             state == CharacterStateMachine.eCharacterState.Move ||
-            state == CharacterStateMachine.eCharacterState.Attack ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
             Damaged(damage);
@@ -100,6 +109,14 @@ public class PlayableCharacter : MonoBehaviour
             movecom.Damaged_Rolling(damage);
         }
 
+        //4. 공격중
+        else if(state == CharacterStateMachine.eCharacterState.Attack)
+        {
+            CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom.AttackCutOff();
+            Damaged(damage);
+        }
+
     }
 
     
@@ -109,6 +126,7 @@ public class PlayableCharacter : MonoBehaviour
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
+
         if (finaldamage >= 80)
         {
             movecom.KnockDown();

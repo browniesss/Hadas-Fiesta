@@ -247,15 +247,17 @@ public class CInputComponent : BaseComponent
         //}
 
         //넉백 테스트
-        if(Input.GetKey(KeyCode.U))
+        if(Input.GetKeyDown(KeyCode.U))
         {
-            movecom.KnockBack();
+            PlayableCharacter.Instance.BeAttacked(10);
+            //movecom.KnockBack();
         }
 
         //넉다운 테스트
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            movecom.KnockDown();
+            PlayableCharacter.Instance.BeAttacked(90);
+            //movecom.KnockDown();
         }
 
         //키 입력

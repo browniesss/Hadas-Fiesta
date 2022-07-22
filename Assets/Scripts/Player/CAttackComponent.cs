@@ -91,7 +91,8 @@ public class CAttackComponent : BaseComponent
 
     public delegate void Invoker();
 
-    
+    //public bool IsTimeCounterActive = false;
+    public IEnumerator coroutine;
 
     void Start()
     {
@@ -124,11 +125,13 @@ public class CAttackComponent : BaseComponent
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
+        //IsTimeCounterActive = true;
 
-        while(true)
+        while (true)
         {
             if((Time.time - starttime)>=time)
             {
+                coroutine = null;
                 invoker.Invoke();
                 yield break;
             }
@@ -187,7 +190,8 @@ public class CAttackComponent : BaseComponent
             AttackNum = 0;
         }
 
-        StartCoroutine(Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect));
+        coroutine = Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect);
+        StartCoroutine(coroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
@@ -264,7 +268,13 @@ public class CAttackComponent : BaseComponent
     //공격이 중간에 끊겨야 할때
     public void AttackCutOff()
     {
-
+        curval.IsAttacking = false;
+        if (coroutine!=null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+            
     }
 
 

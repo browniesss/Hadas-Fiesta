@@ -36,7 +36,7 @@ public class BaseStatus
 
 
     [SerializeField]
-    private CharacterInformation CharacterDBInfo;
+    public CharacterInformation CharacterDBInfo;
     [SerializeField]
     private DataLoad_Save DBController;
 
@@ -53,26 +53,100 @@ public class BaseStatus
             if(curLevel==1)
             {
                 CharacterDBInfo = DBController.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
+                MaxHP = CharacterDBInfo.P_player_HP;
+                MaxStamina = CharacterDBInfo.P_player_Stamina;
+                MaxBalance = CharacterDBInfo.P_player_Balance;
+                MaxMP = CharacterDBInfo.P_player_MP;
+
             }
         }
     }
-    public float MaxHP { get => maxHP; set => maxHP = value; }
-    public float CurHP { get => curHP; set => curHP = value; }
-    public float Damage { get => damage; set => damage = value; }
-    public float Defense { get => defense; set => defense = value; }
-    public float MaxStamina { get => maxStamina; set => maxStamina = value; }
-    public float CurStamina { get => curStamina; set => curStamina = value; }
-    public float MaxBalance { get => maxBalance; set => maxBalance = value; }
-    public float CurBalance { get => curBalance; set => curBalance = value; }
-    public float MaxMP { get => maxMP; set => maxMP = value; }
-    public float CurMP { get => curMP; set => curMP = value; }
-    public int CurExp { get => curExp; set => curExp = value; }
-    public int NextExp { get => nextExp; set => nextExp = value; }
+    public float MaxHP 
+    { 
+        get => maxHP; 
+        set
+        {
+            maxHP = value;
+            CurHP = maxHP;
+        }
+    }
+
+    public float CurHP 
+    { 
+        get => curHP; 
+        set
+        {
+            curHP = value;
+            Debug.Log($"현재 HP 변화 {curHP}");
+        }
+    }
+    
+    public float MaxStamina 
+    { 
+        get => maxStamina; 
+        set
+        {
+            maxStamina = value;
+            CurStamina = maxStamina;
+        }
+    }
+    public float CurStamina 
+    { 
+        get => curStamina; 
+        set => curStamina = value; 
+    }
+    public float MaxBalance 
+    { 
+        get => maxBalance;
+        set
+        {
+            maxBalance = value;
+            CurBalance = maxBalance;
+        }
+    }
+    public float CurBalance 
+    { 
+        get => curBalance; 
+        set => curBalance = value; 
+    }
+    public float MaxMP 
+    { 
+        get => maxMP;
+        set
+        {
+            maxMP = value;
+            CurMP = maxMP;
+        }
+    }
+    public float CurMP 
+    { 
+        get => curMP; 
+        set => curMP = value; 
+    }
+    public int CurExp 
+    { 
+        get => curExp; 
+        set => curExp = value; 
+    }
+    public int NextExp 
+    { 
+        get => nextExp; 
+        set => nextExp = value; 
+    }
+    public float Damage 
+    { 
+        get => damage; 
+        set => damage = value; 
+    }
+    public float Defense 
+    { 
+        get => defense; 
+        set => defense = value; 
+    }
 
     public void Init(DataLoad_Save DBController)
     {
         this.DBController = DBController;
-        CharacterDBInfo = ScriptableObject.CreateInstance<CharacterInformation>();
         CurLevel = 1;
     }
 }

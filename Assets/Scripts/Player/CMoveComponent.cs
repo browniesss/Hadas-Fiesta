@@ -193,6 +193,11 @@ public class CMoveComponent : BaseComponent
 
         while(true)
         {
+            if(CharacterStateMachine.Instance.GetState()==CharacterStateMachine.eCharacterState.OutOfControl)
+            {
+                yield break;
+            }
+
             if(runtime>=duration)
             {
                 //this.transform.position = dest;
@@ -341,7 +346,7 @@ public class CMoveComponent : BaseComponent
         {
             Debug.Log("∏ÿ√„");
             com.animator.Pause();
-            StartCoroutine(Cor_TimeCounter(moveoption.KnockBackTime, KnockDownPause));
+            StartCoroutine(Cor_TimeCounter(moveoption.KnockDownTime, KnockDownPause));
         }
         else
         {
