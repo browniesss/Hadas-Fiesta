@@ -2351,7 +2351,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.52351916, y: 2.577088, z: 0.098494455}
+  m_Size: {x: 0.25, y: 2.577088, z: 0.098494455}
   m_Center: {x: -0.00000016182389, y: -0.9049856, z: -0.00000029012583}
 --- !u!1001 &1043932718
 PrefabInstance:
@@ -7099,7 +7099,7 @@ GameObject:
   - component: {fileID: 1759922881}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
