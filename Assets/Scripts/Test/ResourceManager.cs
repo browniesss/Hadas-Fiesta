@@ -22,6 +22,7 @@ public class ResourceManager : MonoBehaviour
 
     public GameObject Instantiate(string path, Transform parent = null)
     {
+
         GameObject original = Load<GameObject>($"Prefabs/{path}");
 
         if (original == null)
@@ -38,6 +39,7 @@ public class ResourceManager : MonoBehaviour
         GameObject go = Object.Instantiate(original, parent);
         go.name = original.name;
         return go;
+
     }
 
     //¾îµå·¹¼­ºí·Î ¹Ù²ã¾ß´ï

@@ -35,10 +35,23 @@ public class AddressablesController : MonoBehaviour
 
 	public void testLoadAsset()
     {
+		string name = "susu";
+		//GameObject obj=null;
+		StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
+		
 
-		GameObject temp= LoadAsset("susu");
-		Instantiate(temp,new Vector3(0,0,0),Quaternion.identity);
+		foreach(var obj in AddressablesLoader.tempobj)
+		{
+			if(name==obj.name)
+            {
+				Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+				Debug.Log(obj.name + "리스트안착");
+			}
+		
+		}
 	}
+
+
 
 	void temp_Show_list()
 	{
@@ -71,8 +84,15 @@ public class AddressablesController : MonoBehaviour
 
 	}
 
-    private void Update()
+	
+
+	private void Update()
     {
+		if (AddressablesLoader.tempobj!=null)
+        {
+
+        }
+
 		//if(_createdObjs!=null)
   //      {
 		//	foreach (var obj in _createdObjs)
@@ -101,16 +121,36 @@ public class AddressablesController : MonoBehaviour
 	}
 
 
-	//이름으로 썼으면 addAsset해주기
-	public async void LoadResource(string name)
-	{
-		await AddressablesLoader.InitAssets_name(name);
-	}
+    //이름으로 썼으면 addAsset해주기
+    public async void LoadResource(string name)
+    {
+        await AddressablesLoader.InitAssets_name(name);
+    }
 
-	public async void LoadResource(string name, string prefab)
-	{
-		await AddressablesLoader.InitAssets_name(name);
-		tempob = AddClone(prefab);
+    ////어드레서블 이름,프리팹이름
+    //public async void LoadResource(string name, string prefab)
+    //{
+    //	await AddressablesLoader.InitAssets_name(name);
+    //	tempob = AddClone(prefab);
+    //}
+
+    public  GameObject Get_LoadResource(string name,string prefabsname)
+    {
+		LoadResource(name);
+
+		foreach (var obj in AddressablesLoader.tempobj)
+        {
+			//if (prefabsname == obj.name)
+   //         {
+			//	Debug.Log(obj.name + "로드해옴");
+
+			//	return obj;
+   //         }
+
+			Debug.Log(obj.name);
+		}
+		Debug.Log("일치하는 프리팹 없음 null반환");
+		return null;
 	}
 
 
@@ -184,7 +224,7 @@ public class AddressablesController : MonoBehaviour
 			Debug.Log("메모리 삭제");
 		}
 	}
-
+	//레이블 삭제
 	public void Destroy_Obj(GameObject obj)  //삭제할 오브젝트
 	{
 		if (!Addressables.ReleaseInstance(obj))
