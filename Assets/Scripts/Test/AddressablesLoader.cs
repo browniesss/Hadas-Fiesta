@@ -9,27 +9,27 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 public static class AddressablesLoader
 {
     public static List<GameObject> tempobj = new List<GameObject>();
-
-    //·¹ÀÌºí·Î »ı¼º
+    public static int ListCount = 0;
+    //ë ˆì´ë¸”ë¡œ ìƒì„±
     //Addressables.Release();
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
         where T : Object
     {
-        Debug.Log("»ı¼ºÀü" + label);
+        Debug.Log("ìƒì„±ì „" + label);
 
 
         var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-        Debug.Log("»ı¼º°¡¤ÓÁ®¿È" + label);
+        Debug.Log("ìƒì„±ê°€ã…£ì ¸ì˜´" + label);
 
 
         foreach (var location in locations)
         {
             createdObjs.Add(await Addressables.InstantiateAsync(location).Task as T);
-            Debug.Log("»ı¼º" + label);
+            Debug.Log("ìƒì„±" + label);
         }
     }
 
-    //ÀÌ¸§À¸·Î »ı¼º
+    //ì´ë¦„ìœ¼ë¡œ ìƒì„±
     //Addressables.ReleaseInstance();
     public static async Task InitAssets_name<T>(string object_name, List<T> createdObjs)
         where T : Object
@@ -44,8 +44,8 @@ public static class AddressablesLoader
         //createdObjs.Add(operationHandle.Result as T);
 
     }
-    //ÀÌ¸§À¸·Î »ı¼º
-    //¸®½ºÆ® ÇÊ¿ä¾øÀÌ ¸Ş¸ğ¸® ÇÒ´ç¸¸ ÇÒ ¶§
+    //ì´ë¦„ìœ¼ë¡œ ìƒì„±
+    //ë¦¬ìŠ¤íŠ¸ í•„ìš”ì—†ì´ ë©”ëª¨ë¦¬ í• ë‹¹ë§Œ í•  ë•Œ
     //Addressables.ReleaseInstance();
     public static async Task InitAssets_name(string object_name)
     {
@@ -96,8 +96,10 @@ public static class AddressablesLoader
     //	//Addressables.Release(matHandle);
     //}
 
+    //ê°ì²´ ë¶ˆëŸ¬ì˜¤ê¸°
     public static IEnumerator LoadGameObjectAndMaterial(string name)
     {
+        Debug.Log("LoadGameObjectAndMaterialí˜¸ì¶œ");
         //Load a GameObject
         AsyncOperationHandle<GameObject> goHandle = Addressables.LoadAssetAsync<GameObject>(name);
         yield return goHandle;
@@ -105,12 +107,13 @@ public static class AddressablesLoader
         {
             GameObject gameObject = goHandle.Result;
             tempobj.Add(gameObject);
-            Debug.Log(gameObject.name + "·Îµå");
+            ListCount=tempobj.Count;
+            Debug.Log(gameObject.name + "ë¡œë“œ");
 
             foreach (var obj in tempobj)
             {
                 //	c++;
-                Debug.Log(obj.name + "¸®½ºÆ®È®ÀÎ");
+                Debug.Log(obj.name + "ë¦¬ìŠ¤íŠ¸í™•ì¸");
             }
             //etc...
         }
@@ -136,7 +139,7 @@ public static class AddressablesLoader
         GameObject gameObject = obj.Result;
         tempobj.Add(gameObject);
 
-        Debug.Log(obj.Result.name + "¾îµå·¹¼­ºí·Îµå");
+        Debug.Log(obj.Result.name + "ì–´ë“œë ˆì„œë¸”ë¡œë“œ");
 
     }
 
@@ -147,7 +150,7 @@ public static class AddressablesLoader
         Addressables.LoadAssetAsync<GameObject>(object_name).Completed += (handle) =>
          {
              tempobj = handle.Result;
-             Debug.Log(tempobj.name + "¿¡¼Â¸®ÅÏ");
+             Debug.Log(tempobj.name + "ì—ì…‹ë¦¬í„´");
          // return tempobj;
      };
 
@@ -155,7 +158,7 @@ public static class AddressablesLoader
         {
             return tempobj;
         }
-        Debug.Log("ºñ¾îÀÖÀ½");
+        Debug.Log("ë¹„ì–´ìˆìŒ");
         return tempobj;
     }
 

@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 
-public class AddressablesController : MonoBehaviour
+public class AddressablesController : Singleton<AddressablesController>
 {
 	[SerializeField]
 	private string _label;
@@ -12,14 +13,18 @@ public class AddressablesController : MonoBehaviour
 //	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
 	private List<GameObject> _createdObjs = new List<GameObject>();
 	GameObject tempob;
+	int Loder_ListCount = 0;
+	public bool load_Comp = false;
 
 	private void Start()
 	{
 
 		//Instantiate("test1");
-		Instantiate("Monster");
+		//Instantiate("Monster");
 
-		temp_Show_list();
+		//Loder_ListCount = AddressablesLoader.ListCount;
+
+		//temp_Show_list();
 	}
 
 	private async void Instantiate(string label)
@@ -36,32 +41,58 @@ public class AddressablesController : MonoBehaviour
 	public void testLoadAsset()
     {
 		string name = "susu";
-		//GameObject obj=null;
-		StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
-		
+		 
+        GameObject obj = find_Asset_in_list(name);
 
-		foreach(var obj in AddressablesLoader.tempobj)
-		{
-			if(name==obj.name)
+		if(obj==null)
+        {
+			StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
+			Debug.Log("ì—†ì–´ì„œ ë¡œë“œì¤‘..." );
+
+            StartCoroutine(check_List_routine());
+
+            if (load_Comp)
             {
-				Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
-				Debug.Log(obj.name + "¸®½ºÆ®¾ÈÂø");
-			}
-		
-		}
-	}
+                Debug.Log("load_Comp");
 
+                obj = find_Asset_in_list(name);
+                Debug.Log("load_Compì™„ë£Œ" + obj.name);
+                Debug.Log("ì°¾ì€ ê±°" + obj.name);
+                load_Comp = false;
+
+            }
+        }
+        else
+        {
+            Debug.Log("ì°¾ì€ ê±°" + obj.name);
+        }    
+    }
+
+    //ë¦¬ìŠ¤íŠ¸ ê¸°ë‹¤ë ¸ë‹¤ê°€ ì‹¤í–‰í•´ì£¼ê¸° ìœ„í•¨
+    public IEnumerator check_List_routine()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        Debug.Log("check_List_routine");
+        if (Loder_ListCount != AddressablesLoader.tempobj.Count)
+        {
+            Loder_ListCount = AddressablesLoader.tempobj.Count;
+            Debug.Log("listìˆ˜ëŠ”" + AddressablesLoader.tempobj.Count);
+            check_List("susu");
+            load_Comp = true;
+        }
+	}
 
 
 	void temp_Show_list()
 	{
-		Debug.Log("ÀÌ¸§º¸±â");
+		Debug.Log("ì´ë¦„ë³´ê¸°");
 		int c=0;
 
 		foreach (var obj in _createdObjs)
 		{
 			c++;
-			Debug.Log("»ı¼º³×ÀÓ"+obj.name);
+			Debug.Log("ìƒì„±ë„¤ì„"+obj.name);
 		}
 		Debug.Log(c);
 
@@ -77,33 +108,50 @@ public class AddressablesController : MonoBehaviour
 
 	}
 
-	//ÀÌ¸§À¸·Î ½èÀ¸¸é addAssetÇØÁÖ±â
+	//ì´ë¦„ìœ¼ë¡œ ì¼ìœ¼ë©´ addAssetí•´ì£¼ê¸°
 	public async void addAsset(string name)
 	{
 		await AddressablesLoader.InitAssets_name(name, _createdObjs);
 
 	}
 
-	
-
-	private void Update()
+	void check_List(string name)
     {
-		if (AddressablesLoader.tempobj!=null)
-        {
+		foreach (var obj in AddressablesLoader.tempobj)
+		{
+			if (name == obj.name)
+			{
+				Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+				Debug.Log(obj.name + "ë¦¬ìŠ¤íŠ¸ì•ˆì— ìˆìŒ");
+			}
 
-        }
-
-		//if(_createdObjs!=null)
-  //      {
-		//	foreach (var obj in _createdObjs)
-		//	{
-		//		Debug.Log("»ı¼º³×ÀÓ" + obj.name);
-		//	}
-		//}
-		
+		}
 	}
 
-	//³»°¡ ¿Ã¸°°Å¿¡¼­ prefabsName ÀÏÄ¡ÇÏ´Â ÇÁ¸®ÆÕ »ı¼º ¹İÈ¯.
+
+
+    private void Update()
+    {
+		//if(Loder_ListCount!=AddressablesLoader.tempobj.Count)
+  //      {
+		//	Loder_ListCount = AddressablesLoader.tempobj.Count;
+		//	Debug.Log("listìˆ˜ëŠ”" + AddressablesLoader.tempobj.Count);
+		//	check_List("susu");
+		//	load_Comp = true;
+		//}
+
+
+		//if(_createdObjs!=null)
+		//      {
+		//	foreach (var obj in _createdObjs)
+		//	{
+		//		Debug.Log("ìƒì„±ë„¤ì„" + obj.name);
+		//	}
+		//}
+
+	}
+
+	//ë‚´ê°€ ì˜¬ë¦°ê±°ì—ì„œ prefabsName ì¼ì¹˜í•˜ëŠ” í”„ë¦¬íŒ¹ ìƒì„± ë°˜í™˜.
 	public GameObject AddClone(string prefabsName)
 	{
 		GameObject tempGameobj = null;
@@ -121,13 +169,13 @@ public class AddressablesController : MonoBehaviour
 	}
 
 
-    //ÀÌ¸§À¸·Î ½èÀ¸¸é addAssetÇØÁÖ±â
+    //ì´ë¦„ìœ¼ë¡œ ì¼ìœ¼ë©´ addAssetí•´ì£¼ê¸°
     public async void LoadResource(string name)
     {
         await AddressablesLoader.InitAssets_name(name);
     }
 
-    ////¾îµå·¹¼­ºí ÀÌ¸§,ÇÁ¸®ÆÕÀÌ¸§
+    ////ì–´ë“œë ˆì„œë¸” ì´ë¦„,í”„ë¦¬íŒ¹ì´ë¦„
     //public async void LoadResource(string name, string prefab)
     //{
     //	await AddressablesLoader.InitAssets_name(name);
@@ -142,19 +190,68 @@ public class AddressablesController : MonoBehaviour
         {
 			//if (prefabsname == obj.name)
    //         {
-			//	Debug.Log(obj.name + "·ÎµåÇØ¿È");
+			//	Debug.Log(obj.name + "ë¡œë“œí•´ì˜´");
 
 			//	return obj;
    //         }
 
 			Debug.Log(obj.name);
 		}
-		Debug.Log("ÀÏÄ¡ÇÏ´Â ÇÁ¸®ÆÕ ¾øÀ½ null¹İÈ¯");
+		Debug.Log("ì¼ì¹˜í•˜ëŠ” í”„ë¦¬íŒ¹ ì—†ìŒ nullë°˜í™˜");
 		return null;
 	}
 
 
-	//°³¼ö ¸®½ºÆ®·Î ¹Ş¾Æ°¡±â?  º¸·ù? ->Ç®¸µ ÇÏ°í³ª¼­¤¡¤¡
+	public GameObject find_Asset_in_list(string name)
+    {
+		GameObject return_frefabs=null ;
+
+		foreach(var obj in _createdObjs)
+        {
+            int i = 0;
+
+            if (obj==null)
+            {
+                Debug.Log("tempobjì˜" + i + "null");
+                i++;
+                break;
+            }
+			Debug.Log("_createdObjsì˜"+i + 1 + "ë²ˆì§¸ ìš”ì†Œ=" + obj.name);
+			i++;
+
+			if(obj.name==name)
+            {
+				return_frefabs = obj;
+				Debug.Log("_createdObjsì—ì„œ" + return_frefabs.name+"ë°˜í™˜");
+				return return_frefabs;
+			}
+        }
+
+		foreach (var obj in AddressablesLoader.tempobj)
+		{
+            int i = 0;
+            if (obj == null)
+            {
+                Debug.Log("tempobjì˜"+i+"null");
+                i++;
+                break;
+            }
+          
+			Debug.Log("tempobjì˜" + i+ 1 + "ë²ˆì§¸ ìš”ì†Œ=" + obj.name);
+			i++;
+
+			if (obj.name == name)
+			{
+				return_frefabs = obj;
+				Debug.Log("tempobjì—ì„œ" + return_frefabs.name + "ë°˜í™˜");
+				return return_frefabs;
+			}
+		}
+
+		return return_frefabs;
+	}
+
+	//ê°œìˆ˜ ë¦¬ìŠ¤íŠ¸ë¡œ ë°›ì•„ê°€ê¸°?  ë³´ë¥˜? ->í’€ë§ í•˜ê³ ë‚˜ì„œã„±ã„±
 	//public GameObject AddClone<T>(string prefabsName,List<GameObject> saveCloneList)
 	//{
 	//	GameObject tempGameobj = null;
@@ -172,7 +269,7 @@ public class AddressablesController : MonoBehaviour
 	//}
 
 
-	//³×ÀÓÀ¸·Î »ı¼ºÇÒ ¶§ ¿¹½Ã...?
+	//ë„¤ì„ìœ¼ë¡œ ìƒì„±í•  ë•Œ ì˜ˆì‹œ...?
 	void add()
 	{
 
@@ -185,7 +282,7 @@ public class AddressablesController : MonoBehaviour
 	}
 
 
-	//¸®½ºÆ®·Î »èÁ¦ ÇÒ ¶§ ¿¹½Ã..?
+	//ë¦¬ìŠ¤íŠ¸ë¡œ ì‚­ì œ í•  ë•Œ ì˜ˆì‹œ..?
 	public void tempdes()
 	{
 		foreach (var obj in AddressablesLoader.tempobj)
@@ -203,29 +300,29 @@ public class AddressablesController : MonoBehaviour
 		return temp;
 	}
 
-	public void Destroy_Obj(ref GameObject deleteMemory, GameObject deleteobj)  //¸Ş¸ğ¸® ÇØÁ¦ ÇÒ ¿ÀºêÁ§Æ®,»èÁ¦ÇÒ ¿ÀºêÁ§Æ®.
+	public void Destroy_Obj(ref GameObject deleteMemory, GameObject deleteobj)  //ë©”ëª¨ë¦¬ í•´ì œ í•  ì˜¤ë¸Œì íŠ¸,ì‚­ì œí•  ì˜¤ë¸Œì íŠ¸.
 	{
 		if (!Addressables.ReleaseInstance(deleteMemory))
 		{
 			Destroy(deleteobj);
 			Addressables.ReleaseInstance(deleteMemory);
 			AddressablesLoader.tempobj.Remove(deleteMemory);
-			Debug.Log("°´Ã¼ ¸Ş¸ğ¸® »èÁ¦");
+			Debug.Log("ê°ì²´ ë©”ëª¨ë¦¬ ì‚­ì œ");
 		}
 	}
 
-	//ÁÖÀÇÁ¡ -> ¸Ş¸ğ¸® ÇØÁ¦ ÇÏ½Ã±â Àü¿¡ ¸Ş¸ğ¸®¸¦ »ç¿ëÇÏ´Â ¿ÀºêÁ§Æ®µéÀ» ÀüºÎ destroy ÇÏ°í ÇÔ¼ö È£ÃâÇØÁÖ¼¼¿ä!
-	public void Destroy_Obj(ref GameObject deleteMemory)  //¸Ş¸ğ¸® ÇØÁ¦ ÇÒ ¿ÀºêÁ§Æ®.
+	//ì£¼ì˜ì  -> ë©”ëª¨ë¦¬ í•´ì œ í•˜ì‹œê¸° ì „ì— ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ë“¤ì„ ì „ë¶€ destroy í•˜ê³  í•¨ìˆ˜ í˜¸ì¶œí•´ì£¼ì„¸ìš”!
+	public void Destroy_Obj(ref GameObject deleteMemory)  //ë©”ëª¨ë¦¬ í•´ì œ í•  ì˜¤ë¸Œì íŠ¸.
 	{
 		if (!Addressables.ReleaseInstance(deleteMemory))
 		{
 			Addressables.ReleaseInstance(deleteMemory);
 			AddressablesLoader.tempobj.Remove(deleteMemory);
-			Debug.Log("¸Ş¸ğ¸® »èÁ¦");
+			Debug.Log("ë©”ëª¨ë¦¬ ì‚­ì œ");
 		}
 	}
-	//·¹ÀÌºí »èÁ¦
-	public void Destroy_Obj(GameObject obj)  //»èÁ¦ÇÒ ¿ÀºêÁ§Æ®
+	//ë ˆì´ë¸” ì‚­ì œ
+	public void Destroy_Obj(GameObject obj)  //ì‚­ì œí•  ì˜¤ë¸Œì íŠ¸
 	{
 		if (!Addressables.ReleaseInstance(obj))
 		{

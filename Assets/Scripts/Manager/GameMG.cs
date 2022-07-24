@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMG : Singleton<GameMG>
+public  class GameMG :Singleton<GameMG>
 {
-    public float PlayTime;  //ÇÃ·¹ÀÌ ½Ã°£ ÀúÀå
-    private float time_start;
-    private float time_current;
-    private float time_Max = 5f;
-    private bool isEnded;
 
-    ObjectManager _objManager = new ObjectManager();
-    ResourceManager _resourceManager = new ResourceManager();
+    public  float PlayTime;  //í”Œë ˆì´ ì‹œê°„ ì €ì¥
+    private  float time_start;
+    private  float time_current;
+    private  float time_Max = 5f;
+    private  bool isEnded;
 
-    public static ObjectManager ObjManager { get { return Instance._objManager; } }
-    public static ResourceManager Resource { get { return Instance._resourceManager; } }
+     ObjectManager  _objManager = new ObjectManager();
+     ResourceManager _resourceManager = new ResourceManager();
 
-    //ÇÃ·¹ÀÌ ½Ã°£
-    private void Check_Timer()
+    public  ObjectManager ObjManager { get { return Instance._objManager; } }
+    public  ResourceManager Resource { get { return Instance._resourceManager; } }
+
+    //í”Œë ˆì´ ì‹œê°„
+     private void Check_Timer()
     {
         time_current = Time.time - time_start;
         if (time_current < time_Max)
@@ -29,9 +30,10 @@ public class GameMG : Singleton<GameMG>
         {
             End_Timer();
         }
+
     }
 
-    private void End_Timer()
+     private void End_Timer()
     {
         Debug.Log("End");
         time_current = time_Max;
@@ -40,7 +42,7 @@ public class GameMG : Singleton<GameMG>
     }
 
 
-    private void Reset_Timer()
+     private void Reset_Timer()
     {
         time_start = Time.time;
         time_current = 0;
@@ -49,33 +51,33 @@ public class GameMG : Singleton<GameMG>
         Debug.Log("Start");
     }
 
-    void startGame()
+     void startGame()
     {
-        // °ÔÀÓ ÀúÀåµ¥ÀÌÅÍ
-        //°ÔÀÓÇÊµå
-        //Ä³¸¯ÅÍ »ı¼º
-        // UI¸Å´ÏÀú È£Ãâ
+        // ê²Œì„ ì €ì¥ë°ì´í„°
+        //ê²Œì„í•„ë“œ
+        //ìºë¦­í„° ìƒì„±
+        // UIë§¤ë‹ˆì € í˜¸ì¶œ
     }
 
-    //·Îµù ¾À ¸¸µé±â
-    //·ÎµùÁß 
+    //ë¡œë”© ì”¬ ë§Œë“¤ê¸°
+    //ë¡œë”©ì¤‘ 
 
-    //°ÔÀÓÁ¾·á ÀúÀå
+    //ê²Œì„ì¢…ë£Œ ì €ì¥
 
-    //¸ó½ºÅÍ Ä³¸¯ÅÍ ·Îµå
-    
-    //¸ó½ºÅÍ¶û Ä³¸¯ÅÍ ¸¸µå´Â ±ÔÄ¢
-    //½ºÅÈÁ¾·ù°¡ ¾î¶²Áö ¿ªÇÒ 
-    //Ä³¸¯ÅÍ 
-    //½ºÅÈ Å¬·¡½º 
-    //½ºÅ³ µ¥ÀÌÅÍ °è»ê
+    //ëª¬ìŠ¤í„° ìºë¦­í„° ë¡œë“œ
 
-    public void Damage_calculator()
+    //ëª¬ìŠ¤í„°ë‘ ìºë¦­í„° ë§Œë“œëŠ” ê·œì¹™
+    //ìŠ¤íƒ¯ì¢…ë¥˜ê°€ ì–´ë–¤ì§€ ì—­í•  
+    //ìºë¦­í„° 
+    //ìŠ¤íƒ¯ í´ë˜ìŠ¤ 
+    //ìŠ¤í‚¬ ë°ì´í„° ê³„ì‚°
+
+     public  void Damage_calculator()
     {
-        //µ¥¹ÌÁö= (°¡ÇØ)°ø°İ·Â - (ÇÇÇØ)¹æ¾î·Â 
+        //ë°ë¯¸ì§€= (ê°€í•´)ê³µê²©ë ¥ - (í”¼í•´)ë°©ì–´ë ¥ 
     }
 
-    void Update()
+     void Update()
     {
         if (isEnded)
             return;
@@ -84,9 +86,9 @@ public class GameMG : Singleton<GameMG>
     }
 
 
-    void Start()
+     void Start()
     {
-        Reset_Timer();
+      //  Reset_Timer();
     }
 
 }
