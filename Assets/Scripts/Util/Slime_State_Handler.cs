@@ -21,7 +21,7 @@ public class Slime_State_Handler : State_Handler
             case State.Trace:
                 Trace_Process();
                 break;
-            case State.Attack: // ½½¶óÀÓÀº ºÙ¾îÀÖ´Â »óÅÂ
+            case State.Attack: // ìŠ¬ë¼ì„ì€ ë¶™ì–´ìˆëŠ” ìƒíƒœ
                 Attack_Process();
                 break;
             case State.Next_Wait:
@@ -36,7 +36,7 @@ public class Slime_State_Handler : State_Handler
         }
     }
 
-    public override void State_Handler_Initialize(Battle_Character b_c) // ½ºÅ×ÀÌÆ® Ã³¸®±â ÃÊ±âÈ­ ÇÔ¼ö
+    public override void State_Handler_Initialize(Battle_Character b_c) // ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸° ì´ˆê¸°í™” í•¨ìˆ˜
     {
         base.State_Handler_Initialize(b_c);
 
@@ -123,7 +123,7 @@ public class Slime_State_Handler : State_Handler
 
         if (battle_Character.Player_Mana >= battle_Character.need_Mana && slime_component.attached_Player == null)
         {
-            Debug.Log("½ºÅ³¹ßµ¿");
+            Debug.Log("ìŠ¤í‚¬ë°œë™");
             battle_Character.Skill_1();
         }
         else if (slime_component.attached_Player != null)

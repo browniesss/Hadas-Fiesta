@@ -9,7 +9,7 @@ public class Summoner : Enemy
     public GameObject ShootingStarPrefabs;
 
     bool check_skill=false;
-    int skill_coolingTime = 0;  //½ºÅ³ ÄğÅ¸ÀÓ ¼³Á¤
+    int skill_coolingTime = 0;  //ìŠ¤í‚¬ ì¿¨íƒ€ì„ ì„¤ì •
 
     bool isDelay = true;
     float delayTime = 1f;
@@ -59,7 +59,7 @@ public class Summoner : Enemy
             next_Skill = Random.Range(1, 3);
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     if (!check_skill)
                     {
                         susu_Summons();
@@ -70,25 +70,25 @@ public class Summoner : Enemy
                         next_Skill = 2;
                     }
                     break;
-                case 2: // 2¹ø ½ºÅ³
+                case 2: // 2ë²ˆ ìŠ¤í‚¬
                     ShootingStar();
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
             Mana = 0;
 
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // »çÁ¤ °Å¸® ³»¿¡ ÀÖ´Ù¸é 
+            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // ì‚¬ì • ê±°ë¦¬ ë‚´ì— ìˆë‹¤ë©´ 
             {
                 anim.SetBool("isWalk", false);
                 anim.SetTrigger("isAttack");
                 //Attack_Mana();
             }
-            else // »çÁ¤ °Å¸® ¿Ü¿¡ ÀÖ´Ù¸é
+            else // ì‚¬ì • ê±°ë¦¬ ì™¸ì— ìˆë‹¤ë©´
             {
-                cur_State = 2; // ÃßÀû state·Î º¯°æ
+                cur_State = 2; // ì¶”ì  stateë¡œ ë³€ê²½
             }
         }
     }
@@ -151,7 +151,7 @@ public class Summoner : Enemy
 
             // Instantiate(SusuPrefabs, new Vector3(transform.position.x, transform.position.y, transform.position.z* distance), Quaternion.identity);
 
-            //Ä³¸¯ÅÍ ¤¿¶óº¸±â
+            //ìºë¦­í„° ã…ë¼ë³´ê¸°
             //SusuPrefabs.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * speed);
         }
     }

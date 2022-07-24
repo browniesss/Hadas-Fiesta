@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-ex ) ¿ø°Å¸®, ±Ù°Å¸® Ã³·³ ´Ù¸¥ ½ºÅ×ÀÌÆ® ÇÁ·Î¼¼½º¸¦ ¼öÇàÇØ¾ß ÇÑ´Ù¸é 
-½ºÅ×ÀÌÆ® Ã³¸®±â¸¦ »ó¼Ó¹ŞÀº Å¬·¡½º¸¦ ±¸ÇöÇØ¼­, ¿¹¸¦µé¾î¼­ patrol ÀÌ ÇÊ¿ä¾ø´Â ai Á¾·ùÀÇ ½ºÅ×ÀÌÆ® Ã³¸®±â, ÇÊ¿äÇÑ Á¾·áÀÇ ½ºÅ×ÀÌÆ® Ã³¸®±â µîÀ»
-±¸ÇöÇØ¾ßÇÔ . ±×¸®°í state_handler ¸¦ »ó¼ÓÀÌ ¾Æ´Ï¶ó ai Ã³·³ °¡Áö°í ÀÖÀ» ¼ö ÀÖ°Ô ÇØ¾ßÇÔ. 
+ex ) ì›ê±°ë¦¬, ê·¼ê±°ë¦¬ ì²˜ëŸ¼ ë‹¤ë¥¸ ìŠ¤í…Œì´íŠ¸ í”„ë¡œì„¸ìŠ¤ë¥¼ ìˆ˜í–‰í•´ì•¼ í•œë‹¤ë©´ 
+ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸°ë¥¼ ìƒì†ë°›ì€ í´ë˜ìŠ¤ë¥¼ êµ¬í˜„í•´ì„œ, ì˜ˆë¥¼ë“¤ì–´ì„œ patrol ì´ í•„ìš”ì—†ëŠ” ai ì¢…ë¥˜ì˜ ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸°, í•„ìš”í•œ ì¢…ë£Œì˜ ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸° ë“±ì„
+êµ¬í˜„í•´ì•¼í•¨ . ê·¸ë¦¬ê³  state_handler ë¥¼ ìƒì†ì´ ì•„ë‹ˆë¼ ai ì²˜ëŸ¼ ê°€ì§€ê³  ìˆì„ ìˆ˜ ìˆê²Œ í•´ì•¼í•¨. 
 
-½Ã°£ °ª ÀúÀåÇØÁÖ´Â °Íµµ Ã³¸®.
+ì‹œê°„ ê°’ ì €ì¥í•´ì£¼ëŠ” ê²ƒë„ ì²˜ë¦¬.
  */
 
 public class Battle_Character : MonoBehaviour
@@ -18,60 +18,60 @@ public class Battle_Character : MonoBehaviour
     [SerializeField]
     protected State_Handler state_handler;
 
-    // ½ºÅ×ÀÌÆ® Ã³¸®±â¸¦ »ı¼º. Ä³¸¯ÅÍ¿¡ µû¶ó¼­ ´Ù¸¥ ½ºÅ×ÀÌÆ® Ã³¸®±â¸¦ ¹Ş¾Æ¿È. 
+    // ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸°ë¥¼ ìƒì„±. ìºë¦­í„°ì— ë”°ë¼ì„œ ë‹¤ë¥¸ ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸°ë¥¼ ë°›ì•„ì˜´. 
 
-    [Header("Common Stats")] // ÇÃ·¹ÀÌ¾îºí Ä³¸¯ÅÍ, ¸ó½ºÅÍ °ø¿ë ½ºÅÈ
-    public int index; // ½Äº°ÀÚ
-    public string Character_Name; // ¸ó½ºÅÍ ¶Ç´Â ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍ ÀÌ¸§
-    public float Max_HP; // ÃÖ´ë Ã¼·Â
-    public float Cur_HP; // ÇöÀç Ã¼·Â
-    public float Armor; // ¹æ¾î·Â
-    public float balance_gauge; // ±ÕÇü °ÔÀÌÁö 
-    public float move_Speed; // ÀÌµ¿ ¼Óµµ
+    [Header("Common Stats")] // í”Œë ˆì´ì–´ë¸” ìºë¦­í„°, ëª¬ìŠ¤í„° ê³µìš© ìŠ¤íƒ¯
+    public int index; // ì‹ë³„ì
+    public string Character_Name; // ëª¬ìŠ¤í„° ë˜ëŠ” í”Œë ˆì´ì–´ ìºë¦­í„° ì´ë¦„
+    public float Max_HP; // ìµœëŒ€ ì²´ë ¥
+    public float Cur_HP; // í˜„ì¬ ì²´ë ¥
+    public float Armor; // ë°©ì–´ë ¥
+    public float balance_gauge; // ê· í˜• ê²Œì´ì§€ 
+    public float move_Speed; // ì´ë™ ì†ë„
     [Header("Player Character Stats")]
-    public float Player_Mana; // ¸¶³ª
-    public float Player_Stamina; // ½ºÅ×¹Ì³ª
-    public float player_Atk_1; // 1´Ü °ø°İ·Â
-    public float player_Sta_down_1; // 1´Ü ½ºÅ×¹Ì³ª ¼Ò¸ğ·®
-    public float player_MP_Up_1; // 1´Ü ½ºÅ³°ÔÀÌÁö Áõ°¡·®
-    public float player_Bal_Down_1; // 1´Ü ±ÕÇü°ÔÀÌÁö °¨¼Ò·®
-    public float player_Atk_2; // 2´Ü °ø°İ·Â
-    public float player_Sta_down_2; // 2´Ü ½ºÅ×¹Ì³ª ¼Ò¸ğ·®
-    public float player_MP_Up_2; // 2´Ü ½ºÅ³°ÔÀÌÁö Áõ°¡·®
-    public float player_Bal_Down_2; // 2´Ü ±ÕÇü°ÔÀÌÁö °¨¼Ò·®
-    public float player_Atk_3; // 3´Ü °ø°İ·Â
-    public float player_Sta_down_3; // 3´Ü ½ºÅ×¹Ì³ª ¼Ò¸ğ·®
-    public float player_MP_Up_3; // 3´Ü ½ºÅ³°ÔÀÌÁö Áõ°¡·®
-    public float player_Bal_Down_3; // 3´Ü ±ÕÇü°ÔÀÌÁö °¨¼Ò·®
+    public float Player_Mana; // ë§ˆë‚˜
+    public float Player_Stamina; // ìŠ¤í…Œë¯¸ë‚˜
+    public float player_Atk_1; // 1ë‹¨ ê³µê²©ë ¥
+    public float player_Sta_down_1; // 1ë‹¨ ìŠ¤í…Œë¯¸ë‚˜ ì†Œëª¨ëŸ‰
+    public float player_MP_Up_1; // 1ë‹¨ ìŠ¤í‚¬ê²Œì´ì§€ ì¦ê°€ëŸ‰
+    public float player_Bal_Down_1; // 1ë‹¨ ê· í˜•ê²Œì´ì§€ ê°ì†ŒëŸ‰
+    public float player_Atk_2; // 2ë‹¨ ê³µê²©ë ¥
+    public float player_Sta_down_2; // 2ë‹¨ ìŠ¤í…Œë¯¸ë‚˜ ì†Œëª¨ëŸ‰
+    public float player_MP_Up_2; // 2ë‹¨ ìŠ¤í‚¬ê²Œì´ì§€ ì¦ê°€ëŸ‰
+    public float player_Bal_Down_2; // 2ë‹¨ ê· í˜•ê²Œì´ì§€ ê°ì†ŒëŸ‰
+    public float player_Atk_3; // 3ë‹¨ ê³µê²©ë ¥
+    public float player_Sta_down_3; // 3ë‹¨ ìŠ¤í…Œë¯¸ë‚˜ ì†Œëª¨ëŸ‰
+    public float player_MP_Up_3; // 3ë‹¨ ìŠ¤í‚¬ê²Œì´ì§€ ì¦ê°€ëŸ‰
+    public float player_Bal_Down_3; // 3ë‹¨ ê· í˜•ê²Œì´ì§€ ê°ì†ŒëŸ‰
     [Header("Monster Stats")]
-    public Enemy_Grade enemy_Grade; // ¸ó½ºÅÍ µî±Ş
-    public Enemy_Type enemy_Type; // ¸ó½ºÅÍ Å¸ÀÔ
-    public Vector3 return_Pos; // ÃÊ±â ÁÂÇ¥
-    public Vector3 destination_Pos; // ¼øÂû ÁÂÇ¥
-    public int die_Delay; // »ç¸Á µô·¹ÀÌ
-    public int drop_Reward; // ¸ó½ºÅÍÀÇ º¸»ó
-    public bool patrol_Start = false; // Å½»ö ½ÃÀÛ
-    public float mon_attack_Power; // ¸ó½ºÅÍ °ø°İ·Â
-    public float mon_find_Range; // Å½Áö¹üÀ§
+    public Enemy_Grade enemy_Grade; // ëª¬ìŠ¤í„° ë“±ê¸‰
+    public Enemy_Type enemy_Type; // ëª¬ìŠ¤í„° íƒ€ì…
+    public Vector3 return_Pos; // ì´ˆê¸° ì¢Œí‘œ
+    public Vector3 destination_Pos; // ìˆœì°° ì¢Œí‘œ
+    public int die_Delay; // ì‚¬ë§ ë”œë ˆì´
+    public int drop_Reward; // ëª¬ìŠ¤í„°ì˜ ë³´ìƒ
+    public bool patrol_Start = false; // íƒìƒ‰ ì‹œì‘
+    public float mon_attack_Power; // ëª¬ìŠ¤í„° ê³µê²©ë ¥
+    public float mon_find_Range; // íƒì§€ë²”ìœ„
 
     [Header("Etc Stats")]
     public GameObject cur_Target;
-    public float Attack_Range; // »ç°Å¸®
-    public int need_Mana; // ½ºÅ³ »ç¿ë½Ã ÇÊ¿äÇÑ ¸¶³ª
+    public float Attack_Range; // ì‚¬ê±°ë¦¬
+    public int need_Mana; // ìŠ¤í‚¬ ì‚¬ìš©ì‹œ í•„ìš”í•œ ë§ˆë‚˜
     public int next_Skill;
     protected Animator anim;
 
     [Header("=============================")]
     [Header("Attack Related")]
     [SerializeField]
-    protected GameObject attack_Collider; // °ø°İ ÆÇÁ¤ Ãæµ¹ ¹üÀ§ Äİ¶óÀÌ´õ 
-    public Enemy_Attack_Type attack_Type; // °ø°İ Å¸ÀÔ
-    public bool isAttack_Effect; // °ø°İ¿¡ È¿°ú°¡ ÀÖ´ÂÁö
+    protected GameObject attack_Collider; // ê³µê²© íŒì • ì¶©ëŒ ë²”ìœ„ ì½œë¼ì´ë” 
+    public Enemy_Attack_Type attack_Type; // ê³µê²© íƒ€ì…
+    public bool isAttack_Effect; // ê³µê²©ì— íš¨ê³¼ê°€ ìˆëŠ”ì§€
     public float enemy_Skill_1_damage;
     public float enemy_Skill_2_damage;
     public float enemy_Skill_3_damage;
 
-    public void Stat_Initialize(MonsterInformation info) // ¸ó½ºÅÍ »ı¼º ½Ã ¸ó½ºÅÍ Á¤º¸ ÃÊ±âÈ­
+    public void Stat_Initialize(MonsterInformation info) // ëª¬ìŠ¤í„° ìƒì„± ì‹œ ëª¬ìŠ¤í„° ì •ë³´ ì´ˆê¸°í™”
     {
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();
         die_Delay = info.P_dieDelay;
@@ -92,7 +92,7 @@ public class Battle_Character : MonoBehaviour
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
 
-        // ¿©±â¼­ switch ·Î Á¾·ù¿¡ µû¶ó ½ºÅ×ÀÌÆ® Ã³¸®±â ºĞ¸®
+        // ì—¬ê¸°ì„œ switch ë¡œ ì¢…ë¥˜ì— ë”°ë¼ ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸° ë¶„ë¦¬
         if (Character_Name == "Slime")
             state_handler = gameObject.AddComponent<Slime_State_Handler>();
         else
@@ -104,7 +104,7 @@ public class Battle_Character : MonoBehaviour
         //anim = GetComponent<Animator>();
     }
 
-    public virtual void Damaged(float damage_Amount) // °ø°İ ¹Ş¾ÒÀ» ½Ã È£ÃâµÉ ÇÔ¼ö
+    public virtual void Damaged(float damage_Amount) // ê³µê²© ë°›ì•˜ì„ ì‹œ í˜¸ì¶œë  í•¨ìˆ˜
     {
         Cur_HP -= (damage_Amount - Armor);
     }
@@ -134,7 +134,7 @@ public class Battle_Character : MonoBehaviour
 
     }
 
-    public virtual void Attack_Effect(GameObject obj) // ¶§¸± ½Ã ³Ë¹é µî È¿°ú.
+    public virtual void Attack_Effect(GameObject obj) // ë•Œë¦´ ì‹œ ë„‰ë°± ë“± íš¨ê³¼.
     {
 
     }

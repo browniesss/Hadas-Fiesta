@@ -20,8 +20,8 @@ public class Enemy_Weapon : MonoBehaviour
             parent_BC.isAttack_Effect = false;
         }
 
-        // ¸ÂÀº ´ë»óÀÇ damaged ÇÔ¼ö¸¦ È£ÃâÇØ¼­ µ¥¹ÌÁö¸¦ ÀÔÇôÁÜ.
-        switch (parent_BC.attack_Type) // °ø°İ Å¸ÀÔ¿¡ ¸Â°Ô µ¥¹ÌÁö¸¦ ÀÔÇôÁÜ.
+        // ë§ì€ ëŒ€ìƒì˜ damaged í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ë°ë¯¸ì§€ë¥¼ ì…í˜€ì¤Œ.
+        switch (parent_BC.attack_Type) // ê³µê²© íƒ€ì…ì— ë§ê²Œ ë°ë¯¸ì§€ë¥¼ ì…í˜€ì¤Œ.
         {
             case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
 

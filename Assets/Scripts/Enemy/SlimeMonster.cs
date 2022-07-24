@@ -11,11 +11,11 @@ public class SlimeMonster : Enemy
     bool Mob_Skill_divide;
 
 
-    public GameObject hpBarPrefab; //Instantiate ¸Ş¼­µå·Î º¹Á¦ÇÒ ÇÁ¸®ÆéÀ» ´ãÀ» º¯¼ö
+    public GameObject hpBarPrefab; //Instantiate ë©”ì„œë“œë¡œ ë³µì œí•  í”„ë¦¬í©ì„ ë‹´ì„ ë³€ìˆ˜
     public Vector3 hpBarOffset = new Vector3(-0.5f, 2.4f, 0);
 
     public Canvas enemyHpBarCanvas;
-    //public Slider enemyHpBarSlider; //SliderÀÇ ÃÊ±â ¼¼ÆÃ, Hp °»½Å¿¡ »ç¿ëÇÒ Slider¸¦ ´ãÀ» º¯¼ö
+    //public Slider enemyHpBarSlider; //Sliderì˜ ì´ˆê¸° ì„¸íŒ…, Hp ê°±ì‹ ì— ì‚¬ìš©í•  Sliderë¥¼ ë‹´ì„ ë³€ìˆ˜
     private EnemyHpbar MyHpbar;
   //  public Vector3 hpBarOffset = new Vector3(-0.5f, 2.4f, 0);
     protected override void Enemy_Attack()
@@ -43,20 +43,20 @@ public class SlimeMonster : Enemy
     void SkillFsm()
     {
       
-        if(Now_HP<=0) // ÇöÀç Ã¼·ÂÀÌ 0º¸´Ù ÀÛ´Ù¸é. 
+        if(Now_HP<=0) // í˜„ì¬ ì²´ë ¥ì´ 0ë³´ë‹¤ ì‘ë‹¤ë©´. 
         {
-            if(Mob_Skill_divide) //½ºÅ³À» »ç¿ëÇß´Ù¸é ±×´ë·Î Á¾·áÇÑ´Ù. 
+            if(Mob_Skill_divide) //ìŠ¤í‚¬ì„ ì‚¬ìš©í–ˆë‹¤ë©´ ê·¸ëŒ€ë¡œ ì¢…ë£Œí•œë‹¤. 
             {
                 Destroy(this.gameObject);
             }
-            else if(!Mob_Skill_divide) //½ºÅ³À» »ç¿ë¾ÈÇß¾ú´Ù¸é ½ºÅ³À» »ç¿ëÇÑ´Ù. 
+            else if(!Mob_Skill_divide) //ìŠ¤í‚¬ì„ ì‚¬ìš©ì•ˆí–ˆì—ˆë‹¤ë©´ ìŠ¤í‚¬ì„ ì‚¬ìš©í•œë‹¤. 
             {
                 Slime_Split();
                 Set_Mob_Skill_devied();
             }
         }
     }
-    void Slime_Split()  //½½¶óÀÓÀÌ ºĞ¿­ÇÏ´Â°÷.
+    void Slime_Split()  //ìŠ¬ë¼ì„ì´ ë¶„ì—´í•˜ëŠ”ê³³.
     {
         Vector3 tmp;
         GameObject obj = Resources.Load<GameObject>("Prefabs/Fire Demon-Yellow");

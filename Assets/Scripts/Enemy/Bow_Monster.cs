@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bow_Monster : Battle_Character
 {
     [SerializeField]
-    private float Knife_Range; // ±ÙÁ¢ »ç°Å¸® 
+    private float Knife_Range; // ê·¼ì ‘ ì‚¬ê±°ë¦¬ 
 
     void Start()
     {
@@ -19,12 +19,12 @@ public class Bow_Monster : Battle_Character
         state_handler.State_Handler_Update();
     }
 
-    public override void Skill_1() // ¼±¹ß µ¹°İ´ë 1¹ø½ºÅ³ Âî¸£±â
+    public override void Skill_1() // ì„ ë°œ ëŒê²©ëŒ€ 1ë²ˆìŠ¤í‚¬ ì°Œë¥´ê¸°
     {
-        Debug.Log("Âî¸£±â ¹ßµ¿");
+        Debug.Log("ì°Œë¥´ê¸° ë°œë™");
     }
 
-    public override void Die_Process() // Á×À»¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    public override void Die_Process() // ì£½ì„ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     {
 
     }
@@ -35,24 +35,24 @@ public class Bow_Monster : Battle_Character
         {
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     Skill_1();
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
-            //Enemy_Skill_Rand(); // ´ÙÀ½ ½ºÅ³ Ã£±â
+            //Enemy_Skill_Rand(); // ë‹¤ìŒ ìŠ¤í‚¬ ì°¾ê¸°
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            // ±âº» °ø°İ ÄÚµå
+            // ê¸°ë³¸ ê³µê²© ì½”ë“œ
             //anim.SetBool("isAttack", true);
-            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Knife_Range) // ±ÙÁ¢ »ç°Å¸® º¸´Ù °¡±õ°Ô ÀÖ´Ù¸é
+            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Knife_Range) // ê·¼ì ‘ ì‚¬ê±°ë¦¬ ë³´ë‹¤ ê°€ê¹ê²Œ ìˆë‹¤ë©´
             {
-                // ±ÙÁ¢°ø°İ
+                // ê·¼ì ‘ê³µê²©
             }
             else
             {
-                // È° °ø°İ
+                // í™œ ê³µê²©
             }
         }
     }

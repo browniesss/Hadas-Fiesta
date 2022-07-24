@@ -16,20 +16,20 @@ public class Rush_Monster : Battle_Character
         state_handler.State_Handler_Update();
     }
 
-    public override void Skill_1() // ¼±¹ß µ¹°İ´ë 1¹ø½ºÅ³ Âî¸£±â
+    public override void Skill_1() // ì„ ë°œ ëŒê²©ëŒ€ 1ë²ˆìŠ¤í‚¬ ì°Œë¥´ê¸°
     {
-        Debug.Log("µ¹Áø Âî¸£±â ¹ßµ¿");
+        Debug.Log("ëŒì§„ ì°Œë¥´ê¸° ë°œë™");
         state_handler.navMesh.speed *= 3f;
 
         attack_Type = Enemy_Enum.Enemy_Attack_Type.Skill_1_sel;
     }
 
-    public override void Die_Process() // Á×À»¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    public override void Die_Process() // ì£½ì„ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     {
 
     }
 
-    public override void Attack_Effect(GameObject obj) // ¶§¸± ½Ã ³Ë¹é µî È¿°ú.
+    public override void Attack_Effect(GameObject obj) // ë•Œë¦´ ì‹œ ë„‰ë°± ë“± íš¨ê³¼.
     {
         //obj.
     }
@@ -40,16 +40,16 @@ public class Rush_Monster : Battle_Character
         {
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     Skill_1();
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
-            //Enemy_Skill_Rand(); // ´ÙÀ½ ½ºÅ³ Ã£±â
+            //Enemy_Skill_Rand(); // ë‹¤ìŒ ìŠ¤í‚¬ ì°¾ê¸°
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            // ±âº» °ø°İ ÄÚµå
+            // ê¸°ë³¸ ê³µê²© ì½”ë“œ
             //anim.SetBool("isAttack", true);
 
             attack_Type = Enemy_Enum.Enemy_Attack_Type.Normal_Attack;
