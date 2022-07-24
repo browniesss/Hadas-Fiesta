@@ -5,12 +5,12 @@ using UnityEngine;
 public class Skeleton_Knight : Battle_Character
 {
     [SerializeField]
-    private GameObject spawn_Skeleton_Prefab; // ¼ÒÈ¯ÇÒ ½ºÄÌ·¹Åæ ¸ó½ºÅÍ ÇÁ¸®ÆÕ
+    private GameObject spawn_Skeleton_Prefab; // ì†Œí™˜í•  ìŠ¤ì¼ˆë ˆí†¤ ëª¬ìŠ¤í„° í”„ë¦¬íŒ¹
 
     [SerializeField]
-    private bool isPassive = false; // ÆÐ½Ãºê ½ºÅ³ ( ½ºÅ³ 3¹ø ) ÀÌ ¹ßµ¿µÇ¾ú´ÂÁö Ã¼Å©ÇÒ bool º¯¼ö
+    private bool isPassive = false; // íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ( ìŠ¤í‚¬ 3ë²ˆ ) ì´ ë°œë™ë˜ì—ˆëŠ”ì§€ ì²´í¬í•  bool ë³€ìˆ˜
 
-    // ¹æÆÐ¸¦ µé°í ÀÌµ¿ÇÏ°í ¹æÆÐ¸¦ µé¾î¿Ã¸° ÂÊ¿¡¼­ ÀÔ´Â µ¥¹ÌÁö´Â °¨¼ÒÇÏ±â ¶§¹®¿¡ ÄÝ¶óÀÌ´õ¸¦ ÇÏ³ª ´õ ¸¸µé¾îÁà¾ßÇÔ.
+    // ë°©íŒ¨ë¥¼ ë“¤ê³  ì´ë™í•˜ê³  ë°©íŒ¨ë¥¼ ë“¤ì–´ì˜¬ë¦° ìª½ì—ì„œ ìž…ëŠ” ë°ë¯¸ì§€ëŠ” ê°ì†Œí•˜ê¸° ë•Œë¬¸ì— ì½œë¼ì´ë”ë¥¼ í•˜ë‚˜ ë” ë§Œë“¤ì–´ì¤˜ì•¼í•¨.
     void Start()
     {
         Initalize();
@@ -26,29 +26,29 @@ public class Skeleton_Knight : Battle_Character
             Damaged(5);
     }
 
-    public override void Skill_1() // ½ºÄÌ·¹Åæ ³ªÀÌÆ® 1¹ø½ºÅ³ 
+    public override void Skill_1() // ìŠ¤ì¼ˆë ˆí†¤ ë‚˜ì´íŠ¸ 1ë²ˆìŠ¤í‚¬ 
     {
-        Debug.Log("°­Å¸ ¹ßµ¿");
-        // Àü¹æÀ» Ä®·Î Èû²¯ Ä¡´Â ¾Ö´Ï¸ÞÀÌ¼Ç
+        Debug.Log("ê°•íƒ€ ë°œë™");
+        // ì „ë°©ì„ ì¹¼ë¡œ íž˜ê» ì¹˜ëŠ” ì• ë‹ˆë©”ì´ì…˜
     }
 
-    public override void Skill_2() // ½ºÄÌ·¹Åæ ³ªÀÌÆ® 2¹ø½ºÅ³ 
+    public override void Skill_2() // ìŠ¤ì¼ˆë ˆí†¤ ë‚˜ì´íŠ¸ 2ë²ˆìŠ¤í‚¬ 
     {
-        Debug.Log("¹æÆÐÄ«¿îÅÍ ¹ßµ¿");
-        // Àü¹æÀ» ¹æÆÐ·Î Èû²¯ ¹Ð¾î ¿Ã·ÁÄ¡´Â ¾Ö´Ï¸ÞÀÌ¼Ç
+        Debug.Log("ë°©íŒ¨ì¹´ìš´í„° ë°œë™");
+        // ì „ë°©ì„ ë°©íŒ¨ë¡œ íž˜ê» ë°€ì–´ ì˜¬ë ¤ì¹˜ëŠ” ì• ë‹ˆë©”ì´ì…˜
     }
 
-    public override void Skill_3()  // ½ºÄÌ·¹Åæ ³ªÀÌÆ® 3¹ø½ºÅ³ ( ÆÐ½Ãºê ½ºÅ³ : Ã¼·Â 50 % ¹Ì¸¸ÀÌ µÇ¸é ¹ßµ¿ ) 
+    public override void Skill_3()  // ìŠ¤ì¼ˆë ˆí†¤ ë‚˜ì´íŠ¸ 3ë²ˆìŠ¤í‚¬ ( íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ : ì²´ë ¥ 50 % ë¯¸ë§Œì´ ë˜ë©´ ë°œë™ ) 
     {
-        Debug.Log("Æ÷È¿ ¹ßµ¿");
-        // Ä®·Î ¹æÆÐ¸¦ 2¹ø Ä£ ÈÄ ¾çÆÈÀ» ¹ú¸° Ã¤ Æ÷È¿¸¦ ³»Áö¸£´Â ¾Ö´Ï¸ÞÀÌ¼Ç.
+        Debug.Log("í¬íš¨ ë°œë™");
+        // ì¹¼ë¡œ ë°©íŒ¨ë¥¼ 2ë²ˆ ì¹œ í›„ ì–‘íŒ”ì„ ë²Œë¦° ì±„ í¬íš¨ë¥¼ ë‚´ì§€ë¥´ëŠ” ì• ë‹ˆë©”ì´ì…˜.
 
-        // ¸ó½ºÅÍ 8¸¶¸® ¼ÒÈ¯
-        // ¼ÒÈ¯µÇ´Â ¸ó½ºÅÍÀÇ ¶¥¼Ó¿¡¼­ ¿Ã¶ó¿À´Â ¾Ö´Ï¸ÞÀÌ¼Ç ½ÇÇà
+        // ëª¬ìŠ¤í„° 8ë§ˆë¦¬ ì†Œí™˜
+        // ì†Œí™˜ë˜ëŠ” ëª¬ìŠ¤í„°ì˜ ë•…ì†ì—ì„œ ì˜¬ë¼ì˜¤ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
         for (int i = 0; i < 8; i++)
         {
             GameObject spawned_enemy = GameObject.Instantiate(spawn_Skeleton_Prefab);
-            spawned_enemy.gameObject.name = i.ToString() + "¹øÂ°";
+            spawned_enemy.gameObject.name = i.ToString() + "ë²ˆì§¸";
 
             Vector3 v = new Vector3(Mathf.Sin(30.0f * i) * 5.0f, 0, Mathf.Cos(30.0f * i) * 5.0f);
 
@@ -60,7 +60,7 @@ public class Skeleton_Knight : Battle_Character
     {
         base.Damaged(damage_Amount);
 
-        Debug.Log("³ªµ¥¹ÌÁö");
+        Debug.Log("ë‚˜ë°ë¯¸ì§€");
 
         if (Cur_HP <= (Max_HP / 2) && !isPassive)
         {
@@ -75,19 +75,19 @@ public class Skeleton_Knight : Battle_Character
         {
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     Skill_1();
                     break;
-                case 2: // 2¹ø ½ºÅ³
+                case 2: // 2ë²ˆ ìŠ¤í‚¬
                     Skill_2();
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
-            //Enemy_Skill_Rand(); // ´ÙÀ½ ½ºÅ³ Ã£±â
+            //Enemy_Skill_Rand(); // ë‹¤ìŒ ìŠ¤í‚¬ ì°¾ê¸°
         }
-        else // ±âº» °ø°Ý
+        else // ê¸°ë³¸ ê³µê²©
         {
-            // ±âº» °ø°Ý ÄÚµå
+            // ê¸°ë³¸ ê³µê²© ì½”ë“œ
             //anim.SetBool("isAttack", true);
         }
     }

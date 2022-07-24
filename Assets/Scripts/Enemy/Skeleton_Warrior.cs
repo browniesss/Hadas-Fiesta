@@ -16,29 +16,29 @@ public class Skeleton_Warrior : Battle_Character
         state_handler.State_Handler_Update();
     }
 
-    public override void Skill_1() // ½ºÄÌ·¹Åæ ¿ö¸®¾î 1¹ø½ºÅ³ ³»·ÁÄ¡±â
+    public override void Skill_1() // ìŠ¤ì¼ˆë ˆí†¤ ì›Œë¦¬ì–´ 1ë²ˆìŠ¤í‚¬ ë‚´ë ¤ì¹˜ê¸°
     {
-        Debug.Log("³»·ÁÄ¡±â ¹ßµ¿");
+        Debug.Log("ë‚´ë ¤ì¹˜ê¸° ë°œë™");
     }
 
-    public override void Skill_2() // ½ºÄÌ·¹Åæ ¿ö¸®¾î 2¹ø½ºÅ³ Âî¸£±â
+    public override void Skill_2() // ìŠ¤ì¼ˆë ˆí†¤ ì›Œë¦¬ì–´ 2ë²ˆìŠ¤í‚¬ ì°Œë¥´ê¸°
     {
-        Debug.Log("Âî¸£±â ¹ßµ¿");
+        Debug.Log("ì°Œë¥´ê¸° ë°œë™");
     }
 
-    public override void Die_Process() // Á×À»¶§ È£ÃâµÇ´Â ÇÔ¼ö (ºÎÈ° Ã³¸®ÇØ¾ßÇÔ)
+    public override void Die_Process() // ì£½ì„ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ (ë¶€í™œ ì²˜ë¦¬í•´ì•¼í•¨)
     {
         StartCoroutine(Skeleton_Warrior_Revival());
     }
 
     IEnumerator Skeleton_Warrior_Revival()
     {
-        // »ç¸ÁÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼Ç Ã³¸®
+        // ì‚¬ë§í•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì²˜ë¦¬
 
-        yield return new WaitForSeconds(5f); // 5ÃÊ ¾È¿¡ ‹š¸®Áö ¾Ê¾Ò´Ù¸é
+        yield return new WaitForSeconds(5f); // 5ì´ˆ ì•ˆì— ë–„ë¦¬ì§€ ì•Šì•˜ë‹¤ë©´
 
-        Debug.Log("ºÎÈ°ºÎÈ°");
-        // ºÎÈ°ÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ÈÄ 
+        Debug.Log("ë¶€í™œë¶€í™œ");
+        // ë¶€í™œí•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ í›„ 
         ai.AI_Initialize(this);
 
         Cur_HP = 100;
@@ -50,19 +50,19 @@ public class Skeleton_Warrior : Battle_Character
         {
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     Skill_1();
                     break;
-                case 2: // 2¹ø ½ºÅ³
+                case 2: // 2ë²ˆ ìŠ¤í‚¬
                     Skill_2();
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
-            //Enemy_Skill_Rand(); // ´ÙÀ½ ½ºÅ³ Ã£±â
+            //Enemy_Skill_Rand(); // ë‹¤ìŒ ìŠ¤í‚¬ ì°¾ê¸°
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            // ±âº» °ø°İ ÄÚµå
+            // ê¸°ë³¸ ê³µê²© ì½”ë“œ
             //anim.SetBool("isAttack", true);
         }
     }
