@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum State // ½ºÅ×ÀÌÆ® 
+public enum State // ìŠ¤í…Œì´íŠ¸ 
 {
     Init,
     Patrol_Enter,
@@ -23,8 +23,8 @@ public enum State // ½ºÅ×ÀÌÆ®
 }
 
 /*
- ´ÙÀ½ ½ºÅ³À» ¾î¶² ÆĞÅÏ, ¾î¶² ¹æ½ÄÀ¸·Î ±¼·¯°¡¾ß ÇÏ´ÂÁö °Ë»çÇÏ´Â°Íµµ ÇØÁà¾ßÇÔ.
-¾î¶² ÆĞÅÏµÚ¿¡´Â ¾î¶² ÆĞÅÏÀÌ ¾È³ª¿À°í ÀÌ·±½ÄÀÌ ÀÖÀ» ¼ö ÀÖ±â ¶§¹®¿¡
+ ë‹¤ìŒ ìŠ¤í‚¬ì„ ì–´ë–¤ íŒ¨í„´, ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ êµ´ëŸ¬ê°€ì•¼ í•˜ëŠ”ì§€ ê²€ì‚¬í•˜ëŠ”ê²ƒë„ í•´ì¤˜ì•¼í•¨.
+ì–´ë–¤ íŒ¨í„´ë’¤ì—ëŠ” ì–´ë–¤ íŒ¨í„´ì´ ì•ˆë‚˜ì˜¤ê³  ì´ëŸ°ì‹ì´ ìˆì„ ìˆ˜ ìˆê¸° ë•Œë¬¸ì—
  */
 
 [System.Serializable]
@@ -33,13 +33,13 @@ public class FSM_AI
     public State now_State;
     public Battle_Character battle_Character;
 
-    public void AI_Initialize(Battle_Character bc) // AI ÃÊ±âÈ­ ÇÔ¼ö. ÀÌ ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ÃÊ±âÈ­¸¦ ÇØÁà¾ßÇÔ.
+    public void AI_Initialize(Battle_Character bc) // AI ì´ˆê¸°í™” í•¨ìˆ˜. ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ì´ˆê¸°í™”ë¥¼ í•´ì¤˜ì•¼í•¨.
     {
         now_State = State.Init;
         battle_Character = bc;
     }
 
-    public State AI_Update() // ÀÌ ¾÷µ¥ÀÌÆ® ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ÇöÀç State¿¡ µû¶ó¼­ ÆÇ´Ü ÈÄ ÆÇ´Ü °á°ú(»óÅÂ)¸¦ return ÇØÁÜ.
+    public State AI_Update() // ì´ ì—…ë°ì´íŠ¸ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ í˜„ì¬ Stateì— ë”°ë¼ì„œ íŒë‹¨ í›„ íŒë‹¨ ê²°ê³¼(ìƒíƒœ)ë¥¼ return í•´ì¤Œ.
     {
         switch (now_State)
         {
@@ -51,7 +51,7 @@ public class FSM_AI
                 break;
             case State.Patrol:
                 Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, battle_Character.mon_find_Range);
-                //, 1 << 8); // ºñÆ® ¿¬»êÀÚ·Î 8¹øÂ° ·¹ÀÌ¾î
+                //, 1 << 8); // ë¹„íŠ¸ ì—°ì‚°ìë¡œ 8ë²ˆì§¸ ë ˆì´ì–´
 
                 if (cols.Length > 0)
                 {
@@ -66,13 +66,13 @@ public class FSM_AI
                 }
                 break;
             case State.Trace:
-                if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range) // Å¸°Ù¿¡ ´ê¾Ò´Ù¸é
+                if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range) // íƒ€ê²Ÿì— ë‹¿ì•˜ë‹¤ë©´
                 {
-                    now_State = State.Attack; // °ø°İ »óÅÂ·Î º¯°æ
+                    now_State = State.Attack; // ê³µê²© ìƒíƒœë¡œ ë³€ê²½
                 }
                 break;
             case State.Attack:
-                if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range)) // »çÁ¤ °Å¸® ³»¿¡ ÀÖ´Ù¸é 
+                if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Range)) // ì‚¬ì • ê±°ë¦¬ ë‚´ì— ìˆë‹¤ë©´ 
                 {
                     now_State = State.Trace;
                 }
@@ -84,7 +84,7 @@ public class FSM_AI
                 now_State = State.Wait;
                 break;
             case State.Return:
-                if ((Vector3.Distance(battle_Character.transform.position, battle_Character.return_Pos) <= 0.5f)) // »çÁ¤ °Å¸® ³»¿¡ ÀÖ´Ù¸é 
+                if ((Vector3.Distance(battle_Character.transform.position, battle_Character.return_Pos) <= 0.5f)) // ì‚¬ì • ê±°ë¦¬ ë‚´ì— ìˆë‹¤ë©´ 
                 {
                     now_State = State.Init;
                 }

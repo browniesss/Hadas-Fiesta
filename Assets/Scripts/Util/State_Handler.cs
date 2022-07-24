@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// ½ºÅ×ÀÌÆ® Ã³¸®±â ÇÔ¼ö
+// ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸° í•¨ìˆ˜
 public abstract class State_Handler : MonoBehaviour
 {
     public State state;
@@ -18,7 +18,7 @@ public abstract class State_Handler : MonoBehaviour
 
     public abstract void State_Handler_Update();
 
-    public virtual void State_Handler_Initialize(Battle_Character b_c) // ½ºÅ×ÀÌÆ® Ã³¸®±â ÃÊ±âÈ­ ÇÔ¼ö
+    public virtual void State_Handler_Initialize(Battle_Character b_c) // ìŠ¤í…Œì´íŠ¸ ì²˜ë¦¬ê¸° ì´ˆê¸°í™” í•¨ìˆ˜
     {
         battle_Character = b_c;
 
@@ -42,7 +42,7 @@ public abstract class State_Handler : MonoBehaviour
 
     protected abstract void Return_Process();
 
-    protected IEnumerator patrol_Think_Coroutine()  // ´ÙÀ½ ¸ñÀûÁö »ı°¢ÇÏ´Â ÄÚ·çÆ¾
+    protected IEnumerator patrol_Think_Coroutine()  // ë‹¤ìŒ ëª©ì ì§€ ìƒê°í•˜ëŠ” ì½”ë£¨í‹´
     {
         yield return new WaitForSeconds(1f);
 
@@ -85,18 +85,18 @@ public abstract class State_Handler : MonoBehaviour
         }
     }
 
-    protected virtual IEnumerator Mana_Regen() // ¸¶³ª Àç»ı ÇÔ¼ö. virtual ÀÌ¹Ç·Î ¸ó½ºÅÍ¿¡ µû¶ó ¸¶³ª È¹µæ·® ´Ù¸£°Ô ÇÒ ¼öµµ ÀÖÀ½. ¾ÆÁ÷Àº ¸ó½ºÅÍº° ¸¶³ª È¹µæ·® ¸ğ¸£´Ï±î ÅëÀÏ
+    protected virtual IEnumerator Mana_Regen() // ë§ˆë‚˜ ì¬ìƒ í•¨ìˆ˜. virtual ì´ë¯€ë¡œ ëª¬ìŠ¤í„°ì— ë”°ë¼ ë§ˆë‚˜ íšë“ëŸ‰ ë‹¤ë¥´ê²Œ í•  ìˆ˜ë„ ìˆìŒ. ì•„ì§ì€ ëª¬ìŠ¤í„°ë³„ ë§ˆë‚˜ íšë“ëŸ‰ ëª¨ë¥´ë‹ˆê¹Œ í†µì¼
     {
         yield return new WaitForSeconds(1f);
 
-        battle_Character.Player_Mana += 5; // ¸ó½ºÅÍ ¸¶³ª Àç»ı·®À» ´õÇØÁÖ¸é µÉµí.
+        battle_Character.Player_Mana += 5; // ëª¬ìŠ¤í„° ë§ˆë‚˜ ì¬ìƒëŸ‰ì„ ë”í•´ì£¼ë©´ ë ë“¯.
 
         StartCoroutine(Mana_Regen());
     }
 
     protected void Enemy_Skill_Rand()
     {
-        battle_Character.next_Skill = Random.Range(1, 3); // ½ºÅ³ ¹üÀ§¸¦ µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¿Í¼­ °¡Áø ½ºÅ³ ¼ö ¸¸Å­ Áß¿¡ ·£´ıÀ¸·Î ³ª¿À°Ô
+        battle_Character.next_Skill = Random.Range(1, 3); // ìŠ¤í‚¬ ë²”ìœ„ë¥¼ ë°ì´í„°ë¥¼ ë°›ì•„ì™€ì„œ ê°€ì§„ ìŠ¤í‚¬ ìˆ˜ ë§Œí¼ ì¤‘ì— ëœë¤ìœ¼ë¡œ ë‚˜ì˜¤ê²Œ
         battle_Character.Player_Mana = 0;
     }
 

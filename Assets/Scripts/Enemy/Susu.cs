@@ -10,7 +10,7 @@ public class Susu : Enemy
     public float rush_length = 2f;
     float rush_speed = 1000f;
     bool return_savepoint=false;
-    int skill_coolingTime = 0;  //½ºÅ³ ÄğÅ¸ÀÓ ¼³Á¤
+    int skill_coolingTime = 0;  //ìŠ¤í‚¬ ì¿¨íƒ€ì„ ì„¤ì •
 
     bool isDelay=true;
     float delayTime = 1f;  
@@ -52,16 +52,16 @@ public class Susu : Enemy
 
     IEnumerator ch()
     {
-        //µ¹Áø ÈÄ ¸Å´Ş¸®±â
-        //¸Å´Ş¸®±â ¸îÃÊÁö¼Ó?
-        //ÃÊÀ½ÆÄ´Â ±Ùµ¥... ´©°¡ °ø°İÇÔ? ¸Å´Ş¸°¾Ö°¡??
-        //ÃÊÀ½ÆÄ µ¥¹ÌÁö °ø°İ¹üÀ§?
+        //ëŒì§„ í›„ ë§¤ë‹¬ë¦¬ê¸°
+        //ë§¤ë‹¬ë¦¬ê¸° ëª‡ì´ˆì§€ì†?
+        //ì´ˆìŒíŒŒëŠ” ê·¼ë°... ëˆ„ê°€ ê³µê²©í•¨? ë§¤ë‹¬ë¦°ì• ê°€??
+        //ì´ˆìŒíŒŒ ë°ë¯¸ì§€ ê³µê²©ë²”ìœ„?
 
-        //µ¥¹ÌÁö ÀÔÈù µÚ
-        //ÇÃ·¹ÀÌ¾î hp °¨¼Ò 
-        //ÃÊÀ½ÆÄ °ø°İ?
-        Debug.Log("°ø°İ");
-        //ÈÄ ´Ù½Ã º¹±Í
+        //ë°ë¯¸ì§€ ì…íŒ ë’¤
+        //í”Œë ˆì´ì–´ hp ê°ì†Œ 
+        //ì´ˆìŒíŒŒ ê³µê²©?
+        Debug.Log("ê³µê²©");
+        //í›„ ë‹¤ì‹œ ë³µê·€
         yield return new WaitForSeconds(2f);
         cur_State = 5;
 
@@ -79,7 +79,7 @@ public class Susu : Enemy
 
                  dir = (savePoint - transform.position).normalized;
 
-                Debug.Log("º¹±Í");
+                Debug.Log("ë³µê·€");
                 GetComponent<Rigidbody>().AddForce(dir * rush_speed);
               
                 // transform.position = Vector3.MoveTowards(transform.position, savePoint, Time.deltaTime * 10f);
@@ -88,7 +88,7 @@ public class Susu : Enemy
             else
             {
                  dir = (cur_Target.transform.position - transform.position).normalized;
-                Debug.Log("´ë½¬");
+                Debug.Log("ëŒ€ì‰¬");
                 GetComponent<Rigidbody>().AddForce(dir * rush_speed);
               
             }
@@ -107,9 +107,9 @@ public class Susu : Enemy
 
     private void Approach_prohibition()
     {
-        //µ¶¾È°³ ¹üÀ§?
-        //Ä³¸¯ÅÍ hp (½ºÅ³ µ¥¹ÌÁö?) 
-        //¸îÃÊÁö¼Ó?
+        //ë…ì•ˆê°œ ë²”ìœ„?
+        //ìºë¦­í„° hp (ìŠ¤í‚¬ ë°ë¯¸ì§€?) 
+        //ëª‡ì´ˆì§€ì†?
        
 
     }
@@ -161,31 +161,31 @@ public class Susu : Enemy
 
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     Meteor();
                     next_Skill = 0;
                     break;
-                case 2: // 2¹ø ½ºÅ³
+                case 2: // 2ë²ˆ ìŠ¤í‚¬
                   
                     savePoint = transform.position;
                     cur_State = 5;
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
             Mana = 0;
 
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // »çÁ¤ °Å¸® ³»¿¡ ÀÖ´Ù¸é 
+            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // ì‚¬ì • ê±°ë¦¬ ë‚´ì— ìˆë‹¤ë©´ 
             {
                 anim.SetBool("isWalk", false);
                 anim.SetTrigger("isAttack");
                 //Attack_Mana();
             }
-            else // »çÁ¤ °Å¸® ¿Ü¿¡ ÀÖ´Ù¸é
+            else // ì‚¬ì • ê±°ë¦¬ ì™¸ì— ìˆë‹¤ë©´
             {
-                cur_State = 2; // ÃßÀû state·Î º¯°æ
+                cur_State = 2; // ì¶”ì  stateë¡œ ë³€ê²½
             }
         }
     }

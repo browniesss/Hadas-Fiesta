@@ -6,15 +6,15 @@ namespace Enemy_Enum
 {
     public enum Enemy_Grade
     {
-        Normal = 1, // ÀÏ¹İ ¸ó½ºÅÍ 
-        General,  // Á¤¿¹ ¸ó½ºÅÍ
-        Boss // º¸½º ¸ó½ºÅÍ
+        Normal = 1, // ì¼ë°˜ ëª¬ìŠ¤í„° 
+        General,  // ì •ì˜ˆ ëª¬ìŠ¤í„°
+        Boss // ë³´ìŠ¤ ëª¬ìŠ¤í„°
     }
 
     public enum Enemy_Type
     {
-        Preemptive = 1, // ¼±°øÇü
-        Non_Preemptive,  // ºñ¼±°øÇü
+        Preemptive = 1, // ì„ ê³µí˜•
+        Non_Preemptive,  // ë¹„ì„ ê³µí˜•
     }
 
     public enum Enemy_Attack_Type

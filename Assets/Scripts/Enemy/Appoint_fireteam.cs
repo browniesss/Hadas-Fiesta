@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Appoint_fireteam : Enemy
 {
-    public int general_attack_damage;  //ÀÏ¹İ°ø°İ µ¥¹ÌÁö
+    public int general_attack_damage;  //ì¼ë°˜ê³µê²© ë°ë¯¸ì§€
 
    private float rush_speed=1000f;
 
@@ -34,15 +34,15 @@ public class Appoint_fireteam : Enemy
         }
     }
 
-    void general_attack() //ÀÏ¹İ°ø°İ
+    void general_attack() //ì¼ë°˜ê³µê²©
     {
-        //³Ë¹é
-        //µ¥¹ÌÁö
-        //³Ë¹é Ä³¸¯ÅÍ ÇÕÄ¡°í ¤¡¤¡
-        //µ¥¹ÌÁö ¾ó¸¶ÀÓ?
-        //µ¥¹ÌÁö Ä³¸¯ÅÍ hp¿¡¼­ ±î¾ßÇØ¼­ Ä³¸¯ ÇÕÄ¡°í ¤¡¤¡
+        //ë„‰ë°±
+        //ë°ë¯¸ì§€
+        //ë„‰ë°± ìºë¦­í„° í•©ì¹˜ê³  ã„±ã„±
+        //ë°ë¯¸ì§€ ì–¼ë§ˆì„?
+        //ë°ë¯¸ì§€ ìºë¦­í„° hpì—ì„œ ê¹Œì•¼í•´ì„œ ìºë¦­ í•©ì¹˜ê³  ã„±ã„±
 
-        Debug.Log("ÀÏ¹İ°ø°İ");
+        Debug.Log("ì¼ë°˜ê³µê²©");
     }
 
     private void FixedUpdate()
@@ -52,7 +52,7 @@ public class Appoint_fireteam : Enemy
         if(cur_State==5)
         {
             dir = (cur_Target.transform.position - transform.position).normalized;
-            Debug.Log("´ë½¬");
+            Debug.Log("ëŒ€ì‰¬");
             GetComponent<Rigidbody>().AddForce(dir * rush_speed);
         }
       
@@ -66,11 +66,11 @@ public class Appoint_fireteam : Enemy
         cur_State = 3;
     }
 
-    void Rush_pierce()  //µ¹ÁøÂî¸£±â
+    void Rush_pierce()  //ëŒì§„ì°Œë¥´ê¸°
     {
-        //¾ÕÀ¸·Î µ¹ÁøÈÄ µ¥¹ÌÁö
-        //µ¥¹ÌÁö ¾ó¸¶?
-        //Ä³¸¯ÅÍ µ¥¹ÌÁö ÇÕÄ¡°í ¤¡
+        //ì•ìœ¼ë¡œ ëŒì§„í›„ ë°ë¯¸ì§€
+        //ë°ë¯¸ì§€ ì–¼ë§ˆ?
+        //ìºë¦­í„° ë°ë¯¸ì§€ í•©ì¹˜ê³  ã„±
         anim.SetBool("isAttack", false);
         anim.SetTrigger("isWalk");
 
@@ -81,17 +81,17 @@ public class Appoint_fireteam : Enemy
             anim.SetBool("isWalk", false);
             anim.SetTrigger("isAttack");
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Debug.Log("ÀÌÁ¦ ¸ØÃç");
+            Debug.Log("ì´ì œ ë©ˆì¶°");
             next_Skill = 0;
             cur_State = 6;
 
 
-            //2¿¬Å¸
+            //2ì—°íƒ€
             //anim.SetBool("isAttack", false);
             //anim.SetBool("MeleeAttack02", true);
         }
 
-        Debug.Log("2¿¬Å¸ ¸ØÃç");
+        Debug.Log("2ì—°íƒ€ ë©ˆì¶°");
         
         StartCoroutine(attack());
 
@@ -138,31 +138,31 @@ public class Appoint_fireteam : Enemy
             }
             switch (next_Skill)
             {
-                case 1: // 1¹ø ½ºÅ³
+                case 1: // 1ë²ˆ ìŠ¤í‚¬
                     cur_State = 5;
                   //  next_Skill = 0;
                     break;
-                case 2: // 2¹ø ½ºÅ³
+                case 2: // 2ë²ˆ ìŠ¤í‚¬
                     general_attack();
                     next_Skill = 0;
 
                     break;
-                    // ½ºÅ³¿¡ µû¶ó ÁøÇà
+                    // ìŠ¤í‚¬ì— ë”°ë¼ ì§„í–‰
             }
             Mana = 0;
 
         }
-        else // ±âº» °ø°İ
+        else // ê¸°ë³¸ ê³µê²©
         {
-            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // »çÁ¤ °Å¸® ³»¿¡ ÀÖ´Ù¸é 
+            if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // ì‚¬ì • ê±°ë¦¬ ë‚´ì— ìˆë‹¤ë©´ 
             {
                 anim.SetBool("isWalk", false);
                 anim.SetTrigger("isAttack");
                 //Attack_Mana();
             }
-            else // »çÁ¤ °Å¸® ¿Ü¿¡ ÀÖ´Ù¸é
+            else // ì‚¬ì • ê±°ë¦¬ ì™¸ì— ìˆë‹¤ë©´
             {
-                cur_State = 2; // ÃßÀû state·Î º¯°æ
+                cur_State = 2; // ì¶”ì  stateë¡œ ë³€ê²½
             }
         }
     }

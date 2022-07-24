@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Slime : Battle_Character
 {
-    public bool isDivide = false; // ÇÑ¹ø¹Û¿¡ ºĞ¿­ÇÏÁö ¸øÇÏ¹Ç·Î ºĞ¿­À» ÀÌ¹Ì ÇÑ ½½¶óÀÓÀÎÁö Ã¼Å©ÇÏ±â À§ÇÔ.
+    public bool isDivide = false; // í•œë²ˆë°–ì— ë¶„ì—´í•˜ì§€ ëª»í•˜ë¯€ë¡œ ë¶„ì—´ì„ ì´ë¯¸ í•œ ìŠ¬ë¼ì„ì¸ì§€ ì²´í¬í•˜ê¸° ìœ„í•¨.
 
-    public bool OnTree = true; // ³ª¹« À§¿¡ ÀÖ´ÂÁö
+    public bool OnTree = true; // ë‚˜ë¬´ ìœ„ì— ìˆëŠ”ì§€
 
-    public bool isJump = false; // Á¡ÇÁ ÁßÀÎÁö Ã¼Å©
+    public bool isJump = false; // ì í”„ ì¤‘ì¸ì§€ ì²´í¬
 
-    public GameObject attached_Player; // ºÙ¾îÀÖ´Â ÇÃ·¹ÀÌ¾î
+    public GameObject attached_Player; // ë¶™ì–´ìˆëŠ” í”Œë ˆì´ì–´
 
     public Vector3 offset;
 
@@ -45,9 +45,9 @@ public class Slime : Battle_Character
         Gizmos.DrawWireSphere(transform.position, mon_find_Range);
     }
 
-    public override void Skill_1() // ½½¶óÀÓ 1¹ø ½ºÅ³ ( Èí¼ö ) 
+    public override void Skill_1() // ìŠ¬ë¼ì„ 1ë²ˆ ìŠ¤í‚¬ ( í¡ìˆ˜ ) 
     {
-        Debug.Log("Èí¼ö ¹ßµ¿");
+        Debug.Log("í¡ìˆ˜ ë°œë™");
 
         state_handler.navMesh.enabled = false;
 
@@ -94,14 +94,14 @@ public class Slime : Battle_Character
         }
     }
 
-    public override void Skill_2() // ºĞ¿­ ( Á×À¸¸é ºÎÈ° )  
+    public override void Skill_2() // ë¶„ì—´ ( ì£½ìœ¼ë©´ ë¶€í™œ )  
     {
-        Debug.Log("ºĞ¿­ ¹ßµ¿");
-        // ½½¶óÀÓ 2¸¶¸® »ı¼ºÇØÁÜ
-        // »ı¼ºÇÑ ½½¶óÀÓ Å©±â¿Í Ã¼·Â °¨¼Ò Slime_Devide_Init ÇÔ¼ö ½ÇÇàÇØÁÖ±â 
+        Debug.Log("ë¶„ì—´ ë°œë™");
+        // ìŠ¬ë¼ì„ 2ë§ˆë¦¬ ìƒì„±í•´ì¤Œ
+        // ìƒì„±í•œ ìŠ¬ë¼ì„ í¬ê¸°ì™€ ì²´ë ¥ ê°ì†Œ Slime_Devide_Init í•¨ìˆ˜ ì‹¤í–‰í•´ì£¼ê¸° 
     }
 
-    public override void Die_Process() // Á×À»¶§ È£ÃâµÇ´Â ÇÔ¼ö (ºÎÈ° Ã³¸®ÇØ¾ßÇÔ)
+    public override void Die_Process() // ì£½ì„ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ (ë¶€í™œ ì²˜ë¦¬í•´ì•¼í•¨)
     {
         Skill_2();
     }
