@@ -33,7 +33,7 @@ public class CMoveComponent : BaseComponent
     [System.Serializable]
     public class MoveOption
     {
-        [Header("==================ÀÌµ¿ °ü·Ã º¯¼öµé==================")]
+        [Header("==================ì´ë™ ê´€ë ¨ ë³€ìˆ˜ë“¤==================")]
         [SerializeField]
         public float RotMouseSpeed = 10f;
         [SerializeField]
@@ -45,9 +45,9 @@ public class CMoveComponent : BaseComponent
         [SerializeField]
         public float MaxAngle;
         [SerializeField]
-        public float Gravity;//Áß·Â°ª(ÇÁ·¹ÀÓ´ÜÀ§·Î Áõ°¡½ÃÄÑÁÙ °ª)
+        public float Gravity;//ì¤‘ë ¥ê°’(í”„ë ˆì„ë‹¨ìœ„ë¡œ ì¦ê°€ì‹œì¼œì¤„ ê°’)
         [SerializeField]
-        public float JumpPower = 120;//Á¡ÇÁ¸¦ ÇÏ¸é ÇØ´ç °ªÀ¸·Î curgravity°ªÀ» ¹Ù²ãÁØ´Ù.
+        public float JumpPower = 120;//ì í”„ë¥¼ í•˜ë©´ í•´ë‹¹ ê°’ìœ¼ë¡œ curgravityê°’ì„ ë°”ê¿”ì¤€ë‹¤.
         [SerializeField]
         public float JumpcoolTime = 1f;
         [SerializeField]
@@ -55,8 +55,8 @@ public class CMoveComponent : BaseComponent
         [SerializeField]
         public float MaxSlop = 70;
         [SerializeField]
-        public float SlopAccel;//(Áß·Â°ª°ú °°ÀÌ ¹Ì²ø¾îÁú¶§ Á¡Á¡Áõ°¡µÉ °ª)
-        [Header("==================È¸ÇÇ °ü·Ã º¯¼öµé==================")]
+        public float SlopAccel;//(ì¤‘ë ¥ê°’ê³¼ ê°™ì´ ë¯¸ëŒì–´ì§ˆë•Œ ì ì ì¦ê°€ë  ê°’)
+        [Header("==================íšŒí”¼ ê´€ë ¨ ë³€ìˆ˜ë“¤==================")]
         public AnimationClip RollingClip;
 
         public float RollingClipPlaySpeed = 2.3f;
@@ -68,7 +68,7 @@ public class CMoveComponent : BaseComponent
         public float RollingFreeDamageTime;
 
 
-        [Header("==================ÇÇ°İ °ü·Ã º¯¼öµé==================")]
+        [Header("==================í”¼ê²© ê´€ë ¨ ë³€ìˆ˜ë“¤==================")]
         public AnimationClip KnockDownClip;
 
         public AnimationClip KnockBackClip;
@@ -87,7 +87,7 @@ public class CMoveComponent : BaseComponent
 
     public Vector3 WorldMove = Vector3.zero;
 
-    public float CurGravity;//ÇöÀç º§·Î½ÃÆ¼ÀÇ y°ª
+    public float CurGravity;//í˜„ì¬ ë²¨ë¡œì‹œí‹°ì˜ yê°’
 
     public Com com = new Com();
 
@@ -130,20 +130,20 @@ public class CMoveComponent : BaseComponent
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         inputcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.InputCom) as CInputComponent;
         //if (inputcom == null)
-        //    Debug.Log("MoveCom ¿À·ù inputcom = null");
+        //    Debug.Log("MoveCom ì˜¤ë¥˜ inputcom = null");
 
-        com.CharacterRoot = GameObject.Find("CharacterRoot").transform;
+        //com.CharacterRoot = GameObject.Find("CharacterRoot").transform;
         com.CharacterRig = GetComponent<Rigidbody>();
-        com.TpCamRig = GameObject.Find("TPCamRig").transform;
-        com.TpCam = GameObject.Find("TPCam").transform;
-        com.FpRoot = GameObject.Find("FPRoot").transform;
-        com.FpCamRig = GameObject.Find("FPCamRig").transform;
-        com.FpCam = GameObject.Find("FPCam").transform;
+        //com.TpCamRig = GameObject.Find("TPCamRig").transform;
+        //com.TpCam = GameObject.Find("TPCam").transform;
+        //com.FpRoot = GameObject.Find("FPRoot").transform;
+        //com.FpCamRig = GameObject.Find("FPCamRig").transform;
+        //com.FpCam = GameObject.Find("FPCam").transform;
         com.CapsuleCol = GetComponent<CapsuleCollider>();
 
         com.animator = GetComponentInChildren<AnimationController>();
         //if (com.animator == null)
-        //    Debug.Log("MoveCom ¿À·ù com.animator = null");
+        //    Debug.Log("MoveCom ì˜¤ë¥˜ com.animator = null");
 
 
         eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
@@ -168,7 +168,7 @@ public class CMoveComponent : BaseComponent
     //}
 
 
-    //duration ½Ã°£µ¿¾È ¸ñÇ¥À§Ä¡·Î ÀÌµ¿ÇÑ´Ù.
+    //duration ì‹œê°„ë™ì•ˆ ëª©í‘œìœ„ì¹˜ë¡œ ì´ë™í•œë‹¤.
     public void DoMove(Vector3 destpos, float duration)
     {
         Vector3 startpos = this.transform.position;
@@ -178,7 +178,7 @@ public class CMoveComponent : BaseComponent
         StartCoroutine(CorDoMove(startpos, destpos, duration));
     }
 
-    //duration ½Ã°£µ¿¾È ¸ñÇ¥À§Ä¡·Î ÀÌµ¿ÇÑ´Ù.
+    //duration ì‹œê°„ë™ì•ˆ ëª©í‘œìœ„ì¹˜ë¡œ ì´ë™í•œë‹¤.
     public void FowardDoMove(float distnace, float duratoin)
     {
         Vector3 direction = com.FpRoot.forward * distnace;
@@ -229,7 +229,7 @@ public class CMoveComponent : BaseComponent
 
         if (curval.IsOnTheSlop)
         {
-            curval.CurVirVelocity = new Vector3(0, CurGravity + moveoption.SlopAccel, 0);//Áß·Â°ª°ú °æ»ç·Î¿¡¼­ÀÇ ¹Ì²ô·¯Áú¶§ÀÇ °¡¼Óµµ°ª
+            curval.CurVirVelocity = new Vector3(0, CurGravity + moveoption.SlopAccel, 0);//ì¤‘ë ¥ê°’ê³¼ ê²½ì‚¬ë¡œì—ì„œì˜ ë¯¸ë„ëŸ¬ì§ˆë•Œì˜ ê°€ì†ë„ê°’
 
             //CurVirVelocity = new Vector3(0, 0, 0);
             if (curval.IsSlip)
@@ -238,7 +238,7 @@ public class CMoveComponent : BaseComponent
                 Vector3 temp = -curval.CurGroundCross;
                 //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
                 temp = com.FpRoot.forward;
-                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//°æ»ç·Î¿¡ ÀÇÇÑ yÃà ÀÌµ¿¹æÇâ
+                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//ê²½ì‚¬ë¡œì— ì˜í•œ yì¶• ì´ë™ë°©í–¥
                 curval.CurHorVelocity *= moveoption.MoveSpeed;
                 curval.CurHorVelocity *= -1.0f;
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
@@ -247,9 +247,9 @@ public class CMoveComponent : BaseComponent
             else
             {
                 curval.CurHorVelocity = new Vector3(WorldMove.x, 0.0f, WorldMove.z);
-                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//°æ»ç·Î¿¡ ÀÇÇÑ yÃà ÀÌµ¿¹æÇâ
-                //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//ÀÌÀü¿¡ »ç¿ëÇß´ø ¹«ºê
-                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//ÀÌ°Ç ½½¸³»óÅÂÀÏ¶§¸¸ ÀÌ¿ëÇÏµµ·Ï
+                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//ê²½ì‚¬ë¡œì— ì˜í•œ yì¶• ì´ë™ë°©í–¥
+                //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//ì´ì „ì— ì‚¬ìš©í–ˆë˜ ë¬´ë¸Œ
+                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//ì´ê±´ ìŠ¬ë¦½ìƒíƒœì¼ë•Œë§Œ ì´ìš©í•˜ë„ë¡
             }
             Debug.DrawLine(this.transform.position, this.transform.position + (curval.CurHorVelocity + curval.CurVirVelocity));
             com.CharacterRig.velocity = curval.CurHorVelocity + curval.CurVirVelocity;
@@ -265,8 +265,8 @@ public class CMoveComponent : BaseComponent
 
 
 
-    //¸ğµç È¸ÀüÀÌ ¿Ï·áµÈ ´ÙÀ½¿¡ µ¿ÀÛÇØ¾ß ÇÑ´Ù.
-    //x,zÃàÀÇ ¿òÁ÷ÀÓÀ» ´ã´ç yÃàÀÇ ¿òÁ÷ÀÓÀº µû·Î °ü¸®
+    //ëª¨ë“  íšŒì „ì´ ì™„ë£Œëœ ë‹¤ìŒì— ë™ì‘í•´ì•¼ í•œë‹¤.
+    //x,zì¶•ì˜ ì›€ì§ì„ì„ ë‹´ë‹¹ yì¶•ì˜ ì›€ì§ì„ì€ ë”°ë¡œ ê´€ë¦¬
     public void HorVelocity()
     {
         //CurHorVelocity = com.FpCamRig.forward;
@@ -274,9 +274,9 @@ public class CMoveComponent : BaseComponent
 
         if (curval.IsSlip)
         {
-            //¿òÁ÷ÀÓÀ» ÇöÀç ¹Ù´Ú °æ»ç°¢ÀÇ -·Î ÇØ¼­ È¸ÀüÀ» ½ÃÅ´
+            //ì›€ì§ì„ì„ í˜„ì¬ ë°”ë‹¥ ê²½ì‚¬ê°ì˜ -ë¡œ í•´ì„œ íšŒì „ì„ ì‹œí‚´
         }
-        curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//ÀÌ·°½ÄÀ¸·Î º¤ÅÍ¸¦ È¸Àü½ÃÅ³ ¼ö ÀÖ´Ù. ¿ªÀº ¼º¸³ÇÏÁö ¾Ê´Â´Ù.
+        curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//ì´ëŸ­ì‹ìœ¼ë¡œ ë²¡í„°ë¥¼ íšŒì „ì‹œí‚¬ ìˆ˜ ìˆë‹¤. ì—­ì€ ì„±ë¦½í•˜ì§€ ì•ŠëŠ”ë‹¤.
 
     }
 
@@ -326,7 +326,7 @@ public class CMoveComponent : BaseComponent
 
     public void KnockDown()
     {
-        //ÀÌ¹Ì ³Ë´Ù¿î ÁßÀÏ¶§ ÇØ´ç ÇÔ¼ö°¡ ´Ù½Ã µé¾î¿À¸é ±×³É ¸®ÅÏ
+        //ì´ë¯¸ ë„‰ë‹¤ìš´ ì¤‘ì¼ë•Œ í•´ë‹¹ í•¨ìˆ˜ê°€ ë‹¤ì‹œ ë“¤ì–´ì˜¤ë©´ ê·¸ëƒ¥ ë¦¬í„´
         if(curval.IsKnockDown)
         {
             //curval.IsKnockDown = false;
@@ -344,13 +344,13 @@ public class CMoveComponent : BaseComponent
         
         if (com.animator.GetPlaySpeed() != 0.0f)
         {
-            Debug.Log("¸ØÃã");
+            Debug.Log("ë©ˆì¶¤");
             com.animator.Pause();
             StartCoroutine(Cor_TimeCounter(moveoption.KnockDownTime, KnockDownPause));
         }
         else
         {
-            Debug.Log("´Ù½Ã½ÃÀÛ");
+            Debug.Log("ë‹¤ì‹œì‹œì‘");
             com.animator.Resume();
         }
 
@@ -358,7 +358,7 @@ public class CMoveComponent : BaseComponent
 
     public void KnockDownEnd(string s_val)
     {
-        Debug.Log($"{s_val} µé¾î¿È");
+        Debug.Log($"{s_val} ë“¤ì–´ì˜´");
         curval.IsKnockDown = false;
     }
 
@@ -366,7 +366,7 @@ public class CMoveComponent : BaseComponent
     public void KnockBack()
     {
 
-        //ÀÌ¹Ì ³Ë¹é Áß ÀÏ¶§ ÇØ´ç ÇÔ¼ö°¡ ´Ù½Ã µé¾î¿À¸é ´Ù½Ã ³Ë¹é ½ÇÇà
+        //ì´ë¯¸ ë„‰ë°± ì¤‘ ì¼ë•Œ í•´ë‹¹ í•¨ìˆ˜ê°€ ë‹¤ì‹œ ë“¤ì–´ì˜¤ë©´ ë‹¤ì‹œ ë„‰ë°± ì‹¤í–‰
         if(curval.IsKnockBack)
         {
             //curval.IsKnockBack = false;
@@ -380,11 +380,11 @@ public class CMoveComponent : BaseComponent
 
     public void KnockBakcEnd(string s_val)
     {
-        Debug.Log($"{s_val} µé¾î¿È");
+        Debug.Log($"{s_val} ë“¤ì–´ì˜´");
         curval.IsKnockBack = false;
     }
 
-    //°ø°İÀÌ ½ÃÀÛµÈÁö ÀÏÁ¤ ½Ã°£ µÚ¿¡ ÀÌÆåÆ®¸¦ ½ÇÇàÇØ¾ß ÇÒ ¶§ »ç¿ë
+    //ê³µê²©ì´ ì‹œì‘ëœì§€ ì¼ì • ì‹œê°„ ë’¤ì— ì´í™íŠ¸ë¥¼ ì‹¤í–‰í•´ì•¼ í•  ë•Œ ì‚¬ìš©
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -413,14 +413,14 @@ public class CMoveComponent : BaseComponent
     }
 
 
-    //±¸¸£±â
-    //¹«Àû½Ã°£Àº Ã³À½ ±¸¸£±â°¡ ½ÃÀÛµÈ ½ÃÁ¡ºÎÅÍ Ä«¿îÆ®ÇÑ´Ù.
+    //êµ¬ë¥´ê¸°
+    //ë¬´ì ì‹œê°„ì€ ì²˜ìŒ êµ¬ë¥´ê¸°ê°€ ì‹œì‘ëœ ì‹œì ë¶€í„° ì¹´ìš´íŠ¸í•œë‹¤.
     public void Rolling()
     {
-        //ÀÌ¹Ì ±¸¸£°í ÀÖÀ¸¸é ±¸¸£Áö ¸øÇÑ´Ù.
+        //ì´ë¯¸ êµ¬ë¥´ê³  ìˆìœ¼ë©´ êµ¬ë¥´ì§€ ëª»í•œë‹¤.
         if (curval.IsRolling)
             return;
-        //¶¥¿¡ ÀÖ¾î¾ß ±¸¸£±â °¡´É
+        //ë•…ì— ìˆì–´ì•¼ êµ¬ë¥´ê¸° ê°€ëŠ¥
         if (!curval.IsGrounded)
             return;
 
@@ -445,7 +445,7 @@ public class CMoveComponent : BaseComponent
 
 
         int tempval = (int)(temptime / 0.016f);
-        //Debug.Log($"{temptime}/{0.016} -> {tempval}È¸ ¹İº¹");
+        //Debug.Log($"{temptime}/{0.016} -> {tempval}íšŒ ë°˜ë³µ");
 
         int i = 0;
         Vector3 tempmove = Vector3.zero;
@@ -475,23 +475,23 @@ public class CMoveComponent : BaseComponent
 
     public void Rotation()
     {
-        //1 ÀÎÄª ÀÏ¶§
-        //fp root·Î ÁÂ¿ìÈ¸Àü
-        //fp cam rig·Î »óÇÏÈ¸Àü
+        //1 ì¸ì¹­ ì¼ë•Œ
+        //fp rootë¡œ ì¢Œìš°íšŒì „
+        //fp cam rigë¡œ ìƒí•˜íšŒì „
         if (curval.IsFPP)
         {
             RotateFP();
         }
-        else//3 ÀÎÄª ÀÏ¶§
-        //fp root·Î ÁÂ¿ìÈ¸Àü
-        //tp cam rig·Î ÁÂ¿ì ¹× »óÇÏÈ¸Àü
+        else//3 ì¸ì¹­ ì¼ë•Œ
+        //fp rootë¡œ ì¢Œìš°íšŒì „
+        //tp cam rigë¡œ ì¢Œìš° ë° ìƒí•˜íšŒì „
         {
             RotateTP();
             RotateTPFP();
         }
     }
 
-    //1ÀÎÄªÀÏ¶§È¸Àü 3ÀÎÄªÀº ³öµÎ°í 1ÀÎÄª Ä³¸¯ÅÍ¸¸ È¸Àü½ÃÄÑ ÁØ´Ù.
+    //1ì¸ì¹­ì¼ë•ŒíšŒì „ 3ì¸ì¹­ì€ ë†”ë‘ê³  1ì¸ì¹­ ìºë¦­í„°ë§Œ íšŒì „ì‹œì¼œ ì¤€ë‹¤.
     public void RotateFP()
     {
         float xRotPrev = com.FpRoot.localEulerAngles.y;
@@ -513,7 +513,7 @@ public class CMoveComponent : BaseComponent
     }
 
 
-    //3ÀÎÄªÀÏ¶§
+    //3ì¸ì¹­ì¼ë•Œ
     public void RotateTP()
     {
         float xRotPrev = com.TpCamRig.localEulerAngles.y;
@@ -534,7 +534,7 @@ public class CMoveComponent : BaseComponent
         com.TpCamRig.localEulerAngles = new Vector3(yRotNext, xRotNext, 0);
     }
 
-    //ÀÌ‹š´Â ¸¶¿ì½º·Î¿òÁ÷ÀÌ´Â°Ô¾Æ´Ï°í Å°º¸µå ÀÔ·Â¿¡ µû¶ó¼­ È¸Àü ÇØ¾ß ÇÏ±â¶§¹®¿¡ µû·Î ¸¸µê
+    //ì´ë–„ëŠ” ë§ˆìš°ìŠ¤ë¡œì›€ì§ì´ëŠ”ê²Œì•„ë‹ˆê³  í‚¤ë³´ë“œ ì…ë ¥ì— ë”°ë¼ì„œ íšŒì „ í•´ì•¼ í•˜ê¸°ë•Œë¬¸ì— ë”°ë¡œ ë§Œë“¦
     public void RotateTPFP()
     {
         float nextRotY = 0;

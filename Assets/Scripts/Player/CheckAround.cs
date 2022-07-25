@@ -52,7 +52,7 @@ public class CheckAround : MonoBehaviour
         curval.IsSlip = false;
         curval.IsOnTheSlop = false;
         curval.CurGroundSlopAngle = 0;
-        if (Time.time >= curval.LastJump + 0.2f)//а║гаго╟М 0.2цй ╣©╬хю╨ аЖ╦И╟к╩Г╦╕ гоаЖ ╬й╢б╢ы.
+        if (Time.time >= curval.LastJump + 0.2f)//Л═░М■└М∙≤ЙЁ═ 0.2Л╢┬ К▐≥Л∙┬Л²─ Л╖─К╘╢Й╡─Л┌╛К╔╪ М∙≤Л╖─ Л∙┼К┼■К▀╓.
         {
             RaycastHit hit;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //jo
-//ÇöÀç Ä³¸¯ÅÍÀÇ »óÅÂ¸¦ °ü¸®
+//í˜„ì¬ ìºë¦­í„°ì˜ ìƒíƒœë¥¼ ê´€ë¦¬
 //
 public class CharacterStateMachine : MySingleton<CharacterStateMachine>
 {
@@ -12,15 +12,15 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
         //Idle,//movecom
         //Walk,//movecom
         //Run,//movecom
-        //Attack01,//attackcom ¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
+        //Attack01,//attackcom ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
         //Attack02,//attackcom 
         //Attack03,//attackcom
         //Rolling,//movecom
-        //Guard,//guardcom ¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
-        //GuardStun,//battlesystem °¢°¢ÀÇ ÄÄÆ÷³ÍÆ® µé¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
-        //DamagedStun,//movecom °¢°¢ÀÇ ÄÄÆ÷³ÍÆ®µé¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
-        //DamagedKnockBack,//movecom °¢°¢ÀÇ ÄÄÆ÷³ÍÆ®µé¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
-        //Slip,//movecom °¢°¢ÀÇ ÄÄÆ÷³ÍÆ®µé¿¡¼­ ¾Ö´Ï¸ŞÀÌ¼Ç °ü¸®
+        //Guard,//guardcom ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
+        //GuardStun,//battlesystem ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸ ë“¤ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
+        //DamagedStun,//movecom ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸ë“¤ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
+        //DamagedKnockBack,//movecom ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸ë“¤ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
+        //Slip,//movecom ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸ë“¤ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ê´€ë¦¬
         //OutOfControl,//move, battelsys, guard 
 
         Idle,
@@ -46,7 +46,7 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
         
     }
 
-    //¸ğ¼ÇÀÇ µô·¹ÀÌ´Â °¢°¢ÀÇ ¸ğ¼ÇÀÌ Á¾·áÇÒ¶§ °¢ÀÚ°¡ °¡Áö°í ÀÖµµ·Ï ÇÑ´Ù.
+    //ëª¨ì…˜ì˜ ë”œë ˆì´ëŠ” ê°ê°ì˜ ëª¨ì…˜ì´ ì¢…ë£Œí• ë•Œ ê°ìê°€ ê°€ì§€ê³  ìˆë„ë¡ í•œë‹¤.
 
     public List<AnimationBlendingTimeSet> animationBlendingTimeSets = new List<AnimationBlendingTimeSet>();
     //curstate
@@ -54,12 +54,12 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
     //
     public eCharacterState PreState;
 
-    //»óÅÂ º¯È­¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ¹Ù²ãÁØ´Ù.
+    //ìƒíƒœ ë³€í™”ì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ì„ ë°”ê¿”ì¤€ë‹¤.
     public void SetState(eCharacterState state)
     {
         if (CurState != state)
         {
-            //Debug.Log($"{state} µé¾î¿È");
+            //Debug.Log($"{state} ë“¤ì–´ì˜´");
             PreState = CurState;
             CurState = state;
         }

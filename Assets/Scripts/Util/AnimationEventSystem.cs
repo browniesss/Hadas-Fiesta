@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-//¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®µéÀ» °ü¸®
-//¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¿¡ ÇØ´ç ÇÔ¼öµé OnBeginEventString, OnMidEventString, OnEndEventString À» µî·ÏÇØÁÖ°í
-//°¢ ÀÌº¥Æ®µéÀÇ ´ë¸®ÀÚ¿¡ ½ÇÇàÇÏ°íÀÚ ÇÏ´Â ÇÔ¼ö¸¦ AddEvent(beginCallback begin, midCallback mid, endCallback end) ÇÔ¼ö¸¦ ÀÌ¿ëÇØ ¿¬°á½ÃÄÑÁÖ¸é ÀÌº¥Æ®°¡ ½ÇÇàµÇ¸é ÇØ´ç ÇÔ¼ö°¡ ½ÇÇàµÊ
+//ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ë“¤ì„ ê´€ë¦¬
+//ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì— í•´ë‹¹ í•¨ìˆ˜ë“¤ OnBeginEventString, OnMidEventString, OnEndEventString ì„ ë“±ë¡í•´ì£¼ê³ 
+//ê° ì´ë²¤íŠ¸ë“¤ì˜ ëŒ€ë¦¬ìì— ì‹¤í–‰í•˜ê³ ì í•˜ëŠ” í•¨ìˆ˜ë¥¼ AddEvent(beginCallback begin, midCallback mid, endCallback end) í•¨ìˆ˜ë¥¼ ì´ìš©í•´ ì—°ê²°ì‹œì¼œì£¼ë©´ ì´ë²¤íŠ¸ê°€ ì‹¤í–‰ë˜ë©´ í•´ë‹¹ í•¨ìˆ˜ê°€ ì‹¤í–‰ë¨
 
 public class AnimationEventSystem : MonoBehaviour
 {
@@ -42,7 +42,7 @@ public class AnimationEventSystem : MonoBehaviour
 		clips = animator.GetAnimationClips();
 	}
 
-    //¾Ö´Ï¸ŞÀÌ¼ÇÀÌº¥Æ®¿¡ ÇÔ¼ö¸¦ µî·Ï ÇÏ·Á¸é ÇØ´ç ÀÌº¥Æ®¸¦ °¡Áö°í ÀÖ´Â ¾Ö´Ï¸ŞÀÌ¼ÇÅ¬¸³ÀÇ ÀÌ¸§À» °°ÀÌ ³Ö¾î ÁØ´Ù.
+    //ì• ë‹ˆë©”ì´ì…˜ì´ë²¤íŠ¸ì— í•¨ìˆ˜ë¥¼ ë“±ë¡ í•˜ë ¤ë©´ í•´ë‹¹ ì´ë²¤íŠ¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ì• ë‹ˆë©”ì´ì…˜í´ë¦½ì˜ ì´ë¦„ì„ ê°™ì´ ë„£ì–´ ì¤€ë‹¤.
   //  public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
   //  {
 		//if(begin != null)

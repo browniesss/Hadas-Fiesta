@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//move¿¡¼­ »ç¿ëÇÏ´Â º¯¼öµé
-//ÇØ´ç °ªÀÌ º¯°æµÇ¸é ÇØ´çµÇ´Â state º¯°æÀÌ ÇÊ¿ä
+//moveì—ì„œ ì‚¬ìš©í•˜ëŠ” ë³€ìˆ˜ë“¤
+//í•´ë‹¹ ê°’ì´ ë³€ê²½ë˜ë©´ í•´ë‹¹ë˜ëŠ” state ë³€ê²½ì´ í•„ìš”
 [System.Serializable]
 public class CurState
 {
@@ -229,12 +229,12 @@ public class CurState
             if (isGuard)
             {
                 CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
-                //Debug.Log("guardµé¾î¿È");
+                //Debug.Log("guardë“¤ì–´ì˜´");
             }
             else
             {
                 CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
-                //Debug.Log("guard³ª°¨");
+                //Debug.Log("guardë‚˜ê°");
             }
                 
 

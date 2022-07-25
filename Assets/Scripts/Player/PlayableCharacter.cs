@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ÇÃ·¹ÀÌ¾îºí Ä³¸¯ÅÍÀÇ ¸ğµç°ÍÀ» °ü¸®ÇÑ´Ù.
-//1. ÄÄÆ÷³ÍÆ®µé °ü¸®, ±âÁ¸ ComponentManager°¡ ÇÏ´ø ÀÏÀ» ±×´ë·Î ½ÇÇà
-//2. ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¿Í¼­ °¢°¢ÀÇ ÄÄÆ÷³ÍÆ® µé¿¡°Ô °¢°¢ ÇÊ¿äÇÑ µ¥ÀÌÅÍµéÀ» ³Ñ°ÜÁØ´Ù.
+//í”Œë ˆì´ì–´ë¸” ìºë¦­í„°ì˜ ëª¨ë“ ê²ƒì„ ê´€ë¦¬í•œë‹¤.
+//1. ì»´í¬ë„ŒíŠ¸ë“¤ ê´€ë¦¬, ê¸°ì¡´ ComponentManagerê°€ í•˜ë˜ ì¼ì„ ê·¸ëŒ€ë¡œ ì‹¤í–‰
+//2. í”Œë ˆì´ì–´ ë°ì´í„°ë¥¼ ë°›ì•„ì™€ì„œ ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸ ë“¤ì—ê²Œ ê°ê° í•„ìš”í•œ ë°ì´í„°ë“¤ì„ ë„˜ê²¨ì¤€ë‹¤.
 
 
 public class PlayableCharacter : MonoBehaviour
@@ -18,7 +18,7 @@ public class PlayableCharacter : MonoBehaviour
 
     public BaseStatus status;
 
-    /*½Ì±ÛÅæ*/
+    /*ì‹±ê¸€í†¤*/
     static PlayableCharacter _instance;
     public static PlayableCharacter Instance
     {
@@ -30,19 +30,19 @@ public class PlayableCharacter : MonoBehaviour
 
 
 
-    //public CharacterInformation CharacterDBInfo;
+    public CharacterInformation CharacterDBInfo;
 
-    /*ÃÊ±âÈ­*/
+    /*ì´ˆê¸°í™”*/
     private void Awake()
     {
         _instance = this;
     }
 
-    /*ÃÊ±âÈ­*/
+    /*ì´ˆê¸°í™”*/
     private void Start()
     {
-        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
-        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+        CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
+        Debug.Log($"{CharacterDBInfo.P_player_HP}");
 
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
 
@@ -55,7 +55,7 @@ public class PlayableCharacter : MonoBehaviour
         status.Init(DataLoad_Save.Instance);
     }
 
-    /*Component °ü·Ã ¸Ş¼Òµå*/
+    /*Component ê´€ë ¨ ë©”ì†Œë“œ*/
     public BaseComponent GetMyComponent(EnumTypes.eComponentTypes type)
     {
         return components[(int)type];
@@ -72,16 +72,16 @@ public class PlayableCharacter : MonoBehaviour
     }
 
 
-    /*ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍ »óÈ£ÀÛ¿ë ¸Ş¼Òµå*/
+    /*í”Œë ˆì´ì–´ ìºë¦­í„° ìƒí˜¸ì‘ìš© ë©”ì†Œë“œ*/
 
-    /*ÇÃ¿¡ÀÌ¾î°¡ °ø°İÀ» ¹Ş¾ÒÀ»¶§
-      ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ »óÅÂ¿¡ µû¶ó¼­ ³Ë¹é, °¡µå³Ë¹é, È¸ÇÇ µîµîÀÇ µ¿ÀÛÀ» °áÁ¤ÇÑ´Ù.*/
+    /*í”Œì—ì´ì–´ê°€ ê³µê²©ì„ ë°›ì•˜ì„ë•Œ
+      í˜„ì¬ í”Œë ˆì´ì–´ì˜ ìƒíƒœì— ë”°ë¼ì„œ ë„‰ë°±, ê°€ë“œë„‰ë°±, íšŒí”¼ ë“±ë“±ì˜ ë™ì‘ì„ ê²°ì •í•œë‹¤.*/
     public void BeAttacked(float damage)
     {
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
         
 
-        //1. ¹«Á¶°Ç °ø°İÀÌ ¼º°øÇÏ´Â »óÅÂ(Idle, Move, OutOfControl)
+        //1. ë¬´ì¡°ê±´ ê³µê²©ì´ ì„±ê³µí•˜ëŠ” ìƒíƒœ(Idle, Move, OutOfControl)
         if (state == CharacterStateMachine.eCharacterState.Idle ||
             state == CharacterStateMachine.eCharacterState.Move ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
@@ -89,9 +89,9 @@ public class PlayableCharacter : MonoBehaviour
             Damaged(damage);
         }
 
-        //2. °¡µåÁß 
-        //¹ë·±½º°ÔÀÌÁö°¡ ÃæºĞÀÌ ³²¾Æ ÀÖÀ¸¸é °¡µå¿¡ ¼º°øÇÏ°í ¹ë·±½º °ÔÀÌÁö¸¦ °¨¼Ò ½ÃÅ²´Ù.
-        //¹ë·±½º °ÔÀÌÁö°¡ ÃæºĞÈ÷ ³²¾Æ ÀÖÁö ¾ÊÀ¸¸é °¡µå¿¡ ½ÇÆĞÇÏ°í µ¥¹ÌÁö¸¦ ÀÔ´Â´Ù.
+        //2. ê°€ë“œì¤‘ 
+        //ë°¸ëŸ°ìŠ¤ê²Œì´ì§€ê°€ ì¶©ë¶„ì´ ë‚¨ì•„ ìˆìœ¼ë©´ ê°€ë“œì— ì„±ê³µí•˜ê³  ë°¸ëŸ°ìŠ¤ ê²Œì´ì§€ë¥¼ ê°ì†Œ ì‹œí‚¨ë‹¤.
+        //ë°¸ëŸ°ìŠ¤ ê²Œì´ì§€ê°€ ì¶©ë¶„íˆ ë‚¨ì•„ ìˆì§€ ì•Šìœ¼ë©´ ê°€ë“œì— ì‹¤íŒ¨í•˜ê³  ë°ë¯¸ì§€ë¥¼ ì…ëŠ”ë‹¤.
         else if(state == CharacterStateMachine.eCharacterState.Guard)
         {
             CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CGuardComponent;
@@ -99,9 +99,9 @@ public class PlayableCharacter : MonoBehaviour
             guardcom.Damaged_Guard(damage);
         }
 
-        //3. È¸ÇÇÁß
-        //Ä³¸¯ÅÍ°¡ È¸ÇÇÁßÀÌ°í ¹«Àû½Ã°£ÀÏ¶§´Â °ø°İ È¸ÇÇ¿¡ ¼º°øÇÏ°í
-        //Ä³¸¯ÅÍ°¡ È¸ÇÇÁßÀÌÁö¸¸ ¹«Àû½Ã°£ÀÌ ¾Æ´Ò¶§´Â È¸ÇÇ¿¡ ½ÇÆĞÇÏ°í µ¥¹ÌÁö¸¦ ÀÔ´Â´Ù.
+        //3. íšŒí”¼ì¤‘
+        //ìºë¦­í„°ê°€ íšŒí”¼ì¤‘ì´ê³  ë¬´ì ì‹œê°„ì¼ë•ŒëŠ” ê³µê²© íšŒí”¼ì— ì„±ê³µí•˜ê³ 
+        //ìºë¦­í„°ê°€ íšŒí”¼ì¤‘ì´ì§€ë§Œ ë¬´ì ì‹œê°„ì´ ì•„ë‹ë•ŒëŠ” íšŒí”¼ì— ì‹¤íŒ¨í•˜ê³  ë°ë¯¸ì§€ë¥¼ ì…ëŠ”ë‹¤.
         else if(state == CharacterStateMachine.eCharacterState.Rolling)
         {
             CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
@@ -109,7 +109,7 @@ public class PlayableCharacter : MonoBehaviour
             movecom.Damaged_Rolling(damage);
         }
 
-        //4. °ø°İÁß
+        //4. ê³µê²©ì¤‘
         else if(state == CharacterStateMachine.eCharacterState.Attack)
         {
             CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
@@ -123,7 +123,7 @@ public class PlayableCharacter : MonoBehaviour
     public void Damaged(float damage)
     {
         CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        //ÃÖÁ¾ µ¥¹ÌÁö = »ó´ë¹æ µ¥¹ÌÁö - ³ªÀÇ ÇöÀç ¹æ¾î¸·
+        //ìµœì¢… ë°ë¯¸ì§€ = ìƒëŒ€ë°© ë°ë¯¸ì§€ - ë‚˜ì˜ í˜„ì¬ ë°©ì–´ë§‰
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
 

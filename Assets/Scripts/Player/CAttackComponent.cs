@@ -18,17 +18,17 @@ public class CAttackComponent : BaseComponent
     {
         public int AttackNum;
 
-        //¾Ö´Ï¸ŞÀÌ¼Ç ¹è¼Ó
+        //ì• ë‹ˆë©”ì´ì…˜ ë°°ì†
         public float animationPlaySpeed;
         
-        //ÇØ´ç ¸Å´Ï¸ŞÀÌ¼Ç Å¬¸³
+        //í•´ë‹¹ ë§¤ë‹ˆë©”ì´ì…˜ í´ë¦½
         public AnimationClip aniclip;
 
-        //ÈÄµô·¹ÀÌ
+        //í›„ë”œë ˆì´
         public float MovementDelay;
 
-        //´ÙÀ½µ¿ÀÛÀ¸·Î ³Ñ¾î°¡±â À§ÇÑ ½Ã°£
-        //ÇØ´çµ¿ÀÛÀÌ ³¡³ª°í ÇØ´ç ½Ã°£ ¾È¿¡ Attack()ÇÔ¼ö°¡ È£ÃâµÇ¾î¾ßÁö ´ÙÀ½µ¿ÀÛÀ¸·Î ³Ñ¾î°£´Ù.
+        //ë‹¤ìŒë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°€ê¸° ìœ„í•œ ì‹œê°„
+        //í•´ë‹¹ë™ì‘ì´ ëë‚˜ê³  í•´ë‹¹ ì‹œê°„ ì•ˆì— Attack()í•¨ìˆ˜ê°€ í˜¸ì¶œë˜ì–´ì•¼ì§€ ë‹¤ìŒë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°„ë‹¤.
         public float NextMovementTimeVal;
 
         public float damage;
@@ -44,7 +44,7 @@ public class CAttackComponent : BaseComponent
         public float movetime;
     }
 
-    //½ºÅ³µµ ¿©±â¼­ ÇÑ¹ø¿¡ Ã³¸®
+    //ìŠ¤í‚¬ë„ ì—¬ê¸°ì„œ í•œë²ˆì— ì²˜ë¦¬
     [System.Serializable]
     public class SkillInfo
     {
@@ -121,7 +121,7 @@ public class CAttackComponent : BaseComponent
 
     }
 
-    //°ø°İÀÌ ½ÃÀÛµÈÁö ÀÏÁ¤ ½Ã°£ µÚ¿¡ ÀÌÆåÆ®¸¦ ½ÇÇàÇØ¾ß ÇÒ ¶§ »ç¿ë
+    //ê³µê²©ì´ ì‹œì‘ëœì§€ ì¼ì • ì‹œê°„ ë’¤ì— ì´í™íŠ¸ë¥¼ ì‹¤í–‰í•´ì•¼ í•  ë•Œ ì‚¬ìš©
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -139,7 +139,7 @@ public class CAttackComponent : BaseComponent
         }
     }
 
-    //½ºÅ³À» Àç»ıÇØÁØ´Ù.
+    //ìŠ¤í‚¬ì„ ì¬ìƒí•´ì¤€ë‹¤.
     public void SkillAttack(int skillnum)
     {
         if (skillnum < 0 || skillnum > skillinfos.Length)
@@ -176,9 +176,9 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
 
-        //Debug.Log("°ø°İ µé¾î¿È");
+        //Debug.Log("ê³µê²© ë“¤ì–´ì˜´");
         float tempval = Time.time - lastAttackTime;
-        //Debug.Log($"°æ°úµÈ ½Ã°£{tempval}, ¿¬°á½Ã°£{attackinfos[AttackNum].NextMovementTimeVal}");
+        //Debug.Log($"ê²½ê³¼ëœ ì‹œê°„{tempval}, ì—°ê²°ì‹œê°„{attackinfos[AttackNum].NextMovementTimeVal}");
 
         if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
         {
@@ -193,7 +193,7 @@ public class CAttackComponent : BaseComponent
         coroutine = Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect);
         StartCoroutine(coroutine);
 
-        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}¾Ö´Ï¸ŞÀÌ¼Ç {attackinfos[AttackNum].animationPlaySpeed}¼Óµµ·Ï ½ÇÇÛ");
+        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}ì• ë‹ˆë©”ì´ì…˜ {attackinfos[AttackNum].animationPlaySpeed}ì†ë„ë¡ ì‹¤í•¼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
 
         
@@ -224,7 +224,7 @@ public class CAttackComponent : BaseComponent
 
     }
 
-    //°ø°İ ÀÌÆåÆ®¸¦ »ı¼º
+    //ê³µê²© ì´í™íŠ¸ë¥¼ ìƒì„±
     public void CreateEffect()
     {
         effectobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
@@ -242,14 +242,14 @@ public class CAttackComponent : BaseComponent
 
 
 
-    //°ø°İ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³ª¸é ÇØ´ç ÇÔ¼ö°¡ µé¾î¿Â´Ù
+    //ê³µê²©ì• ë‹ˆë©”ì´ì…˜ì´ ëë‚˜ë©´ í•´ë‹¹ í•¨ìˆ˜ê°€ ë“¤ì–´ì˜¨ë‹¤
     public void AttackEnd(string s_val)
     {
         
 
         if(effectobj!=null)
         {
-            Debug.Log($"°ø°İ ³¡ µé¾î¿È -> {s_val}");
+            Debug.Log($"ê³µê²© ë ë“¤ì–´ì˜´ -> {s_val}");
             effectobj.transform.parent = preparent;
         }
 
@@ -265,7 +265,7 @@ public class CAttackComponent : BaseComponent
 
     }
 
-    //°ø°İÀÌ Áß°£¿¡ ²÷°Ü¾ß ÇÒ¶§
+    //ê³µê²©ì´ ì¤‘ê°„ì— ëŠê²¨ì•¼ í• ë•Œ
     public void AttackCutOff()
     {
         curval.IsAttacking = false;

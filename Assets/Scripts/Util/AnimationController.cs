@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/*»ç¿ëÇÒ ¸ğµç Å¬¸³µéÀÌ µî·ÏµÇ¾îÀÖ´Â animation controller °¡ ¿¬°áµÈ animator °¡ ÇÊ¿ä
-  GetAnimationClips()¸¦ ÀÌ¿ëÇÏ¿© ÇöÀç µî·ÏµÈ Å¬¸³µéÀ» ¹Ş¾Æ¿ÀµçÁö, Á÷Á¢ ÀÔ·ÂÇÏ´øÁö ÇØ¼­ Àç»ıÀ» ¿øÇÏ´Â Å¬¸³ÀÇ ÀÌ¸§À» ¾Ë¾Æ¿Í¼­
-  Play(Å¬¸³ÀÌ¸§, Àç»ı¼Óµµ, Àç»ı½Ã°£, ºí·»µù¼Óµµ) ÇÔ¼ö¸¦ ÀÌ¿ëÇØ Àç»ı*/
+/*ì‚¬ìš©í•  ëª¨ë“  í´ë¦½ë“¤ì´ ë“±ë¡ë˜ì–´ìˆëŠ” animation controller ê°€ ì—°ê²°ëœ animator ê°€ í•„ìš”
+  GetAnimationClips()ë¥¼ ì´ìš©í•˜ì—¬ í˜„ì¬ ë“±ë¡ëœ í´ë¦½ë“¤ì„ ë°›ì•„ì˜¤ë“ ì§€, ì§ì ‘ ì…ë ¥í•˜ë˜ì§€ í•´ì„œ ì¬ìƒì„ ì›í•˜ëŠ” í´ë¦½ì˜ ì´ë¦„ì„ ì•Œì•„ì™€ì„œ
+  Play(í´ë¦½ì´ë¦„, ì¬ìƒì†ë„, ì¬ìƒì‹œê°„, ë¸”ë Œë”©ì†ë„) í•¨ìˆ˜ë¥¼ ì´ìš©í•´ ì¬ìƒ*/
 public class AnimationController : MonoBehaviour
 {
-    //[Header("¾Ö´Ï¸ŞÀÌ¼ÇµéÀÌ µî·ÏµÈ ¾Ö´Ï¸ŞÀÌ¼Ç ÄÁÆ®·Ñ·¯°¡ ÇÊ¿ä")]
+    //[Header("ì• ë‹ˆë©”ì´ì…˜ë“¤ì´ ë“±ë¡ëœ ì• ë‹ˆë©”ì´ì…˜ ì»¨íŠ¸ë¡¤ëŸ¬ê°€ í•„ìš”")]
     //public AnimatorController anicontrol;
-    [Header("È®ÀÎ¿ë")]
+    [Header("í™•ì¸ìš©")]
     public Animator animator;
     public int m_clipsnum;
     public AnimationClip[] m_clips;
@@ -28,7 +28,7 @@ public class AnimationController : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
             if(animator==null)
             {
-                Debug.Log($"{gameObject.name} animator component ¾øÀ½!");
+                Debug.Log($"{gameObject.name} animator component ì—†ìŒ!");
             }
         }
 
@@ -37,7 +37,7 @@ public class AnimationController : MonoBehaviour
 
     
 
-    //Å¬¸³ÀÌ¸§, Àç»ı¼Óµµ (±âº»ÀÌ 1¹è¼Ó), Àç»ı ½Ã°£ (Àç»ı½Ã°£ÀÌ 0ÀÌ¸é °è¼Ó ¹İº¹), ºí·»µù ½Ã°£(´ÙÀ½ µ¿ÀÛÀ¸·Î ³Ñ¾î°¡´Âµ¥ °É¸± ½Ã°£) 
+    //í´ë¦½ì´ë¦„, ì¬ìƒì†ë„ (ê¸°ë³¸ì´ 1ë°°ì†), ì¬ìƒ ì‹œê°„ (ì¬ìƒì‹œê°„ì´ 0ì´ë©´ ê³„ì† ë°˜ë³µ), ë¸”ë Œë”© ì‹œê°„(ë‹¤ìŒ ë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°€ëŠ”ë° ê±¸ë¦´ ì‹œê°„) 
     public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f)
     {
 
@@ -58,7 +58,7 @@ public class AnimationController : MonoBehaviour
         animator.CrossFade(pname, blendingtime);
     }
 
-    ////Å¬¸³ÀÌ¸§, Àç»ı¼Óµµ (±âº»ÀÌ 1¹è¼Ó), ºí·»µù ½Ã°£(´ÙÀ½ µ¿ÀÛÀ¸·Î ³Ñ¾î°¡´Âµ¥ °É¸± ½Ã°£) 
+    ////í´ë¦½ì´ë¦„, ì¬ìƒì†ë„ (ê¸°ë³¸ì´ 1ë°°ì†), ë¸”ë Œë”© ì‹œê°„(ë‹¤ìŒ ë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°€ëŠ”ë° ê±¸ë¦´ ì‹œê°„) 
     //public void Play(string pname, float PlaySpeed = 1.0f, float blendingtime = 0.1f)
     //{
 
@@ -74,7 +74,7 @@ public class AnimationController : MonoBehaviour
     //}
 
 
-    //¼±ÅÃÇÑ Å¬¸³ÀÇ ÃÑ ±æÀÌ¸¦ ¾Ë·ÁÁØ´Ù.
+    //ì„ íƒí•œ í´ë¦½ì˜ ì´ ê¸¸ì´ë¥¼ ì•Œë ¤ì¤€ë‹¤.
     public float GetClipLength(string pname)
     {
         float time = 0;
@@ -89,32 +89,32 @@ public class AnimationController : MonoBehaviour
         return time;
     }
 
-    //ÇöÀç ¾Ö´Ï¸ŞÀÌÅÍ¿¡ ¼³Á¤µÇ¾î ÀÖ´Â Å¬¸³µéÀÇ ¹è¿­À» ¹Ş¾Æ¿Â´Ù.
+    //í˜„ì¬ ì• ë‹ˆë©”ì´í„°ì— ì„¤ì •ë˜ì–´ ìˆëŠ” í´ë¦½ë“¤ì˜ ë°°ì—´ì„ ë°›ì•„ì˜¨ë‹¤.
     public AnimationClip[] GetAnimationClips()
     {
         return m_clips;
     }
 
-    //Àç»ı¼Óµµ¸¦ ¼³Á¤ÇÑ´Ù.
+    //ì¬ìƒì†ë„ë¥¼ ì„¤ì •í•œë‹¤.
     public void SetPlaySpeed(float PlaySpeed)
     {
         if (animator.speed != PlaySpeed)
             animator.speed = PlaySpeed;
     }
 
-    //ÇöÀç ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ıµÇ°í ÀÖ´Â ¼Óµµ¸¦ ¹Ş¾Æ¿Â´Ù.
+    //í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ì´ ì¬ìƒë˜ê³  ìˆëŠ” ì†ë„ë¥¼ ë°›ì•„ì˜¨ë‹¤.
     public float GetPlaySpeed()
     {
         return animator.speed;
     }
 
-    //Àç»ı Á¤Áö
+    //ì¬ìƒ ì •ì§€
     public void Stop()
     {
         animator.StopPlayback();
     }
 
-    //Àç»ı ÀÏ½ÃÁ¤Áö
+    //ì¬ìƒ ì¼ì‹œì •ì§€
     public void Pause()
     {
         prespeed = animator.speed;
@@ -122,7 +122,7 @@ public class AnimationController : MonoBehaviour
         //animator.CrossFade()
     }
 
-    //´Ù½Ã Àç»ı
+    //ë‹¤ì‹œ ì¬ìƒ
     public void Resume()
     {
         if(prespeed!=0)
@@ -138,12 +138,12 @@ public class AnimationController : MonoBehaviour
     //public IEnumerator CountTime(string playname, float desttime)
     //{
     //    float starttime = Time.time;
-    //    Debug.Log($"ÄÚ·çÆ¾ µé¾î¿È");
+    //    Debug.Log($"ì½”ë£¨í‹´ ë“¤ì–´ì˜´");
     //    while (true)
     //    {
     //        if (Time.time - starttime >= desttime)
     //        {
-    //            Debug.Log($"{playname} ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇàÇÔ");
+    //            Debug.Log($"{playname} ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰í•¨");
     //            animator.Play(playname);
     //            yield break;
     //        }
@@ -154,7 +154,7 @@ public class AnimationController : MonoBehaviour
     //}
 
 
-    //°ø°İÀÌ ½ÃÀÛµÈÁö ÀÏÁ¤ ½Ã°£ µÚ¿¡ ÀÌÆåÆ®¸¦ ½ÇÇàÇØ¾ß ÇÒ ¶§ »ç¿ë
+    //ê³µê²©ì´ ì‹œì‘ëœì§€ ì¼ì • ì‹œê°„ ë’¤ì— ì´í™íŠ¸ë¥¼ ì‹¤í–‰í•´ì•¼ í•  ë•Œ ì‚¬ìš©
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -175,14 +175,14 @@ public class AnimationController : MonoBehaviour
 
     //    if (pname == currentplayclipname)
     //    {
-    //        //Debug.Log("Àç»ıÁßÀÎ°Å Àç»ı");
+    //        //Debug.Log("ì¬ìƒì¤‘ì¸ê±° ì¬ìƒ");
     //        return;
     //    }
     //    currentplayclipname = pname;
     //    animator.CrossFade(pname, 0.3f, layer, normalizedTime);
     //}
 
-    //ÇöÀç Àç»ıÁßÀÎ Å¬¸³ÀÎÁö È®ÀÎÇÑ´Ù.
+    //í˜„ì¬ ì¬ìƒì¤‘ì¸ í´ë¦½ì¸ì§€ í™•ì¸í•œë‹¤.
     public bool IsNowPlaying(string pname)
     {
         return (currentplayclipname == pname);

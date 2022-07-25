@@ -10,11 +10,11 @@ public class CAnimationComponent : BaseComponent
     Animator animator;
 
 
-    //list´Â °¢°¢ÀÇ ani¿­°ÅÇüÀ» ÀÌ¿ëÇØ¼­ Á¢±Ù
+    //listëŠ” ê°ê°ì˜ aniì—´ê±°í˜•ì„ ì´ìš©í•´ì„œ ì ‘ê·¼
     public Dictionary<EnumTypes.eAnimationState, List<AnimationClip>> clips = new Dictionary<eAnimationState, List<AnimationClip>>();
 
     public Animation tempani;
-    //Å×½ºÆ®¿ë
+    //í…ŒìŠ¤íŠ¸ìš©
     public AnimationClip[] Attackclips;
 
     
@@ -58,7 +58,7 @@ public class CAnimationComponent : BaseComponent
         if(value)
         {
             value = value ? false : true;
-            //»óÅÂ´Â ÇÑ¹ø¿¡ ÇÑ°¡Áö¸¸ °¡´É (¿òÁ÷ÀÌ´Â»óÅÂ, °ø°İÇÏ´Â »óÅÂ, ÇÇ°İ´çÇÑ »óÅÂ...)
+            //ìƒíƒœëŠ” í•œë²ˆì— í•œê°€ì§€ë§Œ ê°€ëŠ¥ (ì›€ì§ì´ëŠ”ìƒíƒœ, ê³µê²©í•˜ëŠ” ìƒíƒœ, í”¼ê²©ë‹¹í•œ ìƒíƒœ...)
             for (EnumTypes.eAnimationState a = 0; a < EnumTypes.eAnimationState.AniStateMax; a++)
             {
                 if (a != state)

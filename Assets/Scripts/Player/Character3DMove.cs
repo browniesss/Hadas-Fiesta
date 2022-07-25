@@ -60,7 +60,7 @@ public class Character3DMove: MonoBehaviour
 
     public bool IsOutofControl = false;
 
-    public float CurGravity;//ÇöÀç º§·Î½ÃÆ¼ÀÇ y°ª
+    public float CurGravity;//í˜„ì¬ ë²¨ë¡œì‹œí‹°ì˜ yê°’
 
     private float LastJump;
 
@@ -97,9 +97,9 @@ public class Character3DMove: MonoBehaviour
 
     public float MaxAngle;
 
-    public float Gravity;//Áß·Â°ª(ÇÁ·¹ÀÓ´ÜÀ§·Î Áõ°¡½ÃÄÑÁÙ °ª)
+    public float Gravity;//ì¤‘ë ¥ê°’(í”„ë ˆì„ë‹¨ìœ„ë¡œ ì¦ê°€ì‹œì¼œì¤„ ê°’)
 
-    public float JumpPower = 120;//Á¡ÇÁ¸¦ ÇÏ¸é ÇØ´ç °ªÀ¸·Î curgravity°ªÀ» ¹Ù²ãÁØ´Ù.
+    public float JumpPower = 120;//ì í”„ë¥¼ í•˜ë©´ í•´ë‹¹ ê°’ìœ¼ë¡œ curgravityê°’ì„ ë°”ê¿”ì¤€ë‹¤.
 
     public float JumpcoolTime = 1f;
 
@@ -107,7 +107,7 @@ public class Character3DMove: MonoBehaviour
 
     public float MaxSlop = 70;
 
-    public float SlopAccel;//(Áß·Â°ª°ú °°ÀÌ ¹Ì²ø¾îÁú¶§ Á¡Á¡Áõ°¡µÉ °ª)
+    public float SlopAccel;//(ì¤‘ë ¥ê°’ê³¼ ê°™ì´ ë¯¸ëŒì–´ì§ˆë•Œ ì ì ì¦ê°€ë  ê°’)
 
     [Header("============TestVals============")]
 
@@ -169,7 +169,7 @@ public class Character3DMove: MonoBehaviour
         MoveDir = new Vector3(h, 0, v);
         IsMoving = false;
 
-        Input.GetAxisRaw("Mouse ScrollWheel");//ÁÜÀÎ ÁÜ¾Æ¿ô¿¡ »ç¿ë
+        Input.GetAxisRaw("Mouse ScrollWheel");//ì¤Œì¸ ì¤Œì•„ì›ƒì— ì‚¬ìš©
 
         if (Input.GetKey(KeyCode.W)) v += 1.0f;
         if (Input.GetKey(KeyCode.S)) v -= 1.0f;
@@ -205,17 +205,17 @@ public class Character3DMove: MonoBehaviour
 
         }
 
-        ////°ø°İ ÁßÀÏ ¶§´Â ¿òÁ÷ÀÏ ¼ö ¾ø´Ù.
+        ////ê³µê²© ì¤‘ì¼ ë•ŒëŠ” ì›€ì§ì¼ ìˆ˜ ì—†ë‹¤.
         //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
         //{
 
         //}
     }
 
-    //±¸¸£±â
+    //êµ¬ë¥´ê¸°
     public void Rolling()
     {
-        //¶¥¿¡ ÀÖ¾î¾ß ±¸¸£±â °¡´É
+        //ë•…ì— ìˆì–´ì•¼ êµ¬ë¥´ê¸° ê°€ëŠ¥
         if (!IsGrounded)
             return;
 
@@ -261,7 +261,7 @@ public class Character3DMove: MonoBehaviour
 
         if(IsOnTheSlop)
         {
-            CurVirVelocity = new Vector3(0, CurGravity + SlopAccel, 0);//Áß·Â°ª°ú °æ»ç·Î¿¡¼­ÀÇ ¹Ì²ô·¯Áú¶§ÀÇ °¡¼Óµµ°ª
+            CurVirVelocity = new Vector3(0, CurGravity + SlopAccel, 0);//ì¤‘ë ¥ê°’ê³¼ ê²½ì‚¬ë¡œì—ì„œì˜ ë¯¸ë„ëŸ¬ì§ˆë•Œì˜ ê°€ì†ë„ê°’
             
             //CurVirVelocity = new Vector3(0, 0, 0);
             if (IsSlip)
@@ -270,7 +270,7 @@ public class Character3DMove: MonoBehaviour
                 Vector3 temp = -CurGroundCross;
                 //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
                 temp = com.FpRoot.forward;
-                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//°æ»ç·Î¿¡ ÀÇÇÑ yÃà ÀÌµ¿¹æÇâ
+                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//ê²½ì‚¬ë¡œì— ì˜í•œ yì¶• ì´ë™ë°©í–¥
                 CurHorVelocity *= MoveSpeed;
                 CurHorVelocity *= -1.0f;
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
@@ -279,9 +279,9 @@ public class Character3DMove: MonoBehaviour
             else
             {
                 CurHorVelocity = new Vector3(WorldMove.x, 0.0f, WorldMove.z);
-                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//°æ»ç·Î¿¡ ÀÇÇÑ yÃà ÀÌµ¿¹æÇâ
-                //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//ÀÌÀü¿¡ »ç¿ëÇß´ø ¹«ºê
-                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//ÀÌ°Ç ½½¸³»óÅÂÀÏ¶§¸¸ ÀÌ¿ëÇÏµµ·Ï
+                CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//ê²½ì‚¬ë¡œì— ì˜í•œ yì¶• ì´ë™ë°©í–¥
+                //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//ì´ì „ì— ì‚¬ìš©í–ˆë˜ ë¬´ë¸Œ
+                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//ì´ê±´ ìŠ¬ë¦½ìƒíƒœì¼ë•Œë§Œ ì´ìš©í•˜ë„ë¡
             }
             Debug.DrawLine(this.transform.position, this.transform.position + (CurHorVelocity + CurVirVelocity));
             com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
@@ -338,7 +338,7 @@ public class Character3DMove: MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(testtart, testend);
 
-        //¼öÁ÷º¤ÅÍ
+        //ìˆ˜ì§ë²¡í„°
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(this.transform.position, this.transform.position + CurGroundCross);
 
@@ -356,9 +356,9 @@ public class Character3DMove: MonoBehaviour
         IsSlip = false;
         IsOnTheSlop = false;
         CurGroundSlopAngle = 0;
-        if (Time.time >= LastJump + 0.2f)//Á¡ÇÁÇÏ°í 0.2ÃÊ µ¿¾ÈÀº Áö¸é°Ë»ç¸¦ ÇÏÁö ¾Ê´Â´Ù.
+        if (Time.time >= LastJump + 0.2f)//ì í”„í•˜ê³  0.2ì´ˆ ë™ì•ˆì€ ì§€ë©´ê²€ì‚¬ë¥¼ í•˜ì§€ ì•ŠëŠ”ë‹¤.
         {
-            //Debug.Log("¹Ù´Ú");
+            //Debug.Log("ë°”ë‹¥");
             RaycastHit hit;
             testtart = com.CapsuleCol.transform.position;
             testend = testtart + Vector3.down * 0.2f;
@@ -391,8 +391,8 @@ public class Character3DMove: MonoBehaviour
     }
 
 
-    //¸ğµç È¸ÀüÀÌ ¿Ï·áµÈ ´ÙÀ½¿¡ µ¿ÀÛÇØ¾ß ÇÑ´Ù.
-    //x,zÃàÀÇ ¿òÁ÷ÀÓÀ» ´ã´ç yÃàÀÇ ¿òÁ÷ÀÓÀº µû·Î °ü¸®
+    //ëª¨ë“  íšŒì „ì´ ì™„ë£Œëœ ë‹¤ìŒì— ë™ì‘í•´ì•¼ í•œë‹¤.
+    //x,zì¶•ì˜ ì›€ì§ì„ì„ ë‹´ë‹¹ yì¶•ì˜ ì›€ì§ì„ì€ ë”°ë¡œ ê´€ë¦¬
     public void HorVelocity()
     {
         //CurHorVelocity = com.FpCamRig.forward;
@@ -400,9 +400,9 @@ public class Character3DMove: MonoBehaviour
 
         if (IsSlip)
         {
-            //¿òÁ÷ÀÓÀ» ÇöÀç ¹Ù´Ú °æ»ç°¢ÀÇ -·Î ÇØ¼­ È¸ÀüÀ» ½ÃÅ´
+            //ì›€ì§ì„ì„ í˜„ì¬ ë°”ë‹¥ ê²½ì‚¬ê°ì˜ -ë¡œ í•´ì„œ íšŒì „ì„ ì‹œí‚´
         }
-        CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//ÀÌ·°½ÄÀ¸·Î º¤ÅÍ¸¦ È¸Àü½ÃÅ³ ¼ö ÀÖ´Ù. ¿ªÀº ¼º¸³ÇÏÁö ¾Ê´Â´Ù.
+        CurHorVelocity = Quaternion.AngleAxis(-CurGroundSlopAngle, CurGroundCross) * CurHorVelocity;//ì´ëŸ­ì‹ìœ¼ë¡œ ë²¡í„°ë¥¼ íšŒì „ì‹œí‚¬ ìˆ˜ ìˆë‹¤. ì—­ì€ ì„±ë¦½í•˜ì§€ ì•ŠëŠ”ë‹¤.
 
     }
 
@@ -438,23 +438,23 @@ public class Character3DMove: MonoBehaviour
 
     public void Rotation()
     {
-        //1 ÀÎÄª ÀÏ¶§
-        //fp root·Î ÁÂ¿ìÈ¸Àü
-        //fp cam rig·Î »óÇÏÈ¸Àü
+        //1 ì¸ì¹­ ì¼ë•Œ
+        //fp rootë¡œ ì¢Œìš°íšŒì „
+        //fp cam rigë¡œ ìƒí•˜íšŒì „
         if (IsFPP)
         {
             RotateFP();
         }
-        else//3 ÀÎÄª ÀÏ¶§
-        //fp root·Î ÁÂ¿ìÈ¸Àü
-        //tp cam rig·Î ÁÂ¿ì ¹× »óÇÏÈ¸Àü
+        else//3 ì¸ì¹­ ì¼ë•Œ
+        //fp rootë¡œ ì¢Œìš°íšŒì „
+        //tp cam rigë¡œ ì¢Œìš° ë° ìƒí•˜íšŒì „
         {
             RotateTP();
             RotateTPFP();
         }
     }
 
-    //1ÀÎÄªÀÏ¶§È¸Àü 3ÀÎÄªÀº ³öµÎ°í 1ÀÎÄª Ä³¸¯ÅÍ¸¸ È¸Àü½ÃÄÑ ÁØ´Ù.
+    //1ì¸ì¹­ì¼ë•ŒíšŒì „ 3ì¸ì¹­ì€ ë†”ë‘ê³  1ì¸ì¹­ ìºë¦­í„°ë§Œ íšŒì „ì‹œì¼œ ì¤€ë‹¤.
     public void RotateFP()
     {
         float xRotPrev = com.FpRoot.localEulerAngles.y;
@@ -476,7 +476,7 @@ public class Character3DMove: MonoBehaviour
     }
 
 
-    //3ÀÎÄªÀÏ¶§
+    //3ì¸ì¹­ì¼ë•Œ
     public void RotateTP()
     {
         float xRotPrev = com.TpCamRig.localEulerAngles.y;
@@ -497,7 +497,7 @@ public class Character3DMove: MonoBehaviour
         com.TpCamRig.localEulerAngles = new Vector3(yRotNext, xRotNext, 0);
     }
 
-    //ÀÌ‹š´Â ¸¶¿ì½º·Î¿òÁ÷ÀÌ´Â°Ô¾Æ´Ï°í Å°º¸µå ÀÔ·Â¿¡ µû¶ó¼­  È¸Àü ÇØ¾ß ÇÏ±â¶§¹®¿¡ µû·Î ¸¸µê
+    //ì´ë–„ëŠ” ë§ˆìš°ìŠ¤ë¡œì›€ì§ì´ëŠ”ê²Œì•„ë‹ˆê³  í‚¤ë³´ë“œ ì…ë ¥ì— ë”°ë¼ì„œ  íšŒì „ í•´ì•¼ í•˜ê¸°ë•Œë¬¸ì— ë”°ë¡œ ë§Œë“¦
     public void RotateTPFP()
     {
         float nextRotY = 0;
@@ -562,11 +562,11 @@ public class Character3DMove: MonoBehaviour
             //AnimationClip[] clips = AnimationManager.Instance.GetAnimationClips(GetComponentInChildren<Animator>());
             //foreach(var a in clips)
             //{
-            //    Debug.Log($"¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³µé ¹Ş¾Æ¿È °³¼ö => {clips.Length} {a.name}");
+            //    Debug.Log($"ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ë“¤ ë°›ì•„ì˜´ ê°œìˆ˜ => {clips.Length} {a.name}");
             //}
             //AnimationManager.Instance.Play(GetComponentInChildren<Animator>(), clips[Random.Range(0,clips.Length)].name);
 
-            Debug.Log($"¾Ö´Ï¸ŞÀÌ¼Ç Ãâ·Â ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
+            Debug.Log($"ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥ ID = {GetComponentInChildren<Animator>().GetInstanceID()}");
         }
 
         //if (Input.GetMouseButton(1))
