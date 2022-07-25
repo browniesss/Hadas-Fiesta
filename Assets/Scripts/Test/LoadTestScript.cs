@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class LoadTestScript : MonoBehaviour
 {
+
+    public GameObject pos;
+    public GameObject pos1;
+
     // Start is called before the first frame update
     void Start()
     {
-       // CharacterCreate.Instance.CreateMonster()
+        GameMG.Instance.Resource.Instantiate("Terrain", pos.transform);
+
+        GameMG.Instance.Resource.Instantiate("PlayerCharacter", pos1.transform);
+
+        // CharacterCreate.Instance.CreateMonster()
     }
 
     public void cleic()
     {
-        GameMG.Instance.Resource.Instantiate("Terrain");
-
-        GameMG.Instance.Resource.Instantiate("PlayerCharacter");
-
+  
     }
 
     // Update is called once per frame
