@@ -16,13 +16,13 @@ public class test : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log(collision.gameObject.name);
+    //}
 
-    public void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name);
-    }
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log(other.name);
+    //}
 }

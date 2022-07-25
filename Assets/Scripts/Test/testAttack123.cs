@@ -193,7 +193,8 @@ public class testAttack123 : BaseComponent
 
     public void CreateEffect()
     {
-        preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
+        testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
+        //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
     }
 
@@ -226,7 +227,7 @@ public class testAttack123 : BaseComponent
 
         StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
 
-        testAttckmanager.AttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
+        testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
 
         
 
