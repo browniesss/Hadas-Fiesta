@@ -17,7 +17,7 @@ public class Battle_Character : MonoBehaviour
 
     [SerializeField]
     protected State_Handler state_handler;
-
+    public EnemyHpbar MyHpbar;
     // 스테이트 처리기를 생성. 캐릭터에 따라서 다른 스테이트 처리기를 받아옴. 
 
     [Header("Common Stats")] // 플레이어블 캐릭터, 몬스터 공용 스탯
@@ -80,7 +80,7 @@ public class Battle_Character : MonoBehaviour
         balance_gauge = info.P_mon_Balance;
         Armor = info.P_mon_Def;
         enemy_Grade = (Enemy_Grade)info.P_mon_Default;
-        index = int.Parse(info.P_mon_Index);
+       // index = int.Parse(info.P_mon_Index);
         Max_HP = info.P_mon_MaxHP;
         move_Speed = info.P_mon_moveSpeed;
         Character_Name = info.P_mon_nameKor;
@@ -104,11 +104,15 @@ public class Battle_Character : MonoBehaviour
         //anim = GetComponent<Animator>();
     }
 
-    public virtual void Damaged(float damage_Amount) // 공격 받았을 시 호출될 함수
+
+    public virtual void Damaged(float damage_Amount) // 怨듦꺽 諛쏆븯?????몄텧???⑥닔
     {
         Cur_HP -= (damage_Amount - Armor);
-    }
+        MyHpbar.Curhp = Cur_HP;
+        MyHpbar.hit();
 
+        Debug.Log("아악");
+    }
     public virtual void Skill_1()
     {
 

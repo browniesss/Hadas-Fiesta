@@ -5,52 +5,72 @@ using UnityEngine.UI;
 public class EnemyHpbar : Singleton<EnemyHpbar>
 {
     // Start is called before the first frame update
-    private Camera uiCamera; //UI Ä«¸Ş¶ó¸¦ ´ãÀ» º¯¼ö
+    private Camera uiCamera; //UI ì¹´ë©”ë¼ë¥¼ ë‹´ì„ ë³€ìˆ˜
     [SerializeField]
-    private Canvas canvas; //Äµ¹ö½º¸¦ ´ãÀ» º¯¼ö
-    private RectTransform rectParent; //ºÎ¸ğÀÇ rectTransform º¯¼ö¸¦ ÀúÀåÇÒ º¯¼ö
-    private RectTransform rectHp; //ÀÚ½ÅÀÇ rectTransform ÀúÀåÇÒ º¯¼ö
+    private Canvas canvas; //ìº”ë²„ìŠ¤ë¥¼ ë‹´ì„ ë³€ìˆ˜
+    private RectTransform rectParent; //ë¶€ëª¨ì˜ rectTransform ë³€ìˆ˜ë¥¼ ì €ì¥í•  ë³€ìˆ˜
+    private RectTransform rectHp; //ìì‹ ì˜ rectTransform ì €ì¥í•  ë³€ìˆ˜
     public Canvas enemyHpBarCanvas;
-    //HideInInspector´Â ÇØ´ç º¯¼ö ¼û±â±â, ±»ÀÌ º¸¿©ÁÙ ÇÊ¿ä°¡ ¾øÀ» ¶§ 
-    public Vector3 offset = Vector3.zero; //HpBar À§Ä¡ Á¶Àı¿ë, offsetÀº ¾îµğ¿¡ HpBar¸¦ À§Ä¡ Ãâ·ÂÇÒÁö
-    public Transform enemyTr; //Àû Ä³¸¯ÅÍÀÇ À§Ä¡
-    
+    //HideInInspectorëŠ” í•´ë‹¹ ë³€ìˆ˜ ìˆ¨ê¸°ê¸°, êµ³ì´ ë³´ì—¬ì¤„ í•„ìš”ê°€ ì—†ì„ ë•Œ 
+    public Vector3 offset = Vector3.zero; //HpBar ìœ„ì¹˜ ì¡°ì ˆìš©, offsetì€ ì–´ë””ì— HpBarë¥¼ ìœ„ì¹˜ ì¶œë ¥í• ì§€
+    public Transform enemyTr; //ì  ìºë¦­í„°ì˜ ìœ„ì¹˜
+
     public Slider myhp;
 
     public float Curhp;
     public float Maxhp;
+
+    public Vector3 hpBarOffset = new Vector3(-0.5f, 2.4f, 0);
+    public EnemyHpbar MyHpbar;
     void Start()
     {
-        canvas = GetComponentInParent<Canvas>(); //ºÎ¸ğ°¡ °¡Áö°íÀÖ´Â canvas °¡Á®¿À±â, Enemy HpBar canvasÀÓ
+        canvas = GetComponentInParent<Canvas>(); //ë¶€ëª¨ê°€ ê°€ì§€ê³ ìˆëŠ” canvas ê°€ì ¸ì˜¤ê¸°, Enemy HpBar canvasì„
         uiCamera = canvas.worldCamera;
         rectParent = canvas.GetComponent<RectTransform>();
         rectHp = this.gameObject.GetComponent<RectTransform>();
-       
+
     }
 
-    //LateUpdate´Â update ÀÌÈÄ ½ÇÇàÇÔ, ÀûÀÇ ¿òÁ÷ÀÓÀº Update¿¡¼­ ½ÇÇàµÇ´Ï ¿òÁ÷ÀÓ ÀÌÈÄ¿¡ HpBar¸¦ Ãâ·ÂÇÔ
+    //LateUpdateëŠ” update ì´í›„ ì‹¤í–‰í•¨, ì ì˜ ì›€ì§ì„ì€ Updateì—ì„œ ì‹¤í–‰ë˜ë‹ˆ ì›€ì§ì„ ì´í›„ì— HpBarë¥¼ ì¶œë ¥í•¨
     private void LateUpdate()
     {
-        var screenPos = Camera.main.WorldToScreenPoint(enemyTr.position + offset); //¿ùµåÁÂÇ¥(3D)¸¦ ½ºÅ©¸°ÁÂÇ¥(2D)·Î º¯°æ, offsetÀº ¿ÀºêÁ§Æ® ¸Ó¸® À§Ä¡
+        var screenPos = Camera.main.WorldToScreenPoint(enemyTr.position + offset); //ì›”ë“œì¢Œí‘œ(3D)ë¥¼ ìŠ¤í¬ë¦°ì¢Œí‘œ(2D)ë¡œ ë³€ê²½, offsetì€ ì˜¤ë¸Œì íŠ¸ ë¨¸ë¦¬ ìœ„ì¹˜
         /*
         if(screenPos.z < 0.0f)
         {
             screenPos *= -1.0f;
-            //x, y, (z) ¸ŞÀÎÄ«¸Ş¶ó¿¡¼­ XYÆò¸é±îÁöÀÇ °Å¸®
+            //x, y, (z) ë©”ì¸ì¹´ë©”ë¼ì—ì„œ XYí‰ë©´ê¹Œì§€ì˜ ê±°ë¦¬
         }
-        ¹éºä½ÃÁ¡¿¡¼­´Â µÚµ¹ °æ¿ì HpBar°¡ º¸ÀÌ´Â ¹®Á¦°¡ ÀÖ¾î¼­ À§ÀÇ ÄÚµå·Î ¾Èº¸ÀÌ°Ô ÇßÁö¸¸, ³ª´Â ÄõÅÍºä ½ÃÁ¡ÀÌ¶ó¼­ ÇÊ¿ä¾øÀ½
+        ë°±ë·°ì‹œì ì—ì„œëŠ” ë’¤ëŒ ê²½ìš° HpBarê°€ ë³´ì´ëŠ” ë¬¸ì œê°€ ìˆì–´ì„œ ìœ„ì˜ ì½”ë“œë¡œ ì•ˆë³´ì´ê²Œ í–ˆì§€ë§Œ, ë‚˜ëŠ” ì¿¼í„°ë·° ì‹œì ì´ë¼ì„œ í•„ìš”ì—†ìŒ
         */
 
         var localPos = Vector2.zero;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, uiCamera, out localPos); //½ºÅ©¸°ÁÂÇ¥¿¡¼­ Äµ¹ö½º¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Â ÁÂÇ¥·Î º¯°æ?
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, uiCamera, out localPos); //ìŠ¤í¬ë¦°ì¢Œí‘œì—ì„œ ìº”ë²„ìŠ¤ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì¢Œí‘œë¡œ ë³€ê²½?
 
-        rectHp.localPosition = localPos; //±× ÁÂÇ¥¸¦ localPos¿¡ ÀúÀå, °Å±â¿¡ hpbar¸¦ Ãâ·Â
+        rectHp.localPosition = localPos; //ê·¸ ì¢Œí‘œë¥¼ localPosì— ì €ì¥, ê±°ê¸°ì— hpbarë¥¼ ì¶œë ¥
 
-  //    myhp.value=(float)
+        //    myhp.value=(float)
     }
     public void hit()
     {
         myhp.value = (float)Curhp / (float)Maxhp;
     }
 
+    public void SetHpBar(float HP, Transform trans)
+    {
+        // enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
+        GameObject hpBar = UIManager.Instance.Prefabsload("Enemy HpBar Slider", UIManager.CANVAS_NUM.ex_skill);
+
+        var _hpbar = hpBar.GetComponent<EnemyHpbar>();
+        // hpBar.transform.SetParent(enemyHpBarCanvas.transform);
+        _hpbar.enemyTr = trans;
+        _hpbar.offset = hpBarOffset;
+        _hpbar.Maxhp = HP;
+        _hpbar.Curhp = HP;
+        var _test = hpBar.GetComponent<Slider>();
+        _hpbar.myhp = _test;
+        MyHpbar = _hpbar;
+
+
+    }
 }

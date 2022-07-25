@@ -11,4 +11,5 @@ public class StaticClass
     public static string AttackEnd = "AttackEnd";
     public static string AttackMove = "AttackMove";
     public static string PlayerAttackCollider = "리깅";
+    public static string Prefabs = "Prefabs/";
 }

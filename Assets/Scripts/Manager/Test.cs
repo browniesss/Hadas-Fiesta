@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    public Transform spawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,10 @@ public class Test : MonoBehaviour
         {
             
             UIManager.Instance.Remove("Test2");
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, spawn);
         }
     }
 }
