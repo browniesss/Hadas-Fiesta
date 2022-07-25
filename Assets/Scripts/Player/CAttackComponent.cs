@@ -31,16 +31,22 @@ public class CAttackComponent : BaseComponent
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
         public float NextMovementTimeVal;
 
+        //데미지
         public float damage;
 
+        //이펙트 생성 타이밍
         public float EffectStartTime;
 
+        //공격 이펙트
         public GameObject Effect;
 
+        //공격 이펙트의 위치
         public Transform EffectPosRot;
 
+        //공격 중 움직일 거리
         public float movedis;
 
+        //움직일 시간
         public float movetime;
     }
 
@@ -48,28 +54,40 @@ public class CAttackComponent : BaseComponent
     [System.Serializable]
     public class SkillInfo
     {
+        //스킬 이름 
         public string SkillName;
 
+        //스킬 번호
         public int SkillNum;
 
+        //스킬 애니메이션
         public AnimationClip aniclip;
 
+        //스킬 애니메이션 재생속도
         public float animationPlaySpeed;
 
+        //스킬 후딜레이
         public float MovementDelay;
 
+        //
         public float NextMovementTimeVal;
 
+        //데미지
         public float damage;
 
+        //이펙트
         public GameObject Effect;
 
+        //이펙트 생성 시간
         public float EffectStartTime;
 
+        //이펙트 생성 위치
         public Transform EffectPosRot;
 
+        //움직일 거리
         public float Movedis;
 
+        //움직일 시간
         public float MoveTime;
 
     }
@@ -101,6 +119,7 @@ public class CAttackComponent : BaseComponent
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
 
+        //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for(int i=0;i<attackinfos.Length;i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null), 
@@ -108,8 +127,8 @@ public class CAttackComponent : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.endCallback > (attackinfos[i].aniclip.name, AttackEnd));
         }
 
-
-        for(int i=0;i<skillinfos.Length;i++)
+        //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
+        for (int i=0;i<skillinfos.Length;i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
@@ -161,18 +180,21 @@ public class CAttackComponent : BaseComponent
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
 
-
+    //공격 함수
     public void Attack()
     {
+        //필요한 컴포넌트를 받아온다.
         if(movecom==null)
         {
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
 
+        //이미 공격중일때는 공격 불가
         if (curval.IsAttacking)
             return;
 
+        //공격중으로 바꿈
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
 
@@ -193,13 +215,14 @@ public class CAttackComponent : BaseComponent
         coroutine = Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect);
         StartCoroutine(coroutine);
 
-        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도록 실핼");
+        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
         animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
 
         
 
     }
 
+    //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
     public void AttackMove(string clipname)
     {
         for(int i=0;i<attackinfos.Length;i++)
@@ -242,7 +265,7 @@ public class CAttackComponent : BaseComponent
 
 
 
-    //공격애니메이션이 끝나면 해당 함수가 들어온다
+    //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
         

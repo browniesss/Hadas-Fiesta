@@ -23,12 +23,13 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
         //Slip,//movecom 각각의 컴포넌트들에서 애니메이션 관리
         //OutOfControl,//move, battelsys, guard 
 
-        Idle,
-        Move,
-        Attack,
-        Rolling,
-        Guard,
-        OutOfControl,
+        Idle,//기본
+        Move,//움직임
+        Attack,//공격
+        Rolling,//회피
+        Guard,//가드
+        GuardStun,//그냥 스턴과 가드 중 에서의 스턴을 구분하기 위해(그냥 스턴은 피격 당하지만 가드스턴은 피격당하지 않음)
+        OutOfControl,//스턴, 넉다운 등등
 
 
 

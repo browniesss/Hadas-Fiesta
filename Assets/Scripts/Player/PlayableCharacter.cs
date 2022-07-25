@@ -94,7 +94,7 @@ public class PlayableCharacter : MonoBehaviour
         //밸런스 게이지가 충분히 남아 있지 않으면 가드에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Guard)
         {
-            CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CGuardComponent;
+            CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
 
             guardcom.Damaged_Guard(damage);
         }

@@ -105,7 +105,8 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        if(state == CharacterStateMachine.eCharacterState.Guard)
+        if(state == CharacterStateMachine.eCharacterState.Guard||
+           state == CharacterStateMachine.eCharacterState.GuardStun)
         {
             //movecom.curval.IsMoving = false;
             return;

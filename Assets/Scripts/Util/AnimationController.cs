@@ -16,11 +16,12 @@ public class AnimationController : MonoBehaviour
     public AnimationClip[] m_clips;
     public string currentplayclipname;
     public float prespeed;
+    public float currentSpeed;
+    public float currnetPlayTime;
+    public float currentBlending;
     public delegate void Invoker();
 
     
-
-
     private void Awake()
     {
         if (!TryGetComponent<Animator>(out animator))
@@ -38,12 +39,15 @@ public class AnimationController : MonoBehaviour
     
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
-    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f)
+    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f,bool replay = false)
     {
-
-        if (pname == currentplayclipname)
+        //해당 변수가 true면 이미 재생중인 클립을 다시 재상하는게 가능
+        if(!replay)
         {
-            return;
+            if (pname == currentplayclipname)
+            {
+                return;
+            }
         }
 
         if(PlayTime!=0)

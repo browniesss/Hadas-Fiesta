@@ -5,20 +5,26 @@ using UnityEngine;
 public class CGuardComponent : BaseComponent
 {
     public CMoveComponent movecom;
+    public AnimationController animator;
+    public AnimationEventSystem eventsystem;
+    //public IEnumerator coroutine;
+
 
     [Header("============Guard Options============")]
     public float GuardTime;//최대로 가드를 할 수 있는 시간
-    public float GuardKnockBackTime;
+    public float GuardStunTime;//가드 경직 시간
     public int MaxGuardGauge;//
     public int BalanceDecreaseVal;
-
+    public AnimationClip GuardStunClip;
+    public AnimationClip GuardClip;
 
     [Header("============Cur Values============")]
     public int CurGuardGauge;
     public bool nowGuard;
     public float GaugeDownInterval;
     //public bool playingCor;
-    public IEnumerator coroutine;
+    public IEnumerator guardcoroutine;
+    public IEnumerator stuncoroutine;
     public delegate void Invoker();
 
     public void Guard()
@@ -31,18 +37,18 @@ public class CGuardComponent : BaseComponent
 
         movecom.curval.IsGuard = true;
 
-        movecom.com.animator.Play("_Guard", 2.0f);
+        movecom.com.animator.Play(GuardClip.name, 2.0f);
 
-        if (coroutine != null)
+        if (guardcoroutine != null)
         {
             //playingCor = false;
             //Debug.Log("실행중 나감");
             StopCoroutine("Cor_TimeCounter");
-            coroutine = null;
+            guardcoroutine = null;
 
         }
-        coroutine = Cor_TimeCounter(GuardTime, GuardDown);
-        StartCoroutine(coroutine);
+        guardcoroutine = Cor_TimeCounter(GuardTime, GuardDown);
+        StartCoroutine(guardcoroutine);
     }
 
     //
@@ -51,12 +57,17 @@ public class CGuardComponent : BaseComponent
         if (!movecom.curval.IsGuard)
             return;
 
-        if (coroutine!=null)
+        if (guardcoroutine != null)
         {
             //playingCor = false;
             //Debug.Log("실행중 나감");
-            StopCoroutine(coroutine);
-            coroutine = null;
+            StopCoroutine(guardcoroutine);
+            if(stuncoroutine!=null)
+            {
+                StopCoroutine(stuncoroutine);
+                stuncoroutine = null;
+            }
+            guardcoroutine = null;
         }
             
 
@@ -76,7 +87,7 @@ public class CGuardComponent : BaseComponent
             {
                 //Debug.Log("시간다됨");
                 invoker.Invoke();
-                coroutine = null;
+                //guardcoroutine = null;
                 //playingCor = false;
                 yield break;
             }
@@ -91,7 +102,7 @@ public class CGuardComponent : BaseComponent
         if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
         {
             PlayableCharacter.Instance.status.CurBalance -= BalanceDecreaseVal;
-            GuardKnockBack();
+            GuardStun();
         }
         else
         {
@@ -101,9 +112,25 @@ public class CGuardComponent : BaseComponent
 
 
     //가드넉백상태는 outofcontrol 상태로 넘어가지 않고 가드중인 상태인 것으로 한다.
-    public void GuardKnockBack()
+    public void GuardStun()
     {
+        CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.GuardStun);
+        animator.Play(GuardStunClip.name,2.8f);
+        stuncoroutine = Cor_TimeCounter(GuardStunTime, StunEnd);
+        StartCoroutine(stuncoroutine);
+        // Cor_TimeCounter
+    }
 
+    public void StunEnd()
+    {
+        Debug.Log("스턴끝 들어옴");
+        CharacterStateMachine.eCharacterState prestate = CharacterStateMachine.Instance.GetPreState();
+        CharacterStateMachine.Instance.SetState(prestate);
+        //if(prestate == CharacterStateMachine.eCharacterState.Guard)
+        //{
+        //    movecom.com.animator.Play(GuardClip.name, 2.0f);
+        //}
+        stuncoroutine = null; 
     }
 
     public override void InitComtype()
@@ -114,7 +141,11 @@ public class CGuardComponent : BaseComponent
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponentInChildren<AnimationController>();
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(GuardStunClip.name, AttackEnd));
     }
 
     // Update is called once per frame
