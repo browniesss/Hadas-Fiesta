@@ -27,7 +27,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
 
         GameObject a = Resources.Load<GameObject>(StaticClass.Prefabs + "Skeleton_Knight");
-        a.transform.position = trans.position;
+     //   a.transform.position = trans.position;
         a.GetComponent<Battle_Character>().Stat_Initialize(data);
         // trans.position = q;
 
