@@ -14,6 +14,8 @@ public class LoadTestScript : MonoBehaviour
     {
         GameMG.Instance.Resource.Instantiate("Terrain");
 
+        GameMG.Instance.Resource.Instantiate("PlayerCharacter");
+
     }
 
     // Update is called once per frame
