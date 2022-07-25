@@ -24,4 +24,11 @@ namespace Enemy_Enum
         Skill_3_sel,
         Normal_Attack,
     }
+
+    public enum Enemy_Attack_Logic
+    {
+        Melee_Attack = 0,
+        Long_Attack,
+        Attack_Logic_Amount,
+    }
 }

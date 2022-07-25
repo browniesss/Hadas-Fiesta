@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
 public class AI
 {
     public Battle_Character b_c;
@@ -11,6 +12,13 @@ public class AI
     public List<State> pre_State_List;
 
     public NavMeshAgent navMesh;
+
+    public void AI_Init(Battle_Character b_c)
+    {
+        this.b_c = b_c;
+
+        navMesh = b_c.GetComponent<NavMeshAgent>();
+    }
 
     public void AI_Update()
     {

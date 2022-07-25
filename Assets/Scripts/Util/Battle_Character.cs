@@ -56,7 +56,8 @@ public class Battle_Character : MonoBehaviour
 
     [Header("Etc Stats")]
     public GameObject cur_Target;
-    public float Attack_Range; // 사거리
+    public float Attack_Melee_Range; // 사거리
+    public float Attack_Long_Range; // 사거리
     public int need_Mana; // 스킬 사용시 필요한 마나
     public int next_Skill;
     protected Animator anim;
@@ -70,8 +71,9 @@ public class Battle_Character : MonoBehaviour
     public float enemy_Skill_1_damage;
     public float enemy_Skill_2_damage;
     public float enemy_Skill_3_damage;
+    public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
 
-    public AI real_AI; 
+    public AI real_AI;
 
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
@@ -82,7 +84,7 @@ public class Battle_Character : MonoBehaviour
         balance_gauge = info.P_mon_Balance;
         Armor = info.P_mon_Def;
         enemy_Grade = (Enemy_Grade)info.P_mon_Default;
-       // index = int.Parse(info.P_mon_Index);
+        // index = int.Parse(info.P_mon_Index);
         Max_HP = info.P_mon_MaxHP;
         move_Speed = info.P_mon_moveSpeed;
         Character_Name = info.P_mon_nameKor;
@@ -115,6 +117,7 @@ public class Battle_Character : MonoBehaviour
 
         Debug.Log("아악");
     }
+
     public virtual void Skill_1()
     {
 
