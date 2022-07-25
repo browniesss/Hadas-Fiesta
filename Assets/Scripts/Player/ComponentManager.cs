@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ÇöÀç °´Ã¼¿Í °´Ã¼ÀÇ ÇÏÀ§¿¡ ÀÖ´Â ¸ðµç Ä³¸¯ÅÍ°ü·Ã ÄÄÆ÷³ÍÆ®µéÀ» Á¾ÇÕÇØ¼­ µî·ÏÇÏ°í °ü¸®ÇÑ´Ù.
-//°¢°¢ÀÇ µî·ÏµÈ ÄÄÆ÷³ÍÆ®µéÀº ¼­·Î°£ µ¥ÀÌÅÍ¸¦ ÁÖ°í¹ÞÀ»¶§ ÄÄÆ÷³ÍÆ® ¸Å´ÏÀú¸¦ ÅëÇØ¼­ ÁÖ°í¹Þ´Â´Ù.
+//í˜„ìž¬ ê°ì²´ì™€ ê°ì²´ì˜ í•˜ìœ„ì— ìžˆëŠ” ëª¨ë“  ìºë¦­í„°ê´€ë ¨ ì»´í¬ë„ŒíŠ¸ë“¤ì„ ì¢…í•©í•´ì„œ ë“±ë¡í•˜ê³  ê´€ë¦¬í•œë‹¤.
+//ê°ê°ì˜ ë“±ë¡ëœ ì»´í¬ë„ŒíŠ¸ë“¤ì€ ì„œë¡œê°„ ë°ì´í„°ë¥¼ ì£¼ê³ ë°›ì„ë•Œ ì»´í¬ë„ŒíŠ¸ ë§¤ë‹ˆì €ë¥¼ í†µí•´ì„œ ì£¼ê³ ë°›ëŠ”ë‹¤.
 //public class ComponentManager : MonoBehaviour
 //{
 //    static ComponentManager _CMInstance;

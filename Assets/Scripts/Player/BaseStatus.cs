@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//·¹º§ÀÌ º¯ÇÒ¶§¸¶´Ù Ä³¸¯ÅÍ ½ºÅÈ Á¤º¸µéÀ» ¹Ş¾Æ¿Í¼­ ÃÊ±âÈ­ ÇØÁØ´Ù.
+//ë ˆë²¨ì´ ë³€í• ë•Œë§ˆë‹¤ ìºë¦­í„° ìŠ¤íƒ¯ ì •ë³´ë“¤ì„ ë°›ì•„ì™€ì„œ ì´ˆê¸°í™” í•´ì¤€ë‹¤.
 public class BaseStatus
 {
     [Header("=========================")]
@@ -18,9 +18,9 @@ public class BaseStatus
     [SerializeField]
     private float curStamina;
     [SerializeField]
-    private float damage;//°ø°İ·Â
+    private float damage;//ê³µê²©ë ¥
     [SerializeField]
-    private float defense;//¹æ¾î·Â
+    private float defense;//ë°©ì–´ë ¥
     [SerializeField]
     private float maxBalance;
     [SerializeField]
@@ -77,7 +77,7 @@ public class BaseStatus
         set
         {
             curHP = value;
-            Debug.Log($"ÇöÀç HP º¯È­ {curHP}");
+            Debug.Log($"í˜„ì¬ HP ë³€í™” {curHP}");
         }
     }
     

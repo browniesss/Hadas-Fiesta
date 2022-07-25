@@ -7,7 +7,7 @@ public class CGuardComponent : BaseComponent
     public CMoveComponent movecom;
 
     [Header("============Guard Options============")]
-    public float GuardTime;//ÃÖ´ë·Î °¡µå¸¦ ÇÒ ¼ö ÀÖ´Â ½Ã°£
+    public float GuardTime;//ìµœëŒ€ë¡œ ê°€ë“œë¥¼ í•  ìˆ˜ ìˆëŠ” ì‹œê°„
     public float GuardKnockBackTime;
     public int MaxGuardGauge;//
     public int BalanceDecreaseVal;
@@ -36,7 +36,7 @@ public class CGuardComponent : BaseComponent
         if (coroutine != null)
         {
             //playingCor = false;
-            //Debug.Log("½ÇÇàÁß ³ª°¨");
+            //Debug.Log("ì‹¤í–‰ì¤‘ ë‚˜ê°");
             StopCoroutine("Cor_TimeCounter");
             coroutine = null;
 
@@ -54,7 +54,7 @@ public class CGuardComponent : BaseComponent
         if (coroutine!=null)
         {
             //playingCor = false;
-            //Debug.Log("½ÇÇàÁß ³ª°¨");
+            //Debug.Log("ì‹¤í–‰ì¤‘ ë‚˜ê°");
             StopCoroutine(coroutine);
             coroutine = null;
         }
@@ -64,17 +64,17 @@ public class CGuardComponent : BaseComponent
         //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
     }
 
-    //°ø°İÀÌ ½ÃÀÛµÈÁö ÀÏÁ¤ ½Ã°£ µÚ¿¡ ÀÌÆåÆ®¸¦ ½ÇÇàÇØ¾ß ÇÒ ¶§ »ç¿ë
+    //ê³µê²©ì´ ì‹œì‘ëœì§€ ì¼ì • ì‹œê°„ ë’¤ì— ì´í™íŠ¸ë¥¼ ì‹¤í–‰í•´ì•¼ í•  ë•Œ ì‚¬ìš©
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         //playingCor = true;
         float starttime = Time.time;
-        //Debug.Log("´Ù½Ã½ÃÀÛ");
+        //Debug.Log("ë‹¤ì‹œì‹œì‘");
         while (true)
         {
             if ((Time.time - starttime) >= time)
             {
-                //Debug.Log("½Ã°£´ÙµÊ");
+                //Debug.Log("ì‹œê°„ë‹¤ë¨");
                 invoker.Invoke();
                 coroutine = null;
                 //playingCor = false;
@@ -85,7 +85,7 @@ public class CGuardComponent : BaseComponent
     }
 
 
-    //°¡µåÁßÀÏ¶§ µ¥¹ÌÁö°¡ µé¾î¿ÔÀ»¶§´Â ÀÌÂÊÀ¸·Î µé¾î¿Â´Ù.
+    //ê°€ë“œì¤‘ì¼ë•Œ ë°ë¯¸ì§€ê°€ ë“¤ì–´ì™”ì„ë•ŒëŠ” ì´ìª½ìœ¼ë¡œ ë“¤ì–´ì˜¨ë‹¤.
     public void Damaged_Guard(float damage)
     {
         if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
@@ -100,7 +100,7 @@ public class CGuardComponent : BaseComponent
     }
 
 
-    //°¡µå³Ë¹é»óÅÂ´Â outofcontrol »óÅÂ·Î ³Ñ¾î°¡Áö ¾Ê°í °¡µåÁßÀÎ »óÅÂÀÎ °ÍÀ¸·Î ÇÑ´Ù.
+    //ê°€ë“œë„‰ë°±ìƒíƒœëŠ” outofcontrol ìƒíƒœë¡œ ë„˜ì–´ê°€ì§€ ì•Šê³  ê°€ë“œì¤‘ì¸ ìƒíƒœì¸ ê²ƒìœ¼ë¡œ í•œë‹¤.
     public void GuardKnockBack()
     {
 

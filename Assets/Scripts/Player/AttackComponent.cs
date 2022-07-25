@@ -59,7 +59,7 @@ public class AttackComponent : MonoBehaviour
         if (!B_AttackOn)
         {
             B_AttackOn = true;
-            Debug.Log("∞¯∞›");
+            Debug.Log("Í≥µÍ≤©");
             foreach (Collider coll in colliders)
             {
                 Debug.Log(coll.name);
@@ -83,11 +83,11 @@ public class AttackComponent : MonoBehaviour
     {
         if (animator == null)
         {
-            Debug.Log("¿Ã∞≈ Ω««‡");
+            Debug.Log("Ïù¥Í±∞ Ïã§Ìñâ");
             
         }
 
-        Debug.Log("∞¯∞› ≥°");      
+        Debug.Log("Í≥µÍ≤© ÎÅù");      
 
         foreach (Collider coll in colliders)
         {

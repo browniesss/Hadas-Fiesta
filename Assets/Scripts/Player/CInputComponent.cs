@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/*À¯ÀúÀÇ ÀÔ·ÂÀ» Ã³¸®ÇÑ´Ù.*/
+/*ìœ ì €ì˜ ì…ë ¥ì„ ì²˜ë¦¬í•œë‹¤.*/
 public class CInputComponent : BaseComponent
 {
-    //Ä³¸¯ÅÍÀÇ ¸ğµç ÄÄÆ÷³ÍÆ®¸¦ °ü¸®ÇÏ±â ½±°Ô ÇÏ±â À§ÇØ basecomponent¸¦ »ó¼Ó¹ŞÀº ½ºÅ©¸³Æ®µéÀ» componentmanager¿¡¼­ °ü¸®ÇÑ´Ù.
+    //ìºë¦­í„°ì˜ ëª¨ë“  ì»´í¬ë„ŒíŠ¸ë¥¼ ê´€ë¦¬í•˜ê¸° ì‰½ê²Œ í•˜ê¸° ìœ„í•´ basecomponentë¥¼ ìƒì†ë°›ì€ ìŠ¤í¬ë¦½íŠ¸ë“¤ì„ componentmanagerì—ì„œ ê´€ë¦¬í•œë‹¤.
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.InputCom;
     }
     
-    //»ç¿ëÇÒ Å° ÁöÁ¤
+    //ì‚¬ìš©í•  í‚¤ ì§€ì •
     [System.Serializable]
     public class KeySetting
     {
@@ -38,17 +38,17 @@ public class CInputComponent : BaseComponent
     [Header("Keys")]
     public KeySetting _key = new KeySetting();
 
-    //input¿¡¼­ ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®µé
+    //inputì—ì„œ í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸ë“¤
     [Header("Components")]
-    //1. move ÄÄÆ÷³ÍÆ®
+    //1. move ì»´í¬ë„ŒíŠ¸
     public CMoveComponent movecom;
-    //2. Attack ÄÄÆ÷³ÍÆ®
+    //2. Attack ì»´í¬ë„ŒíŠ¸
     public CAttackComponent attackcom;
-    //3. Defence ÄÄÆ÷³ÍÆ®
+    //3. Defence ì»´í¬ë„ŒíŠ¸
     public CGuardComponent guardcom;
     
    
-    //Å°¿Í ¸¶¿ì½º ÀÔ·ÂÀ» Ã³¸®ÇÑ´Ù.
+    //í‚¤ì™€ ë§ˆìš°ìŠ¤ ì…ë ¥ì„ ì²˜ë¦¬í•œë‹¤.
     void KeyInput()
     {
         if (movecom == null)
@@ -61,8 +61,8 @@ public class CInputComponent : BaseComponent
         movecom.curval.IsMoving = false;
 
 
-        movecom.MouseMove = new Vector2(0, 0);//¸¶¿ì½º ¿òÁ÷ÀÓ
-        movecom.MoveDir = new Vector3(0, 0, 0);//wasd Å° ÀÔ·Â¿¡ µû¸¥ ÀÌµ¿ ¹æÇâ
+        movecom.MouseMove = new Vector2(0, 0);//ë§ˆìš°ìŠ¤ ì›€ì§ì„
+        movecom.MoveDir = new Vector3(0, 0, 0);//wasd í‚¤ ì…ë ¥ì— ë”°ë¥¸ ì´ë™ ë°©í–¥
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
@@ -77,7 +77,7 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        //if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//È¸ÇÇÁß, ¶³¾îÁö´ÂÁß, °ø°İÇÏ´Â Áß¿¡´Â ¿òÁ÷ÀÏ ¼ö´Â ¾øÁö¸¸ ¸¶¿ì½º¸¦ ¿òÁ÷¿© È­¸éÀ» µ¹¸®´Â°ÍÀº °¡´É
+        //if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//íšŒí”¼ì¤‘, ë–¨ì–´ì§€ëŠ”ì¤‘, ê³µê²©í•˜ëŠ” ì¤‘ì—ëŠ” ì›€ì§ì¼ ìˆ˜ëŠ” ì—†ì§€ë§Œ ë§ˆìš°ìŠ¤ë¥¼ ì›€ì§ì—¬ í™”ë©´ì„ ëŒë¦¬ëŠ”ê²ƒì€ ê°€ëŠ¥
         //{
         //    movecom.curval.IsMoving = false;
         //    return;
@@ -85,14 +85,14 @@ public class CInputComponent : BaseComponent
 
         
 
-        //¿ŞÂÊ ¸¶¿ì½º Å¬¸¯
+        //ì™¼ìª½ ë§ˆìš°ìŠ¤ í´ë¦­
         if (Input.GetMouseButtonDown(0))
         {
             LeftMouseDown();
             return;
         }
 
-        //¿À¸¥ÂÊ ¸¶¿ì½º Å¬¸¯
+        //ì˜¤ë¥¸ìª½ ë§ˆìš°ìŠ¤ í´ë¦­
         if (Input.GetMouseButtonDown(1))
         {
             RightMouseDown();
@@ -111,10 +111,10 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        Input.GetAxisRaw("Mouse ScrollWheel");//ÁÜÀÎ ÁÜ¾Æ¿ô¿¡ »ç¿ë
+        Input.GetAxisRaw("Mouse ScrollWheel");//ì¤Œì¸ ì¤Œì•„ì›ƒì— ì‚¬ìš©
 
-        //space Ã³¸®
-        //±¸¸£±â¸¦ ¸ÕÀú Ã³¸®ÇÏ°í ¿òÁ÷ÀÓÀº Ã³¸®ÇÏÁö ¾Ê°Ô ÇÏ±â À§ÇØ¼­
+        //space ì²˜ë¦¬
+        //êµ¬ë¥´ê¸°ë¥¼ ë¨¼ì € ì²˜ë¦¬í•˜ê³  ì›€ì§ì„ì€ ì²˜ë¦¬í•˜ì§€ ì•Šê²Œ í•˜ê¸° ìœ„í•´ì„œ
         if (Input.GetKey(_key.Rolling))
         {
             movecom.Rolling();
@@ -140,7 +140,7 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        //wasd Ã³¸®
+        //wasd ì²˜ë¦¬
         if (Input.GetKey(_key.foward)) v += 1.0f;
         if (Input.GetKey(_key.back)) v -= 1.0f;
         if (Input.GetKey(_key.left)) h -= 1.0f;
@@ -148,13 +148,13 @@ public class CInputComponent : BaseComponent
 
         movecom.MoveDir = new Vector3(h, 0, v);
 
-        //left shift Ã³¸®
+        //left shift ì²˜ë¦¬
         if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
         else movecom.curval.IsRunning = false;
 
         
 
-        //ÀÌµ¿°ªÀÌ Á¶±İÀÌ¶óµµ ÀÖÀ¸¸é ¿òÁ÷ÀÌ´ÂÁßÀ¸·Î ÆÇ´Ü
+        //ì´ë™ê°’ì´ ì¡°ê¸ˆì´ë¼ë„ ìˆìœ¼ë©´ ì›€ì§ì´ëŠ”ì¤‘ìœ¼ë¡œ íŒë‹¨
         if (movecom.MoveDir.magnitude > 0 )
         {
             movecom.curval.IsMoving = true;
@@ -219,7 +219,7 @@ public class CInputComponent : BaseComponent
 
     void Update()
     {
-        ////¿ŞÂÊ ¸¶¿ì½º Å¬¸¯
+        ////ì™¼ìª½ ë§ˆìš°ìŠ¤ í´ë¦­
         //if(Input.GetMouseButtonDown(0))
         //{
         //    if (attackcom == null)
@@ -228,7 +228,7 @@ public class CInputComponent : BaseComponent
         //    //movecom.curval.IsAttacking = true;
         //}
 
-        ////¿À¸¥ÂÊ ¸¶¿ì½º Å¬¸¯
+        ////ì˜¤ë¥¸ìª½ ë§ˆìš°ìŠ¤ í´ë¦­
         //if(Input.GetMouseButtonDown(1))
         //{
         //    if (guardcom == null)
@@ -246,21 +246,21 @@ public class CInputComponent : BaseComponent
         //    //movecom.curval.IsGuard = false;
         //}
 
-        //³Ë¹é Å×½ºÆ®
+        //ë„‰ë°± í…ŒìŠ¤íŠ¸
         if(Input.GetKeyDown(KeyCode.U))
         {
             PlayableCharacter.Instance.BeAttacked(10);
             //movecom.KnockBack();
         }
 
-        //³Ë´Ù¿î Å×½ºÆ®
+        //ë„‰ë‹¤ìš´ í…ŒìŠ¤íŠ¸
         if (Input.GetKeyDown(KeyCode.I))
         {
             PlayableCharacter.Instance.BeAttacked(90);
             //movecom.KnockDown();
         }
 
-        //Å° ÀÔ·Â
+        //í‚¤ ì…ë ¥
         KeyInput();
     }
 }
