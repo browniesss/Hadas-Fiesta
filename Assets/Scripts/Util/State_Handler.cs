@@ -6,7 +6,7 @@ using UnityEngine.AI;
 // 스테이트 처리기 함수
 public abstract class State_Handler : MonoBehaviour
 {
-    public State state;
+    public _State state;
 
     [SerializeField]
     protected Battle_Character battle_Character;

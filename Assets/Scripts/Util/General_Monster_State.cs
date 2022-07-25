@@ -8,22 +8,22 @@ public class General_Monster_State : State_Handler
     {
         switch (state)
         {
-            case State.Patrol_Enter:
+            case _State.Patrol_Enter:
                 Patrol_Enter_Process();
                 break;
-            case State.Patrol:
+            case _State.Patrol:
                 Patrol_Process();
                 break;
-            case State.Trace:
+            case _State.Trace:
                 Trace_Process();
                 break;
-            case State.Attack:
+            case _State.Attack:
                 Attack_Process();
                 break;
-            case State.Return:
+            case _State.Return:
                 Return_Process();
                 break;
-            case State.Die:
+            case _State.Die:
                 Die_Process();
                 break;
         }

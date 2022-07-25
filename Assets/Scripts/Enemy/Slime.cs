@@ -56,7 +56,7 @@ public class Slime : Battle_Character
         Debug.Log(dirvec);
         GetComponent<Rigidbody>().AddForce(dirvec * 400f);
 
-        ai.now_State = State.Next_Wait;
+        ai.now_State = _State.Next_Wait;
 
         Player_Mana = 0;
 
@@ -72,12 +72,12 @@ public class Slime : Battle_Character
         state_handler.navMesh.enabled = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-        ai.now_State = State.Patrol_Enter;
+        ai.now_State = _State.Patrol_Enter;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && ai.now_State == State.Next_Wait)
+        if (collision.gameObject.tag == "Player" && ai.now_State == _State.Next_Wait)
         {
             //offset = collision.transform.position - collision.contacts[0].point;
 
@@ -90,7 +90,7 @@ public class Slime : Battle_Character
 
             transform.parent = attached_Player.transform;
 
-            ai.now_State = State.Attack;
+            ai.now_State = _State.Attack;
         }
     }
 
