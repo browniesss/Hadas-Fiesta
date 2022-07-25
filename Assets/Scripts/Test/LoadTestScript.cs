@@ -7,7 +7,7 @@ public class LoadTestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       // CharacterCreate.Instance.CreateMonster()
     }
 
     public void cleic()
