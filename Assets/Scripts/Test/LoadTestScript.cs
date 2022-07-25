@@ -7,11 +7,15 @@ public class LoadTestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameMG.Instance.Resource.Instantiate("susu");
 
     }
 
-    
+    public void cleic()
+    {
+        GameMG.Instance.Resource.Instantiate("Terrain");
+
+    }
+
     // Update is called once per frame
     void Update()
     {
