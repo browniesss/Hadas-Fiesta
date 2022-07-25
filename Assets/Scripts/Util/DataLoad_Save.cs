@@ -19,6 +19,10 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
     [SerializeField]
     List<Monster_aconstant> Monster_A_constantDB_List = new List<Monster_aconstant>();
 
+    private void Awake()
+    {
+        Init();
+    }
 
     public void Init()
     {
@@ -171,7 +175,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
 
     void Start()
     {
-        Init();
+       // Init();
         //TestScp();
     }
 

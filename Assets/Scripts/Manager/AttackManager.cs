@@ -44,7 +44,7 @@ public class AttackManager : Singleton<AttackManager>
     //{
     //    if (effectobj != null)
     //    {
-    //        Debug.Log($"dasdw°ø°Ý ³¡ µé¾î¿È -> {s_val}");
+    //        Debug.Log($"dasdwê³µê²© ë ë“¤ì–´ì˜´ -> {s_val}");
     //        effectobj.transform.parent = preparent;
     //    }
 
@@ -57,7 +57,7 @@ public class AttackManager : Singleton<AttackManager>
 
     public void AddComponent(BaseComponent com , string keyname)
     {
-        //ÀÓ½Ã
+        //ìž„ì‹œ
         AttackComList.Add(com);
     }
 
@@ -78,13 +78,19 @@ public class AttackManager : Singleton<AttackManager>
     public Transform CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime)
     {
         GameObject effectobj;
-       
+        Collider testcol;
+        
 
         effectobj = GameObject.Instantiate(effect);
+
+        testcol = effectobj.GetComponent<Collider>();
+        testcol.enabled = true;
+
+
         effectobj.transform.position = EffectPosRot.position;
         effectobj.transform.rotation = EffectPosRot.rotation;
         effectobj.transform.parent = EffectPosRot;
-
+        
         //Destroy(effectobj, destroyTime);
 
         return effectobj.transform.parent;

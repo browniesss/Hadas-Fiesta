@@ -107,10 +107,13 @@ public class testAttack123 : BaseComponent
     {
         colliders = GetComponentsInChildren<Collider>();
 
-        for(int i=0;i<2;i++)
-        {
-            Debug.Log( colliders[i].name);
-        }
+        //for(int i=0;i<2;i++)
+        //{
+        //    if(colliders[i].name == StaticClass.PlayerAttackCollider)
+        //    {
+        //        colliders[i].
+        //    }
+        //}
 
 
         for (int i = 0; i < Attack_InformationList.Count; i++)
@@ -190,7 +193,8 @@ public class testAttack123 : BaseComponent
 
     public void CreateEffect()
     {
-        preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
+        preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
+        //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
     }
 
     public void Attack()
