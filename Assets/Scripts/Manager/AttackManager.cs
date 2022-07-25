@@ -55,25 +55,16 @@ public class AttackManager : Singleton<AttackManager>
     //    lastAttackTime = Time.time;
     //}
 
-    public void AddComponent(BaseComponent com)
+    public void AddComponent(BaseComponent com , string keyname)
     {
-
+        //юс╫ц
+        AttackComList.Add(com);
     }
 
+    
     public void EventAdd(int size , string clipname , string methodname , AnimationEventSystem eventsystem)
     {
-        //for (int i = 0; i < size; i++)
-        //{
-        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(clipname, methodname),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(clipname, methodname));
-        //}
-        //for (int i = 0; i < size; i++)
-        //{
-        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(clipname, methodname),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(clipname, methodname));
-        //}
+        
     }
          
 
@@ -94,7 +85,7 @@ public class AttackManager : Singleton<AttackManager>
         effectobj.transform.rotation = EffectPosRot.rotation;
         effectobj.transform.parent = EffectPosRot;
 
-        Destroy(effectobj, destroyTime);
+        //Destroy(effectobj, destroyTime);
 
         return effectobj.transform.parent;
     }

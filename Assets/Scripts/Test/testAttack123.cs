@@ -18,17 +18,17 @@ public class testAttack123 : BaseComponent
     {
         public int AttackNum;
 
-        //¾Ö´Ï¸ŞÀÌ¼Ç ¹è¼Ó
+        //ì• ë‹ˆë©”ì´ì…˜ ë°°ì†
         public float animationPlaySpeed;
 
-        //ÇØ´ç ¸Å´Ï¸ŞÀÌ¼Ç Å¬¸³
+        //í•´ë‹¹ ë§¤ë‹ˆë©”ì´ì…˜ í´ë¦½
         public AnimationClip aniclip;
 
-        //ÈÄµô·¹ÀÌ
+        //í›„ë”œë ˆì´
         public float MovementDelay;
 
-        //´ÙÀ½µ¿ÀÛÀ¸·Î ³Ñ¾î°¡±â À§ÇÑ ½Ã°£
-        //ÇØ´çµ¿ÀÛÀÌ ³¡³ª°í ÇØ´ç ½Ã°£ ¾È¿¡ Attack()ÇÔ¼ö°¡ È£ÃâµÇ¾î¾ßÁö ´ÙÀ½µ¿ÀÛÀ¸·Î ³Ñ¾î°£´Ù.
+        //ë‹¤ìŒë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°€ê¸° ìœ„í•œ ì‹œê°„
+        //í•´ë‹¹ë™ì‘ì´ ëë‚˜ê³  í•´ë‹¹ ì‹œê°„ ì•ˆì— Attack()í•¨ìˆ˜ê°€ í˜¸ì¶œë˜ì–´ì•¼ì§€ ë‹¤ìŒë™ì‘ìœ¼ë¡œ ë„˜ì–´ê°„ë‹¤.
         public float NextMovementTimeVal;
 
         public float damage;
@@ -50,7 +50,7 @@ public class testAttack123 : BaseComponent
     [SerializeField]
     public PlayerAttack_Information SkillData;
 
-    //½ºÅ³µµ ¿©±â¼­ ÇÑ¹ø¿¡ Ã³¸®
+    //ìŠ¤í‚¬ë„ ì—¬ê¸°ì„œ í•œë²ˆì— ì²˜ë¦¬
     [System.Serializable]
     public class SkillInfo
     {
@@ -101,13 +101,22 @@ public class testAttack123 : BaseComponent
 
     public AttackManager testAttckmanager;
 
+    public Transform AttackColliderParent;
+
     void Start()
     {
         colliders = GetComponentsInChildren<Collider>();
-        //for(int i=0;i<Attack_InformationList.Count;i++)
-        //{
-        //    Debug.Log(Attack_InformationList[i].P_AttackNum);
-        //}
+
+        for(int i=0;i<2;i++)
+        {
+            Debug.Log( colliders[i].name);
+        }
+
+
+        for (int i = 0; i < Attack_InformationList.Count; i++)
+        {
+            Debug.Log(Attack_InformationList[i].P_AttackNum);
+        }
 
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
@@ -125,11 +134,7 @@ public class testAttack123 : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
 
-        //for (int i = 0; i < skillinfos.Length; i++)
-        //{
-        //    testAttckmanager.EventAdd(attackinfos.Length, attackinfos[i].aniclip.name, StaticClass.AttackMove , eventsystem);
-        //    testAttckmanager.EventAdd(attackinfos.Length, attackinfos[i].aniclip.name, StaticClass.AttackEnd , eventsystem);
-        //}
+        
 
     }
     void Update()
@@ -147,7 +152,7 @@ public class testAttack123 : BaseComponent
         }
     }
 
-    //°ø°İÀÌ ½ÃÀÛµÈÁö ÀÏÁ¤ ½Ã°£ µÚ¿¡ ÀÌÆåÆ®¸¦ ½ÇÇàÇØ¾ß ÇÒ ¶§ »ç¿ë
+    //ê³µê²©ì´ ì‹œì‘ëœì§€ ì¼ì • ì‹œê°„ ë’¤ì— ì´í™íŠ¸ë¥¼ ì‹¤í–‰í•´ì•¼ í•  ë•Œ ì‚¬ìš©
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -163,12 +168,13 @@ public class testAttack123 : BaseComponent
         }
     }
 
-    //½ºÅ³À» Àç»ıÇØÁØ´Ù.
+    //ìŠ¤í‚¬ì„ ì¬ìƒí•´ì¤€ë‹¤.
     public void SkillAttack()
     {      
         if (movecom == null)
         {
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }
 
@@ -184,7 +190,7 @@ public class testAttack123 : BaseComponent
 
     public void CreateEffect()
     {
-        preparent = testAttckmanager.CreateEffect(attackinfos[AttackNum].Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
+        preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
     }
 
     public void Attack()
@@ -195,6 +201,7 @@ public class testAttack123 : BaseComponent
         if (movecom == null)
         {
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }
 
@@ -203,7 +210,7 @@ public class testAttack123 : BaseComponent
         
         float tempval = Time.time - lastAttackTime;
         
-        if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
+        if (tempval <= Attack_InformationList[AttackNum].P_NextMovementTimeVal)
         {
             AttackNum = (AttackNum + 1) % (int)EnumTypes.eAniAttack.AttackMax;
 
@@ -213,15 +220,11 @@ public class testAttack123 : BaseComponent
             AttackNum = 0;
         }
 
-        StartCoroutine(Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect));
+        StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
 
         testAttckmanager.AttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
 
-        foreach (Collider coll in colliders)
-        {
-            Debug.Log(coll.name);
-            coll.enabled = true;
-        }
+        
 
     }
 
@@ -232,7 +235,7 @@ public class testAttack123 : BaseComponent
         {
             if (attackinfos[i].aniclip.name == clipname)
             {               
-                movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
+                movecom.FowardDoMove(Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
 
                 return;
             }
@@ -255,7 +258,7 @@ public class testAttack123 : BaseComponent
     {
         if (effectobj != null)
         {
-            Debug.Log($"dasdw°ø°İ ³¡ µé¾î¿È -> {s_val}");
+            Debug.Log($"dasdwê³µê²© ë ë“¤ì–´ì˜´ -> {s_val}");
             effectobj.transform.parent = preparent;
         }
         
@@ -266,11 +269,7 @@ public class testAttack123 : BaseComponent
         lastAttackTime = Time.time;
 
 
-        foreach (Collider coll in colliders)
-        {
-            if (coll.name == "Object003")
-                coll.enabled = false;
-        }
+        
     }
 
    
