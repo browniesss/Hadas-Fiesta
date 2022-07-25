@@ -71,6 +71,8 @@ public class Battle_Character : MonoBehaviour
     public float enemy_Skill_2_damage;
     public float enemy_Skill_3_damage;
 
+    public AI real_AI; 
+
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();

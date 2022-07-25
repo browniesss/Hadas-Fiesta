@@ -18,6 +18,6 @@ public class Test_enemy : Battle_Character
 
     public override void Skill_1()
     {
-        // ½ºÅ³ 1¹ø
+        // ìŠ¤í‚¬ 1ë²ˆ
     }
 }

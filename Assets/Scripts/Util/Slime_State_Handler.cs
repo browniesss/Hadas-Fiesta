@@ -12,25 +12,25 @@ public class Slime_State_Handler : State_Handler
     {
         switch (state)
         {
-            case State.Patrol_Enter:
+            case _State.Patrol_Enter:
                 Patrol_Enter_Process();
                 break;
-            case State.Patrol:
+            case _State.Patrol:
                 Patrol_Process();
                 break;
-            case State.Trace:
+            case _State.Trace:
                 Trace_Process();
                 break;
-            case State.Attack: // 슬라임은 붙어있는 상태
+            case _State.Attack: // 슬라임은 붙어있는 상태
                 Attack_Process();
                 break;
-            case State.Next_Wait:
+            case _State.Next_Wait:
                 Next_Wait_Process();
                 break;
-            case State.Return:
+            case _State.Return:
                 Return_Process();
                 break;
-            case State.Die:
+            case _State.Die:
                 Die_Process();
                 break;
         }
@@ -141,7 +141,7 @@ public class Slime_State_Handler : State_Handler
                 navMesh.enabled = true;
                 battle_Character.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                battle_Character.ai.now_State = State.Patrol_Enter;
+                battle_Character.ai.now_State = _State.Patrol_Enter;
             }
         }
     }
